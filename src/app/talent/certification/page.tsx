@@ -13,7 +13,7 @@ import { certifications } from '@/lib/talent-data';
 export default function TalentCertificationPage() {
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('All');
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const filteredCerts = useMemo(() => {

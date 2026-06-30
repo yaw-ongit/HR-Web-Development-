@@ -1,34 +1,75 @@
-import { ForwardedRef, forwardRef, ButtonHTMLAttributes } from 'react';
-import clsx from 'clsx';
+import { ForwardedRef, forwardRef, ButtonHTMLAttributes, ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive' | 'outline';
+  size?: 'sm' | 'md' | 'lg' | 'icon';
+  loading?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
-const variantStyles = {
-  primary: 'bg-sky-500 text-white hover:bg-sky-400 shadow-lg shadow-sky-500/20',
+const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
+  primary: 'bg-sky-500 text-white hover:bg-sky-400 shadow-lg shadow-sky-500/20 border border-transparent',
   secondary: 'bg-slate-800 text-slate-100 hover:bg-slate-700 border border-slate-700',
-  ghost: 'bg-transparent text-slate-100 hover:bg-slate-800',
-  destructive: 'bg-rose-500 text-white hover:bg-rose-400 shadow-lg shadow-rose-500/20',
+  ghost: 'bg-transparent text-slate-100 hover:bg-slate-800 border border-transparent',
+  destructive: 'bg-rose-500 text-white hover:bg-rose-400 shadow-lg shadow-rose-500/20 border border-transparent',
   outline: 'bg-slate-950 text-slate-100 border border-slate-700 hover:bg-slate-900',
+};
+
+const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
+  sm: 'h-8 px-3 text-xs gap-1.5 rounded-2xl',
+  md: 'h-10 px-4 text-sm gap-2 rounded-2xl',
+  lg: 'h-12 px-5 text-sm gap-2 rounded-3xl',
+  icon: 'h-10 w-10 rounded-2xl',
 };
 
 export const Button = forwardRef(
   (
-    { className, variant = 'primary', children, ...props }: ButtonProps,
+    {
+      className,
+      variant = 'primary',
+      size = 'md',
+      loading = false,
+      leftIcon,
+      rightIcon,
+      children,
+      disabled,
+      ...props
+    }: ButtonProps,
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     return (
       <button
         ref={ref}
-        className={clsx(
-          'inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:cursor-not-allowed disabled:opacity-60',
+        disabled={disabled || loading}
+        aria-busy={loading}
+        className={cn(
+          'inline-flex items-center justify-center font-semibold transition-all duration-200',
+          'focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-950',
+          'disabled:cursor-not-allowed disabled:opacity-60',
           variantStyles[variant],
+          sizeStyles[size],
           className,
         )}
         {...props}
       >
-        {children}
+        {loading ? (
+          <>
+            <span
+              className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent"
+              aria-hidden="true"
+            />
+            <span className="sr-only">Loading</span>
+            {typeof children === 'string' ? children : null}
+          </>
+        ) : (
+          <>
+            {leftIcon && <span aria-hidden="true">{leftIcon}</span>}
+            {children}
+            {rightIcon && <span aria-hidden="true">{rightIcon}</span>}
+          </>
+        )}
       </button>
     );
   },

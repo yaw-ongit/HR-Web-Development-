@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { AreaChart, Area, BarChart, Bar, CartesianGrid, LineChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { ArrowRight, CalendarCheck, CheckCircle2, ClipboardList, FileText, Layers, Search, ShieldCheck, TrendingUp, UserPlus } from 'lucide-react';
+import { ArrowRight, CalendarCheck, CheckCircle2, ClipboardList, Clock, FileText, Layers, Search, ShieldCheck, TrendingUp, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';

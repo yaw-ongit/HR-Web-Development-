@@ -1,7 +1,6 @@
-'use client';
+import { ReactNode } from 'react';
+import { AppShell } from '@/components/layout/app-shell';
 
-import { PageContainer } from '@/components/layout/page-container';
-
-export default function CompensationLayout({ children }: { children: React.ReactNode }) {
-  return <PageContainer>{children}</PageContainer>;
+export default function CompensationLayout({ children }: { children: ReactNode }) {
+  return <AppShell moduleName="Compensation">{children}</AppShell>;
 }

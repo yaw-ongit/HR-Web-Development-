@@ -1,23 +1,26 @@
 'use client';
 
-import { ReactNode, createContext, useState } from 'react';
+/**
+ * ThemeProvider — currently the application runs in dark-only mode.
+ * This provider is retained as a placeholder for future light/dark toggle support.
+ * When light mode is needed, extend this with next-themes or a custom CSS class strategy.
+ */
+import { createContext, useContext, ReactNode } from 'react';
 
 interface ThemeContextValue {
-  theme: 'dark' | 'light';
-  setTheme: (value: 'dark' | 'light') => void;
+  theme: 'dark';
 }
 
-export const ThemeContext = createContext<ThemeContextValue>({
-  theme: 'dark',
-  setTheme: () => undefined,
-});
+const ThemeContext = createContext<ThemeContextValue>({ theme: 'dark' });
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={theme === 'dark' ? 'theme-dark' : 'theme-light'}>{children}</div>
+    <ThemeContext.Provider value={{ theme: 'dark' }}>
+      {children}
     </ThemeContext.Provider>
   );
 }

@@ -1,14 +1,50 @@
-import { EmptyState } from '@/components/ui/empty-state';
+import Link from 'next/link';
+import { Home, ArrowLeft } from 'lucide-react';
 
-export default function NotFound() {
+export default function NotFoundPage() {
   return (
-    <main className="grid min-h-screen place-items-center bg-slate-950 px-6 py-12 text-slate-100">
-      <EmptyState
-        title="Page not found"
-        description="The dashboard route you tried to access does not exist. Return to the overview to continue." 
-        ctaLabel="Return home"
-        href="/"
-      />
+    <main
+      id="main-content"
+      className="grid min-h-screen place-items-center bg-slate-950 px-6 py-12"
+      role="main"
+    >
+      <div className="flex w-full max-w-md flex-col items-center rounded-[28px] border border-white/10 bg-slate-900/90 p-10 text-center shadow-card">
+        {/* Large 404 */}
+        <p
+          className="select-none text-8xl font-bold tabular-nums text-slate-800"
+          aria-hidden="true"
+        >
+          404
+        </p>
+
+        <p className="mt-2 text-xs uppercase tracking-[0.3em] text-sky-300">Page not found</p>
+
+        <h1 className="mt-3 text-2xl font-semibold text-slate-100">
+          This page doesn't exist
+        </h1>
+        <p className="mt-3 text-sm leading-7 text-slate-400">
+          The route you tried to access doesn't exist or may have been moved. Check the URL or
+          navigate back to the dashboard.
+        </p>
+
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-950"
+          >
+            <Home className="h-4 w-4" aria-hidden="true" />
+            Go to dashboard
+          </Link>
+          <button
+            type="button"
+            onClick={() => window.history.back()}
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/90 px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-950"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            Go back
+          </button>
+        </div>
+      </div>
     </main>
   );
 }

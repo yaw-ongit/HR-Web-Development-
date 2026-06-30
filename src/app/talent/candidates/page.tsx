@@ -13,7 +13,7 @@ import { candidates, candidatePipeline } from '@/lib/talent-data';
 export default function TalentCandidatesPage() {
   const [search, setSearch] = useState('');
   const [stage, setStage] = useState('All');
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const filteredCandidates = useMemo(() => {

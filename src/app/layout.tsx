@@ -1,17 +1,40 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { ThemeProvider } from '@/providers/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'Enterprise HRIS Dashboard',
-  description: 'Command center for enterprise HR operations.',
+  title: {
+    default: 'Enterprise HRIS Platform',
+    template: '%s | Enterprise HRIS',
+  },
+  description:
+    'A production-ready enterprise Human Resource Information System for workforce management, talent lifecycle, compensation, and analytics.',
+  keywords: ['HRIS', 'HR software', 'workforce management', 'employee management', 'HR analytics'],
+  robots: { index: false, follow: false },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#020617',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-slate-950 text-slate-100">
-        <ThemeProvider>{children}</ThemeProvider>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Inter font loaded via CSS for performance */}
+      </head>
+      <body className="min-h-screen bg-slate-950 text-slate-100 antialiased">
+        {/* Skip to main content — accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-2xl focus:bg-sky-500 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+        >
+          Skip to main content
+        </a>
+        {children}
       </body>
     </html>
   );

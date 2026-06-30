@@ -13,7 +13,7 @@ import { hiring } from '@/lib/talent-data';
 export default function TalentHiringPage() {
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('All');
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const filteredHiring = useMemo(() => {

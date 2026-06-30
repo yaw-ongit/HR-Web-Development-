@@ -13,7 +13,7 @@ import { competencies } from '@/lib/talent-data';
 export default function TalentCompetencyPage() {
   const [search, setSearch] = useState('');
   const [level, setLevel] = useState('All');
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const filteredCompetencies = useMemo(() => {

@@ -20,16 +20,13 @@ const config: Config = {
       },
       boxShadow: {
         soft: '0 22px 48px rgba(15, 23, 42, 0.08)',
-        card: '0 12px 28px rgba(15, 23, 42, 0.06)',
+        card: '0 20px 60px rgba(15, 23, 42, 0.12)',
       },
       backgroundImage: {
         'radial-glow': 'radial-gradient(circle at top, rgba(96, 173, 255, 0.18), transparent 42%)',
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      },
-      boxShadow: {
-        card: '0 20px 60px rgba(15, 23, 42, 0.12)',
       },
     },
   },

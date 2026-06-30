@@ -13,7 +13,7 @@ import { claims, claimTrendData } from '@/lib/compensation-data';
 export default function ClaimsPage() {
   const [search, setSearch] = useState('');
   const [claimStatus, setClaimStatus] = useState('All');
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const filteredClaims = useMemo(() => {

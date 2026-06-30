@@ -13,7 +13,7 @@ import { shiftOverview, shiftSchedules } from '@/lib/workforce-data';
 export default function WorkforceShiftManagementPage() {
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('All');
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const filteredShifts = useMemo(() => {

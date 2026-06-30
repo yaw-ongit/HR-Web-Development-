@@ -14,7 +14,7 @@ export default function MedicalPage() {
   const [search, setSearch] = useState('');
   const [medicalType, setMedicalType] = useState('All');
   const [status, setStatus] = useState('All');
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const filteredRecords = useMemo(() => {

@@ -14,7 +14,7 @@ export default function WorkforceLeaveManagementPage() {
   const [search, setSearch] = useState('');
   const [department, setDepartment] = useState('All');
   const [status, setStatus] = useState('All');
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const filteredLeaves = useMemo(() => {

@@ -2,36 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   CSS Custom Properties — Enterprise HRIS Design Tokens
+   ============================================================ */
 :root {
   color-scheme: dark;
+
+  /* Typography */
   font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Background */
   background-color: #020617;
   color: #e2e8f0;
+
+  /* Border radius tokens */
   --radius: 1rem;
   --radius-sm: 0.75rem;
   --radius-md: 1.25rem;
+  --radius-lg: 1.75rem;
+  --radius-card: 1.75rem; /* 28px */
+
+  /* Shadow tokens */
   --shadow-card: 0 24px 80px rgba(15, 23, 42, 0.16);
   --shadow-soft: 0 16px 48px rgba(15, 23, 42, 0.12);
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+
+  /* Border */
   --border: rgba(148, 163, 184, 0.18);
+  --border-strong: rgba(148, 163, 184, 0.30);
+
+  /* Surface */
   --surface: rgba(15, 23, 42, 0.85);
   --surface-strong: rgba(15, 23, 42, 0.96);
   --surface-soft: rgba(15, 23, 42, 0.70);
+
+  /* Focus ring */
+  --focus-ring: rgba(56, 189, 248, 0.6);
+
+  /* Transition */
+  --transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* {
+/* ============================================================
+   Base Reset
+   ============================================================ */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   min-height: 100vh;
-  background: radial-gradient(circle at top, rgba(96, 173, 255, 0.12), transparent 32%), #020617;
+  background: radial-gradient(ellipse at top, rgba(96, 173, 255, 0.10) 0%, transparent 50%), #020617;
   color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
+/* ============================================================
+   Focus visible — accessible keyboard navigation
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.7);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Remove focus ring for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================================
+   Form elements
+   ============================================================ */
 button,
 input,
 textarea,
@@ -39,22 +91,119 @@ select {
   font: inherit;
 }
 
+input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* ============================================================
+   Text selection
+   ============================================================ */
 ::selection {
   background: rgba(56, 189, 248, 0.25);
+  color: #f0f9ff;
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* ============================================================
+   Scrollbar styling
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-.no-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.28);
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.22);
   border-radius: 9999px;
 }
 
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.40);
+}
+
+/* ============================================================
+   Utility layer
+   ============================================================ */
 @layer utilities {
   .bg-surface {
     background-color: rgba(15, 23, 42, 0.86);
   }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Hide scrollbar but keep scroll */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Tabular numbers for KPIs / metrics */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Truncate with ellipsis utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* ============================================================
+   Loading skeleton pulse
+   ============================================================ */
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton-pulse {
+  animation: skeleton-pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================================
+   Chart tooltip override (Recharts)
+   ============================================================ */
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+/* ============================================================
+   Screen reader only helper
+   ============================================================ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
