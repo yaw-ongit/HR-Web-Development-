@@ -1,0 +1,167 @@
+'use client';
+
+import Link from 'next/link';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { ArrowLeft, Shield, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { SectionContainer } from '@/components/layout/section-container';
+import { medicalExpiryData, certificateExpiryData, complianceRateData, missingRequirementsData } from '@/lib/analytics-data';
+
+const COLORS = ['#ef4444', '#f97316', '#0ea5e9', '#10b981'];
+
+export default function ComplianceAnalyticsPage() {
+  return (
+    <div className="space-y-8 pb-12 pt-6 lg:pb-16">
+      <SectionContainer>
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-4">
+            <Link href="/analytics">
+              <Button className="rounded-full border border-white/10 bg-slate-950/90 px-4 py-2 text-sm font-semibold text-slate-100 hover:border-sky-400">
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+            </Link>
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Analytics</p>
+              <h1 className="text-3xl font-semibold text-slate-100">Compliance Analytics</h1>
+            </div>
+          </div>
+        </div>
+      </SectionContainer>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Overall Compliance</p>
+              <p className="mt-3 text-3xl font-semibold text-slate-100">90.4%</p>
+              <p className="mt-2 text-sm text-emerald-400">↑ 1.2% from last month</p>
+            </div>
+            <CheckCircle2 className="h-8 w-8 text-emerald-400" />
+          </div>
+        </Card>
+
+        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">At Risk</p>
+              <p className="mt-3 text-3xl font-semibold text-slate-100">28</p>
+              <p className="mt-2 text-sm text-rose-400">Employees with issues</p>
+            </div>
+            <AlertCircle className="h-8 w-8 text-rose-400" />
+          </div>
+        </Card>
+
+        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Medical Compliance</p>
+              <p className="mt-3 text-3xl font-semibold text-slate-100">91.3%</p>
+              <p className="mt-2 text-sm text-emerald-400">On target</p>
+            </div>
+            <Shield className="h-8 w-8 text-sky-400" />
+          </div>
+        </Card>
+      </div>
+
+      <SectionContainer>
+        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Medical Expiry Status</p>
+          <div className="space-y-3">
+            {medicalExpiryData.map((item) => (
+              <div key={item.description} className="rounded-2xl bg-slate-950/80 p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-sm font-semibold text-slate-100">{item.description}</p>
+                  <span className={`text-sm font-semibold ${
+                    item.level === 'critical' ? 'text-rose-400' :
+                    item.level === 'warning' ? 'text-amber-400' :
+                    item.level === 'info' ? 'text-sky-400' :
+                    'text-emerald-400'
+                  }`}>{item.count} employees</span>
+                </div>
+                <div className="h-2 w-full bg-slate-900/50 rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full rounded-full ${
+                      item.level === 'critical' ? 'bg-rose-500' :
+                      item.level === 'warning' ? 'bg-amber-500' :
+                      item.level === 'info' ? 'bg-sky-500' :
+                      'bg-emerald-500'
+                    }`}
+                    style={{ width: `${(item.count / 250) * 100}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </SectionContainer>
+
+      <SectionContainer>
+        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Certificate Expiry Status</p>
+          <div className="space-y-3">
+            {certificateExpiryData.map((item) => (
+              <div key={item.description} className="rounded-2xl bg-slate-950/80 p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-sm font-semibold text-slate-100">{item.description}</p>
+                  <span className={`text-sm font-semibold ${
+                    item.level === 'critical' ? 'text-rose-400' :
+                    item.level === 'warning' ? 'text-amber-400' :
+                    'text-emerald-400'
+                  }`}>{item.count}</span>
+                </div>
+                <div className="h-2 w-full bg-slate-900/50 rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full rounded-full ${
+                      item.level === 'critical' ? 'bg-rose-500' :
+                      item.level === 'warning' ? 'bg-amber-500' :
+                      'bg-emerald-500'
+                    }`}
+                    style={{ width: `${(item.count / 285) * 100}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </SectionContainer>
+
+      <SectionContainer>
+        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Compliance Rate by Category</p>
+          <ResponsiveContainer width="100%" height={350}>
+            <BarChart data={complianceRateData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+              <XAxis dataKey="item" stroke="#94a3b8" angle={-45} textAnchor="end" height={100} />
+              <YAxis stroke="#94a3b8" domain={[0, 100]} />
+              <Tooltip 
+                contentStyle={{ backgroundColor: '#1e293b', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px' }}
+                labelStyle={{ color: '#cbd5e1' }}
+              />
+              <Legend />
+              <Bar dataKey="rate" fill="#0ea5e9" name="Current Rate" />
+              <Bar dataKey="target" fill="#10b981" name="Target" />
+            </BarChart>
+          </ResponsiveContainer>
+        </Card>
+      </SectionContainer>
+
+      <SectionContainer>
+        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Missing Requirements</p>
+          <div className="space-y-3">
+            {missingRequirementsData.map((item) => (
+              <div key={item.requirement} className="rounded-2xl bg-slate-950/80 p-4 flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-slate-100">{item.requirement}</p>
+                  <p className="mt-1 text-xs text-slate-500">{item.department}</p>
+                </div>
+                <span className="text-lg font-semibold text-rose-400">{item.missing}</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </SectionContainer>
+    </div>
+  );
+}
