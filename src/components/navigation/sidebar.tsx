@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Users2, Layers, ShieldCheck, PieChart, Settings, Briefcase } from 'lucide-react';
+import { Menu, Users2, Layers, ShieldCheck, PieChart, Settings, Briefcase, KeyRound } from 'lucide-react';
 
 const sections = [
   {
@@ -13,7 +13,8 @@ const sections = [
       { label: 'Talent', icon: Briefcase, href: '/talent' },
       { label: 'Compensation', icon: ShieldCheck, href: '/compensation' },
       { label: 'Analytics', icon: PieChart, href: '/analytics' },
-      { label: 'Administration', icon: Settings, href: '/' },
+      { label: 'Administration', icon: Settings, href: '/administration' },
+      { label: 'Identity', icon: KeyRound, href: '/identity' },
     ],
   },
 ];
