@@ -15,10 +15,11 @@ const sections = [
   'role-visibility',
 ];
 
-export default function IdentitySectionPage({ params }: { params: { section: string } }) {
-  if (!sections.includes(params.section)) {
+export default async function IdentitySectionPage({ params }: { params: Promise<{ section: string }> }) {
+  const resolvedParams = await params;
+  if (!sections.includes(resolvedParams.section)) {
     notFound();
   }
 
-  return <IdentityWorkspace section={params.section} />;
+  return <IdentityWorkspace section={resolvedParams.section} />;
 }

@@ -699,6 +699,8 @@ export const payrollReady: PayrollReady[] = [
     allowances: {
       transportation: 1200000,
       meal: 600000,
+      accommodation: 0,
+      operational: 0,
     },
     deductions: {
       bpjs: 675000,
@@ -768,6 +770,7 @@ export const payrollReady: PayrollReady[] = [
       transportation: 1000000,
       meal: 500000,
       accommodation: 1500000,
+      operational: 0,
     },
     deductions: {
       bpjs: 765000,

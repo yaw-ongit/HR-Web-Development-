@@ -1,18 +1,19 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, use } from 'react';
 import { ArrowRight, Briefcase, BookOpen, CalendarDays, CheckCircle2, ClipboardList, HeartPulse, Mail, MapPin, Phone, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { getEmployeeProfile } from '@/lib/people-data';
 
 interface EmployeePageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function EmployeeProfilePage({ params }: EmployeePageProps) {
+export default function EmployeeProfilePage(props: EmployeePageProps) {
+  const params = use(props.params);
   const profile = getEmployeeProfile(params.id);
   const [activeTab, setActiveTab] = useState('Overview');
 

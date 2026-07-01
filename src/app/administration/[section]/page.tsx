@@ -17,10 +17,11 @@ const sections = [
   'system-preferences',
 ];
 
-export default function AdministrationSectionPage({ params }: { params: { section: string } }) {
-  if (!sections.includes(params.section)) {
+export default async function AdministrationSectionPage({ params }: { params: Promise<{ section: string }> }) {
+  const resolvedParams = await params;
+  if (!sections.includes(resolvedParams.section)) {
     notFound();
   }
 
-  return <AdministrationWorkspace section={params.section} />;
+  return <AdministrationWorkspace section={resolvedParams.section} />;
 }
