@@ -31,7 +31,7 @@ export default function TalentHiringPage() {
 
   const columns = useMemo<ColumnDef<typeof hiring[number]>[]>(
     () => [
-      { accessorKey: 'candidate', header: 'Candidate' },
+      { accessorKey: 'candidate', header: 'Kandidat' },
       { accessorKey: 'position', header: 'Position' },
       { accessorKey: 'department', header: 'Department' },
       { accessorKey: 'manager', header: 'Manager' },
@@ -93,7 +93,7 @@ export default function TalentHiringPage() {
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Track offer extensions, acceptances, and prepare candidates for onboarding.</p>
           </div>
           <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
-            Back to talent
+            Kembali ke Talent
           </Link>
         </div>
       </SectionContainer>
@@ -116,10 +116,10 @@ export default function TalentHiringPage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
-              <Download className="h-4 w-4" /> Export
+              <Download className="h-4 w-4" /> Ekspor
             </Button>
             <Button variant="ghost" className="rounded-full px-5 py-3">
-              <Filter className="h-4 w-4" /> Filters
+              <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
         </div>
@@ -130,15 +130,15 @@ export default function TalentHiringPage() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search candidate, position, or department"
+              placeholder="Cari kandidat, posisi, atau departemen"
               className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
             <option value="All">All statuses</option>
-            <option value="Offer Extended">Offer Extended</option>
-            <option value="Accepted">Accepted</option>
-            <option value="Rejected">Rejected</option>
+            <option value="Offer Extended">Tawaran Diperpanjang</option>
+            <option value="Accepted">Diterima</option>
+            <option value="Rejected">Ditolak</option>
             <option value="Onboarding">Onboarding</option>
           </select>
         </div>

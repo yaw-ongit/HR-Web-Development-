@@ -55,7 +55,7 @@ export default function PeopleDirectoryPage() {
     {
       id: 'employee',
       accessorFn: (r) => r.fullName,
-      header: 'Employee',
+      header: 'Karyawan',
       enableSorting: true,
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
@@ -70,15 +70,15 @@ export default function PeopleDirectoryPage() {
       ),
     },
     { accessorKey: 'employeeId', header: 'ID', enableSorting: true },
-    { accessorKey: 'department', header: 'Department', enableSorting: true },
-    { accessorKey: 'position', header: 'Position', enableSorting: true },
+    { accessorKey: 'department', header: 'Departemen', enableSorting: true },
+    { accessorKey: 'position', header: 'Jabatan', enableSorting: true },
     {
       accessorKey: 'status', header: 'Status', enableSorting: true,
       cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
     },
-    { accessorKey: 'joinDate', header: 'Join date', enableSorting: true },
-    { accessorKey: 'contractType', header: 'Contract' },
-    { accessorKey: 'manager', header: 'Manager' },
+    { accessorKey: 'joinDate', header: 'Tanggal bergabung', enableSorting: true },
+    { accessorKey: 'contractType', header: 'Kontrak' },
+    { accessorKey: 'manager', header: 'Manajer' },
     {
       id: 'actions', header: 'Actions',
       cell: ({ row }) => (
@@ -113,14 +113,14 @@ export default function PeopleDirectoryPage() {
   return (
     <div className="space-y-6 py-6">
       <PageHeader
-        breadcrumbs={[{ label: 'People', href: '/people' }, { label: 'Directory' }]}
-        title="Employee directory"
-        description="A single source for employee profiles, org context and operational insight."
+        breadcrumbs={[{ label: 'People', href: '/people' }, { label: 'Direktori' }]}
+        title="Direktori karyawan"
+        description="Sumber utama profil karyawan, konteks organisasi, dan wawasan operasional."
         actions={
           <>
-            <Button variant="primary" size="md" leftIcon={<Plus className="h-4 w-4" />}>Add employee</Button>
-            <Button variant="secondary" size="md" leftIcon={<Upload className="h-4 w-4" />}>Import</Button>
-            <Button variant="ghost" size="md" leftIcon={<Download className="h-4 w-4" />}>Export</Button>
+            <Button variant="primary" size="md" leftIcon={<Plus className="h-4 w-4" />}>Tambah karyawan</Button>
+            <Button variant="secondary" size="md" leftIcon={<Upload className="h-4 w-4" />}>Impor</Button>
+            <Button variant="ghost" size="md" leftIcon={<Download className="h-4 w-4" />}>Ekspor</Button>
           </>
         }
       />
@@ -128,12 +128,12 @@ export default function PeopleDirectoryPage() {
       <div className="grid gap-5 xl:grid-cols-[1fr_280px]">
         <div className="space-y-4">
           <FilterBar>
-            <SearchInput value={search} onChange={setSearch} placeholder="Search name, ID, email, department…" className="min-w-[260px] flex-1" label="Search employees" />
-            <SelectFilter label="Filter department" value={department} onChange={setDepartment} options={deptOptions} className="w-44" />
-            <SelectFilter label="Filter position" value={position} onChange={setPosition} options={posOptions} className="w-44" />
+            <SearchInput value={search} onChange={setSearch} placeholder="Cari nama, ID, email, departemen…" className="min-w-[260px] flex-1" label="Cari karyawan" />
+            <SelectFilter label="Filter departemen" value={department} onChange={setDepartment} options={deptOptions} className="w-44" />
+            <SelectFilter label="Filter jabatan" value={position} onChange={setPosition} options={posOptions} className="w-44" />
             <SelectFilter label="Filter status" value={status} onChange={setStatus} options={stOptions} className="w-40" />
-            <SelectFilter label="Filter contract" value={contractType} onChange={setContractType} options={ctOptions} className="w-40" />
-            <SelectFilter label="Filter branch" value={branch} onChange={setBranch} options={brOptions} className="w-40" />
+            <SelectFilter label="Filter kontrak" value={contractType} onChange={setContractType} options={ctOptions} className="w-40" />
+            <SelectFilter label="Filter cabang" value={branch} onChange={setBranch} options={brOptions} className="w-40" />
           </FilterBar>
 
           <SectionContainer title="Employee directory" description={`${filteredData.length} record${filteredData.length !== 1 ? 's' : ''} found`}>
@@ -147,7 +147,7 @@ export default function PeopleDirectoryPage() {
 
         {/* Sidebar summary */}
         <aside className="space-y-4" aria-label="People module summary">
-          <Card title="Employee workspace" description="Quick stats and module actions.">
+          <Card title="Area karyawan" description="Statistik singkat dan tindakan modul cepat.">
             <div className="mt-2 grid grid-cols-2 gap-3">
               <div className="rounded-2xl bg-white/80 p-4">
                 <p className="text-xs text-slate-400">Total employees</p>
@@ -159,12 +159,12 @@ export default function PeopleDirectoryPage() {
               </div>
             </div>
           </Card>
-          <Card title="Workspace actions">
+          <Card title="Aksi modul">
             <nav aria-label="People workspace actions">
               <ul className="space-y-2">
                 {[
-                  { label: 'Organization structure', href: '/people/org-structure' },
-                  { label: 'Document center', href: '/people/documents' },
+                  { label: 'Struktur organisasi', href: '/people/org-structure' },
+                  { label: 'Pusat dokumen', href: '/people/documents' },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link href={link.href}

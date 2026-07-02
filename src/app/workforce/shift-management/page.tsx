@@ -76,12 +76,12 @@ export default function WorkforceShiftManagementPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Workforce / Shift Management</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Shift dashboard</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">Manage shift coverage, assignment and operational alignment in one place.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Workforce / Manajemen Shift</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Dasbor shift</h1>
+            <p className="mt-2 max-w-2xl text-sm text-slate-400">Kelola cakupan shift, penugasan, dan keselarasan operasional di satu tempat.</p>
           </div>
           <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
-            Back to workforce
+            Kembali ke Workforce
           </Link>
         </div>
       </SectionContainer>
@@ -98,15 +98,15 @@ export default function WorkforceShiftManagementPage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Shift table</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-900">Published shift plans</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Tabel shift</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">Rencana shift terbit</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
-              <Download className="h-4 w-4" /> Export
+              <Download className="h-4 w-4" /> Ekspor
             </Button>
             <Button variant="ghost" className="rounded-full px-5 py-3">
-              <Filter className="h-4 w-4" /> Filters
+              <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
         </div>
@@ -117,14 +117,14 @@ export default function WorkforceShiftManagementPage() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search shift name or manager"
+              placeholder="Cari nama shift atau manajer"
               className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
             <option value="All">All statuses</option>
-            <option value="Active">Active</option>
-            <option value="Planned">Planned</option>
+            <option value="Active">Aktif</option>
+            <option value="Planned">Direncanakan</option>
           </select>
         </div>
 

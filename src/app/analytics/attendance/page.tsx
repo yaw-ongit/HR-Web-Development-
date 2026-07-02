@@ -25,8 +25,8 @@ export default function AttendanceAnalyticsPage() {
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analytics</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Attendance Analytics</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <h1 className="text-3xl font-semibold text-slate-900">Analitik Absensi</h1>
             </div>
           </div>
         </div>
@@ -36,9 +36,9 @@ export default function AttendanceAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Avg Weekly Attendance</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Rata-rata Kehadiran Mingguan</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">94.2%</p>
-              <p className="mt-2 text-sm text-emerald-600">↑ 0.5% from last week</p>
+              <p className="mt-2 text-sm text-emerald-600">↑ 0.5% dari minggu lalu</p>
             </div>
             <TrendingUp className="h-8 w-8 text-emerald-600" />
           </div>
@@ -47,9 +47,9 @@ export default function AttendanceAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Late Incidents</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kasus Terlambat</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">41</p>
-              <p className="mt-2 text-sm text-amber-600">This week</p>
+              <p className="mt-2 text-sm text-amber-600">Minggu ini</p>
             </div>
             <Clock className="h-8 w-8 text-amber-600" />
           </div>
@@ -58,9 +58,9 @@ export default function AttendanceAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Absence Rate</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tingkat Ketidakhadiran</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">3.2%</p>
-              <p className="mt-2 text-sm text-slate-400">9 employees absent today</p>
+              <p className="mt-2 text-sm text-slate-400">9 karyawan absen hari ini</p>
             </div>
             <AlertCircle className="h-8 w-8 text-blue-600" />
           </div>
@@ -69,7 +69,7 @@ export default function AttendanceAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Attendance Heatmap by Department</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Heatmap Absensi per Departemen</p>
           <div className="space-y-3">
             {attendanceHeatmapData.map((dept) => (
               <div key={dept.department} className="rounded-2xl bg-white/80 p-4">
@@ -79,15 +79,15 @@ export default function AttendanceAnalyticsPage() {
                 </div>
                 <div className="grid grid-cols-3 gap-2">
                   <div>
-                    <p className="text-xs text-slate-400">Attendance</p>
+                    <p className="text-xs text-slate-400">Kehadiran</p>
                     <p className="text-sm font-semibold text-slate-900">{dept.weekAvg}%</p>
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Absence</p>
+                    <p className="text-xs text-slate-400">Ketidakhadiran</p>
                     <p className="text-sm font-semibold text-rose-600">{dept.absenceRate}%</p>
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Late</p>
+                    <p className="text-xs text-slate-400">Terlambat</p>
                     <p className="text-sm font-semibold text-amber-600">{dept.lateRate}%</p>
                   </div>
                 </div>
@@ -100,7 +100,7 @@ export default function AttendanceAnalyticsPage() {
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Late Trend by Day</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Keterlambatan per Hari</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={lateTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -118,7 +118,7 @@ export default function AttendanceAnalyticsPage() {
 
         <SectionContainer>
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Overtime Trend</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Lembur</p>
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={overtimeTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
@@ -143,7 +143,7 @@ export default function AttendanceAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Daily Attendance Trend</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Kehadiran Harian</p>
           <ResponsiveContainer width="100%" height={350}>
             <AreaChart data={attendanceTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>

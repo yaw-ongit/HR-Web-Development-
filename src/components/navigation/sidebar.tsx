@@ -2,18 +2,45 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { X, LayoutDashboard, Users2, Layers, ShieldCheck, PieChart, Settings, Briefcase, KeyRound } from 'lucide-react';
+import {
+  X,
+  LayoutDashboard,
+  Users2,
+  Layers,
+  ShieldCheck,
+  PieChart,
+  Settings,
+  Briefcase,
+  FileText,
+  Clock,
+  CalendarCheck,
+  BookOpen,
+  Sparkles,
+  UserPlus,
+  Wallet,
+  ShieldAlert,
+  HeartPulse,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
   { label: 'Dashboard', icon: LayoutDashboard, href: '/' },
   { label: 'Data Karyawan', icon: Users2, href: '/people' },
-  { label: 'Kehadiran & Waktu', icon: Layers, href: '/workforce' },
-  { label: 'Rekrutmen & Pelatihan', icon: Briefcase, href: '/talent' },
-  { label: 'Penggajian & Benefit', icon: ShieldCheck, href: '/compensation' },
-  { label: 'Laporan Analitik', icon: PieChart, href: '/analytics' },
-  { label: 'Administrasi', icon: Settings, href: '/administration' },
-  { label: 'Hak Akses', icon: KeyRound, href: '/identity' },
+  { label: 'Struktur Organisasi', icon: Layers, href: '/people/org-structure' },
+  { label: 'Dokumen Karyawan', icon: FileText, href: '/people/documents' },
+  { label: 'Presensi', icon: Clock, href: '/workforce' },
+  { label: 'Shift', icon: CalendarCheck, href: '/workforce/shift-management' },
+  { label: 'Cuti & Izin', icon: BookOpen, href: '/workforce/leave-management' },
+  { label: 'Lembur', icon: Sparkles, href: '/workforce/overtime' },
+  { label: 'Rekrutmen', icon: Briefcase, href: '/talent' },
+  { label: 'Onboarding', icon: UserPlus, href: '/talent/onboarding' },
+  { label: 'Pelatihan & Sertifikasi', icon: ShieldCheck, href: '/talent/training' },
+  { label: 'Payroll', icon: Wallet, href: '/compensation/payroll-ready' },
+  { label: 'Benefit', icon: ShieldAlert, href: '/compensation/benefits' },
+  { label: 'BPJS & Asuransi', icon: ShieldCheck, href: '/compensation/insurance' },
+  { label: 'MCU', icon: HeartPulse, href: '/compensation/medical' },
+  { label: 'Analitik HR', icon: PieChart, href: '/analytics' },
+  { label: 'Administrasi HR', icon: Settings, href: '/administration' },
 ];
 
 interface SidebarProps {
@@ -54,15 +81,12 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         {/* Logo / Brand */}
         <div className="mb-8 flex items-center justify-between gap-3 px-2">
           <div className="flex items-center gap-3">
-            <div
-              className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 ring-1 ring-blue-100"
-              aria-hidden="true"
-            >
-              <LayoutDashboard className="h-5 w-5 text-blue-600" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-brand-50 ring-1 ring-brand-200" aria-hidden="true">
+              <img src="/placeholder-logo.svg" alt="PT Indocater" className="h-8 w-8" />
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400">Enterprise</p>
-              <p className="text-sm font-semibold text-slate-900">HRIS Platform</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400">PT Indocater</p>
+              <p className="text-sm font-semibold text-slate-900">HRIS Internal</p>
             </div>
           </div>
           {/* Mobile close button */}
@@ -94,7 +118,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                       'flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
                       'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 focus:ring-offset-slate-950',
                       active
-                        ? 'bg-blue-50 text-blue-500 ring-1 ring-blue-100'
+                        ? 'bg-brand-50 text-brand-500 ring-1 ring-brand-100'
                         : 'text-slate-400 hover:bg-slate-50 hover:text-slate-900',
                     )}
                   >
@@ -118,7 +142,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           <div className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-4">
             <div className="flex items-center gap-3">
               <div
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-sm font-bold text-slate-950"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-sm font-bold text-slate-950"
                 aria-hidden="true"
               >
                 M

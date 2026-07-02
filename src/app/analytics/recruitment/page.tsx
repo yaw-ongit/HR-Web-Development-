@@ -20,8 +20,8 @@ export default function RecruitmentAnalyticsPage() {
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analytics</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Recruitment Analytics</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <h1 className="text-3xl font-semibold text-slate-900">Analitik Rekrutmen</h1>
             </div>
           </div>
         </div>
@@ -31,9 +31,9 @@ export default function RecruitmentAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Total Applications</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Total Lamaran</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">346</p>
-              <p className="mt-2 text-sm text-slate-400">Last 6 months</p>
+              <p className="mt-2 text-sm text-slate-400">6 bulan terakhir</p>
             </div>
             <Briefcase className="h-8 w-8 text-blue-600" />
           </div>
@@ -42,9 +42,9 @@ export default function RecruitmentAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Avg Time to Hire</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">29 days</p>
-              <p className="mt-2 text-sm text-emerald-600">↓ 3 days from last month</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Rata-rata Waktu Hire</p>
+              <p className="mt-3 text-3xl font-semibold text-slate-900">29 hari</p>
+              <p className="mt-2 text-sm text-emerald-600">↓ 3 hari dari bulan lalu</p>
             </div>
             <TrendingUp className="h-8 w-8 text-emerald-600" />
           </div>
@@ -53,9 +53,9 @@ export default function RecruitmentAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Offer Acceptance</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Penerimaan Tawaran</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">88%</p>
-              <p className="mt-2 text-sm text-blue-600">This quarter</p>
+              <p className="mt-2 text-sm text-blue-600">Kuartal ini</p>
             </div>
             <TrendingUp className="h-8 w-8 text-blue-600" />
           </div>
@@ -64,7 +64,7 @@ export default function RecruitmentAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Hiring Funnel</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Funnel Rekrutmen</p>
           <div className="space-y-3">
             {hiringFunnelData.map((stage) => (
               <div key={stage.stage} className="rounded-2xl bg-white/80 p-4">
@@ -87,7 +87,7 @@ export default function RecruitmentAnalyticsPage() {
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Time to Hire Trend</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Waktu Hire</p>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={timeToHireData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -106,7 +106,7 @@ export default function RecruitmentAnalyticsPage() {
 
         <SectionContainer>
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Offer Acceptance Rate</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tingkat Penerimaan Tawaran</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={offerAcceptanceData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -127,7 +127,7 @@ export default function RecruitmentAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Current Vacancies</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Lowongan Saat Ini</p>
           <div className="space-y-3">
             {vacancyStatusData.map((vacancy) => (
               <div key={vacancy.position} className="rounded-2xl bg-white/80 p-4">
@@ -135,7 +135,7 @@ export default function RecruitmentAnalyticsPage() {
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-slate-900">{vacancy.position}</p>
                     <p className="mt-1 text-xs text-slate-400">
-                      {vacancy.applications} applications • Posted {vacancy.posted}
+                      {vacancy.applications} lamaran • Diposting {vacancy.posted}
                     </p>
                   </div>
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-[0.2em] ${

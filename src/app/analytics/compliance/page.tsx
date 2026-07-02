@@ -22,8 +22,8 @@ export default function ComplianceAnalyticsPage() {
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analytics</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Compliance Analytics</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <h1 className="text-3xl font-semibold text-slate-900">Analitik Kepatuhan</h1>
             </div>
           </div>
         </div>
@@ -33,9 +33,9 @@ export default function ComplianceAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Overall Compliance</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kepatuhan Total</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">90.4%</p>
-              <p className="mt-2 text-sm text-emerald-600">↑ 1.2% from last month</p>
+              <p className="mt-2 text-sm text-emerald-600">↑ 1.2% dari bulan lalu</p>
             </div>
             <CheckCircle2 className="h-8 w-8 text-emerald-600" />
           </div>
@@ -44,9 +44,9 @@ export default function ComplianceAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">At Risk</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Berisiko</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">28</p>
-              <p className="mt-2 text-sm text-rose-600">Employees with issues</p>
+              <p className="mt-2 text-sm text-rose-600">Karyawan dengan masalah</p>
             </div>
             <AlertCircle className="h-8 w-8 text-rose-600" />
           </div>
@@ -55,9 +55,9 @@ export default function ComplianceAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Medical Compliance</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kepatuhan Medis</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">91.3%</p>
-              <p className="mt-2 text-sm text-emerald-600">On target</p>
+              <p className="mt-2 text-sm text-emerald-600">Sesuai target</p>
             </div>
             <Shield className="h-8 w-8 text-blue-600" />
           </div>
@@ -66,7 +66,7 @@ export default function ComplianceAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Medical Expiry Status</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Status Kedaluwarsa Medis</p>
           <div className="space-y-3">
             {medicalExpiryData.map((item) => (
               <div key={item.description} className="rounded-2xl bg-white/80 p-4">
@@ -98,7 +98,7 @@ export default function ComplianceAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Certificate Expiry Status</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Status Kedaluwarsa Sertifikat</p>
           <div className="space-y-3">
             {certificateExpiryData.map((item) => (
               <div key={item.description} className="rounded-2xl bg-white/80 p-4">
@@ -128,7 +128,7 @@ export default function ComplianceAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Compliance Rate by Category</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tingkat Kepatuhan per Kategori</p>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={complianceRateData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -148,7 +148,7 @@ export default function ComplianceAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Missing Requirements</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Persyaratan Tidak Lengkap</p>
           <div className="space-y-3">
             {missingRequirementsData.map((item) => (
               <div key={item.requirement} className="rounded-2xl bg-white/80 p-4 flex items-center justify-between">

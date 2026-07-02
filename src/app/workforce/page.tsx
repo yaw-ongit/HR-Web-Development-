@@ -28,29 +28,29 @@ export default function WorkforceHomePage() {
       <section className="space-y-6">
         <div className="flex flex-col gap-4 rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Workforce</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Workforce workspace</h1>
-            <p className="mt-3 max-w-2xl text-sm text-slate-400">One operational view for attendance, leave, shift planning and overtime approvals.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Presensi & Workforce</p>
+            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Pusat operasional HR</h1>
+            <p className="mt-3 max-w-2xl text-sm text-slate-400">Satu tampilan operasional untuk absensi, cuti, penjadwalan shift, dan persetujuan lembur.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link href="/workforce/attendance">
               <Button variant="secondary" className="rounded-full px-5 py-3">
-                <CalendarCheck className="h-4 w-4" /> Attendance
+                <CalendarCheck className="h-4 w-4" /> Absensi
               </Button>
             </Link>
             <Link href="/workforce/leave-management">
               <Button variant="secondary" className="rounded-full px-5 py-3">
-                <CheckCircle2 className="h-4 w-4" /> Leave
+                <CheckCircle2 className="h-4 w-4" /> Cuti
               </Button>
             </Link>
             <Link href="/workforce/shift-management">
               <Button variant="secondary" className="rounded-full px-5 py-3">
-                <Layers className="h-4 w-4" /> Shifts
+                <Layers className="h-4 w-4" /> Shift
               </Button>
             </Link>
             <Link href="/workforce/overtime">
               <Button variant="secondary" className="rounded-full px-5 py-3">
-                <ClipboardList className="h-4 w-4" /> Overtime
+                <ClipboardList className="h-4 w-4" /> Lembur
               </Button>
             </Link>
           </div>
@@ -69,14 +69,14 @@ export default function WorkforceHomePage() {
             </div>
 
             <div className="grid gap-4 xl:grid-cols-2">
-              <Card title="Workforce search" description="Find employee attendance, shift, or leave status immediately.">
+              <Card title="Cari pegawai" description="Temukan status absensi, shift, atau cuti karyawan secara cepat.">
                 <div className="relative">
                   <input
                     type="search"
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
-                    placeholder="Search employee, department, shift or status"
-                    className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 px-5 text-sm text-slate-900 outline-none transition focus:border-blue-500"
+                    placeholder="Cari karyawan, departemen, shift, atau status"
+                    className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 px-5 text-sm text-slate-900 outline-none transition focus:border-brand-500"
                   />
                   <Search className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                 </div>
@@ -94,12 +94,12 @@ export default function WorkforceHomePage() {
                       </div>
                     ))
                   ) : (
-                    <p>No matching workforce records found.</p>
+                    <p>Tidak ada data workforce yang cocok ditemukan.</p>
                   )}
                 </div>
               </Card>
 
-              <Card title="Quick actions" description="Common operational actions for the workforce team.">
+              <Card title="Aksi cepat" description="Tindakan operasional umum untuk tim HR.">
                 <div className="grid gap-3">
                   {workforceQuickActions.map((action) => (
                     <Link key={action.label} href={action.href} className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-blue-500">
@@ -118,7 +118,7 @@ export default function WorkforceHomePage() {
           </div>
 
           <div className="space-y-6">
-            <Card title="Attendance trend" description="Attendance rate across the last six months.">
+            <Card title="Tren Kehadiran" description="Tingkat kehadiran selama enam bulan terakhir.">
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={attendanceTrend} margin={{ top: 16, right: 16, left: -12, bottom: 0 }}>
@@ -138,7 +138,7 @@ export default function WorkforceHomePage() {
               </div>
             </Card>
 
-            <Card title="Department attendance" description="Attendance by department for the current month.">
+            <Card title="Kehadiran per Departemen" description="Kehadiran per departemen untuk bulan berjalan.">
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={departmentAttendance} margin={{ top: 16, right: 16, left: 0, bottom: 0 }}>
@@ -159,9 +159,9 @@ export default function WorkforceHomePage() {
         <div className="grid gap-4 xl:grid-cols-4">
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Late arrival trend</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">43 incidents</p>
+                <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tren Keterlambatan</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">43 insiden</p>
               </div>
               <TrendingUp className="h-6 w-6 text-blue-600" />
             </div>
@@ -179,10 +179,10 @@ export default function WorkforceHomePage() {
           </Card>
 
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Leave trend</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">118 reports</p>
+                <div className="flex items-center justify-between gap-4">
+                <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tren Cuti</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">118 laporan</p>
               </div>
               <FileText className="h-6 w-6 text-blue-600" />
             </div>
@@ -206,10 +206,10 @@ export default function WorkforceHomePage() {
           </Card>
 
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Overtime trend</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">78 hrs</p>
+                <div className="flex items-center justify-between gap-4">
+                <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tren Lembur</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">78 jam</p>
               </div>
               <Clock className="h-6 w-6 text-blue-600" />
             </div>
@@ -227,15 +227,15 @@ export default function WorkforceHomePage() {
           </Card>
 
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Operational readiness</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">Live staff view</p>
+                <div className="flex items-center justify-between gap-4">
+                <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kesiapan Operasional</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">Tampilan staf real-time</p>
               </div>
               <ShieldCheck className="h-6 w-6 text-blue-600" />
             </div>
             <div className="mt-6 space-y-3 text-sm text-slate-400">
-              <p>Attendance, leave, shift and overtime are synced into the workforce command center.</p>
+              <p>Absensi, cuti, shift, dan lembur disinkronkan ke pusat komando workforce.</p>
             </div>
           </Card>
         </div>

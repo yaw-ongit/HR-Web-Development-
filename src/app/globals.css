@@ -12,8 +12,23 @@
   font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Background */
-  background-color: #f8fafc;
+  background-color: #f3f4f6;
   color: #0f172a;
+
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #2563eb;
+  --color-brand-600: #1d4ed8;
+  --color-brand-700: #1e40af;
+  --color-brand-800: #1e3a8a;
+  --color-brand-900: #172554;
+
+  --color-indogold-500: #b2872a;
+  --color-indogold-600: #9a6f24;
+  --color-indogold-700: #7f5a1c;
 
   /* Border radius tokens */
   --radius: 1rem;

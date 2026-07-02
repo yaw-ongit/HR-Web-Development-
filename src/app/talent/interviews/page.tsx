@@ -31,7 +31,7 @@ export default function TalentInterviewsPage() {
 
   const columns = useMemo<ColumnDef<typeof interviews[number]>[]>(
     () => [
-      { accessorKey: 'candidate', header: 'Candidate' },
+      { accessorKey: 'candidate', header: 'Kandidat' },
       { accessorKey: 'position', header: 'Position' },
       { accessorKey: 'type', header: 'Interview type' },
       { accessorKey: 'interviewer', header: 'Interviewer' },
@@ -89,11 +89,11 @@ export default function TalentInterviewsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent / Interviews</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Interview pipeline</h1>
+            <h1 className="text-3xl font-semibold text-slate-900">Alur wawancara</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Schedule, track, and manage interviews across all rounds and interview types.</p>
           </div>
           <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
-            Back to talent
+            Kembali ke Talent
           </Link>
         </div>
       </SectionContainer>
@@ -116,10 +116,10 @@ export default function TalentInterviewsPage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
-              <Download className="h-4 w-4" /> Export
+              <Download className="h-4 w-4" /> Ekspor
             </Button>
             <Button variant="ghost" className="rounded-full px-5 py-3">
-              <Filter className="h-4 w-4" /> Filters
+              <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
         </div>
@@ -130,15 +130,15 @@ export default function TalentInterviewsPage() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search candidate, position, or interviewer"
+              placeholder="Cari kandidat, posisi, atau pewawancara"
               className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
             <option value="All">All statuses</option>
-            <option value="Scheduled">Scheduled</option>
-            <option value="Completed">Completed</option>
-            <option value="Pending">Pending</option>
+            <option value="Scheduled">Terjadwal</option>
+            <option value="Completed">Selesai</option>
+            <option value="Pending">Tertunda</option>
           </select>
         </div>
 

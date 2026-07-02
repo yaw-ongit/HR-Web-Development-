@@ -96,12 +96,12 @@ export default function TalentCompetencyPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent / Competency</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Competency management</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">Assess and develop employee competencies to ensure skill alignment and career growth.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent / Kompetensi</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Manajemen kompetensi</h1>
+            <p className="mt-2 max-w-2xl text-sm text-slate-400">Nilai dan kembangkan kompetensi karyawan untuk kesesuaian keterampilan dan pengembangan karier.</p>
           </div>
           <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
-            Back to talent
+            Kembali ke Talent
           </Link>
         </div>
       </SectionContainer>
@@ -158,15 +158,15 @@ export default function TalentCompetencyPage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Competency table</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-900">Employee assessments</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Tabel kompetensi</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">Penilaian karyawan</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
-              <Download className="h-4 w-4" /> Export
+              <Download className="h-4 w-4" /> Ekspor
             </Button>
             <Button variant="ghost" className="rounded-full px-5 py-3">
-              <Filter className="h-4 w-4" /> Filters
+              <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
         </div>
@@ -177,7 +177,7 @@ export default function TalentCompetencyPage() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search employee, competency, or assessor"
+              placeholder="Cari karyawan, kompetensi, atau penilai"
               className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
             />
           </div>

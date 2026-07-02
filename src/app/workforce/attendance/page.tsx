@@ -103,7 +103,7 @@ export default function WorkforceAttendancePage() {
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Live attendance status, daily presence and employee operations in a single view.</p>
           </div>
           <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
-            Back to workforce
+            Kembali ke Workforce
           </Link>
         </div>
       </SectionContainer>
@@ -183,10 +183,10 @@ export default function WorkforceAttendancePage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
-              <Download className="h-4 w-4" /> Export
+              <Download className="h-4 w-4" /> Ekspor
             </Button>
             <Button variant="ghost" className="rounded-full px-5 py-3">
-              <Filter className="h-4 w-4" /> Filters
+              <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
         </div>

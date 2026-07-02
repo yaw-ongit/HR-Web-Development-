@@ -44,13 +44,13 @@ export function PageHeader({
                 {crumb.href ? (
                   <Link
                     href={crumb.href}
-                    className="uppercase tracking-[0.24em] transition hover:text-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded"
+                    className="uppercase tracking-[0.24em] transition hover:text-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-500 rounded"
                   >
                     {crumb.label}
                   </Link>
                 ) : (
                   <span
-                    className="uppercase tracking-[0.24em] text-blue-600"
+                    className="uppercase tracking-[0.24em] text-brand-600"
                     aria-current="page"
                   >
                     {crumb.label}

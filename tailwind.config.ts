@@ -17,6 +17,11 @@ const config: Config = {
           800: 'var(--color-brand-800)',
           900: 'var(--color-brand-900)',
         },
+        indogold: {
+          500: 'var(--color-indogold-500)',
+          600: 'var(--color-indogold-600)',
+          700: 'var(--color-indogold-700)',
+        },
       },
       boxShadow: {
         soft: '0 22px 48px rgba(15, 23, 42, 0.08)',

@@ -33,14 +33,14 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
               <div className="flex items-center gap-3">
                 <button
                   type="button"
-                  aria-label="Open navigation menu"
+                  aria-label="Buka menu navigasi"
                   aria-expanded={sidebarOpen}
                   aria-controls="sidebar"
                   onClick={() => setSidebarOpen(true)}
                   className={cn(
                     'inline-flex h-10 w-10 items-center justify-center rounded-2xl',
                     'border border-slate-200 bg-slate-50 text-slate-800 transition',
-                    'hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:hidden',
+                    'hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500 lg:hidden',
                   )}
                 >
                   <Menu className="h-5 w-5" aria-hidden="true" />
@@ -69,8 +69,8 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                   />
                   <input
                     type="search"
-                    aria-label="Global search"
-                    placeholder="Search..."
+                    aria-label="Pencarian global"
+                    placeholder="Cari..."
                     className={cn(
                       'w-full rounded-full border border-slate-200 bg-slate-50/90 py-2.5 pl-10 pr-4 text-sm text-slate-900',
                       'outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30',
@@ -81,7 +81,7 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                 {/* Notifications */}
                 <button
                   type="button"
-                  aria-label="View notifications"
+                  aria-label="Lihat pemberitahuan"
                   className={cn(
                     'relative inline-flex h-10 w-10 items-center justify-center rounded-2xl',
                     'bg-slate-50 text-slate-700 transition hover:bg-slate-100 hover:text-slate-900',
@@ -99,7 +99,7 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                 {/* Theme toggle */}
                 <button
                   type="button"
-                  aria-label="Toggle theme"
+                  aria-label="Ubah tema"
                   className={cn(
                     'hidden sm:inline-flex h-10 w-10 items-center justify-center rounded-2xl',
                     'bg-slate-50 text-slate-700 transition hover:bg-slate-100 hover:text-slate-900',
@@ -112,7 +112,7 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                 {/* User menu */}
                 <button
                   type="button"
-                  aria-label="User menu — Maya Thompson"
+                  aria-label="Menu pengguna — Maya Thompson"
                   aria-haspopup="true"
                   className={cn(
                     'inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1.5',

@@ -16,8 +16,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const emailError = submitted && !email.includes('@') ? 'Enter a valid enterprise email address.' : '';
-  const passwordError = submitted && password.length > 0 && password.length < 8 ? 'Password must be at least 8 characters.' : '';
+  const emailError = submitted && !email.includes('@') ? 'Masukkan alamat email perusahaan yang valid.' : '';
+  const passwordError = submitted && password.length > 0 && password.length < 8 ? 'Kata sandi harus minimal 8 karakter.' : '';
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -31,23 +31,23 @@ export default function LoginPage() {
     <main id="main-content" className="min-h-screen bg-white px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl items-center gap-10 lg:grid-cols-[1fr_420px]">
         {/* Brand panel */}
-        <section aria-label="Enterprise HRIS branding" className="space-y-6">
+        <section aria-label="Branding HRIS PT Indocater" className="space-y-6">
           <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-slate-50 ring-1 ring-slate-700" aria-hidden="true">
-            <ShieldCheck className="h-7 w-7 text-blue-600" />
+            <ShieldCheck className="h-7 w-7 text-brand-600" />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Enterprise HRIS</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">PT Indocater HRIS</p>
             <h1 className="mt-2 max-w-lg text-4xl font-semibold text-slate-900 lg:text-5xl">
-              Your secure people platform
+              Platform HR internal yang aman
             </h1>
             <p className="mt-4 max-w-md text-sm leading-7 text-slate-400">
-              Sign in to manage HR operations, approvals, workforce data, and enterprise analytics from one governed workspace.
+              Masuk untuk mengelola operasi HR, persetujuan, data karyawan, dan analitik dari satu portal terpadu.
             </p>
           </div>
-          <ul className="grid gap-3 sm:grid-cols-3" aria-label="Security features">
-            {['SSO ready', 'MFA enabled', 'Audit logging'].map((item) => (
+          <ul className="grid gap-3 sm:grid-cols-3" aria-label="Fitur keamanan">
+            {['SSO siap', 'MFA aktif', 'Audit logging'].map((item) => (
               <li key={item} className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
-                <LockKeyhole className="h-4 w-4 text-blue-600" aria-hidden="true" />
+                <LockKeyhole className="h-4 w-4 text-brand-600" aria-hidden="true" />
                 <p className="mt-2 text-sm font-semibold text-slate-900">{item}</p>
               </li>
             ))}
@@ -55,12 +55,12 @@ export default function LoginPage() {
         </section>
 
         {/* Login form */}
-        <Card title="Sign in" description="Use your company account to continue.">
+        <Card title="Masuk" description="Gunakan akun perusahaan untuk masuk.">
           <form className="space-y-5" onSubmit={handleSubmit} noValidate aria-label="Login form">
             {/* Email */}
             <div>
               <label htmlFor={emailId} className="block text-xs uppercase tracking-[0.24em] text-slate-400">
-                Email address <span aria-hidden="true" className="text-rose-600">*</span>
+                Alamat email <span aria-hidden="true" className="text-rose-600">*</span>
               </label>
               <input
                 id={emailId}
@@ -86,7 +86,7 @@ export default function LoginPage() {
             {/* Password */}
             <div>
               <label htmlFor={passwordId} className="block text-xs uppercase tracking-[0.24em] text-slate-400">
-                Password <span aria-hidden="true" className="text-rose-600">*</span>
+                Kata sandi <span aria-hidden="true" className="text-rose-600">*</span>
               </label>
               <div className="relative mt-2">
                 <input
@@ -126,15 +126,15 @@ export default function LoginPage() {
                   type="checkbox"
                   checked={remember}
                   onChange={(e) => setRemember(e.target.checked)}
-                  className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-blue-600 focus:ring-blue-500"
+                  className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-brand-600 focus:ring-brand-500"
                 />
-                Remember me
+                Ingat saya
               </label>
               <Link
                 href="/identity"
-                className="text-sm font-semibold text-blue-600 transition hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                className="text-sm font-semibold text-brand-600 transition hover:text-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 rounded"
               >
-                Forgot password?
+                Lupa kata sandi?
               </Link>
             </div>
 
@@ -145,13 +145,13 @@ export default function LoginPage() {
               loading={loading}
               className="w-full rounded-full"
             >
-              Sign in
+              Masuk
             </Button>
 
             <p className="text-center text-sm text-slate-400">
-              Need access?{' '}
-              <Link href="/identity" className="font-semibold text-blue-600 transition hover:text-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded">
-                Contact your administrator
+              Butuh akses?{' '}
+              <Link href="/identity" className="font-semibold text-brand-600 transition hover:text-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 rounded">
+                Hubungi administrator
               </Link>
             </p>
           </form>

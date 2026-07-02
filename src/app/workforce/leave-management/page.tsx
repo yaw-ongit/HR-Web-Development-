@@ -82,12 +82,12 @@ export default function WorkforceLeaveManagementPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Workforce / Leave Management</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Leave dashboard</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">A centralized leave operations workspace for requests, balance and approvals.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Workforce / Manajemen Cuti</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Dasbor Cuti</h1>
+            <p className="mt-2 max-w-2xl text-sm text-slate-400">Workspace terpusat untuk permintaan cuti, saldo, dan persetujuan.</p>
           </div>
           <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
-            Back to workforce
+            Kembali ke Workforce
           </Link>
         </div>
       </SectionContainer>
@@ -119,7 +119,7 @@ export default function WorkforceLeaveManagementPage() {
             {leaveTypes.map((type) => (
               <div key={type} className="rounded-3xl bg-white/80 p-4">
                 <p className="text-sm font-semibold text-slate-900">{type}</p>
-                <p className="mt-2 text-sm text-slate-400">Managed through the HR workflow and approval pipeline.</p>
+                <p className="mt-2 text-sm text-slate-400">Dikelola melalui alur kerja HR dan jalur persetujuan.</p>
               </div>
             ))}
           </div>
@@ -188,7 +188,7 @@ export default function WorkforceLeaveManagementPage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
-              <Download className="h-4 w-4" /> Export
+              <Download className="h-4 w-4" /> Ekspor
             </Button>
             <Button variant="ghost" className="rounded-full px-5 py-3">
               <Filter className="h-4 w-4" /> Filter
@@ -202,15 +202,15 @@ export default function WorkforceLeaveManagementPage() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search employee, leave type or approver"
+              placeholder="Cari karyawan, jenis cuti atau pemberi persetujuan"
               className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
             <option value="All">All statuses</option>
-            <option value="Pending">Pending</option>
-            <option value="Approved">Approved</option>
-            <option value="Rejected">Rejected</option>
+            <option value="Pending">Menunggu</option>
+            <option value="Approved">Disetujui</option>
+            <option value="Rejected">Ditolak</option>
           </select>
         </div>
 

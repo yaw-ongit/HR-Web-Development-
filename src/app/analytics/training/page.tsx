@@ -22,8 +22,8 @@ export default function TrainingAnalyticsPage() {
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analytics</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Training Analytics</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <h1 className="text-3xl font-semibold text-slate-900">Analitik Pelatihan</h1>
             </div>
           </div>
         </div>
@@ -33,9 +33,9 @@ export default function TrainingAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Completion Rate</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tingkat Penyelesaian</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">87.5%</p>
-              <p className="mt-2 text-sm text-emerald-600">↑ 2.1% from last month</p>
+              <p className="mt-2 text-sm text-emerald-600">↑ 2.1% dari bulan lalu</p>
             </div>
             <Award className="h-8 w-8 text-emerald-600" />
           </div>
@@ -44,9 +44,9 @@ export default function TrainingAnalyticsPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Expiring Soon</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Segera Kedaluwarsa</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">38</p>
-              <p className="mt-2 text-sm text-amber-600">Within 60 days</p>
+              <p className="mt-2 text-sm text-amber-600">Dalam 60 hari</p>
             </div>
             <AlertCircle className="h-8 w-8 text-amber-600" />
           </div>
@@ -55,7 +55,7 @@ export default function TrainingAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Mandatory Training Compliance</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Kepatuhan Pelatihan Wajib</p>
           <div className="space-y-3">
             {mandatoryTrainingData.map((training) => (
               <div key={training.training} className="rounded-2xl bg-white/80 p-4">
@@ -82,22 +82,22 @@ export default function TrainingAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Certificate Expiry Status</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Status Kedaluwarsa Sertifikat</p>
           <div className="space-y-3">
             {expiredCertificatesData.map((cert) => (
               <div key={cert.certificate} className="rounded-2xl bg-white/80 p-4">
                 <p className="text-sm font-semibold text-slate-900 mb-3">{cert.certificate}</p>
-                <div className="grid grid-cols-3 gap-2">
-                  <div>
-                    <p className="text-xs text-rose-600 font-semibold">{cert.expired} Expired</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div>
+                      <p className="text-xs text-rose-600 font-semibold">{cert.expired} Kedaluwarsa</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-amber-600 font-semibold">{cert.expiringSoon} Segera Kedaluwarsa</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-emerald-600 font-semibold">{cert.active} Aktif</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs text-amber-600 font-semibold">{cert.expiringSoon} Expiring</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-emerald-600 font-semibold">{cert.active} Active</p>
-                  </div>
-                </div>
               </div>
             ))}
           </div>
@@ -107,7 +107,7 @@ export default function TrainingAnalyticsPage() {
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Training Completion Trend</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Penyelesaian Pelatihan</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={trainingCompletionData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -127,7 +127,7 @@ export default function TrainingAnalyticsPage() {
 
         <SectionContainer>
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Competency Matrix</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Matriks Kompetensi</p>
             <div className="space-y-3">
               {competencyMatrixData.map((competency) => (
                 <div key={competency.competency} className="rounded-2xl bg-white/80 p-3">

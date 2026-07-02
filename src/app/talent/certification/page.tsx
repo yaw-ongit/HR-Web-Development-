@@ -77,10 +77,10 @@ export default function TalentCertificationPage() {
   });
 
   const metrics = [
-    { label: 'Active certifications', value: '156', subtext: 'Current & valid' },
-    { label: 'Expiring soon', value: '3', subtext: 'Next 90 days' },
-    { label: 'Expired', value: '1', subtext: 'Action required' },
-    { label: 'Renewal rate', value: '92%', subtext: 'Historical' },
+    { label: 'Sertifikat aktif', value: '156', subtext: 'Saat ini valid' },
+    { label: 'Segera kedaluwarsa', value: '3', subtext: '90 hari ke depan' },
+    { label: 'Kedaluwarsa', value: '1', subtext: 'Tindakan diperlukan' },
+    { label: 'Tingkat perpanjangan', value: '92%', subtext: 'Historis' },
   ];
 
   return (
@@ -88,12 +88,12 @@ export default function TalentCertificationPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent / Certification</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Certification management</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">Track employee certifications, expiry dates, and renewal requirements.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent / Sertifikasi</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Manajemen sertifikasi</h1>
+            <p className="mt-2 max-w-2xl text-sm text-slate-400">Lacak sertifikasi karyawan, tanggal kedaluwarsa, dan kebutuhan perpanjangan.</p>
           </div>
           <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
-            Back to talent
+            Kembali ke Talent
           </Link>
         </div>
       </SectionContainer>
@@ -113,15 +113,15 @@ export default function TalentCertificationPage() {
           <div className="flex items-start gap-3 rounded-3xl border border-amber-500/20 bg-amber-500/5 p-4">
             <AlertCircle className="h-5 w-5 mt-0.5 text-amber-600 flex-shrink-0" />
             <div>
-              <p className="text-sm font-semibold text-amber-200">Expiring soon</p>
+              <p className="text-sm font-semibold text-amber-200">Segera kedaluwarsa</p>
               <p className="text-sm text-amber-100 mt-1">Zoe Kim's CSPO certification expires on 2026-11-20 (147 days).</p>
             </div>
           </div>
           <div className="flex items-start gap-3 rounded-3xl border border-rose-500/20 bg-rose-500/5 p-4">
             <AlertCircle className="h-5 w-5 mt-0.5 text-rose-600 flex-shrink-0" />
             <div>
-              <p className="text-sm font-semibold text-rose-200">Expired</p>
-              <p className="text-sm text-rose-100 mt-1">Maya Thompson's SHRM certification expired on 2026-05-10. Renewal recommended.</p>
+              <p className="text-sm font-semibold text-rose-200">Kedaluwarsa</p>
+              <p className="text-sm text-rose-100 mt-1">Sertifikat SHRM Maya Thompson kedaluwarsa pada 2026-05-10. Disarankan memperbarui.</p>
             </div>
           </div>
         </div>
@@ -133,12 +133,12 @@ export default function TalentCertificationPage() {
             <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Certification table</p>
             <h2 className="mt-2 text-xl font-semibold text-slate-900">All certifications</h2>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
-              <Download className="h-4 w-4" /> Export
+              <Download className="h-4 w-4" /> Ekspor
             </Button>
             <Button variant="ghost" className="rounded-full px-5 py-3">
-              <Filter className="h-4 w-4" /> Filters
+              <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
         </div>
@@ -155,9 +155,9 @@ export default function TalentCertificationPage() {
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
             <option value="All">All statuses</option>
-            <option value="Active">Active</option>
-            <option value="Expiring">Expiring</option>
-            <option value="Expired">Expired</option>
+            <option value="Active">Aktif</option>
+            <option value="Expiring">Segera Kedaluwarsa</option>
+            <option value="Expired">Kedaluwarsa</option>
           </select>
         </div>
 

@@ -28,8 +28,8 @@ export default function WorkforceAnalyticsPage() {
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analytics</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Workforce Analytics</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <h1 className="text-3xl font-semibold text-slate-900">Analitik Workforce</h1>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function WorkforceAnalyticsPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <SectionContainer>
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Age Distribution</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Distribusi Usia</p>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie data={ageDistribution} dataKey="count" nameKey="age" cx="50%" cy="50%" outerRadius={80} label>
@@ -57,7 +57,7 @@ export default function WorkforceAnalyticsPage() {
 
         <SectionContainer>
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Gender Distribution</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Distribusi Gender</p>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie data={genderDistribution} dataKey="count" nameKey="gender" cx="50%" cy="50%" outerRadius={80} label>
@@ -76,7 +76,7 @@ export default function WorkforceAnalyticsPage() {
 
         <SectionContainer>
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Years of Service</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Lama Bekerja</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={yearsOfServiceData} layout="vertical" margin={{ top: 10, right: 30, left: 100, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -95,7 +95,7 @@ export default function WorkforceAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Department Comparison</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Perbandingan Departemen</p>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={departmentComparisonData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -115,7 +115,7 @@ export default function WorkforceAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Organization Structure - Headcount by Department</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Struktur Organisasi - Headcount per Departemen</p>
           <div className="space-y-3">
             {departmentComparisonData.map((dept) => (
               <div key={dept.department} className="rounded-2xl bg-white/80 p-4">
@@ -137,7 +137,7 @@ export default function WorkforceAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Headcount Trend with Department Breakdown</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Headcount per Departemen</p>
           <ResponsiveContainer width="100%" height={350}>
             <LineChart data={workforceTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />

@@ -96,11 +96,11 @@ export default function TalentOnboardingPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent / Onboarding</p>
-            <h1 className="text-3xl font-semibold text-slate-900">New employee onboarding</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">Track onboarding tasks, assignments, and new employee readiness across departments.</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Onboarding karyawan baru</h1>
+            <p className="mt-2 max-w-2xl text-sm text-slate-400">Lacak tugas onboarding, penugasan, dan kesiapan karyawan baru antar departemen.</p>
           </div>
           <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
-            Back to talent
+            Kembali ke Talent
           </Link>
         </div>
       </SectionContainer>
@@ -133,10 +133,10 @@ export default function TalentOnboardingPage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
-              <Download className="h-4 w-4" /> Export
+              <Download className="h-4 w-4" /> Ekspor
             </Button>
             <Button variant="ghost" className="rounded-full px-5 py-3">
-              <Filter className="h-4 w-4" /> Filters
+              <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
         </div>

@@ -27,8 +27,8 @@ export default function LeaveAnalyticsPage() {
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analytics</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Leave Analytics</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <h1 className="text-3xl font-semibold text-slate-900">Analitik Cuti</h1>
             </div>
           </div>
         </div>
@@ -37,25 +37,25 @@ export default function LeaveAnalyticsPage() {
       <SectionContainer>
         <div className="grid gap-4 md:grid-cols-2">
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Leave Balance Overview</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Ikhtisar Saldo Cuti</p>
             <div className="space-y-4">
               {leaveBalanceData.map((leave) => (
                 <div key={leave.leaveType} className="rounded-2xl bg-white/80 p-4">
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-sm font-semibold text-slate-900">{leave.leaveType}</p>
-                    <span className="text-xs font-semibold text-slate-400">{leave.employees} employees</span>
+                    <span className="text-xs font-semibold text-slate-400">{leave.employees} karyawan</span>
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-center">
                     <div>
-                      <p className="text-xs text-slate-400">Allocation</p>
+                      <p className="text-xs text-slate-400">Alokasi</p>
                       <p className="text-sm font-semibold text-slate-900">{leave.total}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">Used</p>
+                      <p className="text-xs text-slate-400">Dipakai</p>
                       <p className="text-sm font-semibold text-rose-600">{leave.used}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">Balance</p>
+                      <p className="text-xs text-slate-400">Saldo</p>
                       <p className={`text-sm font-semibold ${leave.balance < 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
                         {leave.balance}
                       </p>
@@ -67,7 +67,7 @@ export default function LeaveAnalyticsPage() {
           </Card>
 
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Leave Type Distribution</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Distribusi Jenis Cuti</p>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie data={leaveTypeDistribution} dataKey="count" nameKey="type" cx="50%" cy="50%" outerRadius={80} label>
@@ -87,7 +87,7 @@ export default function LeaveAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Leave Approval Trend</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Persetujuan Cuti</p>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={leaveTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -107,7 +107,7 @@ export default function LeaveAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Department Leave Comparison</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Perbandingan Cuti Departemen</p>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={departmentComparisonData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -127,26 +127,26 @@ export default function LeaveAnalyticsPage() {
 
       <SectionContainer>
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Leave Request Processing Time</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Waktu Proses Permintaan Cuti</p>
           <div className="space-y-3">
             <div className="rounded-2xl bg-white/80 p-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-900">Average Processing Time</p>
-                <p className="mt-1 text-xs text-slate-400">Last 30 days</p>
+                <p className="text-sm font-semibold text-slate-900">Rata-rata Waktu Proses</p>
+                <p className="mt-1 text-xs text-slate-400">30 hari terakhir</p>
               </div>
-              <span className="text-2xl font-semibold text-blue-600">2.3 days</span>
+              <span className="text-2xl font-semibold text-blue-600">2.3 hari</span>
             </div>
             <div className="rounded-2xl bg-white/80 p-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-900">Fastest Department</p>
-                <p className="mt-1 text-xs text-slate-400">Finance - avg 1.5 days</p>
+                <p className="text-sm font-semibold text-slate-900">Departemen Tercepat</p>
+                <p className="mt-1 text-xs text-slate-400">Keuangan - rata-rata 1.5 hari</p>
               </div>
               <span className="text-2xl font-semibold text-emerald-600">1.5d</span>
             </div>
             <div className="rounded-2xl bg-white/80 p-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-900">Slowest Department</p>
-                <p className="mt-1 text-xs text-slate-400">Facilities - avg 3.2 days</p>
+                <p className="text-sm font-semibold text-slate-900">Departemen Terlambat</p>
+                <p className="mt-1 text-xs text-slate-400">Fasilitas - rata-rata 3.2 hari</p>
               </div>
               <span className="text-2xl font-semibold text-amber-600">3.2d</span>
             </div>

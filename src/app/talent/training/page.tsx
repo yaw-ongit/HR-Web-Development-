@@ -93,10 +93,10 @@ export default function TalentTrainingPage() {
   });
 
   const metrics = [
-    { label: 'Active programs', value: '28', subtext: 'Currently enrolled' },
-    { label: 'Completed this month', value: '31', subtext: 'Certifications' },
-    { label: 'In progress', value: '30', subtext: 'Active trainings' },
-    { label: 'Dropout rate', value: '4.6%', subtext: 'This quarter' },
+    { label: 'Program aktif', value: '28', subtext: 'Sedang berjalan' },
+    { label: 'Sertifikasi bulan ini', value: '31', subtext: 'Sertifikasi' },
+    { label: 'Sedang berlangsung', value: '30', subtext: 'Pelatihan aktif' },
+    { label: 'Tingkat putus', value: '4.6%', subtext: 'Kuartal ini' },
   ];
 
   return (
@@ -104,12 +104,12 @@ export default function TalentTrainingPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent / Training</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Training & development</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">Track employee training programs, progress, and completion to drive skill development.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent / Pelatihan</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Pelatihan & pengembangan</h1>
+            <p className="mt-2 max-w-2xl text-sm text-slate-400">Lacak program pelatihan karyawan, kemajuan, dan penyelesaian untuk pengembangan keterampilan.</p>
           </div>
           <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
-            Back to talent
+            Kembali ke Talent
           </Link>
         </div>
       </SectionContainer>
@@ -127,15 +127,15 @@ export default function TalentTrainingPage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Training table</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-900">Active programs</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Tabel pelatihan</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">Program aktif</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
-              <Download className="h-4 w-4" /> Export
+              <Download className="h-4 w-4" /> Ekspor
             </Button>
             <Button variant="ghost" className="rounded-full px-5 py-3">
-              <Filter className="h-4 w-4" /> Filters
+              <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
         </div>
@@ -146,16 +146,16 @@ export default function TalentTrainingPage() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search employee, program, or provider"
+              placeholder="Cari karyawan, program, atau penyedia"
               className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
             <option value="All">All statuses</option>
-            <option value="Completed">Completed</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Scheduled">Scheduled</option>
-            <option value="Cancelled">Cancelled</option>
+            <option value="Completed">Selesai</option>
+            <option value="In Progress">Sedang Berlangsung</option>
+            <option value="Scheduled">Terjadwal</option>
+            <option value="Cancelled">Dibatalkan</option>
           </select>
         </div>
 
