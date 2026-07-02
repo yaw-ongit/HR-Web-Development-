@@ -83,7 +83,8 @@ export default function TalentHomePage() {
                   <Line type="monotone" dataKey="screened" stroke="#38bdf8" strokeWidth={2} name="Disaring" />
                   <Line type="monotone" dataKey="interviewed" stroke="#06b6d4" strokeWidth={2} name="Wawancara" />
                   <Line type="monotone" dataKey="hired" stroke="#10b981" strokeWidth={2} name="Dipekerjakan" />
-            </ResponsiveContainer>
+                </LineChart>
+                </ResponsiveContainer>
           </div>
         </Card>
       </div>
@@ -135,8 +136,7 @@ export default function TalentHomePage() {
                 <Bar dataKey="actual" fill="#38bdf8" radius={[12, 12, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
-          </div>
-        </Card>
+          </Card>
       </div>
 
       <SectionContainer title="Operasi Talenta" className="space-y-4">
