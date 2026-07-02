@@ -1,0 +1,10 @@
+node_modules
+.next
+.vercel
+.vscode
+*.zip
+*.rar
+*.7z
+*.log
+.env*
+tsconfig.tsbuildinfo

@@ -8,3 +8,10 @@ coverage/
 .env.*
 !.env.example
 lib.zip
+
+.vercel
+.vscode/
+tsconfig.tsbuildinfo
+*.zip
+*.rar
+*.7z

@@ -136,7 +136,7 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
 
         {/* Page content */}
         <main id="main-content" className="flex-1" tabIndex={-1}>
-          <PageContainer>{children}</PageContainer>
+          <PageContainer className="pt-2 sm:pt-4 lg:pt-5">{children}</PageContainer>
         </main>
       </div>
     </div>
