@@ -23,13 +23,13 @@ export default function WorkforceAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-white/10 bg-slate-950/90 px-4 py-2 text-sm font-semibold text-slate-100 hover:border-sky-400">
+              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Analytics</p>
-              <h1 className="text-3xl font-semibold text-slate-100">Workforce Analytics</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analytics</p>
+              <h1 className="text-3xl font-semibold text-slate-900">Workforce Analytics</h1>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function WorkforceAnalyticsPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <SectionContainer>
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Age Distribution</p>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -56,7 +56,7 @@ export default function WorkforceAnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Gender Distribution</p>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -75,7 +75,7 @@ export default function WorkforceAnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Years of Service</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={yearsOfServiceData} layout="vertical" margin={{ top: 10, right: 30, left: 100, bottom: 0 }}>
@@ -94,7 +94,7 @@ export default function WorkforceAnalyticsPage() {
       </div>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Department Comparison</p>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={departmentComparisonData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
@@ -114,16 +114,16 @@ export default function WorkforceAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Organization Structure - Headcount by Department</p>
           <div className="space-y-3">
             {departmentComparisonData.map((dept) => (
-              <div key={dept.department} className="rounded-2xl bg-slate-950/80 p-4">
+              <div key={dept.department} className="rounded-2xl bg-white/80 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-slate-100">{dept.department}</p>
-                  <span className="text-sm font-semibold text-sky-400">{dept.headcount} employees</span>
+                  <p className="text-sm font-semibold text-slate-900">{dept.department}</p>
+                  <span className="text-sm font-semibold text-blue-600">{dept.headcount} employees</span>
                 </div>
-                <div className="h-2 w-full bg-slate-900/50 rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-slate-50/50 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full"
                     style={{ width: `${(dept.headcount / 85) * 100}%` }}
@@ -136,7 +136,7 @@ export default function WorkforceAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Headcount Trend with Department Breakdown</p>
           <ResponsiveContainer width="100%" height={350}>
             <LineChart data={workforceTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>

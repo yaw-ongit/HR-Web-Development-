@@ -135,7 +135,7 @@ export const passwordPolicies = [
 ];
 
 export const roleVisibility = [
-  { role: 'Employee', modules: ['Dashboard', 'Profile', 'Workforce', 'Training', 'Claims'], color: 'text-sky-200' },
+  { role: 'Employee', modules: ['Dashboard', 'Profile', 'Workforce', 'Training', 'Claims'], color: 'text-blue-500' },
   { role: 'Supervisor', modules: ['People', 'Workforce', 'Approvals', 'Team Analytics'], color: 'text-emerald-200' },
   { role: 'HR Officer', modules: ['People', 'Employee 360', 'Talent', 'Compensation'], color: 'text-amber-200' },
   { role: 'HR Manager', modules: ['All HR Modules', 'Analytics', 'Approval Matrix', 'Audit View'], color: 'text-purple-200' },

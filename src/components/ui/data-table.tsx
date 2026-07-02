@@ -28,10 +28,10 @@ export function DataTable<TData>({
   const totalCount = table.getRowModel().rows.length;
 
   return (
-    <div className="rounded-[28px] border border-white/10 bg-slate-900/90 shadow-card overflow-hidden">
+    <div className="rounded-[28px] border border-slate-200 bg-slate-50/90 shadow-card overflow-hidden">
       <div className="overflow-x-auto" role="region" aria-label={caption ?? 'Data table'} tabIndex={0}>
         <table
-          className="min-w-full border-separate border-spacing-0 text-left text-sm text-slate-200"
+          className="min-w-full border-separate border-spacing-0 text-left text-sm text-slate-800"
           aria-label={caption}
         >
           {caption && (
@@ -59,8 +59,8 @@ export function DataTable<TData>({
                           : undefined
                       }
                       className={cn(
-                        'sticky top-0 z-10 border-b border-white/10 bg-slate-950/95 px-4 py-4',
-                        'text-xs uppercase tracking-[0.24em] text-slate-500 whitespace-nowrap',
+                        'sticky top-0 z-10 border-b border-slate-200 bg-white/95 px-4 py-4',
+                        'text-xs uppercase tracking-[0.24em] text-slate-400 whitespace-nowrap',
                         header.column.id === 'actions' && 'text-right',
                         header.column.id === 'select' && 'w-12',
                         canSort && 'cursor-pointer select-none',
@@ -82,11 +82,11 @@ export function DataTable<TData>({
                         <div className="flex items-center gap-1.5">
                           {flexRender(header.column.columnDef.header, header.getContext())}
                           {canSort && (
-                            <span aria-hidden="true" className="text-slate-600">
+                            <span aria-hidden="true" className="text-slate-500">
                               {sortDir === 'asc' ? (
-                                <ArrowUp className="h-3.5 w-3.5 text-sky-400" />
+                                <ArrowUp className="h-3.5 w-3.5 text-blue-600" />
                               ) : sortDir === 'desc' ? (
-                                <ArrowDown className="h-3.5 w-3.5 text-sky-400" />
+                                <ArrowDown className="h-3.5 w-3.5 text-blue-600" />
                               ) : (
                                 <ArrowUpDown className="h-3.5 w-3.5" />
                               )}
@@ -107,10 +107,10 @@ export function DataTable<TData>({
                   key={row.id}
                   aria-selected={row.getIsSelected()}
                   className={cn(
-                    'border-b border-white/5 transition-colors last:border-0',
+                    'border-b border-slate-100 transition-colors last:border-0',
                     row.getIsSelected()
-                      ? 'bg-sky-500/5'
-                      : 'hover:bg-slate-950/60',
+                      ? 'bg-blue-600/5'
+                      : 'hover:bg-white/60',
                   )}
                 >
                   {row.getVisibleCells().map((cell) => (
@@ -133,7 +133,7 @@ export function DataTable<TData>({
                   className="px-4 py-16 text-center"
                 >
                   {emptyContent ?? (
-                    <p className="text-sm text-slate-500">No records found.</p>
+                    <p className="text-sm text-slate-400">No records found.</p>
                   )}
                 </td>
               </tr>
@@ -143,7 +143,7 @@ export function DataTable<TData>({
       </div>
 
       {showFooter && (
-        <div className="flex flex-col gap-3 border-t border-white/10 bg-slate-950/95 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-slate-200 bg-white/95 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           {/* Selection info */}
           <p className="text-xs text-slate-400" aria-live="polite">
             {selectedCount > 0
@@ -173,13 +173,13 @@ export function DataTable<TData>({
                 .map((col) => (
                   <label
                     key={col.id}
-                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-slate-900/80 px-2.5 py-1 text-xs text-slate-400 hover:text-slate-200 transition"
+                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-slate-50/80 px-2.5 py-1 text-xs text-slate-400 hover:text-slate-800 transition"
                   >
                     <input
                       type="checkbox"
                       checked={col.getIsVisible()}
                       onChange={col.getToggleVisibilityHandler()}
-                      className="h-3 w-3 cursor-pointer rounded border-slate-700 bg-slate-800 text-sky-400 focus:ring-sky-400"
+                      className="h-3 w-3 cursor-pointer rounded border-slate-300 bg-slate-100 text-blue-600 focus:ring-blue-500"
                       aria-label={`Toggle ${col.id} column`}
                     />
                     {col.id}

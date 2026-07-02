@@ -3,7 +3,7 @@ import { SkeletonPageHeader, SkeletonCard, SkeletonChart } from '@/components/ui
 export default function Loading() {
   return (
     <div
-      className="min-h-screen bg-slate-950 text-slate-100"
+      className="min-h-screen bg-white text-slate-900"
       role="status"
       aria-label="Loading dashboard"
     >

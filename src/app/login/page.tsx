@@ -28,16 +28,16 @@ export default function LoginPage() {
   }
 
   return (
-    <main id="main-content" className="min-h-screen bg-slate-950 px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
+    <main id="main-content" className="min-h-screen bg-white px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl items-center gap-10 lg:grid-cols-[1fr_420px]">
         {/* Brand panel */}
         <section aria-label="Enterprise HRIS branding" className="space-y-6">
-          <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-slate-900 ring-1 ring-slate-700" aria-hidden="true">
-            <ShieldCheck className="h-7 w-7 text-sky-300" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-slate-50 ring-1 ring-slate-700" aria-hidden="true">
+            <ShieldCheck className="h-7 w-7 text-blue-600" />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Enterprise HRIS</p>
-            <h1 className="mt-2 max-w-lg text-4xl font-semibold text-slate-100 lg:text-5xl">
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Enterprise HRIS</p>
+            <h1 className="mt-2 max-w-lg text-4xl font-semibold text-slate-900 lg:text-5xl">
               Your secure people platform
             </h1>
             <p className="mt-4 max-w-md text-sm leading-7 text-slate-400">
@@ -46,9 +46,9 @@ export default function LoginPage() {
           </div>
           <ul className="grid gap-3 sm:grid-cols-3" aria-label="Security features">
             {['SSO ready', 'MFA enabled', 'Audit logging'].map((item) => (
-              <li key={item} className="rounded-2xl border border-white/10 bg-slate-900/80 p-4">
-                <LockKeyhole className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                <p className="mt-2 text-sm font-semibold text-slate-100">{item}</p>
+              <li key={item} className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
+                <LockKeyhole className="h-4 w-4 text-blue-600" aria-hidden="true" />
+                <p className="mt-2 text-sm font-semibold text-slate-900">{item}</p>
               </li>
             ))}
           </ul>
@@ -60,7 +60,7 @@ export default function LoginPage() {
             {/* Email */}
             <div>
               <label htmlFor={emailId} className="block text-xs uppercase tracking-[0.24em] text-slate-400">
-                Email address <span aria-hidden="true" className="text-rose-400">*</span>
+                Email address <span aria-hidden="true" className="text-rose-600">*</span>
               </label>
               <input
                 id={emailId}
@@ -72,12 +72,12 @@ export default function LoginPage() {
                 aria-required="true"
                 aria-invalid={!!emailError}
                 aria-describedby={emailError ? `${emailId}-error` : undefined}
-                className={`mt-2 w-full rounded-3xl border bg-slate-950/90 p-4 text-sm text-slate-100 outline-none transition focus:ring-2 focus:ring-sky-400/30 ${
-                  emailError ? 'border-rose-500 focus:border-rose-400' : 'border-white/10 focus:border-sky-400'
+                className={`mt-2 w-full rounded-3xl border bg-white/90 p-4 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-blue-500/30 ${
+                  emailError ? 'border-rose-500 focus:border-rose-400' : 'border-slate-200 focus:border-blue-500'
                 }`}
               />
               {emailError && (
-                <p id={`${emailId}-error`} role="alert" className="mt-1.5 flex items-center gap-1.5 text-xs text-rose-400">
+                <p id={`${emailId}-error`} role="alert" className="mt-1.5 flex items-center gap-1.5 text-xs text-rose-600">
                   <AlertCircle className="h-3.5 w-3.5" aria-hidden="true" />{emailError}
                 </p>
               )}
@@ -86,7 +86,7 @@ export default function LoginPage() {
             {/* Password */}
             <div>
               <label htmlFor={passwordId} className="block text-xs uppercase tracking-[0.24em] text-slate-400">
-                Password <span aria-hidden="true" className="text-rose-400">*</span>
+                Password <span aria-hidden="true" className="text-rose-600">*</span>
               </label>
               <div className="relative mt-2">
                 <input
@@ -99,21 +99,21 @@ export default function LoginPage() {
                   aria-required="true"
                   aria-invalid={!!passwordError}
                   aria-describedby={passwordError ? `${passwordId}-error` : undefined}
-                  className={`w-full rounded-3xl border bg-slate-950/90 p-4 pr-12 text-sm text-slate-100 outline-none transition focus:ring-2 focus:ring-sky-400/30 ${
-                    passwordError ? 'border-rose-500 focus:border-rose-400' : 'border-white/10 focus:border-sky-400'
+                  className={`w-full rounded-3xl border bg-white/90 p-4 pr-12 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-blue-500/30 ${
+                    passwordError ? 'border-rose-500 focus:border-rose-400' : 'border-slate-200 focus:border-blue-500'
                   }`}
                 />
                 <button
                   type="button"
                   aria-label={visible ? 'Hide password' : 'Show password'}
                   onClick={() => setVisible((v) => !v)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded p-0.5 text-slate-400 transition hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded p-0.5 text-slate-400 transition hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   {visible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
               {passwordError && (
-                <p id={`${passwordId}-error`} role="alert" className="mt-1.5 flex items-center gap-1.5 text-xs text-rose-400">
+                <p id={`${passwordId}-error`} role="alert" className="mt-1.5 flex items-center gap-1.5 text-xs text-rose-600">
                   <AlertCircle className="h-3.5 w-3.5" aria-hidden="true" />{passwordError}
                 </p>
               )}
@@ -121,18 +121,18 @@ export default function LoginPage() {
 
             {/* Remember + forgot */}
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-300">
+              <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
                 <input
                   type="checkbox"
                   checked={remember}
                   onChange={(e) => setRemember(e.target.checked)}
-                  className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-sky-400 focus:ring-sky-400"
+                  className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-blue-600 focus:ring-blue-500"
                 />
                 Remember me
               </label>
               <Link
                 href="/identity"
-                className="text-sm font-semibold text-sky-300 transition hover:text-sky-200 focus:outline-none focus:ring-2 focus:ring-sky-400 rounded"
+                className="text-sm font-semibold text-blue-600 transition hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
               >
                 Forgot password?
               </Link>
@@ -150,7 +150,7 @@ export default function LoginPage() {
 
             <p className="text-center text-sm text-slate-400">
               Need access?{' '}
-              <Link href="/identity" className="font-semibold text-sky-300 transition hover:text-sky-200 focus:outline-none focus:ring-1 focus:ring-sky-400 rounded">
+              <Link href="/identity" className="font-semibold text-blue-600 transition hover:text-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded">
                 Contact your administrator
               </Link>
             </p>

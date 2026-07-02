@@ -49,7 +49,7 @@ export default function WelfarePage() {
       Family: 'from-purple-500/20 to-purple-500/10 border-purple-500/20 text-purple-300',
       Wellness: 'from-cyan-500/20 to-cyan-500/10 border-cyan-500/20 text-cyan-300',
     };
-    return colors[category] || 'from-slate-500/20 to-slate-500/10 border-slate-500/20 text-slate-300';
+    return colors[category] || 'from-slate-500/20 to-slate-500/10 border-slate-500/20 text-slate-700';
   };
 
   const totalBudget = welfarePrograms.reduce((sum, p) => sum + p.budget, 0);
@@ -63,47 +63,47 @@ export default function WelfarePage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Compensation / Welfare</p>
-            <h1 className="text-3xl font-semibold text-slate-100">Employee Welfare Programs</h1>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Compensation / Welfare</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Employee Welfare Programs</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Explore comprehensive welfare and wellness initiatives supporting employee wellbeing and quality of life.</p>
           </div>
-          <Link href="/compensation" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/90 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
+          <Link href="/compensation" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
             Back to compensation
           </Link>
         </div>
       </SectionContainer>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Active Programs</p>
-          <p className="mt-3 text-3xl font-semibold text-slate-100">{activePrograms}</p>
-          <p className="mt-2 text-sm text-emerald-400">Currently running</p>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Active Programs</p>
+          <p className="mt-3 text-3xl font-semibold text-slate-900">{activePrograms}</p>
+          <p className="mt-2 text-sm text-emerald-600">Currently running</p>
         </Card>
 
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Total Participants</p>
-          <p className="mt-3 text-3xl font-semibold text-slate-100">{totalParticipants}</p>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Total Participants</p>
+          <p className="mt-3 text-3xl font-semibold text-slate-900">{totalParticipants}</p>
           <p className="mt-2 text-sm text-slate-400">Enrolled employees</p>
         </Card>
 
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Total Budget</p>
-          <p className="mt-3 text-2xl font-semibold text-slate-100">Rp {(totalBudget / 1000000000).toFixed(1)}B</p>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Total Budget</p>
+          <p className="mt-3 text-2xl font-semibold text-slate-900">Rp {(totalBudget / 1000000000).toFixed(1)}B</p>
           <p className="mt-2 text-sm text-slate-400">Annual allocation</p>
         </Card>
 
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Categories</p>
-          <p className="mt-3 text-3xl font-semibold text-slate-100">{categories.length - 1}</p>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Categories</p>
+          <p className="mt-3 text-3xl font-semibold text-slate-900">{categories.length - 1}</p>
           <p className="mt-2 text-sm text-slate-400">Program types</p>
         </Card>
       </div>
 
-      <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+      <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-sky-300">Programs</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-100">Welfare Programs</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Programs</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">Welfare Programs</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
@@ -117,18 +117,18 @@ export default function WelfarePage() {
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search program"
-              className="w-full rounded-3xl border border-white/10 bg-slate-950/90 py-4 pl-11 pr-4 text-sm text-slate-100 outline-none transition focus:border-sky-400"
+              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
             />
           </div>
           <select
             value={categoryFilter}
             onChange={(event) => setCategoryFilter(event.target.value)}
-            className="rounded-3xl border border-white/10 bg-slate-950/90 p-4 text-sm text-slate-100 outline-none focus:border-sky-400"
+            className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500"
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>
@@ -143,42 +143,42 @@ export default function WelfarePage() {
         {filteredPrograms.map((program) => (
           <Card key={program.id} className={`rounded-[28px] border-2 bg-gradient-to-br ${getCategoryColor(program.category)} p-6 shadow-card transition hover:shadow-lg hover:border-opacity-100`}>
             <div className="flex items-start justify-between">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-slate-100">{getCategoryIcon(program.category)}</div>
-              <span className={`inline-flex rounded-full px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] ${program.status === 'Active' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-500/20 text-slate-300'}`}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-slate-900">{getCategoryIcon(program.category)}</div>
+              <span className={`inline-flex rounded-full px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] ${program.status === 'Active' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-500/20 text-slate-700'}`}>
                 {program.status}
               </span>
             </div>
 
-            <h3 className="mt-4 text-lg font-semibold text-slate-100">{program.name}</h3>
-            <p className="mt-2 text-sm text-slate-300 line-clamp-2">{program.description}</p>
+            <h3 className="mt-4 text-lg font-semibold text-slate-900">{program.name}</h3>
+            <p className="mt-2 text-sm text-slate-700 line-clamp-2">{program.description}</p>
 
-            <div className="mt-4 space-y-2 border-t border-white/10 pt-4">
+            <div className="mt-4 space-y-2 border-t border-slate-200 pt-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-slate-400">Budget</span>
-                <span className="text-sm font-semibold text-slate-100">Rp {(program.budget / 1000000).toFixed(0)}M</span>
+                <span className="text-sm font-semibold text-slate-900">Rp {(program.budget / 1000000).toFixed(0)}M</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-xs text-slate-400">Participants</span>
-                <span className="text-sm font-semibold text-slate-100">{program.participants}</span>
+                <span className="text-sm font-semibold text-slate-900">{program.participants}</span>
               </div>
               {program.provider && (
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-slate-400">Provider</span>
-                  <span className="text-xs font-medium text-slate-300">{program.provider.split(' ').slice(0, 2).join(' ')}</span>
+                  <span className="text-xs font-medium text-slate-700">{program.provider.split(' ').slice(0, 2).join(' ')}</span>
                 </div>
               )}
             </div>
 
             <div className="mt-4 flex gap-2">
-              <button className="flex-1 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-slate-100 transition hover:bg-white/20">Details</button>
-              <button className="flex-1 rounded-2xl bg-sky-500/20 px-3 py-2 text-xs font-semibold text-sky-300 transition hover:bg-sky-500/30">Enroll</button>
+              <button className="flex-1 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:bg-white/20">Details</button>
+              <button className="flex-1 rounded-2xl bg-blue-600/20 px-3 py-2 text-xs font-semibold text-blue-600 transition hover:bg-blue-600/30">Enroll</button>
             </div>
           </Card>
         ))}
       </div>
 
       {filteredPrograms.length === 0 && (
-        <div className="flex flex-col items-center justify-center rounded-[28px] border border-white/10 bg-slate-900/50 py-12 text-center">
+        <div className="flex flex-col items-center justify-center rounded-[28px] border border-slate-200 bg-slate-50/50 py-12 text-center">
           <p className="text-sm text-slate-400">No welfare programs match your search.</p>
         </div>
       )}

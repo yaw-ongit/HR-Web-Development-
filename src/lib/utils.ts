@@ -47,9 +47,9 @@ export function getStatusVariant(status: string): StatusVariant {
 }
 
 export const statusVariantClasses: Record<StatusVariant, string> = {
-  success: 'bg-emerald-500/15 text-emerald-200',
-  warning: 'bg-amber-500/15 text-amber-200',
-  danger: 'bg-rose-500/15 text-rose-200',
-  info: 'bg-sky-500/15 text-sky-200',
-  neutral: 'bg-slate-700/40 text-slate-300',
+  success: 'bg-emerald-50 text-emerald-200',
+  warning: 'bg-amber-50 text-amber-200',
+  danger: 'bg-rose-50 text-rose-200',
+  info: 'bg-blue-50 text-blue-500',
+  neutral: 'bg-slate-200/40 text-slate-700',
 };

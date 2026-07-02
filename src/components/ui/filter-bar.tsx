@@ -24,7 +24,7 @@ export function SelectFilter({ label, value, options, onChange, className }: Sel
         aria-label={label}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full appearance-none rounded-3xl border border-white/10 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30"
+        className="w-full appearance-none rounded-3xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30"
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -55,7 +55,7 @@ export function SearchInput({
     <div className={cn('relative', className)}>
       <label className="sr-only">{label}</label>
       <Search
-        className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500"
+        className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
         aria-hidden="true"
       />
       <input
@@ -64,14 +64,14 @@ export function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-3xl border border-white/10 bg-slate-950/90 py-3 pl-11 pr-10 text-sm text-slate-100 outline-none transition focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30"
+        className="w-full rounded-3xl border border-slate-200 bg-white/90 py-3 pl-11 pr-10 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30"
       />
       {value && (
         <button
           type="button"
           aria-label="Clear search"
           onClick={() => onChange('')}
-          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-slate-500 transition hover:text-slate-300 focus:outline-none focus:ring-1 focus:ring-sky-400"
+          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-slate-400 transition hover:text-slate-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           <X className="h-3.5 w-3.5" />
         </button>
@@ -90,7 +90,7 @@ export function FilterBar({ children, className }: FilterBarProps) {
     <div
       role="search"
       className={cn(
-        'rounded-[28px] border border-white/10 bg-slate-900/95 px-5 py-4 shadow-card',
+        'rounded-[28px] border border-slate-200 bg-slate-50/95 px-5 py-4 shadow-card',
         className,
       )}
     >

@@ -42,12 +42,12 @@ function titleFromSection(section?: string) {
 function StatusBadge({ value }: { value: string }) {
   const color =
     value === 'Success' || value === 'Current' || value === 'Trusted' || value === 'Good' || value === 'Active'
-      ? 'bg-emerald-500/15 text-emerald-200'
+      ? 'bg-emerald-50 text-emerald-200'
       : value === 'Failed' || value === 'Suspicious' || value === 'Review' || value === 'High'
-        ? 'bg-amber-500/15 text-amber-200'
+        ? 'bg-amber-50 text-amber-200'
         : value === 'Blocked' || value === 'Disabled'
-          ? 'bg-rose-500/15 text-rose-200'
-          : 'bg-sky-500/15 text-sky-200';
+          ? 'bg-rose-50 text-rose-200'
+          : 'bg-blue-50 text-blue-500';
 
   return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
 }
@@ -65,11 +65,11 @@ function ExportButtons() {
 function IdentityShell({ children, section }: { children: React.ReactNode; section?: string }) {
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
-      <section className="rounded-[28px] border border-white/10 bg-slate-900/95 px-6 py-6 shadow-card">
+      <section className="rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Identity</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-100">{titleFromSection(section)}</h1>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Identity</p>
+            <h1 className="mt-2 text-3xl font-semibold text-slate-900">{titleFromSection(section)}</h1>
             <p className="mt-3 max-w-3xl text-sm text-slate-400">
               Enterprise identity, authentication, authorization, sessions, notifications, preferences and security controls prepared for future provider integration.
             </p>
@@ -84,9 +84,9 @@ function IdentityShell({ children, section }: { children: React.ReactNode; secti
           {identitySections.map((item) => {
             const active = (!section && item.href === '/identity') || (section && item.href.endsWith(section));
             return (
-              <Link key={item.label} href={item.href} className={`rounded-3xl border px-4 py-3 text-sm transition ${active ? 'border-sky-400 bg-sky-500/10 text-sky-100' : 'border-white/10 bg-slate-950/70 text-slate-300 hover:border-sky-400'}`}>
+              <Link key={item.label} href={item.href} className={`rounded-3xl border px-4 py-3 text-sm transition ${active ? 'border-blue-500 bg-blue-50/50 text-sky-100' : 'border-slate-200 bg-white/70 text-slate-700 hover:border-blue-500'}`}>
                 <div className="flex items-center gap-2">
-                  <item.icon className="h-4 w-4 text-sky-300" />
+                  <item.icon className="h-4 w-4 text-blue-600" />
                   <span>{item.label}</span>
                 </div>
               </Link>
@@ -111,8 +111,8 @@ function DashboardView() {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {identityKpis.map((kpi) => (
           <Card key={kpi.label} className="p-6">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{kpi.label}</p>
-            <p className="mt-4 text-3xl font-semibold text-slate-100">{kpi.value}</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{kpi.label}</p>
+            <p className="mt-4 text-3xl font-semibold text-slate-900">{kpi.value}</p>
             <p className="mt-2 text-sm text-slate-400">{kpi.note}</p>
           </Card>
         ))}
@@ -121,15 +121,15 @@ function DashboardView() {
       <div className="grid gap-4 xl:grid-cols-[1.4fr_0.8fr]">
         <Card title="Global user search" description="Search by user, role, department, status or employee ID.">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
-            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search identity users" className="w-full rounded-3xl border border-white/10 bg-slate-950/90 py-4 pl-11 pr-4 text-sm text-slate-100 outline-none transition focus:border-sky-400" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search identity users" className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500" />
           </div>
           <div className="mt-5 grid gap-3">
             {users.slice(0, 5).map((user) => (
-              <div key={user.employeeId} className="rounded-3xl border border-white/10 bg-slate-950/80 px-4 py-4">
+              <div key={user.employeeId} className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-slate-100">{user.name}</p>
+                    <p className="text-sm font-semibold text-slate-900">{user.name}</p>
                     <p className="mt-1 text-sm text-slate-400">{user.employeeId} - {user.department} - {user.role}</p>
                   </div>
                   <StatusBadge value={user.status} />
@@ -181,8 +181,8 @@ function AuthenticationView() {
     <div className="grid gap-4 xl:grid-cols-3">
       {authProviderReadiness.map((provider) => (
         <Card key={provider.name} className="p-6">
-          <provider.icon className="h-7 w-7 text-sky-300" />
-          <p className="mt-5 text-base font-semibold text-slate-100">{provider.name}</p>
+          <provider.icon className="h-7 w-7 text-blue-600" />
+          <p className="mt-5 text-base font-semibold text-slate-900">{provider.name}</p>
           <p className="mt-2 text-sm text-slate-400">Frontend architecture placeholder for future authentication provider wiring.</p>
           <div className="mt-4"><StatusBadge value={provider.status} /></div>
         </Card>
@@ -196,17 +196,17 @@ function ProfilePreferencesView() {
     <div className="grid gap-4 xl:grid-cols-[0.7fr_1.3fr]">
       <Card title="Profile" description="Personal information and employee context.">
         <div className="flex items-center gap-4">
-          <div className="grid h-20 w-20 place-items-center rounded-[28px] bg-sky-500/15 text-2xl font-semibold text-slate-100">{profilePreference.avatar}</div>
+          <div className="grid h-20 w-20 place-items-center rounded-[28px] bg-blue-50 text-2xl font-semibold text-slate-900">{profilePreference.avatar}</div>
           <div>
-            <p className="text-xl font-semibold text-slate-100">{profilePreference.name}</p>
+            <p className="text-xl font-semibold text-slate-900">{profilePreference.name}</p>
             <p className="text-sm text-slate-400">{profilePreference.position}</p>
           </div>
         </div>
         <div className="mt-6 grid gap-3">
           {Object.entries(profilePreference).filter(([key]) => key !== 'avatar' && key !== 'name').map(([key, value]) => (
-            <div key={key} className="rounded-3xl bg-slate-950/80 px-4 py-3">
-              <p className="text-xs uppercase tracking-[0.24em] text-slate-500">{key.replace(/([A-Z])/g, ' $1')}</p>
-              <p className="mt-1 text-sm font-semibold text-slate-100">{value}</p>
+            <div key={key} className="rounded-3xl bg-white/80 px-4 py-3">
+              <p className="text-xs uppercase tracking-[0.24em] text-slate-400">{key.replace(/([A-Z])/g, ' $1')}</p>
+              <p className="mt-1 text-sm font-semibold text-slate-900">{value}</p>
             </div>
           ))}
         </div>
@@ -224,8 +224,8 @@ function SecurityCenterView() {
           <Card key={card.label} className="p-6">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{card.label}</p>
-                <p className="mt-4 text-2xl font-semibold text-slate-100">{card.value}</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{card.label}</p>
+                <p className="mt-4 text-2xl font-semibold text-slate-900">{card.value}</p>
                 <p className="mt-2 text-sm text-slate-400">{card.note}</p>
               </div>
               <StatusBadge value={card.status} />
@@ -251,7 +251,7 @@ function sessionColumns(): ColumnDef<SessionRecord>[] {
     { accessorKey: 'location', header: 'Location' },
     { accessorKey: 'lastActivity', header: 'Last activity' },
     { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
-    { id: 'actions', header: 'Actions', cell: () => <button className="rounded-full border border-white/10 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-slate-100 hover:border-sky-400">Terminate</button> },
+    { id: 'actions', header: 'Actions', cell: () => <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-blue-500">Terminate</button> },
   ];
 }
 
@@ -287,7 +287,7 @@ function LoginHistoryView({ compact = false }: { compact?: boolean }) {
       {!compact && (
         <Card title="Login filters" description="Filter by date, success, failed and location.">
           <div className="grid gap-3 md:grid-cols-4">
-            {['Date', 'Success', 'Failed', 'Location'].map((label) => <select key={label} className="rounded-3xl border border-white/10 bg-slate-950/90 p-4 text-sm text-slate-100"><option>{label}</option></select>)}
+            {['Date', 'Success', 'Failed', 'Location'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
           </div>
           <div className="mt-4"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Apply filters</Button></div>
         </Card>
@@ -312,18 +312,18 @@ function NotificationCenterView() {
   return (
     <Card title="Notification center" description="Unread, read, high priority and category views for enterprise HR events.">
       <div className="flex flex-wrap gap-2">
-        {tabs.map((item) => <button key={item} onClick={() => setTab(item)} className={`rounded-full border px-4 py-2 text-xs font-semibold ${tab === item ? 'border-sky-400 bg-sky-500/10 text-sky-100' : 'border-white/10 bg-slate-950/80 text-slate-300'}`}>{item}</button>)}
+        {tabs.map((item) => <button key={item} onClick={() => setTab(item)} className={`rounded-full border px-4 py-2 text-xs font-semibold ${tab === item ? 'border-blue-500 bg-blue-50/50 text-sky-100' : 'border-slate-200 bg-white/80 text-slate-700'}`}>{item}</button>)}
       </div>
       <div className="mt-6 grid gap-3">
         {filtered.map((item) => (
-          <div key={item.id} className="rounded-3xl border border-white/10 bg-slate-950/80 p-4">
+          <div key={item.id} className="rounded-3xl border border-slate-200 bg-white/80 p-4">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex gap-3">
-                <div className="grid h-11 w-11 place-items-center rounded-3xl bg-sky-500/15 text-sm font-semibold text-slate-100">{item.avatar}</div>
+                <div className="grid h-11 w-11 place-items-center rounded-3xl bg-blue-50 text-sm font-semibold text-slate-900">{item.avatar}</div>
                 <div>
-                  <div className="flex flex-wrap items-center gap-2"><p className="font-semibold text-slate-100">{item.title}</p><StatusBadge value={item.priority} /></div>
+                  <div className="flex flex-wrap items-center gap-2"><p className="font-semibold text-slate-900">{item.title}</p><StatusBadge value={item.priority} /></div>
                   <p className="mt-1 text-sm text-slate-400">{item.body}</p>
-                  <p className="mt-2 text-xs text-slate-500">{item.category} - {item.timestamp}</p>
+                  <p className="mt-2 text-xs text-slate-400">{item.category} - {item.timestamp}</p>
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -344,12 +344,12 @@ function NotificationPreferenceGrid() {
     <Card title="Notification preferences" description="Configure email, in-app, SMS placeholder and push placeholder delivery.">
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm">
-          <thead><tr className="text-xs uppercase tracking-[0.24em] text-slate-500">{['Category', 'Email', 'In-App', 'SMS Placeholder', 'Push Placeholder'].map((header) => <th key={header} className="px-4 py-3">{header}</th>)}</tr></thead>
+          <thead><tr className="text-xs uppercase tracking-[0.24em] text-slate-400">{['Category', 'Email', 'In-App', 'SMS Placeholder', 'Push Placeholder'].map((header) => <th key={header} className="px-4 py-3">{header}</th>)}</tr></thead>
           <tbody>
             {notificationPreferences.map((preference, rowIndex) => (
-              <tr key={preference} className="border-t border-white/10">
-                <td className="px-4 py-4 font-semibold text-slate-100">{preference}</td>
-                {['Email', 'In-App', 'SMS', 'Push'].map((channel, index) => <td key={channel} className="px-4 py-4"><input type="checkbox" readOnly checked={index < 2 || rowIndex % 3 === index} className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-sky-400" /></td>)}
+              <tr key={preference} className="border-t border-slate-200">
+                <td className="px-4 py-4 font-semibold text-slate-900">{preference}</td>
+                {['Email', 'In-App', 'SMS', 'Push'].map((channel, index) => <td key={channel} className="px-4 py-4"><input type="checkbox" readOnly checked={index < 2 || rowIndex % 3 === index} className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-blue-600" /></td>)}
               </tr>
             ))}
           </tbody>
@@ -363,14 +363,14 @@ function PasswordSettingsView() {
   return (
     <Card title="Password settings" description="Password update UI prepared for future auth provider integration.">
       <div className="grid gap-4">
-        {['Current password', 'New password', 'Confirm password'].map((label) => <input key={label} type="password" placeholder={label} className="rounded-3xl border border-white/10 bg-slate-950/90 p-4 text-sm text-slate-100 outline-none focus:border-sky-400" />)}
+        {['Current password', 'New password', 'Confirm password'].map((label) => <input key={label} type="password" placeholder={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500" />)}
       </div>
       <div className="mt-5">
-        <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Password strength</p>
-        <div className="mt-3 h-3 rounded-full bg-slate-950"><div className="h-3 w-4/5 rounded-full bg-emerald-400" /></div>
+        <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Password strength</p>
+        <div className="mt-3 h-3 rounded-full bg-white"><div className="h-3 w-4/5 rounded-full bg-emerald-400" /></div>
       </div>
       <div className="mt-5 grid gap-2">
-        {passwordPolicies.map((policy) => <div key={policy} className="flex items-center gap-2 text-sm text-slate-300"><LockKeyhole className="h-4 w-4 text-sky-300" />{policy}</div>)}
+        {passwordPolicies.map((policy) => <div key={policy} className="flex items-center gap-2 text-sm text-slate-700"><LockKeyhole className="h-4 w-4 text-blue-600" />{policy}</div>)}
       </div>
     </Card>
   );
@@ -380,7 +380,7 @@ function MfaPlaceholderView() {
   return (
     <Card title="MFA placeholder" description="Prepared controls for future multi-factor authentication rollout.">
       <div className="grid gap-4 md:grid-cols-3">
-        {['Authenticator app', 'SMS placeholder', 'Email one-time code'].map((item) => <div key={item} className="rounded-3xl border border-white/10 bg-slate-950/80 p-5"><ShieldCheck className="h-6 w-6 text-sky-300" /><p className="mt-4 font-semibold text-slate-100">{item}</p><p className="mt-2 text-sm text-slate-400">Ready for backend authentication integration.</p></div>)}
+        {['Authenticator app', 'SMS placeholder', 'Email one-time code'].map((item) => <div key={item} className="rounded-3xl border border-slate-200 bg-white/80 p-5"><ShieldCheck className="h-6 w-6 text-blue-600" /><p className="mt-4 font-semibold text-slate-900">{item}</p><p className="mt-2 text-sm text-slate-400">Ready for backend authentication integration.</p></div>)}
       </div>
     </Card>
   );
@@ -393,7 +393,7 @@ function RoleVisibilityView() {
         <Card key={role.role} className="p-6">
           <p className={`text-lg font-semibold ${role.color}`}>{role.role}</p>
           <div className="mt-4 flex flex-wrap gap-2">
-            {role.modules.map((module) => <span key={module} className="rounded-full border border-white/10 bg-slate-950/80 px-3 py-2 text-xs text-slate-300">{module}</span>)}
+            {role.modules.map((module) => <span key={module} className="rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs text-slate-700">{module}</span>)}
           </div>
         </Card>
       ))}
@@ -407,8 +407,8 @@ function SessionManagementView() {
       <div className="grid gap-4 md:grid-cols-3">
         {['Current Session', 'Previous Sessions', 'Trusted Devices'].map((label, index) => (
           <Card key={label} className="p-6">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{label}</p>
-            <p className="mt-4 text-3xl font-semibold text-slate-100">{[1, 4, 3][index]}</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{label}</p>
+            <p className="mt-4 text-3xl font-semibold text-slate-900">{[1, 4, 3][index]}</p>
             <p className="mt-2 text-sm text-slate-400">Tracked by device, browser, operating system, IP and activity.</p>
           </Card>
         ))}

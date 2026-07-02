@@ -15,10 +15,10 @@ export default function TalentHomePage() {
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <section className="space-y-6">
-        <div className="flex flex-col gap-4 rounded-[28px] border border-white/10 bg-slate-900/95 px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Talent</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-100">Talent lifecycle</h1>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent</p>
+            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Talent lifecycle</h1>
             <p className="mt-3 max-w-2xl text-sm text-slate-400">End-to-end talent management from recruitment through career development and certification.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -47,9 +47,9 @@ export default function TalentHomePage() {
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {talentKpis.map((kpi) => (
-            <Card key={kpi.label} className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{kpi.label}</p>
-              <p className="mt-4 text-3xl font-semibold text-slate-100">{kpi.value}</p>
+            <Card key={kpi.label} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{kpi.label}</p>
+              <p className="mt-4 text-3xl font-semibold text-slate-900">{kpi.value}</p>
               <p className="mt-2 text-sm text-slate-400">{kpi.note}</p>
             </Card>
           ))}
@@ -143,13 +143,13 @@ export default function TalentHomePage() {
 
       <SectionContainer title="Talent operations" className="space-y-4">
         <div className="grid gap-4 xl:grid-cols-3">
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Pipeline health</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-100">84 candidates</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Pipeline health</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">84 candidates</p>
               </div>
-              <Users className="h-6 w-6 text-sky-300" />
+              <Users className="h-6 w-6 text-blue-600" />
             </div>
             <div className="mt-6 space-y-2 text-sm text-slate-400">
               <p>• 24 new submissions</p>
@@ -159,11 +159,11 @@ export default function TalentHomePage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Onboarding active</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-100">4 employees</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Onboarding active</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">4 employees</p>
               </div>
               <UserCheck className="h-6 w-6 text-emerald-300" />
             </div>
@@ -174,11 +174,11 @@ export default function TalentHomePage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Development focus</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-100">28 programs</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Development focus</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">28 programs</p>
               </div>
               <BookOpen className="h-6 w-6 text-amber-300" />
             </div>

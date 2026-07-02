@@ -47,12 +47,12 @@ export default function InsurancePage() {
           const value = getValue() as string;
           const color =
             value === 'Active'
-              ? 'bg-emerald-500/15 text-emerald-200'
+              ? 'bg-emerald-50 text-emerald-200'
               : value === 'Expired'
-              ? 'bg-rose-500/15 text-rose-200'
+              ? 'bg-rose-50 text-rose-200'
               : value === 'Pending'
-              ? 'bg-amber-500/15 text-amber-200'
-              : 'bg-slate-600/15 text-slate-300';
+              ? 'bg-amber-50 text-amber-200'
+              : 'bg-slate-600/15 text-slate-700';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
         },
       },
@@ -60,7 +60,7 @@ export default function InsurancePage() {
         id: 'actions',
         header: 'Actions',
         cell: () => (
-          <Link href="/compensation/insurance" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-slate-100 transition hover:border-sky-400">
+          <Link href="/compensation/insurance" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-blue-500">
             View <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         ),
@@ -91,46 +91,46 @@ export default function InsurancePage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Compensation / Insurance</p>
-            <h1 className="text-3xl font-semibold text-slate-100">Insurance Management</h1>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Compensation / Insurance</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Insurance Management</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Track employee insurance policies, coverage details, and dependent management.</p>
           </div>
-          <Link href="/compensation" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/90 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
+          <Link href="/compensation" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
             Back to compensation
           </Link>
         </div>
       </SectionContainer>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Active Policies</p>
-          <p className="mt-3 text-3xl font-semibold text-slate-100">{activePolicies}</p>
-          <p className="mt-2 text-sm text-emerald-400">Currently active</p>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Active Policies</p>
+          <p className="mt-3 text-3xl font-semibold text-slate-900">{activePolicies}</p>
+          <p className="mt-2 text-sm text-emerald-600">Currently active</p>
         </Card>
 
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Expired Policies</p>
-          <p className="mt-3 text-3xl font-semibold text-slate-100">{expiredPolicies}</p>
-          <p className="mt-2 text-sm text-rose-400">Renewal needed</p>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Expired Policies</p>
+          <p className="mt-3 text-3xl font-semibold text-slate-900">{expiredPolicies}</p>
+          <p className="mt-2 text-sm text-rose-600">Renewal needed</p>
         </Card>
 
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Total Coverage</p>
-          <p className="mt-3 text-2xl font-semibold text-slate-100">Rp {(totalCoverage / 1000000000).toFixed(1)}B</p>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Total Coverage</p>
+          <p className="mt-3 text-2xl font-semibold text-slate-900">Rp {(totalCoverage / 1000000000).toFixed(1)}B</p>
           <p className="mt-2 text-sm text-slate-400">Combined limit</p>
         </Card>
 
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Providers</p>
-          <p className="mt-3 text-3xl font-semibold text-slate-100">{uniqueProviders}</p>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Providers</p>
+          <p className="mt-3 text-3xl font-semibold text-slate-900">{uniqueProviders}</p>
           <p className="mt-2 text-sm text-slate-400">Active providers</p>
         </Card>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-sm uppercase tracking-[0.3em] text-sky-300">Coverage</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-100">Insurance Types</h2>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Coverage</p>
+          <h2 className="mt-2 text-lg font-semibold text-slate-900">Insurance Types</h2>
           <div className="mt-6 space-y-3">
             {[
               { name: 'Health Insurance', count: 4, premium: '850-950K' },
@@ -138,10 +138,10 @@ export default function InsurancePage() {
               { name: 'Accident Insurance', count: 1, premium: '200K' },
               { name: 'Disability', count: 1, premium: 'Included' },
             ].map((type) => (
-              <div key={type.name} className="rounded-2xl bg-slate-950/80 p-3 border border-white/5">
+              <div key={type.name} className="rounded-2xl bg-white/80 p-3 border border-slate-100">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium text-slate-100">{type.name}</p>
-                  <span className="text-xs font-semibold text-sky-400">{type.count} policies</span>
+                  <p className="text-sm font-medium text-slate-900">{type.name}</p>
+                  <span className="text-xs font-semibold text-blue-600">{type.count} policies</span>
                 </div>
                 <p className="text-xs text-slate-400 mt-1">Premium: {type.premium}</p>
               </div>
@@ -149,28 +149,28 @@ export default function InsurancePage() {
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-          <p className="text-sm uppercase tracking-[0.3em] text-sky-300">Expiry monitoring</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-100">Upcoming Expirations</h2>
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Expiry monitoring</p>
+          <h2 className="mt-2 text-lg font-semibold text-slate-900">Upcoming Expirations</h2>
           <div className="mt-6 space-y-3">
-            <div className="flex items-start gap-3 rounded-2xl bg-slate-950/80 p-3 border border-amber-500/20">
-              <AlertCircle className="h-4 w-4 mt-0.5 text-amber-400 flex-shrink-0" />
+            <div className="flex items-start gap-3 rounded-2xl bg-white/80 p-3 border border-amber-500/20">
+              <AlertCircle className="h-4 w-4 mt-0.5 text-amber-600 flex-shrink-0" />
               <div>
-                <p className="text-sm font-medium text-slate-100">Ahmad Wijaya - POL-2025-001</p>
+                <p className="text-sm font-medium text-slate-900">Ahmad Wijaya - POL-2025-001</p>
                 <p className="text-xs text-slate-400 mt-1">Expires in 202 days (2026-01-14)</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 rounded-2xl bg-slate-950/80 p-3 border border-amber-500/20">
-              <AlertCircle className="h-4 w-4 mt-0.5 text-amber-400 flex-shrink-0" />
+            <div className="flex items-start gap-3 rounded-2xl bg-white/80 p-3 border border-amber-500/20">
+              <AlertCircle className="h-4 w-4 mt-0.5 text-amber-600 flex-shrink-0" />
               <div>
-                <p className="text-sm font-medium text-slate-100">Ahmad Wijaya - POL-2025-002</p>
+                <p className="text-sm font-medium text-slate-900">Ahmad Wijaya - POL-2025-002</p>
                 <p className="text-xs text-slate-400 mt-1">Expires in 202 days (2026-01-14)</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 rounded-2xl bg-slate-950/80 p-3 border border-amber-500/20">
-              <AlertCircle className="h-4 w-4 mt-0.5 text-amber-400 flex-shrink-0" />
+            <div className="flex items-start gap-3 rounded-2xl bg-white/80 p-3 border border-amber-500/20">
+              <AlertCircle className="h-4 w-4 mt-0.5 text-amber-600 flex-shrink-0" />
               <div>
-                <p className="text-sm font-medium text-slate-100">Budi Santoso - POL-2025-005</p>
+                <p className="text-sm font-medium text-slate-900">Budi Santoso - POL-2025-005</p>
                 <p className="text-xs text-slate-400 mt-1">Expires in 219 days (2026-01-31)</p>
               </div>
             </div>
@@ -178,11 +178,11 @@ export default function InsurancePage() {
         </Card>
       </div>
 
-      <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+      <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-sky-300">Insurance table</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-100">All policies</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Insurance table</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">All policies</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
@@ -196,22 +196,22 @@ export default function InsurancePage() {
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search employee or policy"
-              className="w-full rounded-3xl border border-white/10 bg-slate-950/90 py-4 pl-11 pr-4 text-sm text-slate-100 outline-none transition focus:border-sky-400"
+              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
             />
           </div>
-          <select value={policyType} onChange={(event) => setPolicyType(event.target.value)} className="rounded-3xl border border-white/10 bg-slate-950/90 p-4 text-sm text-slate-100 outline-none focus:border-sky-400">
+          <select value={policyType} onChange={(event) => setPolicyType(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
             <option value="All">All types</option>
             <option value="Health">Health</option>
             <option value="Life">Life</option>
             <option value="Accident">Accident</option>
             <option value="Disability">Disability</option>
           </select>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-white/10 bg-slate-950/90 p-4 text-sm text-slate-100 outline-none focus:border-sky-400">
+          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
             <option value="All">All statuses</option>
             <option value="Active">Active</option>
             <option value="Expired">Expired</option>

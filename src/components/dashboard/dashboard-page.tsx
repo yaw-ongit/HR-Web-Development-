@@ -43,10 +43,10 @@ function WidgetCalendar({ title }: { title: string }) {
     <Card title={title} description="Monthly presence and time-away summary.">
       <div className="grid grid-cols-7 gap-1.5 text-[11px] text-slate-400">
         {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((d) => (
-          <span key={d} className="text-center font-semibold text-slate-500">{d}</span>
+          <span key={d} className="text-center font-semibold text-slate-400">{d}</span>
         ))}
         {Array.from({ length: 28 }).map((_, i) => (
-          <div key={i} className="h-10 rounded-xl bg-slate-900/80 ring-1 ring-white/5" />
+          <div key={i} className="h-10 rounded-xl bg-slate-50/80 ring-1 ring-slate-100" />
         ))}
       </div>
     </Card>
@@ -58,9 +58,9 @@ function WidgetBalance({ title }: { title: string }) {
     <Card title={title} description="Leave balance and accrual summary.">
       <div className="grid grid-cols-3 gap-3">
         {[{ label: 'Annual', value: '9 days' }, { label: 'Sick', value: '4 days' }, { label: 'Personal', value: '2 days' }].map((item) => (
-          <div key={item.label} className="rounded-2xl bg-slate-950/90 p-3 text-center">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-slate-500">{item.label}</p>
-            <p className="mt-2 text-xl font-semibold text-slate-100">{item.value}</p>
+          <div key={item.label} className="rounded-2xl bg-white/90 p-3 text-center">
+            <p className="text-[10px] uppercase tracking-[0.24em] text-slate-400">{item.label}</p>
+            <p className="mt-2 text-xl font-semibold text-slate-900">{item.value}</p>
           </div>
         ))}
       </div>
@@ -73,13 +73,13 @@ function WidgetActivity({ title }: { title: string }) {
     <Card title={title} description="Latest system and workforce events.">
       <ul className="space-y-3" aria-label="Recent activity">
         {recentActivity.map((item) => (
-          <li key={item.actor} className="rounded-2xl border border-white/5 bg-slate-950/80 p-4">
+          <li key={item.actor} className="rounded-2xl border border-slate-100 bg-white/80 p-4">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold text-slate-100">{item.actor}</p>
+                <p className="text-sm font-semibold text-slate-900">{item.actor}</p>
                 <p className="text-sm text-slate-400">{item.action}</p>
               </div>
-              <span className="shrink-0 text-xs text-slate-500">{item.time}</span>
+              <span className="shrink-0 text-xs text-slate-400">{item.time}</span>
             </div>
           </li>
         ))}
@@ -93,8 +93,8 @@ function WidgetAnnouncements({ title }: { title: string }) {
     <Card title={title} description="Important enterprise announcements.">
       <ul className="space-y-3" aria-label="Announcements">
         {announcements.map((notice) => (
-          <li key={notice.title} className="rounded-2xl bg-slate-950/80 p-4 ring-1 ring-white/5">
-            <p className="text-sm font-semibold text-slate-100">{notice.title}</p>
+          <li key={notice.title} className="rounded-2xl bg-white/80 p-4 ring-1 ring-slate-100">
+            <p className="text-sm font-semibold text-slate-900">{notice.title}</p>
             <p className="mt-1 text-sm text-slate-400">{notice.subtitle}</p>
           </li>
         ))}
@@ -108,9 +108,9 @@ function WidgetStatus({ title }: { title: string }) {
     <Card title={title} description="Current platform health metrics.">
       <ul className="space-y-3" aria-label="System status">
         {systemStatus.map((item) => (
-          <li key={item.label} className="flex items-center justify-between rounded-2xl bg-slate-950/80 p-4">
+          <li key={item.label} className="flex items-center justify-between rounded-2xl bg-white/80 p-4">
             <div>
-              <p className="text-sm font-semibold text-slate-100">{item.label}</p>
+              <p className="text-sm font-semibold text-slate-900">{item.label}</p>
               <p className="text-sm text-slate-400">{item.value}</p>
             </div>
             <StatusBadge status={item.status} />
@@ -126,13 +126,13 @@ function WidgetTraining({ title }: { title: string }) {
     <Card title={title} description="Training schedule and session progress.">
       <div className="space-y-4">
         {[{ course: 'Manager Essentials', progress: 68 }, { course: 'Compliance Certification', progress: 92 }].map((item) => (
-          <div key={item.course} className="rounded-2xl bg-slate-950/80 p-4">
+          <div key={item.course} className="rounded-2xl bg-white/80 p-4">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-slate-100">{item.course}</p>
+              <p className="text-sm font-semibold text-slate-900">{item.course}</p>
               <p className="text-sm text-slate-400">{item.progress}%</p>
             </div>
-            <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-900" role="progressbar" aria-valuenow={item.progress} aria-valuemin={0} aria-valuemax={100} aria-label={`${item.course} progress`}>
-              <div className="h-full rounded-full bg-sky-400 transition-all" style={{ width: `${item.progress}%` }} />
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-50" role="progressbar" aria-valuenow={item.progress} aria-valuemin={0} aria-valuemax={100} aria-label={`${item.course} progress`}>
+              <div className="h-full rounded-full bg-blue-500 transition-all" style={{ width: `${item.progress}%` }} />
             </div>
           </div>
         ))}
@@ -208,8 +208,8 @@ function WidgetApprovals({ title }: { title: string }) {
     <Card title={title} description="Pending approvals requiring your action.">
       <ul className="space-y-3" aria-label="Pending approvals">
         {[{ label: 'Leave request — Jonah', status: 'Pending' }, { label: 'Contract extension — Finance', status: 'Review' }].map((item) => (
-          <li key={item.label} className="flex items-center justify-between rounded-2xl bg-slate-950/80 p-4">
-            <p className="text-sm font-semibold text-slate-100">{item.label}</p>
+          <li key={item.label} className="flex items-center justify-between rounded-2xl bg-white/80 p-4">
+            <p className="text-sm font-semibold text-slate-900">{item.label}</p>
             <StatusBadge status={item.status} />
           </li>
         ))}
@@ -233,9 +233,9 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Company calendar events today.">
       <ul className="space-y-3">
         {[{ label: 'Q2 All-hands', time: 'Today 14:00', status: 'Live' }, { label: 'Leadership workshop', time: 'Thu 09:00', status: 'Upcoming' }].map((e) => (
-          <li key={e.label} className="flex items-center justify-between rounded-2xl bg-slate-950/80 p-4">
+          <li key={e.label} className="flex items-center justify-between rounded-2xl bg-white/80 p-4">
             <div>
-              <p className="text-sm font-semibold text-slate-100">{e.label}</p>
+              <p className="text-sm font-semibold text-slate-900">{e.label}</p>
               <p className="text-sm text-slate-400">{e.time}</p>
             </div>
             <StatusBadge status={e.status} />
@@ -248,9 +248,9 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Active sourcing and hiring progress.">
       <div className="space-y-3">
         {[{ label: 'New hires', value: '16 in pipeline' }, { label: 'Open roles', value: '24 active searches' }].map((item) => (
-          <div key={item.label} className="rounded-2xl bg-slate-950/80 p-4">
+          <div key={item.label} className="rounded-2xl bg-white/80 p-4">
             <p className="text-sm text-slate-400">{item.label}</p>
-            <p className="mt-1.5 text-lg font-semibold text-slate-100">{item.value}</p>
+            <p className="mt-1.5 text-lg font-semibold text-slate-900">{item.value}</p>
           </div>
         ))}
       </div>
@@ -260,9 +260,9 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Colleagues celebrating birthdays this week.">
       <ul className="space-y-3">
         {['Maya Thompson', 'Noah Brooks', 'Avery Patel'].map((name) => (
-          <li key={name} className="rounded-2xl bg-slate-950/80 p-4">
-            <p className="text-sm font-semibold text-slate-100">🎂 {name}</p>
-            <p className="text-xs text-slate-500">Team member</p>
+          <li key={name} className="rounded-2xl bg-white/80 p-4">
+            <p className="text-sm font-semibold text-slate-900">🎂 {name}</p>
+            <p className="text-xs text-slate-400">Team member</p>
           </li>
         ))}
       </ul>
@@ -284,12 +284,12 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     </Card>
   ),
   server: ({ title }) => (
-    <Card title={title} description="Server health — CPU, memory, disk." footer={<p className="text-xs text-slate-500">Updated just now</p>}>
+    <Card title={title} description="Server health — CPU, memory, disk." footer={<p className="text-xs text-slate-400">Updated just now</p>}>
       <div className="space-y-3">
         {[{ metric: 'CPU', value: '58%' }, { metric: 'Memory', value: '72%' }, { metric: 'Disk', value: '41%' }].map((item) => (
-          <div key={item.metric} className="rounded-2xl bg-slate-950/80 p-4">
+          <div key={item.metric} className="rounded-2xl bg-white/80 p-4">
             <p className="text-sm text-slate-400">{item.metric}</p>
-            <p className="mt-1.5 text-xl font-semibold text-slate-100">{item.value}</p>
+            <p className="mt-1.5 text-xl font-semibold text-slate-900">{item.value}</p>
           </div>
         ))}
       </div>
@@ -299,9 +299,9 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Latest audit entries.">
       <ul className="space-y-3">
         {['User access updated', 'Policy audit completed', 'SSH key rotation'].map((item) => (
-          <li key={item} className="rounded-2xl bg-slate-950/80 p-4">
-            <p className="text-sm text-slate-100">{item}</p>
-            <p className="text-xs text-slate-500">Completed</p>
+          <li key={item} className="rounded-2xl bg-white/80 p-4">
+            <p className="text-sm text-slate-900">{item}</p>
+            <p className="text-xs text-slate-400">Completed</p>
           </li>
         ))}
       </ul>
@@ -311,8 +311,8 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Security alerts requiring admin review.">
       <ul className="space-y-3">
         {[{ label: 'MFA configured', level: 'Info' }, { label: 'Unusual login pattern', level: 'Critical' }].map((item) => (
-          <li key={item.label} className="rounded-2xl bg-slate-950/80 p-4">
-            <p className="text-sm font-semibold text-slate-100">{item.label}</p>
+          <li key={item.label} className="rounded-2xl bg-white/80 p-4">
+            <p className="text-sm font-semibold text-slate-900">{item.label}</p>
             <StatusBadge status={item.level} className="mt-1" />
           </li>
         ))}
@@ -337,12 +337,12 @@ export default function DashboardPage() {
 
   const hero = useMemo(() => {
     const heroMap: Record<RoleKey, { title: string; subtitle: string; actions: string[] }> = {
-      employee: { title: 'Welcome back, Maya.', subtitle: `Today is ${today}. Your working status is active.`, actions: ['My schedule', 'Open timecard'] },
-      supervisor: { title: 'Team performance at a glance.', subtitle: `Today is ${today}. Your team is within expected range.`, actions: ['Review approvals', 'Inspect team health'] },
-      'hr-officer': { title: 'Workforce operations command center.', subtitle: `Today is ${today}. Focus on headcount, benefits, and compliance.`, actions: ['Complete onboarding', 'Review compliance'] },
-      'hr-manager': { title: 'Leadership checkpoint for HR performance.', subtitle: `Today is ${today}. Monitor retention, training and recruitment.`, actions: ['Open analytics', 'Approve budget'] },
-      director: { title: 'Executive workforce pulse.', subtitle: `Today is ${today}. High-level insights for organizational health.`, actions: ['View forecast', 'Inspect growth'] },
-      administrator: { title: 'Operational dashboard for administration.', subtitle: `Today is ${today}. All systems are monitored from a single pane.`, actions: ['Review alerts', 'Audit logs'] },
+      employee: { title: 'Selamat datang kembali, Maya.', subtitle: `Hari ini adalah ${today}. Status kerja Anda aktif.`, actions: ['Jadwal Saya', 'Buka Timesheet'] },
+      supervisor: { title: 'Sekilas kinerja tim.', subtitle: `Hari ini adalah ${today}. Tim Anda dalam rentang yang diharapkan.`, actions: ['Tinjau Persetujuan', 'Periksa Tim'] },
+      'hr-officer': { title: 'Pusat komando operasional.', subtitle: `Hari ini adalah ${today}. Fokus pada kehadiran, cuti, dan kontrak.`, actions: ['Selesaikan Onboarding', 'Tinjau Kepatuhan'] },
+      'hr-manager': { title: 'Checkpoint kepemimpinan kinerja HR.', subtitle: `Hari ini adalah ${today}. Pantau retensi, pelatihan dan rekrutmen.`, actions: ['Buka Analitik', 'Setujui Anggaran'] },
+      director: { title: 'Pusat eksekutif tenaga kerja.', subtitle: `Hari ini adalah ${today}. Wawasan tingkat tinggi untuk kesehatan organisasi.`, actions: ['Lihat Proyeksi', 'Periksa Pertumbuhan'] },
+      administrator: { title: 'Dashboard operasional administrasi.', subtitle: `Hari ini adalah ${today}. Semua sistem dipantau dari satu panel.`, actions: ['Tinjau Peringatan', 'Log Audit'] },
     };
     return heroMap[role];
   }, [role, today]);
@@ -354,8 +354,8 @@ export default function DashboardPage() {
         <Card>
           <div className="grid gap-6 p-6 lg:grid-cols-[1fr_260px]">
             <div className="space-y-3">
-              <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Today</p>
-              <h1 className="text-3xl font-semibold text-slate-100">{hero.title}</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Hari Ini</p>
+              <h1 className="text-3xl font-semibold text-slate-900">{hero.title}</h1>
               <p className="max-w-xl text-sm leading-7 text-slate-400">{hero.subtitle}</p>
               <div className="flex flex-wrap gap-3 pt-2">
                 {hero.actions.map((label) => (
@@ -363,26 +363,26 @@ export default function DashboardPage() {
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-slate-950/90 p-5">
+            <div className="rounded-2xl border border-slate-200 bg-white/90 p-5">
               <div className="flex items-center gap-4">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-sky-500/15 text-sky-300" aria-hidden="true">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-blue-600" aria-hidden="true">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Working status</p>
-                  <p className="mt-1.5 text-2xl font-semibold text-slate-100">Active</p>
+                  <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Status Kerja</p>
+                  <p className="mt-1.5 text-2xl font-semibold text-slate-900">Aktif</p>
                 </div>
               </div>
-              <div className="mt-4 space-y-2 rounded-xl bg-slate-900/80 p-4 text-sm text-slate-400">
-                <div className="flex justify-between"><span>Check-in</span><span className="text-slate-200">08:34</span></div>
-                <div className="flex justify-between"><span>Scheduled end</span><span className="text-slate-200">17:30</span></div>
+              <div className="mt-4 space-y-2 rounded-xl bg-slate-50/80 p-4 text-sm text-slate-400">
+                <div className="flex justify-between"><span>Check-in</span><span className="text-slate-800">08:34</span></div>
+                <div className="flex justify-between"><span>Jam Pulang</span><span className="text-slate-800">17:30</span></div>
               </div>
             </div>
           </div>
         </Card>
 
         {/* Role switcher */}
-        <SectionContainer title="Role view">
+        <SectionContainer title="Tampilan Peran">
           <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-6" role="radiogroup" aria-label="Select dashboard role">
             {roles.map((item) => (
               <button
@@ -391,10 +391,10 @@ export default function DashboardPage() {
                 role="radio"
                 aria-checked={role === item.key}
                 onClick={() => setRole(item.key)}
-                className={`rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-sky-400 ${
+                className={`rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   role === item.key
-                    ? 'border-sky-400 bg-sky-500/10 text-slate-100'
-                    : 'border-white/10 bg-slate-950/70 text-slate-400 hover:border-slate-600 hover:text-slate-100'
+                    ? 'border-blue-500 bg-blue-50/50 text-slate-900'
+                    : 'border-slate-200 bg-white/70 text-slate-400 hover:border-slate-400 hover:text-slate-900'
                 }`}
               >
                 {item.label}
@@ -420,16 +420,16 @@ export default function DashboardPage() {
         </section>
 
         {/* Quick actions */}
-        <SectionContainer title="Quick actions">
+        <SectionContainer title="Aksi Cepat">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {quickActions.map((action) => (
-              <Card key={action.label} className="p-5 transition hover:border-sky-400/30">
+              <Card key={action.label} className="p-5 transition hover:border-blue-500/30">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-sky-400/10 text-sky-300" aria-hidden="true">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-blue-50/50 text-blue-600" aria-hidden="true">
                     {createElement(iconMap[action.icon as keyof typeof iconMap] ?? Sparkles, { className: 'h-5 w-5' })}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-slate-100">{action.label}</p>
+                    <p className="text-sm font-semibold text-slate-900">{action.label}</p>
                     <p className="mt-1 text-xs text-slate-400">{action.hint}</p>
                   </div>
                 </div>
@@ -440,7 +440,7 @@ export default function DashboardPage() {
 
         <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
           {/* Widgets */}
-          <SectionContainer title="Workspace widgets">
+          <SectionContainer title="Widget Ruang Kerja">
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {widgets.map((widget) => {
                 const Component = widgetComponents[widget.type] ?? WidgetActivity;
@@ -452,16 +452,16 @@ export default function DashboardPage() {
           {/* Notifications sidebar */}
           <aside aria-label="Notifications">
             <Card
-              title="Recent alerts"
-              description="Notifications for your role."
-              headerActions={<Button variant="ghost" size="sm">View all</Button>}
+              title="Peringatan Terbaru"
+              description="Notifikasi untuk peran Anda."
+              headerActions={<Button variant="ghost" size="sm">Lihat semua</Button>}
             >
               <ul className="space-y-3" aria-label="Notification list">
                 {roleNotifications.map((n) => (
-                  <li key={n.title} className="rounded-2xl border border-white/5 bg-slate-950/80 p-4">
+                  <li key={n.title} className="rounded-2xl border border-slate-100 bg-white/80 p-4">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="text-sm font-semibold text-slate-100">{n.title}</p>
+                        <p className="text-sm font-semibold text-slate-900">{n.title}</p>
                         <p className="mt-1 text-xs text-slate-400">{n.description}</p>
                       </div>
                       <StatusBadge status={n.type} />
@@ -473,9 +473,9 @@ export default function DashboardPage() {
 
             {/* Insights mini-charts */}
             <div className="mt-5 space-y-4">
-              <div className="rounded-2xl border border-white/10 bg-slate-950/85 p-5">
-                <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Attendance trend</p>
-                <p className="mt-1 text-lg font-semibold text-slate-100">Current cycle</p>
+              <div className="rounded-2xl border border-slate-200 bg-white/85 p-5">
+                <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Tren Kehadiran</p>
+                <p className="mt-1 text-lg font-semibold text-slate-900">Siklus Saat Ini</p>
                 <div className="mt-4 h-36" aria-label="Attendance trend chart">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={employeeMetrics.attendance} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
@@ -488,9 +488,9 @@ export default function DashboardPage() {
                   </ResponsiveContainer>
                 </div>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-slate-950/85 p-5">
-                <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Training completion</p>
-                <p className="mt-1 text-lg font-semibold text-slate-100">Participation rate</p>
+              <div className="rounded-2xl border border-slate-200 bg-white/85 p-5">
+                <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Penyelesaian Pelatihan</p>
+                <p className="mt-1 text-lg font-semibold text-slate-900">Tingkat Partisipasi</p>
                 <div className="mt-4 h-36" aria-label="Training completion chart">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={employeeMetrics.trainingCompletion} margin={{ top: 4, right: 0, left: -16, bottom: 0 }}>

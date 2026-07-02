@@ -22,7 +22,7 @@ export function SectionContainer({
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             {title && (
-              <h3 className="text-lg font-semibold text-slate-100">{title}</h3>
+              <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
             )}
             {description && (
               <p className="mt-0.5 text-sm text-slate-400">{description}</p>

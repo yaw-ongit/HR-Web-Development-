@@ -10,11 +10,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
-  primary: 'bg-sky-500 text-white hover:bg-sky-400 shadow-lg shadow-sky-500/20 border border-transparent',
-  secondary: 'bg-slate-800 text-slate-100 hover:bg-slate-700 border border-slate-700',
-  ghost: 'bg-transparent text-slate-100 hover:bg-slate-800 border border-transparent',
+  primary: 'bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-500/20 border border-transparent',
+  secondary: 'bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-300',
+  ghost: 'bg-transparent text-slate-900 hover:bg-slate-100 border border-transparent',
   destructive: 'bg-rose-500 text-white hover:bg-rose-400 shadow-lg shadow-rose-500/20 border border-transparent',
-  outline: 'bg-slate-950 text-slate-100 border border-slate-700 hover:bg-slate-900',
+  outline: 'bg-white text-slate-900 border border-slate-300 hover:bg-slate-50',
 };
 
 const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
@@ -46,7 +46,7 @@ export const Button = forwardRef(
         aria-busy={loading}
         className={cn(
           'inline-flex items-center justify-center font-semibold transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-950',
+          'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950',
           'disabled:cursor-not-allowed disabled:opacity-60',
           variantStyles[variant],
           sizeStyles[size],

@@ -45,11 +45,11 @@ export default function PeopleDirectoryPage() {
       id: 'select',
       header: ({ table }) => (
         <input type="checkbox" aria-label="Select all rows" checked={table.getIsAllRowsSelected()} onChange={table.getToggleAllRowsSelectedHandler()}
-          className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-sky-400 focus:ring-sky-400" />
+          className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-blue-600 focus:ring-blue-500" />
       ),
       cell: ({ row }) => (
         <input type="checkbox" aria-label={`Select ${row.original.fullName}`} checked={row.getIsSelected()} onChange={row.getToggleSelectedHandler()}
-          className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-sky-400 focus:ring-sky-400" />
+          className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-blue-600 focus:ring-blue-500" />
       ),
     },
     {
@@ -59,12 +59,12 @@ export default function PeopleDirectoryPage() {
       enableSorting: true,
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-sky-500/15 text-sm font-semibold text-sky-200" aria-hidden="true">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-sm font-semibold text-blue-500" aria-hidden="true">
             {row.original.initials}
           </div>
           <div>
-            <p className="text-sm font-semibold text-slate-100">{row.original.fullName}</p>
-            <p className="text-xs text-slate-500">{row.original.email}</p>
+            <p className="text-sm font-semibold text-slate-900">{row.original.fullName}</p>
+            <p className="text-xs text-slate-400">{row.original.email}</p>
           </div>
         </div>
       ),
@@ -84,7 +84,7 @@ export default function PeopleDirectoryPage() {
       cell: ({ row }) => (
         <div className="flex justify-end gap-2">
           <Link href={`/people/${row.original.id}`}
-            className="rounded-full border border-white/10 bg-slate-950/90 px-3 py-1.5 text-xs font-semibold text-slate-100 transition hover:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400">
+            className="rounded-full border border-slate-200 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-900 transition hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
             Profile
           </Link>
         </div>
@@ -149,13 +149,13 @@ export default function PeopleDirectoryPage() {
         <aside className="space-y-4" aria-label="People module summary">
           <Card title="Employee workspace" description="Quick stats and module actions.">
             <div className="mt-2 grid grid-cols-2 gap-3">
-              <div className="rounded-2xl bg-slate-950/80 p-4">
-                <p className="text-xs text-slate-500">Total employees</p>
-                <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-100">{employeeDirectory.length}</p>
+              <div className="rounded-2xl bg-white/80 p-4">
+                <p className="text-xs text-slate-400">Total employees</p>
+                <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-900">{employeeDirectory.length}</p>
               </div>
-              <div className="rounded-2xl bg-slate-950/80 p-4">
-                <p className="text-xs text-slate-500">Branches</p>
-                <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-100">{branchOptions.length}</p>
+              <div className="rounded-2xl bg-white/80 p-4">
+                <p className="text-xs text-slate-400">Branches</p>
+                <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-900">{branchOptions.length}</p>
               </div>
             </div>
           </Card>
@@ -168,7 +168,7 @@ export default function PeopleDirectoryPage() {
                 ].map((link) => (
                   <li key={link.href}>
                     <Link href={link.href}
-                      className="flex items-center justify-between rounded-2xl border border-white/10 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 transition hover:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400">
+                      className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 transition hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                       <span>{link.label}</span>
                       <ChevronRight className="h-4 w-4 text-slate-400" aria-hidden="true" />
                     </Link>

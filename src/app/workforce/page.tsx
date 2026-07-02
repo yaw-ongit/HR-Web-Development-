@@ -26,10 +26,10 @@ export default function WorkforceHomePage() {
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <section className="space-y-6">
-        <div className="flex flex-col gap-4 rounded-[28px] border border-white/10 bg-slate-900/95 px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Workforce</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-100">Workforce workspace</h1>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Workforce</p>
+            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Workforce workspace</h1>
             <p className="mt-3 max-w-2xl text-sm text-slate-400">One operational view for attendance, leave, shift planning and overtime approvals.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -60,9 +60,9 @@ export default function WorkforceHomePage() {
           <div className="space-y-6">
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {workforceKpis.map((kpi) => (
-                <Card key={kpi.label} className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{kpi.label}</p>
-                  <p className="mt-4 text-3xl font-semibold text-slate-100">{kpi.value}</p>
+                <Card key={kpi.label} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{kpi.label}</p>
+                  <p className="mt-4 text-3xl font-semibold text-slate-900">{kpi.value}</p>
                   <p className="mt-2 text-sm text-slate-400">{kpi.note}</p>
                 </Card>
               ))}
@@ -76,20 +76,20 @@ export default function WorkforceHomePage() {
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
                     placeholder="Search employee, department, shift or status"
-                    className="w-full rounded-3xl border border-white/10 bg-slate-950/90 py-4 px-5 text-sm text-slate-100 outline-none transition focus:border-sky-400"
+                    className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 px-5 text-sm text-slate-900 outline-none transition focus:border-blue-500"
                   />
-                  <Search className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                  <Search className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                 </div>
                 <div className="mt-6 space-y-3 text-sm text-slate-400">
                   {filteredWorkforce.length ? (
                     filteredWorkforce.slice(0, 5).map((row) => (
-                      <div key={row.id} className="rounded-3xl bg-slate-950/80 p-4">
+                      <div key={row.id} className="rounded-3xl bg-white/80 p-4">
                         <div className="flex items-center justify-between gap-3">
                           <div>
-                            <p className="text-sm font-semibold text-slate-100">{row.employee}</p>
+                            <p className="text-sm font-semibold text-slate-900">{row.employee}</p>
                             <p className="text-sm text-slate-400">{row.department} · {row.shift}</p>
                           </div>
-                          <span className="rounded-full bg-slate-900/90 px-3 py-1 text-xs uppercase tracking-[0.24em] text-slate-300">{row.status}</span>
+                          <span className="rounded-full bg-slate-50/90 px-3 py-1 text-xs uppercase tracking-[0.24em] text-slate-700">{row.status}</span>
                         </div>
                       </div>
                     ))
@@ -102,10 +102,10 @@ export default function WorkforceHomePage() {
               <Card title="Quick actions" description="Common operational actions for the workforce team.">
                 <div className="grid gap-3">
                   {workforceQuickActions.map((action) => (
-                    <Link key={action.label} href={action.href} className="rounded-3xl border border-white/10 bg-slate-950/80 px-4 py-4 transition hover:border-sky-400">
+                    <Link key={action.label} href={action.href} className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-blue-500">
                       <div className="flex items-center justify-between gap-4">
                         <div>
-                          <p className="text-sm font-semibold text-slate-100">{action.label}</p>
+                          <p className="text-sm font-semibold text-slate-900">{action.label}</p>
                           <p className="mt-1 text-sm text-slate-400">{action.description}</p>
                         </div>
                         <ArrowRight className="h-4 w-4 text-slate-400" />
@@ -157,13 +157,13 @@ export default function WorkforceHomePage() {
 
       <SectionContainer title="Workforce analytics" className="space-y-4">
         <div className="grid gap-4 xl:grid-cols-4">
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Late arrival trend</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-100">43 incidents</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Late arrival trend</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">43 incidents</p>
               </div>
-              <TrendingUp className="h-6 w-6 text-sky-300" />
+              <TrendingUp className="h-6 w-6 text-blue-600" />
             </div>
             <div className="mt-6 h-28">
               <ResponsiveContainer width="100%" height="100%">
@@ -178,13 +178,13 @@ export default function WorkforceHomePage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Leave trend</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-100">118 reports</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Leave trend</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">118 reports</p>
               </div>
-              <FileText className="h-6 w-6 text-sky-300" />
+              <FileText className="h-6 w-6 text-blue-600" />
             </div>
             <div className="mt-6 h-28">
               <ResponsiveContainer width="100%" height="100%">
@@ -205,13 +205,13 @@ export default function WorkforceHomePage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Overtime trend</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-100">78 hrs</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Overtime trend</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">78 hrs</p>
               </div>
-              <Clock className="h-6 w-6 text-sky-300" />
+              <Clock className="h-6 w-6 text-blue-600" />
             </div>
             <div className="mt-6 h-28">
               <ResponsiveContainer width="100%" height="100%">
@@ -226,13 +226,13 @@ export default function WorkforceHomePage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Operational readiness</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-100">Live staff view</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Operational readiness</p>
+                <p className="mt-2 text-2xl font-semibold text-slate-900">Live staff view</p>
               </div>
-              <ShieldCheck className="h-6 w-6 text-sky-300" />
+              <ShieldCheck className="h-6 w-6 text-blue-600" />
             </div>
             <div className="mt-6 space-y-3 text-sm text-slate-400">
               <p>Attendance, leave, shift and overtime are synced into the workforce command center.</p>

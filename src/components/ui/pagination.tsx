@@ -27,13 +27,13 @@ export function Pagination({
   const end = totalItems && pageSize ? Math.min(currentPage * pageSize, totalItems) : undefined;
 
   const buttonBase =
-    'inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-slate-950/90 text-sm text-slate-300 transition hover:border-sky-400 hover:text-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400 disabled:cursor-not-allowed disabled:opacity-40';
+    'inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-slate-200 bg-white/90 text-sm text-slate-700 transition hover:border-blue-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-40';
 
   return (
     <nav
       aria-label={label}
       className={cn(
-        'flex flex-col items-center justify-between gap-3 border-t border-white/10 px-4 py-4 sm:flex-row',
+        'flex flex-col items-center justify-between gap-3 border-t border-slate-200 px-4 py-4 sm:flex-row',
         className,
       )}
     >
@@ -86,7 +86,7 @@ export function Pagination({
               onClick={() => onPageChange(page)}
               className={cn(
                 buttonBase,
-                currentPage === page && 'border-sky-400 bg-sky-500/15 text-sky-300',
+                currentPage === page && 'border-blue-500 bg-blue-50 text-blue-600',
               )}
             >
               {page}

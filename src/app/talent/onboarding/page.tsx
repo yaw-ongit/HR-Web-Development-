@@ -43,10 +43,10 @@ export default function TalentOnboardingPage() {
           const value = getValue() as string;
           const color =
             value === 'Completed'
-              ? 'bg-emerald-500/15 text-emerald-200'
+              ? 'bg-emerald-50 text-emerald-200'
               : value === 'In Progress'
-              ? 'bg-sky-500/15 text-sky-200'
-              : 'bg-amber-500/15 text-amber-200';
+              ? 'bg-blue-50 text-blue-500'
+              : 'bg-amber-50 text-amber-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
         },
       },
@@ -54,7 +54,7 @@ export default function TalentOnboardingPage() {
         id: 'actions',
         header: 'Actions',
         cell: () => (
-          <Link href="/talent/onboarding" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/90 px-3 py-2 text-xs font-semibold text-slate-100 transition hover:border-sky-400">
+          <Link href="/talent/onboarding" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-blue-500">
             Update <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         ),
@@ -95,11 +95,11 @@ export default function TalentOnboardingPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Talent / Onboarding</p>
-            <h1 className="text-3xl font-semibold text-slate-100">New employee onboarding</h1>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Talent / Onboarding</p>
+            <h1 className="text-3xl font-semibold text-slate-900">New employee onboarding</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Track onboarding tasks, assignments, and new employee readiness across departments.</p>
           </div>
-          <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/90 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
+          <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
             Back to talent
           </Link>
         </div>
@@ -107,9 +107,9 @@ export default function TalentOnboardingPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {metrics.map((item) => (
-          <Card key={item.label} className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{item.label}</p>
-            <p className="mt-3 text-3xl font-semibold text-slate-100">{item.value}</p>
+          <Card key={item.label} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{item.label}</p>
+            <p className="mt-3 text-3xl font-semibold text-slate-900">{item.value}</p>
             <p className="mt-2 text-sm text-slate-400">{item.subtext}</p>
           </Card>
         ))}
@@ -117,19 +117,19 @@ export default function TalentOnboardingPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         {taskCategories.map((item) => (
-          <Card key={item.category} className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card key={item.category} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="text-3xl mb-3">{item.icon}</div>
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{item.category}</p>
-            <p className="mt-2 text-2xl font-semibold text-slate-100">{item.tasks} tasks</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{item.category}</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-900">{item.tasks} tasks</p>
           </Card>
         ))}
       </div>
 
-      <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+      <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-sky-300">Onboarding table</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-100">Task checklist</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Onboarding table</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">Task checklist</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
@@ -143,15 +143,15 @@ export default function TalentOnboardingPage() {
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search employee, task, or category"
-              className="w-full rounded-3xl border border-white/10 bg-slate-950/90 py-4 pl-11 pr-4 text-sm text-slate-100 outline-none transition focus:border-sky-400"
+              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
             />
           </div>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-white/10 bg-slate-950/90 p-4 text-sm text-slate-100 outline-none focus:border-sky-400">
+          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
             <option value="All">All statuses</option>
             <option value="Completed">Completed</option>
             <option value="In Progress">In Progress</option>

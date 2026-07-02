@@ -17,61 +17,61 @@ export default function TrainingAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-white/10 bg-slate-950/90 px-4 py-2 text-sm font-semibold text-slate-100 hover:border-sky-400">
+              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Analytics</p>
-              <h1 className="text-3xl font-semibold text-slate-100">Training Analytics</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analytics</p>
+              <h1 className="text-3xl font-semibold text-slate-900">Training Analytics</h1>
             </div>
           </div>
         </div>
       </SectionContainer>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Completion Rate</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-100">87.5%</p>
-              <p className="mt-2 text-sm text-emerald-400">↑ 2.1% from last month</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Completion Rate</p>
+              <p className="mt-3 text-3xl font-semibold text-slate-900">87.5%</p>
+              <p className="mt-2 text-sm text-emerald-600">↑ 2.1% from last month</p>
             </div>
-            <Award className="h-8 w-8 text-emerald-400" />
+            <Award className="h-8 w-8 text-emerald-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Expiring Soon</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-100">38</p>
-              <p className="mt-2 text-sm text-amber-400">Within 60 days</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Expiring Soon</p>
+              <p className="mt-3 text-3xl font-semibold text-slate-900">38</p>
+              <p className="mt-2 text-sm text-amber-600">Within 60 days</p>
             </div>
-            <AlertCircle className="h-8 w-8 text-amber-400" />
+            <AlertCircle className="h-8 w-8 text-amber-600" />
           </div>
         </Card>
       </div>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Mandatory Training Compliance</p>
           <div className="space-y-3">
             {mandatoryTrainingData.map((training) => (
-              <div key={training.training} className="rounded-2xl bg-slate-950/80 p-4">
+              <div key={training.training} className="rounded-2xl bg-white/80 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-slate-100">{training.training}</p>
-                  <span className={`text-sm font-semibold ${training.compliance >= 95 ? 'text-emerald-400' : training.compliance >= 85 ? 'text-amber-400' : 'text-rose-400'}`}>
+                  <p className="text-sm font-semibold text-slate-900">{training.training}</p>
+                  <span className={`text-sm font-semibold ${training.compliance >= 95 ? 'text-emerald-600' : training.compliance >= 85 ? 'text-amber-600' : 'text-rose-600'}`}>
                     {training.compliance.toFixed(1)}%
                   </span>
                 </div>
-                <div className="h-2 w-full bg-slate-900/50 rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-slate-50/50 rounded-full overflow-hidden">
                   <div 
                     className={`h-full rounded-full ${training.compliance >= 95 ? 'bg-emerald-500' : training.compliance >= 85 ? 'bg-amber-500' : 'bg-rose-500'}`}
                     style={{ width: `${training.compliance}%` }}
                   />
                 </div>
-                <div className="mt-2 text-xs text-slate-500">
+                <div className="mt-2 text-xs text-slate-400">
                   {training.completed} completed • {training.pending} pending
                 </div>
               </div>
@@ -81,21 +81,21 @@ export default function TrainingAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Certificate Expiry Status</p>
           <div className="space-y-3">
             {expiredCertificatesData.map((cert) => (
-              <div key={cert.certificate} className="rounded-2xl bg-slate-950/80 p-4">
-                <p className="text-sm font-semibold text-slate-100 mb-3">{cert.certificate}</p>
+              <div key={cert.certificate} className="rounded-2xl bg-white/80 p-4">
+                <p className="text-sm font-semibold text-slate-900 mb-3">{cert.certificate}</p>
                 <div className="grid grid-cols-3 gap-2">
                   <div>
-                    <p className="text-xs text-rose-400 font-semibold">{cert.expired} Expired</p>
+                    <p className="text-xs text-rose-600 font-semibold">{cert.expired} Expired</p>
                   </div>
                   <div>
-                    <p className="text-xs text-amber-400 font-semibold">{cert.expiringSoon} Expiring</p>
+                    <p className="text-xs text-amber-600 font-semibold">{cert.expiringSoon} Expiring</p>
                   </div>
                   <div>
-                    <p className="text-xs text-emerald-400 font-semibold">{cert.active} Active</p>
+                    <p className="text-xs text-emerald-600 font-semibold">{cert.active} Active</p>
                   </div>
                 </div>
               </div>
@@ -106,7 +106,7 @@ export default function TrainingAnalyticsPage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Training Completion Trend</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={trainingCompletionData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -126,17 +126,17 @@ export default function TrainingAnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Competency Matrix</p>
             <div className="space-y-3">
               {competencyMatrixData.map((competency) => (
-                <div key={competency.competency} className="rounded-2xl bg-slate-950/80 p-3">
+                <div key={competency.competency} className="rounded-2xl bg-white/80 p-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-semibold text-slate-100">{competency.competency}</p>
-                      <p className="text-xs text-slate-500">{competency.level}</p>
+                      <p className="text-sm font-semibold text-slate-900">{competency.competency}</p>
+                      <p className="text-xs text-slate-400">{competency.level}</p>
                     </div>
-                    <span className="text-sm font-semibold text-sky-400">{competency.employees}</span>
+                    <span className="text-sm font-semibold text-blue-600">{competency.employees}</span>
                   </div>
                 </div>
               ))}

@@ -33,18 +33,18 @@ export function EmptyState({
       role="status"
       aria-label={title}
       className={cn(
-        'flex w-full flex-col items-center rounded-[28px] border border-white/10 bg-slate-900/90 p-10 text-center shadow-card',
+        'flex w-full flex-col items-center rounded-[28px] border border-slate-200 bg-slate-50/90 p-10 text-center shadow-card',
         className,
       )}
     >
       {/* Icon */}
       {icon && (
-        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-800/80 ring-1 ring-white/10 text-slate-400">
+        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-100/80 ring-1 ring-slate-200 text-slate-400">
           {icon}
         </div>
       )}
 
-      <h2 className="text-xl font-semibold text-slate-100">{title}</h2>
+      <h2 className="text-xl font-semibold text-slate-900">{title}</h2>
       <p className="mt-3 max-w-sm text-sm leading-7 text-slate-400">{description}</p>
 
       {children}
@@ -56,7 +56,7 @@ export function EmptyState({
             href ? (
               <Link
                 href={href}
-                className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-950"
+                className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950"
               >
                 {ctaLabel}
               </Link>
@@ -64,7 +64,7 @@ export function EmptyState({
               <button
                 type="button"
                 onClick={onCtaClick}
-                className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-950"
+                className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950"
               >
                 {ctaLabel}
               </button>
@@ -73,7 +73,7 @@ export function EmptyState({
           {secondaryLabel && secondaryHref && (
             <Link
               href={secondaryHref}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/90 px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-950"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950"
             >
               {secondaryLabel}
             </Link>

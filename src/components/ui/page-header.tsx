@@ -28,29 +28,29 @@ export function PageHeader({
   return (
     <header
       className={cn(
-        'rounded-[28px] border border-white/10 bg-slate-900/95 px-6 py-6 shadow-card',
+        'rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card',
         className,
       )}
     >
       {/* Breadcrumb */}
       {breadcrumbs && breadcrumbs.length > 0 && (
         <nav aria-label="Breadcrumb" className="mb-3">
-          <ol className="flex flex-wrap items-center gap-1 text-xs text-slate-500">
+          <ol className="flex flex-wrap items-center gap-1 text-xs text-slate-400">
             {breadcrumbs.map((crumb, index) => (
               <li key={index} className="flex items-center gap-1">
                 {index > 0 && (
-                  <ChevronRight className="h-3 w-3 text-slate-600" aria-hidden="true" />
+                  <ChevronRight className="h-3 w-3 text-slate-500" aria-hidden="true" />
                 )}
                 {crumb.href ? (
                   <Link
                     href={crumb.href}
-                    className="uppercase tracking-[0.24em] transition hover:text-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-400 rounded"
+                    className="uppercase tracking-[0.24em] transition hover:text-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded"
                   >
                     {crumb.label}
                   </Link>
                 ) : (
                   <span
-                    className="uppercase tracking-[0.24em] text-sky-300"
+                    className="uppercase tracking-[0.24em] text-blue-600"
                     aria-current="page"
                   >
                     {crumb.label}
@@ -65,9 +65,9 @@ export function PageHeader({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-1">
           {module && !breadcrumbs && (
-            <p className="text-xs uppercase tracking-[0.3em] text-sky-300">{module}</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">{module}</p>
           )}
-          <h1 className="text-3xl font-semibold text-slate-100">{title}</h1>
+          <h1 className="text-3xl font-semibold text-slate-900">{title}</h1>
           {description && (
             <p className="max-w-2xl text-sm text-slate-400">{description}</p>
           )}

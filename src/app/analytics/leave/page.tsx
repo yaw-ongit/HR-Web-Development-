@@ -22,13 +22,13 @@ export default function LeaveAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-white/10 bg-slate-950/90 px-4 py-2 text-sm font-semibold text-slate-100 hover:border-sky-400">
+              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-sky-300">Analytics</p>
-              <h1 className="text-3xl font-semibold text-slate-100">Leave Analytics</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analytics</p>
+              <h1 className="text-3xl font-semibold text-slate-900">Leave Analytics</h1>
             </div>
           </div>
         </div>
@@ -36,27 +36,27 @@ export default function LeaveAnalyticsPage() {
 
       <SectionContainer>
         <div className="grid gap-4 md:grid-cols-2">
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Leave Balance Overview</p>
             <div className="space-y-4">
               {leaveBalanceData.map((leave) => (
-                <div key={leave.leaveType} className="rounded-2xl bg-slate-950/80 p-4">
+                <div key={leave.leaveType} className="rounded-2xl bg-white/80 p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm font-semibold text-slate-100">{leave.leaveType}</p>
+                    <p className="text-sm font-semibold text-slate-900">{leave.leaveType}</p>
                     <span className="text-xs font-semibold text-slate-400">{leave.employees} employees</span>
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-center">
                     <div>
-                      <p className="text-xs text-slate-500">Allocation</p>
-                      <p className="text-sm font-semibold text-slate-100">{leave.total}</p>
+                      <p className="text-xs text-slate-400">Allocation</p>
+                      <p className="text-sm font-semibold text-slate-900">{leave.total}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Used</p>
-                      <p className="text-sm font-semibold text-rose-400">{leave.used}</p>
+                      <p className="text-xs text-slate-400">Used</p>
+                      <p className="text-sm font-semibold text-rose-600">{leave.used}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Balance</p>
-                      <p className={`text-sm font-semibold ${leave.balance < 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
+                      <p className="text-xs text-slate-400">Balance</p>
+                      <p className={`text-sm font-semibold ${leave.balance < 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
                         {leave.balance}
                       </p>
                     </div>
@@ -66,7 +66,7 @@ export default function LeaveAnalyticsPage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Leave Type Distribution</p>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -86,7 +86,7 @@ export default function LeaveAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Leave Approval Trend</p>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={leaveTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -106,7 +106,7 @@ export default function LeaveAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Department Leave Comparison</p>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={departmentComparisonData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
@@ -126,29 +126,29 @@ export default function LeaveAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-white/10 bg-slate-900/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Leave Request Processing Time</p>
           <div className="space-y-3">
-            <div className="rounded-2xl bg-slate-950/80 p-4 flex items-center justify-between">
+            <div className="rounded-2xl bg-white/80 p-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-100">Average Processing Time</p>
-                <p className="mt-1 text-xs text-slate-500">Last 30 days</p>
+                <p className="text-sm font-semibold text-slate-900">Average Processing Time</p>
+                <p className="mt-1 text-xs text-slate-400">Last 30 days</p>
               </div>
-              <span className="text-2xl font-semibold text-sky-400">2.3 days</span>
+              <span className="text-2xl font-semibold text-blue-600">2.3 days</span>
             </div>
-            <div className="rounded-2xl bg-slate-950/80 p-4 flex items-center justify-between">
+            <div className="rounded-2xl bg-white/80 p-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-100">Fastest Department</p>
-                <p className="mt-1 text-xs text-slate-500">Finance - avg 1.5 days</p>
+                <p className="text-sm font-semibold text-slate-900">Fastest Department</p>
+                <p className="mt-1 text-xs text-slate-400">Finance - avg 1.5 days</p>
               </div>
-              <span className="text-2xl font-semibold text-emerald-400">1.5d</span>
+              <span className="text-2xl font-semibold text-emerald-600">1.5d</span>
             </div>
-            <div className="rounded-2xl bg-slate-950/80 p-4 flex items-center justify-between">
+            <div className="rounded-2xl bg-white/80 p-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-100">Slowest Department</p>
-                <p className="mt-1 text-xs text-slate-500">Facilities - avg 3.2 days</p>
+                <p className="text-sm font-semibold text-slate-900">Slowest Department</p>
+                <p className="mt-1 text-xs text-slate-400">Facilities - avg 3.2 days</p>
               </div>
-              <span className="text-2xl font-semibold text-amber-400">3.2d</span>
+              <span className="text-2xl font-semibold text-amber-600">3.2d</span>
             </div>
           </div>
         </Card>

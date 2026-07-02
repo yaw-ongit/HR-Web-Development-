@@ -15,3 +15,5 @@ tsconfig.tsbuildinfo
 *.zip
 *.rar
 *.7z
+
+.vercel
