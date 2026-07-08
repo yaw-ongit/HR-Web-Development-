@@ -24,7 +24,7 @@ export function SelectFilter({ label, value, options, onChange, className }: Sel
         aria-label={label}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full appearance-none rounded-3xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30"
+        className="w-full appearance-none rounded-3xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30"
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -64,14 +64,14 @@ export function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-3xl border border-slate-200 bg-white/90 py-3 pl-11 pr-10 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30"
+        className="w-full rounded-3xl border border-slate-200 bg-white/90 py-3 pl-11 pr-10 text-sm text-slate-900 outline-none transition focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30"
       />
       {value && (
         <button
           type="button"
           aria-label="Clear search"
           onClick={() => onChange('')}
-          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-slate-400 transition hover:text-slate-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-slate-400 transition hover:text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500"
         >
           <X className="h-3.5 w-3.5" />
         </button>

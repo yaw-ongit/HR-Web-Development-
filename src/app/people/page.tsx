@@ -45,11 +45,11 @@ export default function PeopleDirectoryPage() {
       id: 'select',
       header: ({ table }) => (
         <input type="checkbox" aria-label="Select all rows" checked={table.getIsAllRowsSelected()} onChange={table.getToggleAllRowsSelectedHandler()}
-          className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-blue-600 focus:ring-blue-500" />
+          className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-brand-600 focus:ring-brand-500" />
       ),
       cell: ({ row }) => (
         <input type="checkbox" aria-label={`Select ${row.original.fullName}`} checked={row.getIsSelected()} onChange={row.getToggleSelectedHandler()}
-          className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-blue-600 focus:ring-blue-500" />
+          className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-brand-600 focus:ring-brand-500" />
       ),
     },
     {
@@ -59,7 +59,7 @@ export default function PeopleDirectoryPage() {
       enableSorting: true,
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-sm font-semibold text-blue-500" aria-hidden="true">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-sm font-semibold text-brand-500" aria-hidden="true">
             {row.original.initials}
           </div>
           <div>
@@ -84,7 +84,7 @@ export default function PeopleDirectoryPage() {
       cell: ({ row }) => (
         <div className="flex justify-end gap-2">
           <Link href={`/people/${row.original.id}`}
-            className="rounded-full border border-slate-200 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-900 transition hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            className="rounded-full border border-slate-200 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-900 transition hover:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
             Profile
           </Link>
         </div>
@@ -168,7 +168,7 @@ export default function PeopleDirectoryPage() {
                 ].map((link) => (
                   <li key={link.href}>
                     <Link href={link.href}
-                      className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 transition hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 transition hover:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
                       <span>{link.label}</span>
                       <ChevronRight className="h-4 w-4 text-slate-400" aria-hidden="true" />
                     </Link>

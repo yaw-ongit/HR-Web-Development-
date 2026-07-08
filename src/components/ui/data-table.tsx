@@ -84,9 +84,9 @@ export function DataTable<TData>({
                           {canSort && (
                             <span aria-hidden="true" className="text-slate-500">
                               {sortDir === 'asc' ? (
-                                <ArrowUp className="h-3.5 w-3.5 text-blue-600" />
+                                <ArrowUp className="h-3.5 w-3.5 text-brand-600" />
                               ) : sortDir === 'desc' ? (
-                                <ArrowDown className="h-3.5 w-3.5 text-blue-600" />
+                                <ArrowDown className="h-3.5 w-3.5 text-brand-600" />
                               ) : (
                                 <ArrowUpDown className="h-3.5 w-3.5" />
                               )}
@@ -109,7 +109,7 @@ export function DataTable<TData>({
                   className={cn(
                     'border-b border-slate-100 transition-colors last:border-0',
                     row.getIsSelected()
-                      ? 'bg-blue-600/5'
+                      ? 'bg-brand-600/5'
                       : 'hover:bg-white/60',
                   )}
                 >
@@ -179,7 +179,7 @@ export function DataTable<TData>({
                       type="checkbox"
                       checked={col.getIsVisible()}
                       onChange={col.getToggleVisibilityHandler()}
-                      className="h-3 w-3 cursor-pointer rounded border-slate-300 bg-slate-100 text-blue-600 focus:ring-blue-500"
+                      className="h-3 w-3 cursor-pointer rounded border-slate-300 bg-slate-100 text-brand-600 focus:ring-brand-500"
                       aria-label={`Toggle ${col.id} column`}
                     />
                     {col.id}

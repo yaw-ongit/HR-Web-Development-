@@ -49,7 +49,7 @@ export function KpiCard({
         </div>
         {icon && (
           <div
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-3xl bg-white/85 text-blue-600"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-3xl bg-white/85 text-brand-600"
             aria-hidden="true"
           >
             {icon}

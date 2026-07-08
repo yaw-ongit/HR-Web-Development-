@@ -15,20 +15,30 @@
   background-color: #f3f4f6;
   color: #0f172a;
 
-  --color-brand-50: #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-200: #bfdbfe;
-  --color-brand-300: #93c5fd;
-  --color-brand-400: #60a5fa;
-  --color-brand-500: #2563eb;
-  --color-brand-600: #1d4ed8;
-  --color-brand-700: #1e40af;
-  --color-brand-800: #1e3a8a;
-  --color-brand-900: #172554;
+  /* PT Indocater Navy Blue */
+  --color-brand-50: #f0f4f8;
+  --color-brand-100: #cce0f5;
+  --color-brand-200: #99c2eb;
+  --color-brand-300: #66a3e0;
+  --color-brand-400: #3385d6;
+  --color-brand-500: #0066cc;
+  --color-brand-600: #0052a3;
+  --color-brand-700: #003d7a;
+  --color-brand-800: #002952;
+  --color-brand-900: #001429;
 
-  --color-indogold-500: #b2872a;
-  --color-indogold-600: #9a6f24;
-  --color-indogold-700: #7f5a1c;
+  /* PT Indocater Red (Accent) */
+  --color-accent-50: #fef2f2;
+  --color-accent-100: #fee2e2;
+  --color-accent-500: #ef4444;
+  --color-accent-600: #dc2626;
+  --color-accent-700: #b91c1c;
+  --color-accent-900: #7f1d1d;
+
+  /* PT Indocater Gold */
+  --color-indogold-500: #d4af37;
+  --color-indogold-600: #b8962c;
+  --color-indogold-700: #937823;
 
   /* Border radius tokens */
   --radius: 1rem;

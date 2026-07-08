@@ -65,7 +65,7 @@ export function PageHeader({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-1">
           {module && !breadcrumbs && (
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">{module}</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">{module}</p>
           )}
           <h1 className="text-3xl font-semibold text-slate-900">{title}</h1>
           {description && (

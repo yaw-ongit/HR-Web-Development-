@@ -20,12 +20,12 @@ export default function AttendanceAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500">
+              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
               <h1 className="text-3xl font-semibold text-slate-900">Analitik Absensi</h1>
             </div>
           </div>
@@ -62,7 +62,7 @@ export default function AttendanceAnalyticsPage() {
               <p className="mt-3 text-3xl font-semibold text-slate-900">3.2%</p>
               <p className="mt-2 text-sm text-slate-400">9 karyawan absen hari ini</p>
             </div>
-            <AlertCircle className="h-8 w-8 text-blue-600" />
+            <AlertCircle className="h-8 w-8 text-brand-600" />
           </div>
         </Card>
       </div>
@@ -75,7 +75,7 @@ export default function AttendanceAnalyticsPage() {
               <div key={dept.department} className="rounded-2xl bg-white/80 p-4">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-sm font-semibold text-slate-900">{dept.department}</p>
-                  <span className="text-sm font-semibold text-blue-600">{dept.weekAvg}%</span>
+                  <span className="text-sm font-semibold text-brand-600">{dept.weekAvg}%</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
                   <div>

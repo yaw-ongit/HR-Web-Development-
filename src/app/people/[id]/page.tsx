@@ -100,7 +100,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
           {stats.map((stat) => (
             <Card key={stat.label} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-5 shadow-card">
               <div className="flex items-center gap-3">
-                <div className="grid h-12 w-12 place-items-center rounded-3xl bg-blue-50 text-blue-600">
+                <div className="grid h-12 w-12 place-items-center rounded-3xl bg-brand-50 text-brand-600">
                   <stat.icon className="h-5 w-5" />
                 </div>
                 <div>
@@ -116,7 +116,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
       <section className="space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Employee 360</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Employee 360</p>
             <h2 className="text-2xl font-semibold text-slate-900">{activeTab}</h2>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -126,7 +126,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
                 type="button"
                 onClick={() => setActiveTab(tab)}
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                  activeTab === tab ? 'bg-blue-600 text-slate-950' : 'bg-slate-50/80 text-slate-700 hover:bg-slate-50'
+                  activeTab === tab ? 'bg-brand-600 text-slate-950' : 'bg-slate-50/80 text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 {tab}
@@ -162,7 +162,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               </Card>
 
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Organization</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Organization</p>
                 <div className="mt-5 rounded-[28px] border border-slate-200 bg-white/80 p-6">
                   <div className="space-y-4">
                     <div className="rounded-3xl bg-slate-50/90 p-4">
@@ -180,7 +180,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             <div className="space-y-6">
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Employment information</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Employment information</p>
                 <div className="mt-5 grid gap-4">
                   {profile.employmentHistory.map((item) => (
                     <div key={item.period} className="rounded-3xl bg-white/80 p-4">
@@ -193,7 +193,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               </Card>
 
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Contract summary</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Contract summary</p>
                 <div className="mt-5 space-y-4">
                   <p className="text-sm text-slate-400">{profile.contractType} contract in place since {profile.hireDate}.</p>
                   <div className="grid gap-4 sm:grid-cols-2">

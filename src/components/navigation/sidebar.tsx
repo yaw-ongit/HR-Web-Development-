@@ -74,7 +74,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         className={cn(
           'fixed left-0 top-0 z-40 flex h-full w-72 shrink-0 flex-col overflow-y-auto',
           'border-r border-slate-200 bg-white/98 px-4 py-6 backdrop-blur-xl',
-          'transition-transform duration-300 lg:static lg:translate-x-0',
+          'transition-transform duration-300 lg:translate-x-0',
           open ? 'translate-x-0' : '-translate-x-full',
         )}
       >
@@ -94,7 +94,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             type="button"
             aria-label="Close navigation"
             onClick={onClose}
-            className="rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:hidden"
+            className="rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 lg:hidden"
           >
             <X className="h-4 w-4" />
           </button>
@@ -116,7 +116,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                     onClick={onClose}
                     className={cn(
                       'flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
-                      'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 focus:ring-offset-slate-950',
+                      'focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 focus:ring-offset-slate-950',
                       active
                         ? 'bg-brand-50 text-brand-500 ring-1 ring-brand-100'
                         : 'text-slate-400 hover:bg-slate-50 hover:text-slate-900',
@@ -125,7 +125,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                     <item.icon
                       className={cn(
                         'h-4 w-4 shrink-0',
-                        active ? 'text-blue-600' : 'text-slate-400',
+                        active ? 'text-brand-600' : 'text-slate-400',
                       )}
                       aria-hidden="true"
                     />

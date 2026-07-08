@@ -19,7 +19,7 @@ export default function NotFoundPage() {
           404
         </p>
 
-        <p className="mt-2 text-xs uppercase tracking-[0.3em] text-blue-600">Page not found</p>
+        <p className="mt-2 text-xs uppercase tracking-[0.3em] text-brand-600">Page not found</p>
 
         <h1 className="mt-3 text-2xl font-semibold text-slate-900">
           This page doesn't exist
@@ -32,7 +32,7 @@ export default function NotFoundPage() {
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
           >
             <Home className="h-4 w-4" aria-hidden="true" />
             Go to dashboard
@@ -40,7 +40,7 @@ export default function NotFoundPage() {
           <button
             type="button"
             onClick={() => window.history.back()}
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Go back

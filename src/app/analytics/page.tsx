@@ -25,18 +25,18 @@ export default function AnalyticsPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Intelijen Perusahaan</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Intelijen Perusahaan</p>
             <h1 className="text-3xl font-semibold text-slate-900">Pusat Analitik</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">
               Platform analitik tenaga kerja komprehensif untuk keputusan strategis dan wawasan operasional.
             </p>
           </div>
           <div className="flex gap-2">
-            <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500 hover:text-blue-600">
+            <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500 hover:text-brand-600">
               <Filter className="h-4 w-4 mr-2" />
               Filter
             </Button>
-            <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500 hover:text-blue-600">
+            <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500 hover:text-brand-600">
               <Download className="h-4 w-4 mr-2" />
               Ekspor
             </Button>
@@ -53,7 +53,7 @@ export default function AnalyticsPage() {
                 <p className="mt-3 text-3xl font-semibold text-slate-900">{executiveKpi.totalEmployees}</p>
                 <p className="mt-2 text-sm text-emerald-600">↑ {executiveKpi.headcountGrowth} bulan ini</p>
               </div>
-              <Users className="h-8 w-8 text-blue-600" />
+              <Users className="h-8 w-8 text-brand-600" />
             </div>
           </Card>
 
@@ -84,9 +84,9 @@ export default function AnalyticsPage() {
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kepatuhan Pelatihan</p>
                 <p className="mt-3 text-3xl font-semibold text-slate-900">{executiveKpi.trainingCompliance}%</p>
-                <p className="mt-2 text-sm text-blue-600">Selesai</p>
+                <p className="mt-2 text-sm text-brand-600">Selesai</p>
               </div>
-              <BookOpen className="h-8 w-8 text-blue-600" />
+              <BookOpen className="h-8 w-8 text-brand-600" />
             </div>
           </Card>
         </div>
@@ -226,10 +226,10 @@ export default function AnalyticsPage() {
       <SectionContainer>
         <div className="grid gap-4 md:grid-cols-3">
           <Link href="/analytics/workforce">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-blue-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
-                <Users className="h-5 w-5 text-blue-600" />
+                <Users className="h-5 w-5 text-brand-600" />
               </div>
               <h3 className="text-xl font-semibold text-slate-900">Analitik Workforce</h3>
               <p className="mt-2 text-sm text-slate-400">Headcount, demografi, dan struktur organisasi</p>
@@ -237,7 +237,7 @@ export default function AnalyticsPage() {
           </Link>
 
           <Link href="/analytics/attendance">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-blue-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
                 <Activity className="h-5 w-5 text-emerald-600" />
@@ -248,7 +248,7 @@ export default function AnalyticsPage() {
           </Link>
 
           <Link href="/analytics/leave">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-blue-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
                 <BookOpen className="h-5 w-5 text-amber-600" />
@@ -259,7 +259,7 @@ export default function AnalyticsPage() {
           </Link>
 
           <Link href="/analytics/recruitment">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-blue-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
                 <Briefcase className="h-5 w-5 text-purple-600" />
@@ -270,7 +270,7 @@ export default function AnalyticsPage() {
           </Link>
 
           <Link href="/analytics/training">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-blue-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
                 <Award className="h-5 w-5 text-pink-400" />
@@ -281,7 +281,7 @@ export default function AnalyticsPage() {
           </Link>
 
           <Link href="/analytics/compliance">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-blue-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
                 <Heart className="h-5 w-5 text-red-400" />

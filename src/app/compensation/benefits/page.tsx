@@ -64,7 +64,7 @@ export default function BenefitsPage() {
         id: 'actions',
         header: 'Actions',
         cell: () => (
-          <Link href="/compensation/benefits" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href="/compensation/benefits" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Edit <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         ),
@@ -97,11 +97,11 @@ export default function BenefitsPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Compensation / Benefits</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Compensation / Benefits</p>
             <h1 className="text-3xl font-semibold text-slate-900">Benefits Management</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Manage and track employee benefits, allocations, and coverage across the organization.</p>
           </div>
-          <Link href="/compensation" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href="/compensation" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
             Back to compensation
           </Link>
         </div>
@@ -134,7 +134,7 @@ export default function BenefitsPage() {
       </div>
 
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-        <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Distribution</p>
+        <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Distribution</p>
         <h2 className="mt-2 text-lg font-semibold text-slate-900">Benefit Categories</h2>
         <div className="mt-6 space-y-3">
           {benefitDistributionData.map((item) => (
@@ -154,7 +154,7 @@ export default function BenefitsPage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Benefits table</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Benefits table</p>
             <h2 className="mt-2 text-xl font-semibold text-slate-900">All benefits</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -174,10 +174,10 @@ export default function BenefitsPage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search employee or department"
-              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
+              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500"
             />
           </div>
-          <select value={benefitType} onChange={(event) => setBenefitType(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
+          <select value={benefitType} onChange={(event) => setBenefitType(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
             <option value="All">All benefit types</option>
             {benefitTypes.map((type) => (
               <option key={type} value={type}>
@@ -185,7 +185,7 @@ export default function BenefitsPage() {
               </option>
             ))}
           </select>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
+          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
             <option value="All">All statuses</option>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>

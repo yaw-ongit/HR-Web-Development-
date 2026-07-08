@@ -50,6 +50,6 @@ export const statusVariantClasses: Record<StatusVariant, string> = {
   success: 'bg-emerald-50 text-emerald-200',
   warning: 'bg-amber-50 text-amber-200',
   danger: 'bg-rose-50 text-rose-200',
-  info: 'bg-blue-50 text-blue-500',
+  info: 'bg-brand-50 text-brand-500',
   neutral: 'bg-slate-200/40 text-slate-700',
 };

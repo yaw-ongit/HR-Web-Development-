@@ -1,6 +1,6 @@
 'use client';
 
-import { createElement, useMemo, useState } from 'react';
+import { createElement, useMemo } from 'react';
 import {
   Sparkles, Clock, Users, BookOpen, ShieldCheck, Server, Briefcase,
   TrendingUp, ArrowUpRight, ArrowDownRight, UserPlus, Flag, ShieldAlert,
@@ -132,7 +132,7 @@ function WidgetTraining({ title }: { title: string }) {
               <p className="text-sm text-slate-400">{item.progress}%</p>
             </div>
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-50" role="progressbar" aria-valuenow={item.progress} aria-valuemin={0} aria-valuemax={100} aria-label={`${item.course} progress`}>
-              <div className="h-full rounded-full bg-blue-500 transition-all" style={{ width: `${item.progress}%` }} />
+              <div className="h-full rounded-full bg-brand-500 transition-all" style={{ width: `${item.progress}%` }} />
             </div>
           </div>
         ))}
@@ -230,9 +230,9 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
   distribution: WidgetDistribution,
   approvals: WidgetApprovals,
   events: ({ title }) => (
-    <Card title={title} description="Company calendar events today.">
+    <Card title={title} description="Acara kalender perusahaan hari ini.">
       <ul className="space-y-3">
-        {[{ label: 'Q2 All-hands', time: 'Today 14:00', status: 'Live' }, { label: 'Leadership workshop', time: 'Thu 09:00', status: 'Upcoming' }].map((e) => (
+        {[{ label: 'Q2 All-hands', time: 'Hari ini 14:00', status: 'Live' }, { label: 'Workshop Kepemimpinan', time: 'Kam 09:00', status: 'Mendatang' }].map((e) => (
           <li key={e.label} className="flex items-center justify-between rounded-2xl bg-white/80 p-4">
             <div>
               <p className="text-sm font-semibold text-slate-900">{e.label}</p>
@@ -247,7 +247,7 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
   recruitment: ({ title }) => (
     <Card title={title} description="Sumber kandidat aktif dan perkembangan perekrutan.">
       <div className="space-y-3">
-        {[{ label: 'New hires', value: '16 in pipeline' }, { label: 'Open roles', value: '24 active searches' }].map((item) => (
+        {[{ label: 'Karyawan Baru', value: '16 dalam proses' }, { label: 'Posisi Terbuka', value: '24 pencarian aktif' }].map((item) => (
           <div key={item.label} className="rounded-2xl bg-white/80 p-4">
             <p className="text-sm text-slate-400">{item.label}</p>
             <p className="mt-1.5 text-lg font-semibold text-slate-900">{item.value}</p>
@@ -257,19 +257,19 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     </Card>
   ),
   birthdays: ({ title }) => (
-    <Card title={title} description="Colleagues celebrating birthdays this week.">
+    <Card title={title} description="Rekan kerja yang merayakan ulang tahun minggu ini.">
       <ul className="space-y-3">
         {['Maya Thompson', 'Noah Brooks', 'Avery Patel'].map((name) => (
           <li key={name} className="rounded-2xl bg-white/80 p-4">
             <p className="text-sm font-semibold text-slate-900">🎂 {name}</p>
-            <p className="text-xs text-slate-400">Team member</p>
+            <p className="text-xs text-slate-400">Anggota Tim</p>
           </li>
         ))}
       </ul>
     </Card>
   ),
   trend: ({ title }) => (
-    <Card title={title} description="Organizational trend over six months.">
+    <Card title={title} description="Tren organisasi selama enam bulan.">
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={employeeMetrics.headcountTrend} margin={{ top: 12, right: 18, left: 0, bottom: 0 }}>
@@ -329,7 +329,7 @@ function getRoleLabel(role: RoleKey) {
    Main Dashboard Component
 --------------------------------------------------------------- */
 export default function DashboardPage() {
-  const [role, setRole] = useState<RoleKey>('hr-officer');
+  const role: RoleKey = 'hr-manager';
   const quickActions = roleQuickActions[role];
   const kpis = dashboardKpis[role];
   const widgets = roleWidgets[role];
@@ -354,7 +354,7 @@ export default function DashboardPage() {
         <Card>
           <div className="grid gap-6 p-6 lg:grid-cols-[1fr_260px]">
             <div className="space-y-3">
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Hari Ini</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Hari Ini</p>
               <h1 className="text-3xl font-semibold text-slate-900">{hero.title}</h1>
               <p className="max-w-xl text-sm leading-7 text-slate-400">{hero.subtitle}</p>
               <div className="flex flex-wrap gap-3 pt-2">
@@ -365,7 +365,7 @@ export default function DashboardPage() {
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white/90 p-5">
               <div className="flex items-center gap-4">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-blue-600" aria-hidden="true">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand-600" aria-hidden="true">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
@@ -381,27 +381,6 @@ export default function DashboardPage() {
           </div>
         </Card>
 
-        {/* Role switcher */}
-        <SectionContainer title="Tampilan Peran">
-          <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-6" role="radiogroup" aria-label="Select dashboard role">
-            {roles.map((item) => (
-              <button
-                key={item.key}
-                type="button"
-                role="radio"
-                aria-checked={role === item.key}
-                onClick={() => setRole(item.key)}
-                className={`rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  role === item.key
-                    ? 'border-blue-500 bg-blue-50/50 text-slate-900'
-                    : 'border-slate-200 bg-white/70 text-slate-400 hover:border-slate-400 hover:text-slate-900'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </SectionContainer>
 
         {/* KPI cards */}
         <section aria-label="Key performance indicators">
@@ -423,9 +402,9 @@ export default function DashboardPage() {
         <SectionContainer title="Aksi Cepat">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {quickActions.map((action) => (
-              <Card key={action.label} className="p-5 transition hover:border-blue-500/30">
+              <Card key={action.label} className="p-5 transition hover:border-brand-500/30">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-blue-50/50 text-blue-600" aria-hidden="true">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-50/50 text-brand-600" aria-hidden="true">
                     {createElement(iconMap[action.icon as keyof typeof iconMap] ?? Sparkles, { className: 'h-5 w-5' })}
                   </div>
                   <div>

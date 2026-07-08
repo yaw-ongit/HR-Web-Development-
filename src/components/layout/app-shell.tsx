@@ -73,7 +73,7 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                     placeholder="Cari..."
                     className={cn(
                       'w-full rounded-full border border-slate-200 bg-slate-50/90 py-2.5 pl-10 pr-4 text-sm text-slate-900',
-                      'outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30',
+                      'outline-none transition focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30',
                     )}
                   />
                 </div>
@@ -85,13 +85,13 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                   className={cn(
                     'relative inline-flex h-10 w-10 items-center justify-center rounded-2xl',
                     'bg-slate-50 text-slate-700 transition hover:bg-slate-100 hover:text-slate-900',
-                    'focus:outline-none focus:ring-2 focus:ring-blue-500',
+                    'focus:outline-none focus:ring-2 focus:ring-brand-500',
                   )}
                 >
                   <Bell className="h-5 w-5" aria-hidden="true" />
                   {/* Notification dot */}
                   <span
-                    className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-blue-500"
+                    className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-brand-500"
                     aria-label="3 unread notifications"
                   />
                 </button>
@@ -103,7 +103,7 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                   className={cn(
                     'hidden sm:inline-flex h-10 w-10 items-center justify-center rounded-2xl',
                     'bg-slate-50 text-slate-700 transition hover:bg-slate-100 hover:text-slate-900',
-                    'focus:outline-none focus:ring-2 focus:ring-blue-500',
+                    'focus:outline-none focus:ring-2 focus:ring-brand-500',
                   )}
                 >
                   <SunMedium className="h-5 w-5" aria-hidden="true" />
@@ -117,11 +117,11 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                   className={cn(
                     'inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1.5',
                     'text-sm text-slate-900 transition hover:bg-slate-100',
-                    'focus:outline-none focus:ring-2 focus:ring-blue-500',
+                    'focus:outline-none focus:ring-2 focus:ring-brand-500',
                   )}
                 >
                   <div
-                    className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-600 text-xs font-bold text-slate-950"
+                    className="flex h-7 w-7 items-center justify-center rounded-xl bg-brand-600 text-xs font-bold text-slate-950"
                     aria-hidden="true"
                   >
                     M

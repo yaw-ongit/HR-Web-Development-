@@ -63,7 +63,7 @@ export default function WorkforceAttendancePage() {
               : value === 'On Leave'
               ? 'bg-slate-600/15 text-slate-700'
               : value === 'WFH'
-              ? 'bg-blue-50 text-blue-500'
+              ? 'bg-brand-50 text-brand-500'
               : 'bg-rose-50 text-rose-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
         },
@@ -72,7 +72,7 @@ export default function WorkforceAttendancePage() {
         id: 'actions',
         header: 'Actions',
         cell: ({ row }) => (
-          <Link href={`/workforce/attendance`} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href={`/workforce/attendance`} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Details <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         ),
@@ -98,11 +98,11 @@ export default function WorkforceAttendancePage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Workforce / Attendance</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Workforce / Attendance</p>
             <h1 className="text-3xl font-semibold text-slate-900">Attendance dashboard</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Live attendance status, daily presence and employee operations in a single view.</p>
           </div>
-          <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
             Kembali ke Workforce
           </Link>
         </div>
@@ -129,7 +129,7 @@ export default function WorkforceAttendancePage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Attendance calendar</p>
+              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Attendance calendar</p>
               <h2 className="mt-2 text-xl font-semibold text-slate-900">June snapshot</h2>
             </div>
             <div className="text-sm text-slate-400">Weekend / holiday / business trip highlights</div>
@@ -156,7 +156,7 @@ export default function WorkforceAttendancePage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Attendance detail</p>
+              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Attendance detail</p>
               <h2 className="mt-2 text-xl font-semibold text-slate-900">Attendance heatmap</h2>
             </div>
             <div className="rounded-full bg-white/80 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-700">Daily log</div>
@@ -178,7 +178,7 @@ export default function WorkforceAttendancePage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Attendance table</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Attendance table</p>
             <h2 className="mt-2 text-xl font-semibold text-slate-900">Operational employee log</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -198,16 +198,16 @@ export default function WorkforceAttendancePage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search employee, department or shift"
-              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
+              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500"
             />
           </div>
-          <select value={department} onChange={(event) => setDepartment(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
+          <select value={department} onChange={(event) => setDepartment(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
             <option value="All">All departments</option>
             {workforceDepartmentOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
             ))}
           </select>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
+          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
             <option value="All">All statuses</option>
             <option value="Present">Present</option>
             <option value="On Leave">On Leave</option>

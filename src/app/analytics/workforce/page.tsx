@@ -23,12 +23,12 @@ export default function WorkforceAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500">
+              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
               <h1 className="text-3xl font-semibold text-slate-900">Analitik Workforce</h1>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function WorkforceAnalyticsPage() {
               <div key={dept.department} className="rounded-2xl bg-white/80 p-4">
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-sm font-semibold text-slate-900">{dept.department}</p>
-                  <span className="text-sm font-semibold text-blue-600">{dept.headcount} employees</span>
+                  <span className="text-sm font-semibold text-brand-600">{dept.headcount} employees</span>
                 </div>
                 <div className="h-2 w-full bg-slate-50/50 rounded-full overflow-hidden">
                   <div 

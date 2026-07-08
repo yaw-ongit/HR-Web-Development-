@@ -72,7 +72,7 @@ function StatusBadge({ value }: { value: string }) {
         ? 'bg-amber-50 text-amber-200'
         : value === 'Failed' || value === 'Disabled'
           ? 'bg-rose-50 text-rose-200'
-          : 'bg-blue-50 text-blue-500';
+          : 'bg-brand-50 text-brand-500';
 
   return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
 }
@@ -101,7 +101,7 @@ function AdminShell({ children, section }: { children: ReactNode; section?: stri
       <section className="rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Administration</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Administration</p>
             <h1 className="mt-2 text-3xl font-semibold text-slate-900">{currentTitle}</h1>
             <p className="mt-3 max-w-3xl text-sm text-slate-400">
               Enterprise control center for HR administrators and system administrators to govern data, identity, roles, workflows, integrations, auditability and platform preferences.
@@ -125,11 +125,11 @@ function AdminShell({ children, section }: { children: ReactNode; section?: stri
                 key={item.label}
                 href={item.href}
                 className={`rounded-3xl border px-4 py-3 text-sm transition ${
-                  active ? 'border-blue-500 bg-blue-50/50 text-sky-100' : 'border-slate-200 bg-white/70 text-slate-700 hover:border-blue-500'
+                  active ? 'border-brand-500 bg-brand-50/50 text-sky-100' : 'border-slate-200 bg-white/70 text-slate-700 hover:border-brand-500'
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <item.icon className="h-4 w-4 text-blue-600" />
+                  <item.icon className="h-4 w-4 text-brand-600" />
                   <span>{item.label}</span>
                 </div>
               </Link>
@@ -170,12 +170,12 @@ function DashboardView() {
               value={globalSearch}
               onChange={(event) => setGlobalSearch(event.target.value)}
               placeholder="Search every master data catalog"
-              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
+              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500"
             />
           </div>
           <div className="mt-5 grid gap-3">
             {results.map((record) => (
-              <Link key={record.id} href="/administration/master-data" className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-blue-500">
+              <Link key={record.id} href="/administration/master-data" className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-brand-500">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p className="text-sm font-semibold text-slate-900">{record.name}</p>
@@ -191,11 +191,11 @@ function DashboardView() {
         <Card title="Quick actions" description="High-frequency administration operations.">
           <div className="grid gap-3">
             {adminQuickActions.map((action) => (
-              <Link key={action.label} href={action.href} className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-blue-500">
+              <Link key={action.label} href={action.href} className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-brand-500">
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-blue-50">
-                      <action.icon className="h-4 w-4 text-blue-600" />
+                    <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-brand-50">
+                      <action.icon className="h-4 w-4 text-brand-600" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-slate-900">{action.label}</p>
@@ -294,9 +294,9 @@ function MasterDataView() {
       header: 'Actions',
       cell: () => (
         <div className="flex flex-wrap justify-end gap-2">
-          <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-blue-500"><Edit3 className="inline h-3.5 w-3.5" /> Edit</button>
-          <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-blue-500"><Archive className="inline h-3.5 w-3.5" /> Archive</button>
-          <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-blue-500"><History className="inline h-3.5 w-3.5" /> History</button>
+          <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500"><Edit3 className="inline h-3.5 w-3.5" /> Edit</button>
+          <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500"><Archive className="inline h-3.5 w-3.5" /> Archive</button>
+          <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500"><History className="inline h-3.5 w-3.5" /> History</button>
         </div>
       ),
     },
@@ -318,9 +318,9 @@ function MasterDataView() {
         <div className="grid gap-4 xl:grid-cols-[1.5fr_0.6fr_auto]">
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search catalog, owner or history" className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none focus:border-blue-500" />
+            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search catalog, owner or history" className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none focus:border-brand-500" />
           </div>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
+          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
             <option>All</option>
             <option>Active</option>
             <option>Draft</option>
@@ -357,7 +357,7 @@ function OrganizationView() {
             <div key={node.level} className="relative rounded-3xl border border-slate-200 bg-white/80 p-4" style={{ marginLeft: `${Math.min(index * 18, 90)}px` }}>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-blue-600">{node.level}</p>
+                  <p className="text-xs uppercase tracking-[0.3em] text-brand-600">{node.level}</p>
                   <p className="mt-1 text-base font-semibold text-slate-900">{node.name}</p>
                   <p className="mt-1 text-sm text-slate-400">{node.count}</p>
                 </div>
@@ -388,7 +388,7 @@ function UserManagementView() {
       header: 'User',
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-blue-50 text-sm font-semibold text-slate-900">{row.original.avatar}</div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-brand-50 text-sm font-semibold text-slate-900">{row.original.avatar}</div>
           <div>
             <p className="font-semibold text-slate-900">{row.original.name}</p>
             <p className="text-xs text-slate-400">{row.original.email}</p>
@@ -404,7 +404,7 @@ function UserManagementView() {
     {
       id: 'actions',
       header: 'Actions',
-      cell: () => <div className="flex flex-wrap justify-end gap-2">{['Reset password', 'Disable', 'Enable', 'Assign role', 'Activity'].map((action) => <button key={action} className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-blue-500">{action}</button>)}</div>,
+      cell: () => <div className="flex flex-wrap justify-end gap-2">{['Reset password', 'Disable', 'Enable', 'Assign role', 'Activity'].map((action) => <button key={action} className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500">{action}</button>)}</div>,
     },
   ], []);
 
@@ -418,7 +418,7 @@ function RoleManagementView() {
       {roleCatalog.map((role) => (
         <Card key={role.role} className="p-5 xl:col-span-1">
           <p className="text-sm font-semibold text-slate-900">{role.role}</p>
-          <p className="mt-3 text-2xl font-semibold text-blue-500">{role.users}</p>
+          <p className="mt-3 text-2xl font-semibold text-brand-500">{role.users}</p>
           <p className="mt-1 text-xs text-slate-400">assigned users</p>
         </Card>
       ))}
@@ -460,7 +460,7 @@ function PermissionManagementView() {
                         const checked = role === 'Administrator' || role === 'HR Manager' || action === 'Read' || (roleIndex + moduleIndex + actionIndex) % 4 === 0;
                         return (
                           <label key={action} title={action} className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white">
-                            <input type="checkbox" checked={checked} readOnly className="h-3.5 w-3.5 rounded border-slate-400 bg-slate-100 text-blue-600" />
+                            <input type="checkbox" checked={checked} readOnly className="h-3.5 w-3.5 rounded border-slate-400 bg-slate-100 text-brand-600" />
                           </label>
                         );
                       })}
@@ -484,7 +484,7 @@ function WorkflowView() {
           <div className="flex flex-wrap items-center gap-3">
             {workflow.steps.map((step, index) => (
               <div key={step} className="flex items-center gap-3">
-                <div className="rounded-3xl border border-blue-500/30 bg-blue-50/50 px-4 py-3 text-sm font-semibold text-sky-100">{step}</div>
+                <div className="rounded-3xl border border-brand-500/30 bg-brand-50/50 px-4 py-3 text-sm font-semibold text-sky-100">{step}</div>
                 {index < workflow.steps.length - 1 && <ArrowRight className="h-4 w-4 text-slate-400" />}
               </div>
             ))}
@@ -513,7 +513,7 @@ function CompanySettingsView() {
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       {companySettings.map((setting) => (
         <Card key={setting.label} className="p-6">
-          <setting.icon className="h-6 w-6 text-blue-600" />
+          <setting.icon className="h-6 w-6 text-brand-600" />
           <p className="mt-4 text-sm uppercase tracking-[0.24em] text-slate-400">{setting.label}</p>
           <p className="mt-2 text-base font-semibold text-slate-900">{setting.value}</p>
         </Card>
@@ -572,7 +572,7 @@ function ActivityLogView() {
     <div className="grid gap-4 md:grid-cols-2">
       {activityLogs.map((activity) => (
         <Card key={activity.detail} className="p-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-blue-600">{activity.category}</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-brand-600">{activity.category}</p>
           <p className="mt-3 text-base font-semibold text-slate-900">{activity.detail}</p>
           <p className="mt-2 text-sm text-slate-400">{activity.time}</p>
         </Card>
@@ -605,7 +605,7 @@ function IntegrationView() {
       {integrationCards.map((integration) => (
         <Card key={integration.name} className="p-6">
           <div className="flex items-start justify-between gap-4">
-            <integration.icon className="h-7 w-7 text-blue-600" />
+            <integration.icon className="h-7 w-7 text-brand-600" />
             <StatusBadge value={integration.status} />
           </div>
           <p className="mt-5 text-base font-semibold text-slate-900">{integration.name}</p>

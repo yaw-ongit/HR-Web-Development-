@@ -102,7 +102,7 @@ export default function WorkforceHomePage() {
               <Card title="Aksi cepat" description="Tindakan operasional umum untuk tim HR.">
                 <div className="grid gap-3">
                   {workforceQuickActions.map((action) => (
-                    <Link key={action.label} href={action.href} className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-blue-500">
+                    <Link key={action.label} href={action.href} className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-brand-500">
                       <div className="flex items-center justify-between gap-4">
                         <div>
                           <p className="text-sm font-semibold text-slate-900">{action.label}</p>
@@ -163,7 +163,7 @@ export default function WorkforceHomePage() {
                 <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tren Keterlambatan</p>
                 <p className="mt-2 text-2xl font-semibold text-slate-900">43 insiden</p>
               </div>
-              <TrendingUp className="h-6 w-6 text-blue-600" />
+              <TrendingUp className="h-6 w-6 text-brand-600" />
             </div>
             <div className="mt-6 h-28">
               <ResponsiveContainer width="100%" height="100%">
@@ -184,7 +184,7 @@ export default function WorkforceHomePage() {
                 <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tren Cuti</p>
                 <p className="mt-2 text-2xl font-semibold text-slate-900">118 laporan</p>
               </div>
-              <FileText className="h-6 w-6 text-blue-600" />
+              <FileText className="h-6 w-6 text-brand-600" />
             </div>
             <div className="mt-6 h-28">
               <ResponsiveContainer width="100%" height="100%">
@@ -211,7 +211,7 @@ export default function WorkforceHomePage() {
                 <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tren Lembur</p>
                 <p className="mt-2 text-2xl font-semibold text-slate-900">78 jam</p>
               </div>
-              <Clock className="h-6 w-6 text-blue-600" />
+              <Clock className="h-6 w-6 text-brand-600" />
             </div>
             <div className="mt-6 h-28">
               <ResponsiveContainer width="100%" height="100%">
@@ -232,7 +232,7 @@ export default function WorkforceHomePage() {
                 <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kesiapan Operasional</p>
                 <p className="mt-2 text-2xl font-semibold text-slate-900">Tampilan staf real-time</p>
               </div>
-              <ShieldCheck className="h-6 w-6 text-blue-600" />
+              <ShieldCheck className="h-6 w-6 text-brand-600" />
             </div>
             <div className="mt-6 space-y-3 text-sm text-slate-400">
               <p>Absensi, cuti, shift, dan lembur disinkronkan ke pusat komando workforce.</p>

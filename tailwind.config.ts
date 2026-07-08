@@ -22,6 +22,14 @@ const config: Config = {
           600: 'var(--color-indogold-600)',
           700: 'var(--color-indogold-700)',
         },
+        accent: {
+          50: 'var(--color-accent-50)',
+          100: 'var(--color-accent-100)',
+          500: 'var(--color-accent-500)',
+          600: 'var(--color-accent-600)',
+          700: 'var(--color-accent-700)',
+          900: 'var(--color-accent-900)',
+        },
       },
       boxShadow: {
         soft: '0 22px 48px rgba(15, 23, 42, 0.08)',

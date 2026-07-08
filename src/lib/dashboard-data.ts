@@ -90,21 +90,21 @@ export const roleWidgets = {
 export const dashboardKpis = {
   employee: [
     { label: 'Kehadiran Hari Ini', value: 'Hadir', trend: 'Tepat Waktu', icon: 'Clock', valueColor: 'text-emerald-600' },
-    { label: 'Sisa Cuti', value: '12 hari', trend: '3 hari bulan ini', icon: 'Leaf', valueColor: 'text-blue-500' },
-    { label: 'Pelatihan Mendatang', value: '1 sesi', trend: 'Mulai dalam 4 hari', icon: 'BookOpen', valueColor: 'text-blue-600' },
+    { label: 'Sisa Cuti', value: '12 hari', trend: '3 hari bulan ini', icon: 'Leaf', valueColor: 'text-brand-500' },
+    { label: 'Pelatihan Mendatang', value: '1 sesi', trend: 'Mulai dalam 4 hari', icon: 'BookOpen', valueColor: 'text-brand-600' },
     { label: 'Status Benefit', value: 'Aktif', trend: 'Kesehatan, pensiun', icon: 'ShieldCheck', valueColor: 'text-purple-600' },
   ],
   supervisor: [
     { label: 'Kehadiran Tim', value: '98%', trend: '+2% vs kemarin', icon: 'Users', valueColor: 'text-emerald-600' },
     { label: 'Cuti Menunggu', value: '6 permintaan', trend: '2 mendesak', icon: 'CalendarCheck', valueColor: 'text-amber-600' },
-    { label: 'Karyawan Terlambat', value: '3', trend: 'Meningkat', icon: 'Clock', valueColor: 'text-blue-600' },
+    { label: 'Karyawan Terlambat', value: '3', trend: 'Meningkat', icon: 'Clock', valueColor: 'text-brand-600' },
     { label: 'Kontrak Akan Habis', value: '5', trend: 'Dalam 30 hari', icon: 'FileText', valueColor: 'text-rose-600' },
   ],
   'hr-officer': [
     { label: 'Karyawan Hadir', value: '3,102', trend: '92% dari total', icon: 'Users', valueColor: 'text-emerald-600' },
     { label: 'Karyawan Absen', value: '45', trend: 'Tanpa keterangan', icon: 'UserX', valueColor: 'text-rose-600' },
     { label: 'Sedang Cuti / Izin', value: '124', trend: 'Sakit, Tahunan', icon: 'Bed', valueColor: 'text-amber-600' },
-    { label: 'Kontrak Kedaluwarsa', value: '18', trend: 'Bulan ini', icon: 'FileText', valueColor: 'text-blue-600' },
+    { label: 'Kontrak Kedaluwarsa', value: '18', trend: 'Bulan ini', icon: 'FileText', valueColor: 'text-brand-600' },
   ],
   'hr-manager': [
     { label: 'Total Karyawan', value: '3,412', trend: '+6% kuartal ini', icon: 'Users', valueColor: 'text-emerald-600' },
@@ -120,7 +120,7 @@ export const dashboardKpis = {
   ],
   administrator: [
     { label: 'Status Sistem', value: 'Operasional', trend: 'Semua layanan online', icon: 'Server', valueColor: 'text-emerald-600' },
-    { label: 'Pengguna', value: '4,947', trend: 'Sesi aktif 128', icon: 'UserCheck', valueColor: 'text-blue-600' },
+    { label: 'Pengguna', value: '4,947', trend: 'Sesi aktif 128', icon: 'UserCheck', valueColor: 'text-brand-600' },
     { label: 'Role Akses', value: '12 grup', trend: 'Tidak ada perubahan', icon: 'Key', valueColor: 'text-purple-600' },
     { label: 'Peringatan Keamanan', value: '2', trend: 'Tinjauan kritis', icon: 'ShieldAlert', valueColor: 'text-rose-600' },
   ],

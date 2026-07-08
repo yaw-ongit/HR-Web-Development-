@@ -56,7 +56,7 @@ export default function WorkforceLeaveManagementPage() {
         id: 'actions',
         header: 'Actions',
         cell: ({ row }) => (
-          <Link href="/workforce/leave-management" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href="/workforce/leave-management" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Review <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         ),
@@ -82,11 +82,11 @@ export default function WorkforceLeaveManagementPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Workforce / Manajemen Cuti</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Workforce / Manajemen Cuti</p>
             <h1 className="text-3xl font-semibold text-slate-900">Dasbor Cuti</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Workspace terpusat untuk permintaan cuti, saldo, dan persetujuan.</p>
           </div>
-          <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
             Kembali ke Workforce
           </Link>
         </div>
@@ -111,7 +111,7 @@ export default function WorkforceLeaveManagementPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Leave types</p>
+              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Leave types</p>
               <h2 className="mt-2 text-xl font-semibold text-slate-900">Company leave programs</h2>
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function WorkforceLeaveManagementPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Approval panel</p>
+              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Approval panel</p>
               <h2 className="mt-2 text-xl font-semibold text-slate-900">Pending leave actions</h2>
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function WorkforceLeaveManagementPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Leave calendar</p>
+              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Leave calendar</p>
               <h2 className="mt-2 text-xl font-semibold text-slate-900">Team leave schedule</h2>
             </div>
             <div className="text-sm text-slate-400">Color coded for approvals and planned time away.</div>
@@ -169,7 +169,7 @@ export default function WorkforceLeaveManagementPage() {
         </Card>
 
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Leave balance</p>
+          <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Leave balance</p>
           <div className="mt-6 space-y-3 text-sm text-slate-400">
             <p>Monitor leave availability and balance before approving new requests.</p>
             <div className="rounded-3xl bg-white/80 p-4">
@@ -183,7 +183,7 @@ export default function WorkforceLeaveManagementPage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Leave table</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Leave table</p>
             <h2 className="mt-2 text-xl font-semibold text-slate-900">Request pipeline</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -203,10 +203,10 @@ export default function WorkforceLeaveManagementPage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Cari karyawan, jenis cuti atau pemberi persetujuan"
-              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
+              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500"
             />
           </div>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
+          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
             <option value="All">All statuses</option>
             <option value="Pending">Menunggu</option>
             <option value="Approved">Disetujui</option>

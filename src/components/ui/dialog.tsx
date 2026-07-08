@@ -99,7 +99,7 @@ export function Dialog({ open, onClose, title, description, children, className,
             type="button"
             aria-label="Close dialog"
             onClick={onClose}
-            className="rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             <X className="h-4 w-4" />
           </button>

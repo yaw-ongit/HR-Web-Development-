@@ -72,8 +72,8 @@ export default function LoginPage() {
                 aria-required="true"
                 aria-invalid={!!emailError}
                 aria-describedby={emailError ? `${emailId}-error` : undefined}
-                className={`mt-2 w-full rounded-3xl border bg-white/90 p-4 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-blue-500/30 ${
-                  emailError ? 'border-rose-500 focus:border-rose-400' : 'border-slate-200 focus:border-blue-500'
+                className={`mt-2 w-full rounded-3xl border bg-white/90 p-4 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
+                  emailError ? 'border-rose-500 focus:border-rose-400' : 'border-slate-200 focus:border-brand-500'
                 }`}
               />
               {emailError && (
@@ -99,15 +99,15 @@ export default function LoginPage() {
                   aria-required="true"
                   aria-invalid={!!passwordError}
                   aria-describedby={passwordError ? `${passwordId}-error` : undefined}
-                  className={`w-full rounded-3xl border bg-white/90 p-4 pr-12 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-blue-500/30 ${
-                    passwordError ? 'border-rose-500 focus:border-rose-400' : 'border-slate-200 focus:border-blue-500'
+                  className={`w-full rounded-3xl border bg-white/90 p-4 pr-12 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
+                    passwordError ? 'border-rose-500 focus:border-rose-400' : 'border-slate-200 focus:border-brand-500'
                   }`}
                 />
                 <button
                   type="button"
                   aria-label={visible ? 'Hide password' : 'Show password'}
                   onClick={() => setVisible((v) => !v)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded p-0.5 text-slate-400 transition hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded p-0.5 text-slate-400 transition hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
                   {visible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>

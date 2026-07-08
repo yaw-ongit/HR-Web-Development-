@@ -17,12 +17,12 @@ export default function ComplianceAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500">
+              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
               <h1 className="text-3xl font-semibold text-slate-900">Analitik Kepatuhan</h1>
             </div>
           </div>
@@ -59,7 +59,7 @@ export default function ComplianceAnalyticsPage() {
               <p className="mt-3 text-3xl font-semibold text-slate-900">91.3%</p>
               <p className="mt-2 text-sm text-emerald-600">Sesuai target</p>
             </div>
-            <Shield className="h-8 w-8 text-blue-600" />
+            <Shield className="h-8 w-8 text-brand-600" />
           </div>
         </Card>
       </div>
@@ -75,7 +75,7 @@ export default function ComplianceAnalyticsPage() {
                   <span className={`text-sm font-semibold ${
                     item.level === 'critical' ? 'text-rose-600' :
                     item.level === 'warning' ? 'text-amber-600' :
-                    item.level === 'info' ? 'text-blue-600' :
+                    item.level === 'info' ? 'text-brand-600' :
                     'text-emerald-600'
                   }`}>{item.count} employees</span>
                 </div>
@@ -84,7 +84,7 @@ export default function ComplianceAnalyticsPage() {
                     className={`h-full rounded-full ${
                       item.level === 'critical' ? 'bg-rose-500' :
                       item.level === 'warning' ? 'bg-amber-500' :
-                      item.level === 'info' ? 'bg-blue-600' :
+                      item.level === 'info' ? 'bg-brand-600' :
                       'bg-emerald-500'
                     }`}
                     style={{ width: `${(item.count / 250) * 100}%` }}

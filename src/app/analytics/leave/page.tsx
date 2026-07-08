@@ -22,12 +22,12 @@ export default function LeaveAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500">
+              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
               <h1 className="text-3xl font-semibold text-slate-900">Analitik Cuti</h1>
             </div>
           </div>
@@ -134,7 +134,7 @@ export default function LeaveAnalyticsPage() {
                 <p className="text-sm font-semibold text-slate-900">Rata-rata Waktu Proses</p>
                 <p className="mt-1 text-xs text-slate-400">30 hari terakhir</p>
               </div>
-              <span className="text-2xl font-semibold text-blue-600">2.3 hari</span>
+              <span className="text-2xl font-semibold text-brand-600">2.3 hari</span>
             </div>
             <div className="rounded-2xl bg-white/80 p-4 flex items-center justify-between">
               <div>

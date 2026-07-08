@@ -47,7 +47,7 @@ function StatusBadge({ value }: { value: string }) {
         ? 'bg-amber-50 text-amber-200'
         : value === 'Blocked' || value === 'Disabled'
           ? 'bg-rose-50 text-rose-200'
-          : 'bg-blue-50 text-blue-500';
+          : 'bg-brand-50 text-brand-500';
 
   return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
 }
@@ -68,7 +68,7 @@ function IdentityShell({ children, section }: { children: React.ReactNode; secti
       <section className="rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Identity</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Identity</p>
             <h1 className="mt-2 text-3xl font-semibold text-slate-900">{titleFromSection(section)}</h1>
             <p className="mt-3 max-w-3xl text-sm text-slate-400">
               Enterprise identity, authentication, authorization, sessions, notifications, preferences and security controls prepared for future provider integration.
@@ -84,9 +84,9 @@ function IdentityShell({ children, section }: { children: React.ReactNode; secti
           {identitySections.map((item) => {
             const active = (!section && item.href === '/identity') || (section && item.href.endsWith(section));
             return (
-              <Link key={item.label} href={item.href} className={`rounded-3xl border px-4 py-3 text-sm transition ${active ? 'border-blue-500 bg-blue-50/50 text-sky-100' : 'border-slate-200 bg-white/70 text-slate-700 hover:border-blue-500'}`}>
+              <Link key={item.label} href={item.href} className={`rounded-3xl border px-4 py-3 text-sm transition ${active ? 'border-brand-500 bg-brand-50/50 text-sky-100' : 'border-slate-200 bg-white/70 text-slate-700 hover:border-brand-500'}`}>
                 <div className="flex items-center gap-2">
-                  <item.icon className="h-4 w-4 text-blue-600" />
+                  <item.icon className="h-4 w-4 text-brand-600" />
                   <span>{item.label}</span>
                 </div>
               </Link>
@@ -122,7 +122,7 @@ function DashboardView() {
         <Card title="Global user search" description="Search by user, role, department, status or employee ID.">
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search identity users" className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500" />
+            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search identity users" className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500" />
           </div>
           <div className="mt-5 grid gap-3">
             {users.slice(0, 5).map((user) => (
@@ -181,7 +181,7 @@ function AuthenticationView() {
     <div className="grid gap-4 xl:grid-cols-3">
       {authProviderReadiness.map((provider) => (
         <Card key={provider.name} className="p-6">
-          <provider.icon className="h-7 w-7 text-blue-600" />
+          <provider.icon className="h-7 w-7 text-brand-600" />
           <p className="mt-5 text-base font-semibold text-slate-900">{provider.name}</p>
           <p className="mt-2 text-sm text-slate-400">Frontend architecture placeholder for future authentication provider wiring.</p>
           <div className="mt-4"><StatusBadge value={provider.status} /></div>
@@ -196,7 +196,7 @@ function ProfilePreferencesView() {
     <div className="grid gap-4 xl:grid-cols-[0.7fr_1.3fr]">
       <Card title="Profile" description="Personal information and employee context.">
         <div className="flex items-center gap-4">
-          <div className="grid h-20 w-20 place-items-center rounded-[28px] bg-blue-50 text-2xl font-semibold text-slate-900">{profilePreference.avatar}</div>
+          <div className="grid h-20 w-20 place-items-center rounded-[28px] bg-brand-50 text-2xl font-semibold text-slate-900">{profilePreference.avatar}</div>
           <div>
             <p className="text-xl font-semibold text-slate-900">{profilePreference.name}</p>
             <p className="text-sm text-slate-400">{profilePreference.position}</p>
@@ -251,7 +251,7 @@ function sessionColumns(): ColumnDef<SessionRecord>[] {
     { accessorKey: 'location', header: 'Location' },
     { accessorKey: 'lastActivity', header: 'Last activity' },
     { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
-    { id: 'actions', header: 'Actions', cell: () => <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-blue-500">Terminate</button> },
+    { id: 'actions', header: 'Actions', cell: () => <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500">Terminate</button> },
   ];
 }
 
@@ -312,14 +312,14 @@ function NotificationCenterView() {
   return (
     <Card title="Notification center" description="Unread, read, high priority and category views for enterprise HR events.">
       <div className="flex flex-wrap gap-2">
-        {tabs.map((item) => <button key={item} onClick={() => setTab(item)} className={`rounded-full border px-4 py-2 text-xs font-semibold ${tab === item ? 'border-blue-500 bg-blue-50/50 text-sky-100' : 'border-slate-200 bg-white/80 text-slate-700'}`}>{item}</button>)}
+        {tabs.map((item) => <button key={item} onClick={() => setTab(item)} className={`rounded-full border px-4 py-2 text-xs font-semibold ${tab === item ? 'border-brand-500 bg-brand-50/50 text-sky-100' : 'border-slate-200 bg-white/80 text-slate-700'}`}>{item}</button>)}
       </div>
       <div className="mt-6 grid gap-3">
         {filtered.map((item) => (
           <div key={item.id} className="rounded-3xl border border-slate-200 bg-white/80 p-4">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex gap-3">
-                <div className="grid h-11 w-11 place-items-center rounded-3xl bg-blue-50 text-sm font-semibold text-slate-900">{item.avatar}</div>
+                <div className="grid h-11 w-11 place-items-center rounded-3xl bg-brand-50 text-sm font-semibold text-slate-900">{item.avatar}</div>
                 <div>
                   <div className="flex flex-wrap items-center gap-2"><p className="font-semibold text-slate-900">{item.title}</p><StatusBadge value={item.priority} /></div>
                   <p className="mt-1 text-sm text-slate-400">{item.body}</p>
@@ -349,7 +349,7 @@ function NotificationPreferenceGrid() {
             {notificationPreferences.map((preference, rowIndex) => (
               <tr key={preference} className="border-t border-slate-200">
                 <td className="px-4 py-4 font-semibold text-slate-900">{preference}</td>
-                {['Email', 'In-App', 'SMS', 'Push'].map((channel, index) => <td key={channel} className="px-4 py-4"><input type="checkbox" readOnly checked={index < 2 || rowIndex % 3 === index} className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-blue-600" /></td>)}
+                {['Email', 'In-App', 'SMS', 'Push'].map((channel, index) => <td key={channel} className="px-4 py-4"><input type="checkbox" readOnly checked={index < 2 || rowIndex % 3 === index} className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-brand-600" /></td>)}
               </tr>
             ))}
           </tbody>
@@ -363,14 +363,14 @@ function PasswordSettingsView() {
   return (
     <Card title="Password settings" description="Password update UI prepared for future auth provider integration.">
       <div className="grid gap-4">
-        {['Current password', 'New password', 'Confirm password'].map((label) => <input key={label} type="password" placeholder={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500" />)}
+        {['Current password', 'New password', 'Confirm password'].map((label) => <input key={label} type="password" placeholder={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500" />)}
       </div>
       <div className="mt-5">
         <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Password strength</p>
         <div className="mt-3 h-3 rounded-full bg-white"><div className="h-3 w-4/5 rounded-full bg-emerald-400" /></div>
       </div>
       <div className="mt-5 grid gap-2">
-        {passwordPolicies.map((policy) => <div key={policy} className="flex items-center gap-2 text-sm text-slate-700"><LockKeyhole className="h-4 w-4 text-blue-600" />{policy}</div>)}
+        {passwordPolicies.map((policy) => <div key={policy} className="flex items-center gap-2 text-sm text-slate-700"><LockKeyhole className="h-4 w-4 text-brand-600" />{policy}</div>)}
       </div>
     </Card>
   );
@@ -380,7 +380,7 @@ function MfaPlaceholderView() {
   return (
     <Card title="MFA placeholder" description="Prepared controls for future multi-factor authentication rollout.">
       <div className="grid gap-4 md:grid-cols-3">
-        {['Authenticator app', 'SMS placeholder', 'Email one-time code'].map((item) => <div key={item} className="rounded-3xl border border-slate-200 bg-white/80 p-5"><ShieldCheck className="h-6 w-6 text-blue-600" /><p className="mt-4 font-semibold text-slate-900">{item}</p><p className="mt-2 text-sm text-slate-400">Ready for backend authentication integration.</p></div>)}
+        {['Authenticator app', 'SMS placeholder', 'Email one-time code'].map((item) => <div key={item} className="rounded-3xl border border-slate-200 bg-white/80 p-5"><ShieldCheck className="h-6 w-6 text-brand-600" /><p className="mt-4 font-semibold text-slate-900">{item}</p><p className="mt-2 text-sm text-slate-400">Ready for backend authentication integration.</p></div>)}
       </div>
     </Card>
   );

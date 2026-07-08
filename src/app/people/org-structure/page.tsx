@@ -10,11 +10,11 @@ export default function OrgStructurePage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">People workspace</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">People workspace</p>
             <h1 className="text-3xl font-semibold text-slate-900">Organization structure</h1>
             <p className="mt-2 text-sm text-slate-400">Explore the current team hierarchy and people relationships for HR and management.</p>
           </div>
-          <Link href="/people" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href="/people" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
             <ArrowRight className="h-4 w-4 rotate-180" /> Back to directory
           </Link>
         </div>
@@ -36,7 +36,7 @@ export default function OrgStructurePage() {
             <div className="rounded-[28px] border border-slate-200 bg-white/80 p-6">
               <p className="text-sm text-slate-400">Leader</p>
               <div className="mt-6 flex items-center gap-4 rounded-3xl bg-slate-50/90 p-5">
-                <div className="grid h-16 w-16 place-items-center rounded-3xl bg-blue-50 text-blue-600 text-xl font-semibold">{orgStructure.leader.split(' ').map((part) => part[0]).join('')}</div>
+                <div className="grid h-16 w-16 place-items-center rounded-3xl bg-brand-50 text-brand-600 text-xl font-semibold">{orgStructure.leader.split(' ').map((part) => part[0]).join('')}</div>
                 <div>
                   <p className="text-sm uppercase tracking-[0.28em] text-slate-400">{orgStructure.title}</p>
                   <p className="mt-2 text-xl font-semibold text-slate-900">{orgStructure.leader}</p>

@@ -10,7 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
-  primary: 'bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-500/20 border border-transparent',
+  primary: 'bg-brand-600 text-white hover:bg-brand-500 shadow-lg shadow-brand-500/20 border border-transparent',
   secondary: 'bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-300',
   ghost: 'bg-transparent text-slate-900 hover:bg-slate-100 border border-transparent',
   destructive: 'bg-rose-500 text-white hover:bg-rose-400 shadow-lg shadow-rose-500/20 border border-transparent',
@@ -46,7 +46,7 @@ export const Button = forwardRef(
         aria-busy={loading}
         className={cn(
           'inline-flex items-center justify-center font-semibold transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950',
+          'focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950',
           'disabled:cursor-not-allowed disabled:opacity-60',
           variantStyles[variant],
           sizeStyles[size],

@@ -15,12 +15,12 @@ export default function RecruitmentAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-blue-500">
+              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Analitik</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
               <h1 className="text-3xl font-semibold text-slate-900">Analitik Rekrutmen</h1>
             </div>
           </div>
@@ -35,7 +35,7 @@ export default function RecruitmentAnalyticsPage() {
               <p className="mt-3 text-3xl font-semibold text-slate-900">346</p>
               <p className="mt-2 text-sm text-slate-400">6 bulan terakhir</p>
             </div>
-            <Briefcase className="h-8 w-8 text-blue-600" />
+            <Briefcase className="h-8 w-8 text-brand-600" />
           </div>
         </Card>
 
@@ -55,9 +55,9 @@ export default function RecruitmentAnalyticsPage() {
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Penerimaan Tawaran</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">88%</p>
-              <p className="mt-2 text-sm text-blue-600">Kuartal ini</p>
+              <p className="mt-2 text-sm text-brand-600">Kuartal ini</p>
             </div>
-            <TrendingUp className="h-8 w-8 text-blue-600" />
+            <TrendingUp className="h-8 w-8 text-brand-600" />
           </div>
         </Card>
       </div>
@@ -70,7 +70,7 @@ export default function RecruitmentAnalyticsPage() {
               <div key={stage.stage} className="rounded-2xl bg-white/80 p-4">
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-sm font-semibold text-slate-900">{stage.stage}</p>
-                  <span className="text-sm font-semibold text-blue-600">{stage.count} candidates • {stage.percentage.toFixed(1)}%</span>
+                  <span className="text-sm font-semibold text-brand-600">{stage.count} candidates • {stage.percentage.toFixed(1)}%</span>
                 </div>
                 <div className="h-2 w-full bg-slate-50/50 rounded-full overflow-hidden">
                   <div 
@@ -140,7 +140,7 @@ export default function RecruitmentAnalyticsPage() {
                   </div>
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-[0.2em] ${
                     vacancy.status === 'Open' ? 'bg-emerald-50 text-emerald-300' : 
-                    vacancy.status === 'In Progress' ? 'bg-blue-50 text-blue-600' :
+                    vacancy.status === 'In Progress' ? 'bg-brand-50 text-brand-600' :
                     'bg-slate-500/15 text-slate-700'
                   }`}>
                     {vacancy.status}

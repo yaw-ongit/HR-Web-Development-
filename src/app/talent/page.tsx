@@ -147,7 +147,7 @@ export default function TalentHomePage() {
                 <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kesehatan pipeline</p>
                 <p className="mt-2 text-2xl font-semibold text-slate-900">84 kandidat</p>
               </div>
-              <Users className="h-6 w-6 text-blue-600" />
+              <Users className="h-6 w-6 text-brand-600" />
             </div>
             <div className="mt-6 space-y-2 text-sm text-slate-400">
               <p>• 24 pengajuan baru</p>

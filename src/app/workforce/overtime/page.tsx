@@ -54,7 +54,7 @@ export default function WorkforceOvertimePage() {
         id: 'actions',
         header: 'Actions',
         cell: ({ row }) => (
-          <Link href="/workforce/overtime" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href="/workforce/overtime" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Review <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         ),
@@ -80,11 +80,11 @@ export default function WorkforceOvertimePage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Workforce / Lembur</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Workforce / Lembur</p>
             <h1 className="text-3xl font-semibold text-slate-900">Dasbor lembur</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Lacak permintaan lembur, persetujuan, dan kapasitas operasional tim Anda.</p>
           </div>
-          <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
             Kembali ke Workforce
           </Link>
         </div>
@@ -102,7 +102,7 @@ export default function WorkforceOvertimePage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Overtime detail</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Overtime detail</p>
             <h2 className="mt-2 text-xl font-semibold text-slate-900">Approval timeline</h2>
           </div>
           <div className="rounded-full bg-white/80 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-700">Request review</div>
@@ -119,7 +119,7 @@ export default function WorkforceOvertimePage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Tabel lembur</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Tabel lembur</p>
             <h2 className="mt-2 text-xl font-semibold text-slate-900">Permintaan tertunda</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -139,10 +139,10 @@ export default function WorkforceOvertimePage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Cari karyawan, alasan, atau departemen"
-              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
+              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500"
             />
           </div>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500">
+          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
             <option value="All">All statuses</option>
             <option value="Pending">Menunggu</option>
             <option value="Approved">Disetujui</option>

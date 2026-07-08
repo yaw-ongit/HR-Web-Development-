@@ -42,7 +42,7 @@ export default function WelfarePage() {
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
       Assistance: 'from-rose-500/20 to-rose-500/10 border-rose-500/20 text-rose-300',
-      Housing: 'from-blue-500/20 to-blue-500/10 border-blue-500/20 text-blue-300',
+      Housing: 'from-brand-500/20 to-brand-500/10 border-brand-500/20 text-brand-300',
       Transportation: 'from-orange-500/20 to-orange-500/10 border-orange-500/20 text-orange-300',
       Meal: 'from-amber-500/20 to-amber-500/10 border-amber-500/20 text-amber-300',
       Recognition: 'from-emerald-500/20 to-emerald-500/10 border-emerald-500/20 text-emerald-300',
@@ -63,11 +63,11 @@ export default function WelfarePage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-600">Compensation / Welfare</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Compensation / Welfare</p>
             <h1 className="text-3xl font-semibold text-slate-900">Employee Welfare Programs</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Explore comprehensive welfare and wellness initiatives supporting employee wellbeing and quality of life.</p>
           </div>
-          <Link href="/compensation" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-blue-500">
+          <Link href="/compensation" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
             Back to compensation
           </Link>
         </div>
@@ -102,7 +102,7 @@ export default function WelfarePage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Programs</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Programs</p>
             <h2 className="mt-2 text-xl font-semibold text-slate-900">Welfare Programs</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -122,13 +122,13 @@ export default function WelfarePage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search program"
-              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500"
+              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500"
             />
           </div>
           <select
             value={categoryFilter}
             onChange={(event) => setCategoryFilter(event.target.value)}
-            className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-blue-500"
+            className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500"
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>
@@ -171,7 +171,7 @@ export default function WelfarePage() {
 
             <div className="mt-4 flex gap-2">
               <button className="flex-1 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:bg-white/20">Details</button>
-              <button className="flex-1 rounded-2xl bg-blue-600/20 px-3 py-2 text-xs font-semibold text-blue-600 transition hover:bg-blue-600/30">Enroll</button>
+              <button className="flex-1 rounded-2xl bg-brand-600/20 px-3 py-2 text-xs font-semibold text-brand-600 transition hover:bg-brand-600/30">Enroll</button>
             </div>
           </Card>
         ))}
