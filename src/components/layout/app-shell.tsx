@@ -21,7 +21,7 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Main area */}
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col lg:pl-72">
         {/* Top header */}
         <header
           className="sticky top-0 z-30 border-b border-slate-200 bg-white/98 backdrop-blur-xl"

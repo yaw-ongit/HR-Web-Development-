@@ -73,7 +73,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         aria-label="Main navigation"
         className={cn(
           'fixed left-0 top-0 z-40 flex h-full w-72 shrink-0 flex-col overflow-y-auto',
-          'border-r border-slate-200 bg-white/98 px-4 py-6 backdrop-blur-xl',
+          'border-r border-brand-800 bg-brand-900 px-4 py-6 shadow-2xl shadow-brand-900/20',
           'transition-transform duration-300 lg:translate-x-0',
           open ? 'translate-x-0' : '-translate-x-full',
         )}
@@ -85,8 +85,8 @@ export function Sidebar({ open, onClose }: SidebarProps) {
               <img src="/placeholder-logo.svg" alt="PT Indocater" className="h-8 w-8" />
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400">PT Indocater</p>
-              <p className="text-sm font-semibold text-slate-900">HRIS Internal</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-brand-300">PT Indocater</p>
+              <p className="text-sm font-semibold text-white">HRIS Internal</p>
             </div>
           </div>
           {/* Mobile close button */}
@@ -102,7 +102,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
         {/* Navigation */}
         <nav aria-label="Main menu">
-          <p className="mb-3 px-2 text-[10px] uppercase tracking-[0.3em] text-slate-400">
+          <p className="mb-3 px-2 text-[10px] uppercase tracking-[0.3em] text-brand-300">
             Navigasi
           </p>
           <ul className="space-y-0.5" role="list">
@@ -116,16 +116,16 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                     onClick={onClose}
                     className={cn(
                       'flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
-                      'focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 focus:ring-offset-slate-950',
+                      'focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 focus:ring-offset-brand-900',
                       active
-                        ? 'bg-brand-50 text-brand-500 ring-1 ring-brand-100'
-                        : 'text-slate-400 hover:bg-slate-50 hover:text-slate-900',
+                        ? 'bg-brand-800 text-white ring-1 ring-brand-700/50 shadow-sm'
+                        : 'text-brand-100 hover:bg-brand-800/50 hover:text-white',
                     )}
                   >
                     <item.icon
                       className={cn(
                         'h-4 w-4 shrink-0',
-                        active ? 'text-brand-600' : 'text-slate-400',
+                        active ? 'text-white' : 'text-brand-300',
                       )}
                       aria-hidden="true"
                     />
@@ -139,17 +139,17 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
         {/* Footer */}
         <div className="mt-auto pt-6">
-          <div className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-4">
+          <div className="rounded-2xl border border-brand-800 bg-brand-950/40 px-4 py-4">
             <div className="flex items-center gap-3">
               <div
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-sm font-bold text-slate-950"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-sm font-bold text-white"
                 aria-hidden="true"
               >
                 M
               </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-medium text-slate-900">Maya Thompson</p>
-                <p className="truncate text-xs text-slate-400">HR Officer</p>
+                <p className="truncate text-sm font-medium text-white">Maya Thompson</p>
+                <p className="truncate text-xs text-brand-300">HR Officer</p>
               </div>
             </div>
           </div>

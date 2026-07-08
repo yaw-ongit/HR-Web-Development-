@@ -353,7 +353,7 @@ export default function DashboardPage() {
         {/* Hero card */}
         <Card>
           <div className="grid gap-6 p-6 lg:grid-cols-[1fr_260px]">
-            <div className="space-y-3">
+            <div className="space-y-3 min-w-0">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Hari Ini</p>
               <h1 className="text-3xl font-semibold text-slate-900">{hero.title}</h1>
               <p className="max-w-xl text-sm leading-7 text-slate-400">{hero.subtitle}</p>
@@ -417,9 +417,9 @@ export default function DashboardPage() {
           </div>
         </SectionContainer>
 
-        <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
+        <div className="grid gap-6 lg:grid-cols-[1fr_320px] items-start">
           {/* Widgets */}
-          <SectionContainer title="Widget Ruang Kerja">
+          <SectionContainer title="Widget Ruang Kerja" className="min-w-0">
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {widgets.map((widget) => {
                 const Component = widgetComponents[widget.type] ?? WidgetActivity;
@@ -429,7 +429,7 @@ export default function DashboardPage() {
           </SectionContainer>
 
           {/* Notifications sidebar */}
-          <aside aria-label="Notifications">
+          <aside aria-label="Notifications" className="min-w-0">
             <Card
               title="Peringatan Terbaru"
               description="Notifikasi untuk peran Anda."
