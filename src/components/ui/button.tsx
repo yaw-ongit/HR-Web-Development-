@@ -39,11 +39,20 @@ export const Button = forwardRef(
     }: ButtonProps,
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (props.onClick) {
+        props.onClick(e);
+      } else if (props.type !== 'submit') {
+        alert("Fitur ini akan segera hadir.");
+      }
+    };
+
     return (
       <button
         ref={ref}
         disabled={disabled || loading}
         aria-busy={loading}
+        onClick={handleClick}
         className={cn(
           'inline-flex items-center justify-center font-semibold transition-all duration-200',
           'focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950',
