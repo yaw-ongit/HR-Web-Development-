@@ -34,8 +34,8 @@ export default function WorkforceLeaveManagementPage() {
     () => [
       { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'leaveType', header: 'Leave type' },
-      { accessorKey: 'startTanggal', header: 'Start date' },
-      { accessorKey: 'endTanggal', header: 'End date' },
+      { accessorKey: 'startDate', header: 'Start date' },
+      { accessorKey: 'endDate', header: 'End date' },
       { accessorKey: 'duration', header: 'Durasi' },
       {
         accessorKey: 'status',

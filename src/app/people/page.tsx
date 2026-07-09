@@ -14,7 +14,7 @@ import { SectionContainer } from '@/components/layout/section-container';
 import { NoKaryawansEmptyState } from '@/components/ui/empty-state';
 import {
   employeeDirectory, departmentOptions, positionOptions, statusOptions,
-  contractOptions, branchOptions, locationOptions, genderOptions, KaryawanRecord,
+  contractOptions, branchOptions, locationOptions, genderOptions, EmployeeRecord,
 } from '@/lib/people-data';
 
 export default function PeopleDirectoryPage() {
@@ -40,7 +40,7 @@ export default function PeopleDirectoryPage() {
     });
   }, [search, department, position, status, contractType, branch]);
 
-  const columns = useMemo<ColumnDef<KaryawanRecord>[]>(() => [
+  const columns = useMemo<ColumnDef<EmployeeRecord>[]>(() => [
     {
       id: 'select',
       header: ({ table }) => (
@@ -76,7 +76,7 @@ export default function PeopleDirectoryPage() {
       accessorKey: 'status', header: 'Status', enableSorting: true,
       cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
     },
-    { accessorKey: 'joinTanggal', header: 'Tanggal bergabung', enableSorting: true },
+    { accessorKey: 'joinDate', header: 'Tanggal bergabung', enableSorting: true },
     { accessorKey: 'contractType', header: 'Kontrak' },
     { accessorKey: 'manager', header: 'Manajer' },
     {

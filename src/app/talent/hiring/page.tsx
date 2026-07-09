@@ -35,7 +35,7 @@ export default function TalentHiringPage() {
       { accessorKey: 'position', header: 'Position' },
       { accessorKey: 'department', header: 'Departemen' },
       { accessorKey: 'manager', header: 'Manajer' },
-      { accessorKey: 'hireTanggal', header: 'Hire date' },
+      { accessorKey: 'hireDate', header: 'Hire date' },
       { accessorKey: 'salaryBand', header: 'Salary band' },
       {
         accessorKey: 'status',

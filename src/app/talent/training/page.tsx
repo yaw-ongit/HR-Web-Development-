@@ -31,8 +31,8 @@ export default function TalentTrainingPage() {
     { accessorKey: 'employee', header: 'Karyawan' },
     { accessorKey: 'program', header: 'Program' },
     { accessorKey: 'provider', header: 'Penyedia' },
-    { accessorKey: 'startTanggal', header: 'Tgl Mulai' },
-    { accessorKey: 'endTanggal', header: 'Tgl Selesai' },
+    { accessorKey: 'startDate', header: 'Tgl Mulai' },
+    { accessorKey: 'endDate', header: 'Tgl Selesai' },
     {
       accessorKey: 'progress',
       header: 'Progres',
@@ -53,7 +53,7 @@ export default function TalentTrainingPage() {
       header: 'Status',
       cell: ({ getValue }) => {
         const value = getValue() as string;
-        const color = value === 'Completed' ? 'bg-emerald-50 text-emerald-600' : value === 'In Progress' ? 'bg-brand-50 text-brand-600' : value === 'Scheduled' ? 'bg-amber-50 text-amber-600' : 'bg-rose-50 text-rose-600';
+        const color = value === 'Selesai' ? 'bg-emerald-50 text-emerald-600' : value === 'Sedang Berlangsung' ? 'bg-brand-50 text-brand-600' : value === 'Dijadwalkan' ? 'bg-amber-50 text-amber-600' : 'bg-rose-50 text-rose-600';
         return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
       },
     },
@@ -73,15 +73,15 @@ export default function TalentTrainingPage() {
     { accessorKey: 'employee', header: 'Karyawan' },
     { accessorKey: 'certification', header: 'Sertifikasi' },
     { accessorKey: 'issuer', header: 'Penerbit' },
-    { accessorKey: 'issuedTanggal', header: 'Tgl Terbit' },
-    { accessorKey: 'expiryTanggal', header: 'Kadaluarsa' },
+    { accessorKey: 'issuedDate', header: 'Tgl Terbit' },
+    { accessorKey: 'expiryDate', header: 'Kadaluarsa' },
     {
       accessorKey: 'status',
       header: 'Status',
       cell: ({ getValue }) => {
         const value = getValue() as string;
-        if (value === 'Active') return <StatusBadge status="Aktif" />;
-        if (value === 'Expiring') return <StatusBadge status="Warning" />;
+        if (value === 'Aktif') return <StatusBadge status="Aktif" />;
+        if (value === 'Hampir Habis') return <StatusBadge status="Warning" />;
         return <StatusBadge status="Expired" />;
       },
     },
@@ -101,7 +101,7 @@ export default function TalentTrainingPage() {
     { accessorKey: 'employee', header: 'Karyawan' },
     { accessorKey: 'competency', header: 'Kompetensi' },
     { accessorKey: 'level', header: 'Level' },
-    { accessorKey: 'assessmentTanggal', header: 'Tgl Penilaian' },
+    { accessorKey: 'assessmentDate', header: 'Tgl Penilaian' },
     { accessorKey: 'assessor', header: 'Penilai' },
     {
       id: 'actions',

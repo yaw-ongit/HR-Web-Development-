@@ -40,7 +40,7 @@ export default function WorkforceShiftManagementPage() {
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Active'
+            value === 'Aktif'
               ? 'bg-emerald-50 text-emerald-200'
               : 'bg-brand-50 text-brand-500';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;

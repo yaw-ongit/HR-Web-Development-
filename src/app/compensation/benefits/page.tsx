@@ -38,9 +38,9 @@ export default function BenefitsPage() {
       { accessorKey: 'department', header: 'Departemen' },
       { accessorKey: 'benefitType', header: 'Benefit Type' },
       { accessorKey: 'provider', header: 'Provider' },
-      { accessorKey: 'startTanggal', header: 'Tanggal Mulai' },
+      { accessorKey: 'startDate', header: 'Tanggal Mulai' },
       {
-        accessorKey: 'endTanggal',
+        accessorKey: 'endDate',
         header: 'Tanggal Selesai',
         cell: ({ getValue }) => getValue() || '—',
       },
@@ -50,11 +50,11 @@ export default function BenefitsPage() {
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Active'
+            value === 'Aktif'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Inactive'
+              : value === 'Tidak Aktif'
               ? 'bg-slate-600/15 text-slate-700'
-              : value === 'Suspended'
+              : value === 'Ditangguhkan'
               ? 'bg-amber-50 text-amber-200'
               : 'bg-rose-50 text-rose-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
@@ -88,7 +88,7 @@ export default function BenefitsPage() {
   const benefitTypes = ['Health Insurance', 'Life Insurance', 'Transportation', 'Meal Allowance', 'Accommodation', 'Project Allowance', 'Communication Allowance', 'Operational Allowance', 'Uniform', 'PPE Allocation', 'Other'];
 
   const totalBenefits = benefits.length;
-  const activeBenefits = benefits.filter((b) => b.status === 'Active').length;
+  const activeBenefits = benefits.filter((b) => b.status === 'Aktif').length;
   const uniqueKaryawans = new Set(benefits.map((b) => b.employeeId)).size;
   const uniqueDepartments = new Set(benefits.map((b) => b.department)).size;
 

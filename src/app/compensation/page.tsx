@@ -64,7 +64,7 @@ export default function CompensationDashboard() {
           <div className="flex items-start justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Claims Menunggu</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.claimsMenunggu}</p>
+              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.claimsPending}</p>
               <p className="mt-2 text-sm text-brand-600">Awaiting approval</p>
             </div>
             <FileText className="h-8 w-8 text-brand-600" />

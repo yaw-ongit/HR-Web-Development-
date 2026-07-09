@@ -149,7 +149,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {[
                     { label: 'Mode kerja', value: profile.workMode },
-                    { label: 'Tanggal bergabung', value: profile.hireTanggal },
+                    { label: 'Tanggal bergabung', value: profile.hireDate },
                     { label: 'Kontak darurat', value: `${profile.emergencyContact.name} • ${profile.emergencyContact.relationship}` },
                     { label: 'Kantor', value: profile.location },
                   ].map((item) => (
@@ -195,7 +195,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Ringkasan kontrak</p>
                 <div className="mt-5 space-y-4">
-                  <p className="text-sm text-slate-400">Kontrak {profile.contractType} dimulai sejak {profile.hireTanggal}.</p>
+                  <p className="text-sm text-slate-400">Kontrak {profile.contractType} dimulai sejak {profile.hireDate}.</p>
                   <div className="grid gap-4 sm:grid-cols-2">
                     {profile.leaveBalance.map((leave) => (
                       <div key={leave.type} className="rounded-3xl bg-white/80 p-4">

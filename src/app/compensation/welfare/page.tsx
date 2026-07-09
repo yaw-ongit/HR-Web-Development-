@@ -54,7 +54,7 @@ export default function WelfarePage() {
 
   const totalBudget = welfarePrograms.reduce((sum, p) => sum + p.budget, 0);
   const totalParticipants = welfarePrograms.reduce((sum, p) => sum + p.participants, 0);
-  const activePrograms = welfarePrograms.filter((p) => p.status === 'Active').length;
+  const activePrograms = welfarePrograms.filter((p) => p.status === 'Aktif').length;
 
   const categories = ['All', ...new Set(welfarePrograms.map((p) => p.category))];
 
@@ -144,7 +144,7 @@ export default function WelfarePage() {
           <Card key={program.id} className={`rounded-[28px] border-2 bg-gradient-to-br ${getCategoryColor(program.category)} p-6 shadow-card transition hover:shadow-lg hover:border-opacity-100`}>
             <div className="flex items-start justify-between">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-slate-900">{getCategoryIcon(program.category)}</div>
-              <span className={`inline-flex rounded-full px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] ${program.status === 'Active' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-500/20 text-slate-700'}`}>
+              <span className={`inline-flex rounded-full px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] ${program.status === 'Aktif' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-500/20 text-slate-700'}`}>
                 {program.status}
               </span>
             </div>

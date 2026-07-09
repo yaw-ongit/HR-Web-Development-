@@ -3,13 +3,13 @@
 
 export type BenefitType = 'Health Insurance' | 'Life Insurance' | 'Transportation' | 'Meal Allowance' | 'Accommodation' | 'Project Allowance' | 'Communication Allowance' | 'Operational Allowance' | 'Uniform' | 'PPE Allocation' | 'Other';
 
-export type BenefitStatus = 'Aktif' | 'Inactive' | 'Suspended' | 'Kedaluwarsa';
+export type BenefitStatus = 'Aktif' | 'Tidak Aktif' | 'Ditangguhkan' | 'Kedaluwarsa';
 
 export type InsuranceStatus = 'Aktif' | 'Kedaluwarsa' | 'Menunggu' | 'Dibatalkan';
 
-export type MedicalStatus = 'Selesai' | 'Dijadwalkan' | 'Overdue' | 'Kedaluwarsa';
+export type MedicalStatus = 'Selesai' | 'Dijadwalkan' | 'Terlambat' | 'Kedaluwarsa';
 
-export type ClaimStatus = 'Menunggu' | 'Approved' | 'Ditolak' | 'Processing' | 'Paid';
+export type ClaimStatus = 'Menunggu' | 'Disetujui' | 'Ditolak' | 'Diproses' | 'Dibayar';
 
 export interface Benefit {
   id: string;
@@ -89,7 +89,7 @@ export interface EmployeeWelfareProgram {
   budget: number;
   participants: number;
   provider?: string;
-  status: 'Aktif' | 'Inactive';
+  status: 'Aktif' | 'Tidak Aktif';
 }
 
 export interface PayrollReady {
@@ -502,7 +502,7 @@ export const claims: Claim[] = [
     claimType: 'Medical - Hospitalization',
     amount: 15000000,
     submissionDate: '2026-05-15',
-    status: 'Approved',
+    status: 'Disetujui',
     approver: 'Eka Puspita (HR Manager)',
     approvalDate: '2026-05-20',
     documents: 6,
@@ -515,7 +515,7 @@ export const claims: Claim[] = [
     claimType: 'Medical - Outpatient',
     amount: 3500000,
     submissionDate: '2026-06-10',
-    status: 'Approved',
+    status: 'Disetujui',
     approver: 'Eka Puspita (HR Manager)',
     approvalDate: '2026-06-12',
     documents: 4,
@@ -528,7 +528,7 @@ export const claims: Claim[] = [
     claimType: 'Accident Insurance',
     amount: 5000000,
     submissionDate: '2026-06-15',
-    status: 'Processing',
+    status: 'Diproses',
     approver: 'Eka Puspita (HR Manager)',
     documents: 8,
   },

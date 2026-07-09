@@ -333,7 +333,7 @@ export default function DashboardPage() {
   const quickActions = roleQuickActions[role];
   const kpis = dashboardKpis[role];
   const widgets = roleWidgets[role];
-  const today = new Intl.TanggalTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Tanggal());
+  const today = new Intl.DateTimeFormat('id-ID', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date());
 
   const hero = useMemo(() => {
     const heroMap: Record<RoleKey, { title: string; subtitle: string; actions: string[] }> = {

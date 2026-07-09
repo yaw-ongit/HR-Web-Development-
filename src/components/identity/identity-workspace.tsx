@@ -41,7 +41,7 @@ function titleFromSection(section?: string) {
 
 function StatusBadge({ value }: { value: string }) {
   const color =
-    value === 'Success' || value === 'Current' || value === 'Trusted' || value === 'Good' || value === 'Active'
+    value === 'Success' || value === 'Current' || value === 'Trusted' || value === 'Good' || value === 'Aktif'
       ? 'bg-emerald-50 text-emerald-200'
       : value === 'Failed' || value === 'Suspicious' || value === 'Review' || value === 'High'
         ? 'bg-amber-50 text-amber-200'
@@ -287,7 +287,7 @@ function LoginHistoryView({ compact = false }: { compact?: boolean }) {
       {!compact && (
         <Card title="Login filters" description="Filter by date, success, failed and location.">
           <div className="grid gap-3 md:grid-cols-4">
-            {['Tanggal', 'Success', 'Failed', 'Location'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
+            {['Date', 'Success', 'Failed', 'Location'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
           </div>
           <div className="mt-4"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Apply filters</Button></div>
         </Card>

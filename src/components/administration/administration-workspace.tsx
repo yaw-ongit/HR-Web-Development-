@@ -66,7 +66,7 @@ function titleFromSection(section?: string) {
 
 function StatusBadge({ value }: { value: string }) {
   const color =
-    value === 'Active' || value === 'Success' || value === 'Configured'
+    value === 'Aktif' || value === 'Success' || value === 'Configured'
       ? 'bg-emerald-50 text-emerald-200'
       : value === 'Warning' || value === 'Review' || value === 'Draft' || value === 'Menunggu'
         ? 'bg-amber-50 text-amber-200'
@@ -558,7 +558,7 @@ function AuditLogView() {
     <>
       <Card title="Audit filters" description="Tanggal, module, user and action filters with timeline/table mode.">
         <div className="grid gap-3 md:grid-cols-4">
-          {['Tanggal range', 'Module', 'User', 'Action'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
+          {['Date range', 'Module', 'User', 'Action'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
         </div>
         <div className="mt-4 flex gap-2"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Timeline view</Button><Button variant="ghost" className="rounded-full"><Eye className="h-4 w-4" /> Table view</Button></div>
       </Card>

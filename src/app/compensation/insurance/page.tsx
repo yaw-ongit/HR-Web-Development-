@@ -39,16 +39,16 @@ export default function InsurancePage() {
       { accessorKey: 'provider', header: 'Provider' },
       { accessorKey: 'policyType', header: 'Type' },
       { accessorKey: 'coverage', header: 'Coverage' },
-      { accessorKey: 'expiryTanggal', header: 'Expiry Tanggal' },
+      { accessorKey: 'expiryDate', header: 'Expiry Tanggal' },
       {
         accessorKey: 'status',
         header: 'Status',
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Active'
+            value === 'Aktif'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Expired'
+              : value === 'Kedaluwarsa'
               ? 'bg-rose-50 text-rose-200'
               : value === 'Menunggu'
               ? 'bg-amber-50 text-amber-200'
@@ -81,8 +81,8 @@ export default function InsurancePage() {
     enableRowSelection: true,
   });
 
-  const activePolicies = insurancePolicies.filter((p) => p.status === 'Active').length;
-  const expiredPolicies = insurancePolicies.filter((p) => p.status === 'Expired').length;
+  const activePolicies = insurancePolicies.filter((p) => p.status === 'Aktif').length;
+  const expiredPolicies = insurancePolicies.filter((p) => p.status === 'Kedaluwarsa').length;
   const totalCoverage = insurancePolicies.reduce((sum, p) => sum + p.claimLimit, 0);
   const uniqueProviders = new Set(insurancePolicies.map((p) => p.provider)).size;
 

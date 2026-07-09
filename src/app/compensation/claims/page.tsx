@@ -42,7 +42,7 @@ export default function ClaimsPage() {
           return `Rp ${(value / 1000000).toFixed(1)}M`;
         },
       },
-      { accessorKey: 'submissionTanggal', header: 'Submission Tanggal' },
+      { accessorKey: 'submissionDate', header: 'Submission Tanggal' },
       {
         accessorKey: 'status',
         header: 'Status',
@@ -53,7 +53,7 @@ export default function ClaimsPage() {
               ? 'bg-emerald-50 text-emerald-200'
               : value === 'Menunggu'
               ? 'bg-amber-50 text-amber-200'
-              : value === 'Processing'
+              : value === 'Diproses'
               ? 'bg-brand-50 text-brand-500'
               : value === 'Ditolak'
               ? 'bg-rose-50 text-rose-200'
@@ -90,7 +90,7 @@ export default function ClaimsPage() {
   const pendingClaims = claims.filter((c) => c.status === 'Menunggu').length;
   const approvedClaims = claims.filter((c) => c.status === 'Disetujui').length;
   const rejectedClaims = claims.filter((c) => c.status === 'Ditolak').length;
-  const processingClaims = claims.filter((c) => c.status === 'Processing').length;
+  const processingClaims = claims.filter((c) => c.status === 'Diproses').length;
   const totalClaimAmount = claims.reduce((sum, c) => sum + c.amount, 0);
   const approvedAmount = claims.filter((c) => c.status === 'Disetujui').reduce((sum, c) => sum + c.amount, 0);
 

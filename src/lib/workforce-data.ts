@@ -178,7 +178,7 @@ export const leaveTypes = [
 ];
 
 export const leaveOverview = {
-  permintaan: 84,
+  requests: 84,
   pending: 12,
   approved: 64,
   rejected: 8,

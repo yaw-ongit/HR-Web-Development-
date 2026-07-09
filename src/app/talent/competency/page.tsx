@@ -39,19 +39,19 @@ export default function TalentCompetencyPage() {
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Expert'
+            value === 'Ahli'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Advanced'
+              : value === 'Mahir'
               ? 'bg-brand-50 text-brand-500'
-              : value === 'Intermediate'
+              : value === 'Menengah'
               ? 'bg-amber-50 text-amber-200'
               : 'bg-slate-600/15 text-slate-700';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
         },
       },
-      { accessorKey: 'assessmentTanggal', header: 'Assessment date' },
+      { accessorKey: 'assessmentDate', header: 'Assessment date' },
       { accessorKey: 'assessor', header: 'Assessor' },
-      { accessorKey: 'nextReviewTanggal', header: 'Next review' },
+      { accessorKey: 'nextReviewDate', header: 'Next review' },
       {
         id: 'actions',
         header: 'Aksi',

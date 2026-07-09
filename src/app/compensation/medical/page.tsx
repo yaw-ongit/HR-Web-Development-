@@ -38,8 +38,8 @@ export default function MedicalPage() {
       { accessorKey: 'department', header: 'Departemen' },
       { accessorKey: 'medicalType', header: 'Medical Type' },
       { accessorKey: 'provider', header: 'Provider' },
-      { accessorKey: 'issueTanggal', header: 'Issue Tanggal' },
-      { accessorKey: 'expiryTanggal', header: 'Expiry Tanggal' },
+      { accessorKey: 'issueDate', header: 'Issue Tanggal' },
+      { accessorKey: 'expiryDate', header: 'Expiry Tanggal' },
       {
         accessorKey: 'result',
         header: 'Result',
@@ -62,11 +62,11 @@ export default function MedicalPage() {
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Completed'
+            value === 'Selesai'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Expired'
+              : value === 'Kedaluwarsa'
               ? 'bg-rose-50 text-rose-200'
-              : value === 'Scheduled'
+              : value === 'Dijadwalkan'
               ? 'bg-brand-50 text-brand-500'
               : 'bg-amber-50 text-amber-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
@@ -97,9 +97,9 @@ export default function MedicalPage() {
     enableRowSelection: true,
   });
 
-  const completedRecords = medicalRecords.filter((r) => r.status === 'Completed').length;
-  const scheduledRecords = medicalRecords.filter((r) => r.status === 'Scheduled').length;
-  const expiredRecords = medicalRecords.filter((r) => r.status === 'Expired').length;
+  const completedRecords = medicalRecords.filter((r) => r.status === 'Selesai').length;
+  const scheduledRecords = medicalRecords.filter((r) => r.status === 'Dijadwalkan').length;
+  const expiredRecords = medicalRecords.filter((r) => r.status === 'Kedaluwarsa').length;
   const fitRecords = medicalRecords.filter((r) => r.result === 'Fit').length;
 
   return (

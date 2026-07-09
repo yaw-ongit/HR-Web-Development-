@@ -43,9 +43,9 @@ export default function TalentInterviewsPage() {
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Completed'
+            value === 'Selesai'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Scheduled'
+              : value === 'Dijadwalkan'
               ? 'bg-brand-50 text-brand-500'
               : 'bg-amber-50 text-amber-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;

@@ -34,8 +34,8 @@ export default function TalentCertificationPage() {
       { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'certification', header: 'Certification' },
       { accessorKey: 'issuer', header: 'Issuer' },
-      { accessorKey: 'issuedTanggal', header: 'Issued date' },
-      { accessorKey: 'expiryTanggal', header: 'Expiry date' },
+      { accessorKey: 'issuedDate', header: 'Issued date' },
+      { accessorKey: 'expiryDate', header: 'Expiry date' },
       { accessorKey: 'credentialId', header: 'Credential ID' },
       {
         accessorKey: 'status',
@@ -43,9 +43,9 @@ export default function TalentCertificationPage() {
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Active'
+            value === 'Aktif'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Expiring'
+              : value === 'Hampir Habis'
               ? 'bg-amber-50 text-amber-200'
               : 'bg-rose-50 text-rose-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
