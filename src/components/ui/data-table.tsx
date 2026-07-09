@@ -28,7 +28,7 @@ export function DataTable<TData>({
   const totalCount = table.getRowModel().rows.length;
 
   return (
-    <div className="rounded-[28px] border border-slate-200 bg-slate-50/90 shadow-card overflow-hidden">
+    <div className="overflow-hidden rounded-[28px] border border-brand-100/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fbff_100%)] shadow-[0_18px_48px_rgba(2,34,74,0.08)]">
       <div className="overflow-x-auto" role="region" aria-label={caption ?? 'Data table'} tabIndex={0}>
         <table
           className="min-w-full border-separate border-spacing-0 text-left text-sm text-slate-800"
@@ -59,8 +59,8 @@ export function DataTable<TData>({
                           : undefined
                       }
                       className={cn(
-                        'sticky top-0 z-10 border-b border-slate-200 bg-white/95 px-4 py-4',
-                        'text-xs uppercase tracking-[0.24em] text-slate-400 whitespace-nowrap',
+                        'sticky top-0 z-10 border-b border-brand-100/80 bg-brand-50/80 px-4 py-4',
+                        'text-xs uppercase tracking-[0.24em] text-brand-700 whitespace-nowrap',
                         header.column.id === 'actions' && 'text-right',
                         header.column.id === 'select' && 'w-12',
                         canSort && 'cursor-pointer select-none',
@@ -118,7 +118,7 @@ export function DataTable<TData>({
                       key={cell.id}
                       className={cn(
                         'px-4 py-4 align-middle',
-                        cell.column.id === 'actions' ? 'text-right' : 'text-sm',
+                        cell.column.id === 'actions' ? 'text-right' : 'text-sm text-slate-700',
                       )}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -143,9 +143,9 @@ export function DataTable<TData>({
       </div>
 
       {showFooter && (
-        <div className="flex flex-col gap-3 border-t border-slate-200 bg-white/95 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-brand-100/80 bg-white/80 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           {/* Selection info */}
-          <p className="text-xs text-slate-400" aria-live="polite">
+          <p className="text-xs text-slate-500" aria-live="polite">
             {selectedCount > 0
               ? `${selectedCount} of ${totalCount} row${totalCount !== 1 ? 's' : ''} selected`
               : `${totalCount} row${totalCount !== 1 ? 's' : ''}`}
@@ -173,7 +173,7 @@ export function DataTable<TData>({
                 .map((col) => (
                   <label
                     key={col.id}
-                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-slate-50/80 px-2.5 py-1 text-xs text-slate-400 hover:text-slate-800 transition"
+                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-brand-50/70 px-2.5 py-1 text-xs text-slate-600 hover:text-brand-800 transition"
                   >
                     <input
                       type="checkbox"

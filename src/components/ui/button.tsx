@@ -10,11 +10,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
-  primary: 'bg-brand-600 text-white hover:bg-brand-500 shadow-lg shadow-brand-500/20 border border-transparent',
-  secondary: 'bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-300',
-  ghost: 'bg-transparent text-slate-900 hover:bg-slate-100 border border-transparent',
-  destructive: 'bg-rose-500 text-white hover:bg-rose-400 shadow-lg shadow-rose-500/20 border border-transparent',
-  outline: 'bg-white text-slate-900 border border-slate-300 hover:bg-slate-50',
+  primary: 'bg-gradient-to-r from-brand-700 to-brand-600 text-white hover:from-brand-600 hover:to-brand-500 shadow-lg shadow-brand-500/20 border border-transparent',
+  secondary: 'bg-brand-50 text-brand-800 hover:bg-brand-100 border border-brand-200',
+  ghost: 'bg-transparent text-brand-700 hover:bg-brand-50 border border-transparent',
+  destructive: 'bg-rose-600 text-white hover:bg-rose-500 shadow-lg shadow-rose-500/20 border border-transparent',
+  outline: 'bg-white text-brand-700 border border-brand-200 hover:bg-brand-50 hover:text-brand-800',
 };
 
 const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {

@@ -28,12 +28,12 @@ export default function LoginPage() {
   }
 
   return (
-    <main id="main-content" className="min-h-screen bg-white px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
+    <main id="main-content" className="min-h-screen bg-[linear-gradient(135deg,#f8fafc_0%,#f1f5f9_100%)] px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl items-center gap-10 lg:grid-cols-[1fr_420px]">
         {/* Brand panel */}
         <section aria-label="Branding HRIS PT Indocater" className="space-y-6">
-          <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-slate-50 ring-1 ring-slate-700" aria-hidden="true">
-            <ShieldCheck className="h-7 w-7 text-brand-600" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-gradient-to-br from-brand-700 to-brand-500 ring-1 ring-brand-600" aria-hidden="true">
+            <ShieldCheck className="h-7 w-7 text-white" />
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-brand-600">PT Indocater HRIS</p>
@@ -46,7 +46,7 @@ export default function LoginPage() {
           </div>
           <ul className="grid gap-3 sm:grid-cols-3" aria-label="Fitur keamanan">
             {['SSO siap', 'MFA aktif', 'Audit logging'].map((item) => (
-              <li key={item} className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
+              <li key={item} className="rounded-2xl border border-brand-100/80 bg-white/80 p-4 shadow-sm">
                 <LockKeyhole className="h-4 w-4 text-brand-600" aria-hidden="true" />
                 <p className="mt-2 text-sm font-semibold text-slate-900">{item}</p>
               </li>
@@ -72,8 +72,8 @@ export default function LoginPage() {
                 aria-required="true"
                 aria-invalid={!!emailError}
                 aria-describedby={emailError ? `${emailId}-error` : undefined}
-                className={`mt-2 w-full rounded-3xl border bg-white/90 p-4 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
-                  emailError ? 'border-rose-500 focus:border-rose-400' : 'border-slate-200 focus:border-brand-500'
+                className={`mt-2 w-full rounded-3xl border bg-white/95 p-4 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
+                  emailError ? 'border-rose-500 focus:border-rose-400' : 'border-brand-200 focus:border-brand-500'
                 }`}
               />
               {emailError && (
@@ -99,8 +99,8 @@ export default function LoginPage() {
                   aria-required="true"
                   aria-invalid={!!passwordError}
                   aria-describedby={passwordError ? `${passwordId}-error` : undefined}
-                  className={`w-full rounded-3xl border bg-white/90 p-4 pr-12 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
-                    passwordError ? 'border-rose-500 focus:border-rose-400' : 'border-slate-200 focus:border-brand-500'
+                  className={`w-full rounded-3xl border bg-white/95 p-4 pr-12 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
+                    passwordError ? 'border-rose-500 focus:border-rose-400' : 'border-brand-200 focus:border-brand-500'
                   }`}
                 />
                 <button

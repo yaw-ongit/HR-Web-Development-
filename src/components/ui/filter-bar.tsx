@@ -24,7 +24,7 @@ export function SelectFilter({ label, value, options, onChange, className }: Sel
         aria-label={label}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full appearance-none rounded-3xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30"
+        className="w-full appearance-none rounded-3xl border border-brand-200 bg-white/95 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30"
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -64,7 +64,7 @@ export function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-3xl border border-slate-200 bg-white/90 py-3 pl-11 pr-10 text-sm text-slate-900 outline-none transition focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30"
+        className="w-full rounded-3xl border border-brand-200 bg-white/95 py-3 pl-11 pr-10 text-sm text-slate-900 outline-none transition focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30"
       />
       {value && (
         <button
@@ -90,7 +90,7 @@ export function FilterBar({ children, className }: FilterBarProps) {
     <div
       role="search"
       className={cn(
-        'rounded-[28px] border border-slate-200 bg-slate-50/95 px-5 py-4 shadow-card',
+        'rounded-[28px] border border-brand-100/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fbff_100%)] px-5 py-4 shadow-[0_16px_45px_rgba(2,34,74,0.08)]',
         className,
       )}
     >

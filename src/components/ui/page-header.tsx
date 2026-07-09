@@ -28,14 +28,14 @@ export function PageHeader({
   return (
     <header
       className={cn(
-        'rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card',
+        'rounded-[28px] border border-brand-100/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fbff_100%)] px-6 py-6 shadow-[0_18px_48px_rgba(2,34,74,0.08)]',
         className,
       )}
     >
       {/* Breadcrumb */}
       {breadcrumbs && breadcrumbs.length > 0 && (
         <nav aria-label="Breadcrumb" className="mb-3">
-          <ol className="flex flex-wrap items-center gap-1 text-xs text-slate-400">
+          <ol className="flex flex-wrap items-center gap-1 text-xs text-slate-500">
             {breadcrumbs.map((crumb, index) => (
               <li key={index} className="flex items-center gap-1">
                 {index > 0 && (
@@ -67,9 +67,9 @@ export function PageHeader({
           {module && !breadcrumbs && (
             <p className="text-xs uppercase tracking-[0.3em] text-brand-600">{module}</p>
           )}
-          <h1 className="text-3xl font-semibold text-slate-900">{title}</h1>
+          <h1 className="text-3xl font-semibold text-brand-900">{title}</h1>
           {description && (
-            <p className="max-w-2xl text-sm text-slate-400">{description}</p>
+            <p className="max-w-2xl text-sm text-slate-500">{description}</p>
           )}
         </div>
         {actions && (

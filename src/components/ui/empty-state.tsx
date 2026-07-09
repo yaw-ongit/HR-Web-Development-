@@ -33,19 +33,19 @@ export function EmptyState({
       role="status"
       aria-label={title}
       className={cn(
-        'flex w-full flex-col items-center rounded-[28px] border border-slate-200 bg-slate-50/90 p-10 text-center shadow-card',
+        'flex w-full flex-col items-center rounded-[28px] border border-brand-100/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fbff_100%)] p-10 text-center shadow-[0_18px_48px_rgba(2,34,74,0.08)]',
         className,
       )}
     >
       {/* Icon */}
       {icon && (
-        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-100/80 ring-1 ring-slate-200 text-slate-400">
+        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-50 ring-1 ring-brand-100 text-brand-600">
           {icon}
         </div>
       )}
 
-      <h2 className="text-xl font-semibold text-slate-900">{title}</h2>
-      <p className="mt-3 max-w-sm text-sm leading-7 text-slate-400">{description}</p>
+      <h2 className="text-xl font-semibold text-brand-900">{title}</h2>
+      <p className="mt-3 max-w-sm text-sm leading-7 text-slate-500">{description}</p>
 
       {children}
 
@@ -73,7 +73,7 @@ export function EmptyState({
           {secondaryLabel && secondaryHref && (
             <Link
               href={secondaryHref}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
+              className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-brand-700 transition hover:border-brand-400 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
             >
               {secondaryLabel}
             </Link>

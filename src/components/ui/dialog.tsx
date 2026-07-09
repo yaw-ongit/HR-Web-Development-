@@ -69,7 +69,7 @@ export function Dialog({ open, onClose, title, description, children, className,
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-white/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-slate-950/35 backdrop-blur-sm"
         aria-hidden="true"
         onClick={onClose}
       />
@@ -82,24 +82,24 @@ export function Dialog({ open, onClose, title, description, children, className,
         aria-labelledby="dialog-title"
         aria-describedby={description ? 'dialog-description' : undefined}
         className={cn(
-          'relative w-full rounded-[28px] border border-slate-200 bg-slate-50 shadow-card',
+          'relative w-full rounded-[28px] border border-brand-100/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fbff_100%)] shadow-[0_24px_80px_rgba(2,34,74,0.16)]',
           sizeClasses[size],
           className,
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-slate-200 px-6 py-5">
+        <div className="flex items-start justify-between gap-4 border-b border-brand-100/80 px-6 py-5">
           <div>
-            <h2 id="dialog-title" className="text-lg font-semibold text-slate-900">{title}</h2>
+            <h2 id="dialog-title" className="text-lg font-semibold text-brand-900">{title}</h2>
             {description && (
-              <p id="dialog-description" className="mt-1 text-sm text-slate-400">{description}</p>
+              <p id="dialog-description" className="mt-1 text-sm text-slate-500">{description}</p>
             )}
           </div>
           <button
             type="button"
             aria-label="Close dialog"
             onClick={onClose}
-            className="rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="rounded-full p-1.5 text-slate-500 transition hover:bg-brand-50 hover:text-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             <X className="h-4 w-4" />
           </button>

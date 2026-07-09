@@ -36,23 +36,23 @@ export function Card({
     <Tag
       {...(ariaLabel ? { 'aria-label': ariaLabel } : {})}
       className={cn(
-        'rounded-[28px] border border-slate-200 bg-white shadow-sm',
+        'rounded-[28px] border border-brand-100/70 bg-white/95 shadow-[0_16px_45px_rgba(2,34,74,0.08)]',
         className,
       )}
     >
       {(title || description || headerActions) && (
         <div
           className={cn(
-            'flex items-start justify-between gap-4 border-b border-slate-200',
+            'flex items-start justify-between gap-4 border-b border-brand-100/80 bg-gradient-to-r from-white to-brand-50/40',
             paddingClasses[padding],
           )}
         >
           <div className="space-y-0.5">
             {title && (
-              <h2 className="text-base font-semibold text-slate-900">{title}</h2>
+              <h2 className="text-base font-semibold text-brand-900">{title}</h2>
             )}
             {description && (
-              <p className="text-sm text-slate-400">{description}</p>
+              <p className="text-sm text-slate-500">{description}</p>
             )}
           </div>
           {headerActions && (
@@ -66,7 +66,7 @@ export function Card({
       </div>
 
       {footer && (
-        <div className={cn('border-t border-slate-200', paddingClasses[padding])}>
+        <div className={cn('border-t border-brand-100/80', paddingClasses[padding])}>
           {footer}
         </div>
       )}
