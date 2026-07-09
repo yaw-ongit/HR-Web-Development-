@@ -442,7 +442,7 @@ function PermissionManagementView() {
   return (
     <Card title="Permission matrix" description="Rows are modules, columns are roles, and each role exposes Create, Read, Update, Delete, Approve, Export and Print capabilities.">
       <div className="overflow-x-auto">
-        <table className="min-w-[1180px] border-separate border-spacing-0 text-left text-sm">
+        <table className="min-w-full w-full table-auto border-separate border-spacing-0 text-left text-sm">
           <thead>
             <tr>
               <th className="sticky left-0 bg-slate-50 px-4 py-3 text-xs uppercase tracking-[0.24em] text-slate-400">Module</th>
@@ -455,7 +455,7 @@ function PermissionManagementView() {
                 <td className="sticky left-0 bg-slate-50 px-4 py-4 font-semibold text-slate-900">{module}</td>
                 {permissionRoles.map((role, roleIndex) => (
                   <td key={`${module}-${role}`} className="px-4 py-4">
-                    <div className="grid grid-cols-7 gap-1">
+                    <div className="grid grid-cols-4 gap-1 sm:grid-cols-7">
                       {permissionActions.map((action, actionIndex) => {
                         const checked = role === 'Administrator' || role === 'HR Manager' || action === 'Read' || (roleIndex + moduleIndex + actionIndex) % 4 === 0;
                         return (
