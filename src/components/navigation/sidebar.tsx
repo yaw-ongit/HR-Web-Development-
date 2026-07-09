@@ -81,12 +81,12 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         {/* Logo / Brand */}
         <div className="mb-8 flex items-center justify-between gap-3 px-2">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-brand-50 ring-1 ring-brand-200" aria-hidden="true">
-              <img src="/placeholder-logo.svg" alt="PT Indocater" className="h-8 w-8" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white ring-1 ring-brand-200" aria-hidden="true">
+              <img src="/logo.svg" alt="PT Indocater" className="h-10 w-10 object-contain" />
             </div>
             <div>
               <p className="text-[10px] uppercase tracking-[0.3em] text-brand-300">PT Indocater</p>
-              <p className="text-sm font-semibold text-white">HRIS Internal</p>
+              <p className="text-sm font-semibold text-white">Enterprise HRIS</p>
             </div>
           </div>
           {/* Mobile close button */}

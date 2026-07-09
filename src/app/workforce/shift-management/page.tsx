@@ -30,10 +30,10 @@ export default function WorkforceShiftManagementPage() {
 
   const columns = useMemo<ColumnDef<typeof shiftSchedules[number]>[]>(
     () => [
-      { accessorKey: 'shiftName', header: 'Shift name' },
-      { accessorKey: 'employees', header: 'Employees' },
-      { accessorKey: 'workingHours', header: 'Working hours' },
-      { accessorKey: 'manager', header: 'Manager' },
+      { accessorKey: 'shiftName', header: 'Nama shift' },
+      { accessorKey: 'employees', header: 'Karyawans' },
+      { accessorKey: 'workingJam', header: 'Jam Kerja' },
+      { accessorKey: 'manager', header: 'Manajer' },
       {
         accessorKey: 'status',
         header: 'Status',
@@ -48,7 +48,7 @@ export default function WorkforceShiftManagementPage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: ({ row }) => (
           <Link href="/workforce/shift-management" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             View <ArrowRight className="h-3.5 w-3.5" />
@@ -122,7 +122,7 @@ export default function WorkforceShiftManagementPage() {
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
+            <option value="All">Semua status</option>
             <option value="Active">Aktif</option>
             <option value="Planned">Direncanakan</option>
           </select>

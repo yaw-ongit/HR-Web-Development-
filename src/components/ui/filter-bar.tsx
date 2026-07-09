@@ -47,9 +47,9 @@ interface SearchInputProps {
 export function SearchInput({
   value,
   onChange,
-  placeholder = 'Search...',
+  placeholder = 'Cari...',
   className,
-  label = 'Search',
+  label = 'Cari',
 }: SearchInputProps) {
   return (
     <div className={cn('relative', className)}>
@@ -69,7 +69,7 @@ export function SearchInput({
       {value && (
         <button
           type="button"
-          aria-label="Clear search"
+          aria-label="Bersihkan pencarian"
           onClick={() => onChange('')}
           className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-slate-400 transition hover:text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500"
         >

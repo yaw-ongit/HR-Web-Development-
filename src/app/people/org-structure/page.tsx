@@ -10,12 +10,12 @@ export default function OrgStructurePage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">People workspace</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Organization structure</h1>
-            <p className="mt-2 text-sm text-slate-400">Explore the current team hierarchy and people relationships for HR and management.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Area People</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Struktur organisasi</h1>
+            <p className="mt-2 text-sm text-slate-400">Pelajari hierarki tim saat ini dan hubungan karyawan untuk HR dan manajemen.</p>
           </div>
           <Link href="/people" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
-            <ArrowRight className="h-4 w-4 rotate-180" /> Back to directory
+            <ArrowRight className="h-4 w-4 rotate-180" /> Kembali ke direktori
           </Link>
         </div>
       </SectionContainer>
@@ -24,17 +24,17 @@ export default function OrgStructurePage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Team overview</p>
-              <h2 className="mt-2 text-2xl font-semibold text-slate-900">People Ops leadership map</h2>
+              <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Gambaran tim</p>
+              <h2 className="mt-2 text-2xl font-semibold text-slate-900">Peta kepemimpinan People Ops</h2>
             </div>
             <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-xs uppercase tracking-[0.28em] text-slate-700">
-              <Layers className="h-4 w-4" /> Org chart
+              <Layers className="h-4 w-4" /> Struktur Organisasi
             </div>
           </div>
 
           <div className="mt-8 space-y-8">
             <div className="rounded-[28px] border border-slate-200 bg-white/80 p-6">
-              <p className="text-sm text-slate-400">Leader</p>
+              <p className="text-sm text-slate-400">Pimpinan</p>
               <div className="mt-6 flex items-center gap-4 rounded-3xl bg-slate-50/90 p-5">
                 <div className="grid h-16 w-16 place-items-center rounded-3xl bg-brand-50 text-brand-600 text-xl font-semibold">{orgStructure.leader.split(' ').map((part) => part[0]).join('')}</div>
                 <div>
@@ -45,7 +45,7 @@ export default function OrgStructurePage() {
             </div>
 
             <div className="rounded-[28px] border border-slate-200 bg-white/80 p-6">
-              <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Core team</p>
+              <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Tim Inti</p>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {orgStructure.team.map((member) => (
                   <div key={member.name} className="rounded-3xl border border-slate-100 bg-slate-50/90 p-5">
@@ -66,14 +66,14 @@ export default function OrgStructurePage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-center gap-3 text-slate-400">
             <Users className="h-5 w-5" />
-            <p className="text-sm uppercase tracking-[0.3em]">People operations</p>
+            <p className="text-sm uppercase tracking-[0.3em]">Operasi People</p>
           </div>
           <div className="mt-6 space-y-4 text-sm leading-7 text-slate-400">
-            <p>Use this view to understand reporting lines, team structure, and collaboration pathways that matter for talent planning.</p>
-            <p>Next step: add employee profiles, span of control metrics, and people analytics once the People module expands.</p>
+            <p>Gunakan tampilan ini untuk memahami garis pelaporan, struktur tim, dan jalur kolaborasi yang penting bagi perencanaan talenta.</p>
+            <p>Langkah berikutnya: tambahkan profil karyawan, metrik span of control, dan analitik people ketika modul People berkembang.</p>
           </div>
           <div className="mt-6 rounded-3xl bg-white/80 p-4 text-sm text-slate-700">
-            Tip: keep the org model updated with role changes and new hires to drive faster workforce decisions.
+            Tips: jaga model organisasi tetap terbarui dengan perubahan peran dan karyawan baru agar pengambilan keputusan lebih cepat.
           </div>
         </Card>
       </div>

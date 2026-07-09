@@ -33,7 +33,7 @@ export default function TalentCandidatesPage() {
     () => [
       { accessorKey: 'name', header: 'Name' },
       { accessorKey: 'position', header: 'Position' },
-      { accessorKey: 'department', header: 'Department' },
+      { accessorKey: 'department', header: 'Departemen' },
       { accessorKey: 'email', header: 'Email' },
       { accessorKey: 'phone', header: 'Phone' },
       {
@@ -54,7 +54,7 @@ export default function TalentCandidatesPage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/talent/candidates" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             View <ArrowRight className="h-3.5 w-3.5" />
@@ -132,7 +132,7 @@ export default function TalentCandidatesPage() {
             <option value="New">New</option>
             <option value="Screening">Screening</option>
             <option value="Qualified">Qualified</option>
-            <option value="Rejected">Rejected</option>
+            <option value="Ditolak">Ditolak</option>
           </select>
         </div>
 

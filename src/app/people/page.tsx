@@ -11,10 +11,10 @@ import { StatusBadge } from '@/components/ui/status-badge';
 import { PageHeader } from '@/components/ui/page-header';
 import { FilterBar, SearchInput, SelectFilter } from '@/components/ui/filter-bar';
 import { SectionContainer } from '@/components/layout/section-container';
-import { NoEmployeesEmptyState } from '@/components/ui/empty-state';
+import { NoKaryawansEmptyState } from '@/components/ui/empty-state';
 import {
   employeeDirectory, departmentOptions, positionOptions, statusOptions,
-  contractOptions, branchOptions, locationOptions, genderOptions, EmployeeRecord,
+  contractOptions, branchOptions, locationOptions, genderOptions, KaryawanRecord,
 } from '@/lib/people-data';
 
 export default function PeopleDirectoryPage() {
@@ -40,7 +40,7 @@ export default function PeopleDirectoryPage() {
     });
   }, [search, department, position, status, contractType, branch]);
 
-  const columns = useMemo<ColumnDef<EmployeeRecord>[]>(() => [
+  const columns = useMemo<ColumnDef<KaryawanRecord>[]>(() => [
     {
       id: 'select',
       header: ({ table }) => (
@@ -76,16 +76,16 @@ export default function PeopleDirectoryPage() {
       accessorKey: 'status', header: 'Status', enableSorting: true,
       cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
     },
-    { accessorKey: 'joinDate', header: 'Tanggal bergabung', enableSorting: true },
+    { accessorKey: 'joinTanggal', header: 'Tanggal bergabung', enableSorting: true },
     { accessorKey: 'contractType', header: 'Kontrak' },
     { accessorKey: 'manager', header: 'Manajer' },
     {
-      id: 'actions', header: 'Actions',
+      id: 'actions', header: 'Aksi',
       cell: ({ row }) => (
         <div className="flex justify-end gap-2">
           <Link href={`/people/${row.original.id}`}
             className="rounded-full border border-slate-200 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-900 transition hover:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
-            Profile
+            Profil
           </Link>
         </div>
       ),
@@ -104,17 +104,17 @@ export default function PeopleDirectoryPage() {
     initialState: { pagination: { pageSize: 15 } },
   });
 
-  const deptOptions = [{ value: 'All', label: 'All departments' }, ...departmentOptions.map((o) => ({ value: o, label: o }))];
-  const posOptions = [{ value: 'All', label: 'All positions' }, ...positionOptions.map((o) => ({ value: o, label: o }))];
-  const stOptions = [{ value: 'All', label: 'All statuses' }, ...statusOptions.map((o) => ({ value: o, label: o }))];
-  const ctOptions = [{ value: 'All', label: 'All contracts' }, ...contractOptions.map((o) => ({ value: o, label: o }))];
-  const brOptions = [{ value: 'All', label: 'All branches' }, ...branchOptions.map((o) => ({ value: o, label: o }))];
+  const deptOptions = [{ value: 'All', label: 'Semua departemen' }, ...departmentOptions.map((o) => ({ value: o, label: o }))];
+  const posOptions = [{ value: 'All', label: 'Semua jabatan' }, ...positionOptions.map((o) => ({ value: o, label: o }))];
+  const stOptions = [{ value: 'All', label: 'Semua status' }, ...statusOptions.map((o) => ({ value: o, label: o }))];
+  const ctOptions = [{ value: 'All', label: 'Semua kontrak' }, ...contractOptions.map((o) => ({ value: o, label: o }))];
+  const brOptions = [{ value: 'All', label: 'Semua cabang' }, ...branchOptions.map((o) => ({ value: o, label: o }))];
 
   return (
     <div className="space-y-6 py-6">
       <PageHeader
-        breadcrumbs={[{ label: 'People', href: '/people' }, { label: 'Direktori' }]}
-        title="Direktori karyawan"
+        breadcrumbs={[{ label: 'Data Karyawan', href: '/people' }, { label: 'Direktori' }]}
+        title="Data Karyawan"
         description="Sumber utama profil karyawan, konteks organisasi, dan wawasan operasional."
         actions={
           <>
@@ -136,31 +136,31 @@ export default function PeopleDirectoryPage() {
             <SelectFilter label="Filter cabang" value={branch} onChange={setBranch} options={brOptions} className="w-40" />
           </FilterBar>
 
-          <SectionContainer title="Employee directory" description={`${filteredData.length} record${filteredData.length !== 1 ? 's' : ''} found`}>
+          <SectionContainer title="Direktori karyawan" description={`Menampilkan ${filteredData.length} catatan`}>
             {filteredData.length === 0 ? (
-              <NoEmployeesEmptyState onAdd={() => {}} />
+              <NoKaryawansEmptyState onAdd={() => {}} />
             ) : (
-              <DataTable table={table} caption="Employee directory table" onExport={() => {}} />
+              <DataTable table={table} caption="Tabel direktori karyawan" onExport={() => {}} />
             )}
           </SectionContainer>
         </div>
 
         {/* Sidebar summary */}
-        <aside className="space-y-4" aria-label="People module summary">
+        <aside className="space-y-4" aria-label="Ringkasan modul People">
           <Card title="Area karyawan" description="Statistik singkat dan tindakan modul cepat.">
             <div className="mt-2 grid grid-cols-2 gap-3">
               <div className="rounded-2xl bg-white/80 p-4">
-                <p className="text-xs text-slate-400">Total employees</p>
+                <p className="text-xs text-slate-400">Total karyawan</p>
                 <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-900">{employeeDirectory.length}</p>
               </div>
               <div className="rounded-2xl bg-white/80 p-4">
-                <p className="text-xs text-slate-400">Branches</p>
+                <p className="text-xs text-slate-400">Cabang</p>
                 <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-900">{branchOptions.length}</p>
               </div>
             </div>
           </Card>
           <Card title="Aksi modul">
-            <nav aria-label="People workspace actions">
+            <nav aria-label="Tindakan area People">
               <ul className="space-y-2">
                 {[
                   { label: 'Struktur organisasi', href: '/people/org-structure' },

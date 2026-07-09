@@ -155,7 +155,7 @@ export default function WorkforceHomePage() {
         </div>
       </section>
 
-      <SectionContainer title="Workforce analytics" className="space-y-4">
+      <SectionContainer title="Analitik Workforce" className="space-y-4">
         <div className="grid gap-4 xl:grid-cols-4">
           <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">

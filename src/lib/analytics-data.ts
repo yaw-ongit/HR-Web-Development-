@@ -47,7 +47,7 @@ export const departmentGrowthData = [
   { department: 'HR & Recruitment', headcount: 28, growth: 2, target: 30 },
   { department: 'Facilities Management', headcount: 45, growth: 4, target: 45 },
   { department: 'Catering Services', headcount: 35, growth: 3, target: 40 },
-  { department: 'Finance', headcount: 20, growth: 1, target: 22 },
+  { department: 'Keuangan', headcount: 20, growth: 1, target: 22 },
 ];
 
 // Training Completion Data
@@ -110,7 +110,7 @@ export const attendanceHeatmapData = [
   { department: 'HR & Recruitment', weekAvg: 96.5, absenceRate: 1.2, lateRate: 2.3 },
   { department: 'Facilities Management', weekAvg: 92.1, absenceRate: 4.5, lateRate: 3.4 },
   { department: 'Catering Services', weekAvg: 91.8, absenceRate: 4.8, lateRate: 3.4 },
-  { department: 'Finance', weekAvg: 97.3, absenceRate: 1.0, lateRate: 1.7 },
+  { department: 'Keuangan', weekAvg: 97.3, absenceRate: 1.0, lateRate: 1.7 },
 ];
 
 // Late Trend Data
@@ -165,10 +165,10 @@ export const expiredCertificatesData = [
 
 // Competency Matrix
 export const competencyMatrixData = [
-  { competency: 'Safety Awareness', level: 'Advanced', employees: 215 },
-  { competency: 'Technical Skills', level: 'Intermediate', employees: 189 },
-  { competency: 'Leadership', level: 'Beginner', employees: 58 },
-  { competency: 'Communication', level: 'Advanced', employees: 178 },
+  { competency: 'Safety Awareness', level: 'Mahir', employees: 215 },
+  { competency: 'Technical Skills', level: 'Menengah', employees: 189 },
+  { competency: 'Leadership', level: 'Pemula', employees: 58 },
+  { competency: 'Communication', level: 'Mahir', employees: 178 },
 ];
 
 // Compensation Analytics
@@ -188,9 +188,9 @@ export const insuranceCoverageAnalyticsData = [
 
 export const claimStatisticsData = [
   { status: 'Approved', count: 142, amount: 1850000000 },
-  { status: 'Pending', count: 28, amount: 450000000 },
+  { status: 'Menunggu', count: 28, amount: 450000000 },
   { status: 'Processing', count: 15, amount: 280000000 },
-  { status: 'Rejected', count: 8, amount: 120000000 },
+  { status: 'Ditolak', count: 8, amount: 120000000 },
 ];
 
 export const allowanceDistributionData = [
@@ -203,7 +203,7 @@ export const allowanceDistributionData = [
 // Recruitment Analytics
 export const hiringFunnelData = [
   { stage: 'Applications', count: 346, percentage: 100 },
-  { stage: 'Screening', count: 139, percentage: 40.2 },
+  { stage: 'Penyaringan', count: 139, percentage: 40.2 },
   { stage: 'Interviews', count: 73, percentage: 21.1 },
   { stage: 'Offers', count: 42, percentage: 12.1 },
   { stage: 'Hired', count: 36, percentage: 10.4 },
@@ -236,7 +236,7 @@ export const interviewSuccessData = [
 export const vacancyStatusData = [
   { position: 'Operations Manager', status: 'Open', applications: 28, posted: '2 weeks ago' },
   { position: 'Safety Officer', status: 'Open', applications: 15, posted: '1 week ago' },
-  { position: 'Maintenance Technician', status: 'In Progress', applications: 34, posted: '3 weeks ago' },
+  { position: 'Maintenance Technician', status: 'Sedang Berlangsung', applications: 34, posted: '3 weeks ago' },
   { position: 'Data Analyst', status: 'Closed', applications: 42, posted: '1 month ago' },
 ];
 
@@ -249,7 +249,7 @@ export const medicalExpiryData = [
 ];
 
 export const certificateExpiryData = [
-  { description: 'Expired', count: 28, level: 'critical' },
+  { description: 'Kedaluwarsa', count: 28, level: 'critical' },
   { description: 'Expiring This Month', count: 15, level: 'warning' },
   { description: 'Expiring Next Month', count: 22, level: 'warning' },
   { description: 'Current & Valid', count: 220, level: 'success' },
@@ -266,7 +266,7 @@ export const missingRequirementsData = [
   { requirement: 'Medical Clearance', missing: 18, department: 'Operations' },
   { requirement: 'Safety Induction', missing: 12, department: 'Mining' },
   { requirement: 'HSSE Certification', missing: 25, department: 'Multi' },
-  { requirement: 'Background Check', missing: 5, department: 'HR' },
+  { requirement: 'Background Check', missing: 5, department: 'SDM' },
 ];
 
 // Department Comparison Data
@@ -312,7 +312,7 @@ export const departmentComparisonData = [
     training: 78,
   },
   { 
-    department: 'Finance', 
+    department: 'Keuangan', 
     headcount: 20, 
     avgSalary: 11500000, 
     turnover: 0.0, 

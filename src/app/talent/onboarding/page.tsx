@@ -31,11 +31,11 @@ export default function TalentOnboardingPage() {
 
   const columns = useMemo<ColumnDef<typeof onboardingTasks[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
+      { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'task', header: 'Task' },
       { accessorKey: 'category', header: 'Category' },
       { accessorKey: 'assignedTo', header: 'Assigned to' },
-      { accessorKey: 'dueDate', header: 'Due date' },
+      { accessorKey: 'dueTanggal', header: 'Due date' },
       {
         accessorKey: 'status',
         header: 'Status',
@@ -52,7 +52,7 @@ export default function TalentOnboardingPage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/talent/onboarding" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Update <ArrowRight className="h-3.5 w-3.5" />
@@ -84,7 +84,7 @@ export default function TalentOnboardingPage() {
   ];
 
   const metrics = [
-    { label: 'Active onboarding', value: '4', subtext: 'Employees' },
+    { label: 'Active onboarding', value: '4', subtext: 'Karyawans' },
     { label: 'Tasks pending', value: '15', subtext: 'This week' },
     { label: 'Completed', value: '8', subtext: 'This week' },
     { label: 'Avg time', value: '7 days', subtext: 'To full onboarding' },
@@ -152,10 +152,10 @@ export default function TalentOnboardingPage() {
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
+            <option value="All">Semua status</option>
             <option value="Completed">Completed</option>
             <option value="In Progress">In Progress</option>
-            <option value="Pending">Pending</option>
+            <option value="Menunggu">Menunggu</option>
           </select>
         </div>
 

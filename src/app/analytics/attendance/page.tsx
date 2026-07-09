@@ -122,7 +122,7 @@ export default function AttendanceAnalyticsPage() {
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={overtimeTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
-                  <linearGradient id="colorOvertime" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient id="colorLembur" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.3} />
                     <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
                   </linearGradient>
@@ -134,7 +134,7 @@ export default function AttendanceAnalyticsPage() {
                   contentStyle={{ backgroundColor: '#1e293b', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px' }}
                   labelStyle={{ color: '#cbd5e1' }}
                 />
-                <Area type="monotone" dataKey="hours" stroke="#8b5cf6" fillOpacity={1} fill="url(#colorOvertime)" />
+                <Area type="monotone" dataKey="hours" stroke="#8b5cf6" fillOpacity={1} fill="url(#colorLembur)" />
               </AreaChart>
             </ResponsiveContainer>
           </Card>
@@ -147,11 +147,11 @@ export default function AttendanceAnalyticsPage() {
           <ResponsiveContainer width="100%" height={350}>
             <AreaChart data={attendanceTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
-                <linearGradient id="colorPresent" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="colorHadir" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
                   <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                 </linearGradient>
-                <linearGradient id="colorAbsent" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="colorAbsen" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#ef4444" stopOpacity={0.3} />
                   <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
                 </linearGradient>
@@ -164,8 +164,8 @@ export default function AttendanceAnalyticsPage() {
                 labelStyle={{ color: '#cbd5e1' }}
               />
               <Legend />
-              <Area type="monotone" dataKey="present" stroke="#10b981" fillOpacity={1} fill="url(#colorPresent)" />
-              <Area type="monotone" dataKey="absent" stroke="#ef4444" fillOpacity={1} fill="url(#colorAbsent)" />
+              <Area type="monotone" dataKey="present" stroke="#10b981" fillOpacity={1} fill="url(#colorHadir)" />
+              <Area type="monotone" dataKey="absent" stroke="#ef4444" fillOpacity={1} fill="url(#colorAbsen)" />
             </AreaChart>
           </ResponsiveContainer>
         </Card>

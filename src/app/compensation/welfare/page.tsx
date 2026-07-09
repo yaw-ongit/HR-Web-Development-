@@ -64,7 +64,7 @@ export default function WelfarePage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Compensation / Welfare</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Employee Welfare Programs</h1>
+            <h1 className="text-3xl font-semibold text-slate-900">Karyawan Welfare Programs</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-400">Explore comprehensive welfare and wellness initiatives supporting employee wellbeing and quality of life.</p>
           </div>
           <Link href="/compensation" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">

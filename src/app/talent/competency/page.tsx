@@ -31,7 +31,7 @@ export default function TalentCompetencyPage() {
 
   const columns = useMemo<ColumnDef<typeof competencies[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
+      { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'competency', header: 'Competency' },
       {
         accessorKey: 'level',
@@ -49,12 +49,12 @@ export default function TalentCompetencyPage() {
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
         },
       },
-      { accessorKey: 'assessmentDate', header: 'Assessment date' },
+      { accessorKey: 'assessmentTanggal', header: 'Assessment date' },
       { accessorKey: 'assessor', header: 'Assessor' },
-      { accessorKey: 'nextReviewDate', header: 'Next review' },
+      { accessorKey: 'nextReviewTanggal', header: 'Next review' },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/talent/competency" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Review <ArrowRight className="h-3.5 w-3.5" />
@@ -86,8 +86,8 @@ export default function TalentCompetencyPage() {
 
   const metrics = [
     { label: 'Total competencies tracked', value: '258', subtext: 'Across organization' },
-    { label: 'Expert level', value: '42', subtext: 'Employees' },
-    { label: 'Pending review', value: '18', subtext: 'Due in next 30 days' },
+    { label: 'Expert level', value: '42', subtext: 'Karyawans' },
+    { label: 'Menunggu review', value: '18', subtext: 'Due in next 30 days' },
     { label: 'Development plans', value: '34', subtext: 'In progress' },
   ];
 

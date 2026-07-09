@@ -10,13 +10,13 @@ import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
 import { overtimeOverview, overtimeRequests } from '@/lib/workforce-data';
 
-export default function WorkforceOvertimePage() {
+export default function WorkforceLemburPage() {
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('All');
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
-  const filteredOvertime = useMemo(() => {
+  const filteredLembur = useMemo(() => {
     const query = search.toLowerCase();
     return overtimeRequests.filter((request) => {
       const matchesSearch =
@@ -31,20 +31,20 @@ export default function WorkforceOvertimePage() {
 
   const columns = useMemo<ColumnDef<typeof overtimeRequests[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
-      { accessorKey: 'department', header: 'Department' },
-      { accessorKey: 'date', header: 'Date' },
-      { accessorKey: 'hours', header: 'Hours' },
-      { accessorKey: 'reason', header: 'Reason' },
+      { accessorKey: 'employee', header: 'Karyawan' },
+      { accessorKey: 'department', header: 'Departemen' },
+      { accessorKey: 'date', header: 'Tanggal' },
+      { accessorKey: 'hours', header: 'Jam' },
+      { accessorKey: 'reason', header: 'Alasan' },
       {
         accessorKey: 'status',
         header: 'Status',
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Approved'
+            value === 'Disetujui'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Pending'
+              : value === 'Menunggu'
               ? 'bg-amber-50 text-amber-200'
               : 'bg-rose-50 text-rose-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
@@ -52,7 +52,7 @@ export default function WorkforceOvertimePage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: ({ row }) => (
           <Link href="/workforce/overtime" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Review <ArrowRight className="h-3.5 w-3.5" />
@@ -64,7 +64,7 @@ export default function WorkforceOvertimePage() {
   );
 
   const table = useReactTable({
-    data: filteredOvertime,
+    data: filteredLembur,
     columns,
     state: { sorting, rowSelection },
     onSortingChange: setSorting,
@@ -102,7 +102,7 @@ export default function WorkforceOvertimePage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Overtime detail</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Lembur detail</p>
             <h2 className="mt-2 text-xl font-semibold text-slate-900">Approval timeline</h2>
           </div>
           <div className="rounded-full bg-white/80 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-700">Request review</div>
@@ -110,7 +110,7 @@ export default function WorkforceOvertimePage() {
         <div className="mt-6 grid gap-3 text-sm text-slate-400">
           <p>Each request includes hours, reason and approval status to help managers make quick decisions.</p>
           <div className="rounded-3xl bg-white/80 p-4">
-            <p className="text-sm font-semibold text-slate-900">Manager comment</p>
+            <p className="text-sm font-semibold text-slate-900">Manajer comment</p>
             <p className="mt-2 text-slate-400">Verify workload and business need before approving overtime.</p>
           </div>
         </div>
@@ -143,10 +143,10 @@ export default function WorkforceOvertimePage() {
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
-            <option value="Pending">Menunggu</option>
-            <option value="Approved">Disetujui</option>
-            <option value="Rejected">Ditolak</option>
+            <option value="All">Semua status</option>
+            <option value="Menunggu">Menunggu</option>
+            <option value="Disetujui">Disetujui</option>
+            <option value="Ditolak">Ditolak</option>
           </select>
         </div>
 

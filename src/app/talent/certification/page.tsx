@@ -31,11 +31,11 @@ export default function TalentCertificationPage() {
 
   const columns = useMemo<ColumnDef<typeof certifications[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
+      { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'certification', header: 'Certification' },
       { accessorKey: 'issuer', header: 'Issuer' },
-      { accessorKey: 'issuedDate', header: 'Issued date' },
-      { accessorKey: 'expiryDate', header: 'Expiry date' },
+      { accessorKey: 'issuedTanggal', header: 'Issued date' },
+      { accessorKey: 'expiryTanggal', header: 'Expiry date' },
       { accessorKey: 'credentialId', header: 'Credential ID' },
       {
         accessorKey: 'status',
@@ -53,7 +53,7 @@ export default function TalentCertificationPage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/talent/certification" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             View <ArrowRight className="h-3.5 w-3.5" />
@@ -154,7 +154,7 @@ export default function TalentCertificationPage() {
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
+            <option value="All">Semua status</option>
             <option value="Active">Aktif</option>
             <option value="Expiring">Segera Kedaluwarsa</option>
             <option value="Expired">Kedaluwarsa</option>

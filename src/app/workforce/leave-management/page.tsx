@@ -32,29 +32,29 @@ export default function WorkforceLeaveManagementPage() {
 
   const columns = useMemo<ColumnDef<typeof leaveRequests[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
+      { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'leaveType', header: 'Leave type' },
-      { accessorKey: 'startDate', header: 'Start date' },
-      { accessorKey: 'endDate', header: 'End date' },
-      { accessorKey: 'duration', header: 'Duration' },
+      { accessorKey: 'startTanggal', header: 'Start date' },
+      { accessorKey: 'endTanggal', header: 'End date' },
+      { accessorKey: 'duration', header: 'Durasi' },
       {
         accessorKey: 'status',
         header: 'Status',
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Approved'
+            value === 'Disetujui'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Pending'
+              : value === 'Menunggu'
               ? 'bg-amber-50 text-amber-200'
               : 'bg-rose-50 text-rose-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
         },
       },
-      { accessorKey: 'approver', header: 'Approver' },
+      { accessorKey: 'approver', header: 'Penyetuju' },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: ({ row }) => (
           <Link href="/workforce/leave-management" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Review <ArrowRight className="h-3.5 w-3.5" />
@@ -95,9 +95,9 @@ export default function WorkforceLeaveManagementPage() {
       <div className="grid gap-4 xl:grid-cols-3">
         {[
           { label: 'Leave requests', value: `${leaveOverview.requests}` },
-          { label: 'Pending', value: `${leaveOverview.pending}` },
-          { label: 'Approved', value: `${leaveOverview.approved}` },
-          { label: 'Rejected', value: `${leaveOverview.rejected}` },
+          { label: 'Menunggu', value: `${leaveOverview.pending}` },
+          { label: 'Disetujui', value: `${leaveOverview.approved}` },
+          { label: 'Ditolak', value: `${leaveOverview.rejected}` },
           { label: 'Leave balance', value: leaveOverview.balance },
         ].map((item) => (
           <Card key={item.label} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
@@ -129,7 +129,7 @@ export default function WorkforceLeaveManagementPage() {
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Approval panel</p>
-              <h2 className="mt-2 text-xl font-semibold text-slate-900">Pending leave actions</h2>
+              <h2 className="mt-2 text-xl font-semibold text-slate-900">Menunggu leave actions</h2>
             </div>
           </div>
           <div className="mt-6 space-y-4 text-sm text-slate-400">
@@ -148,7 +148,7 @@ export default function WorkforceLeaveManagementPage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Leave calendar</p>
+              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Kalender Cuti</p>
               <h2 className="mt-2 text-xl font-semibold text-slate-900">Team leave schedule</h2>
             </div>
             <div className="text-sm text-slate-400">Color coded for approvals and planned time away.</div>
@@ -183,7 +183,7 @@ export default function WorkforceLeaveManagementPage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Leave table</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Tabel Cuti</p>
             <h2 className="mt-2 text-xl font-semibold text-slate-900">Request pipeline</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -207,10 +207,10 @@ export default function WorkforceLeaveManagementPage() {
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
-            <option value="Pending">Menunggu</option>
-            <option value="Approved">Disetujui</option>
-            <option value="Rejected">Ditolak</option>
+            <option value="All">Semua status</option>
+            <option value="Menunggu">Menunggu</option>
+            <option value="Disetujui">Disetujui</option>
+            <option value="Ditolak">Ditolak</option>
           </select>
         </div>
 

@@ -35,7 +35,7 @@ export default function TalentInterviewsPage() {
       { accessorKey: 'position', header: 'Position' },
       { accessorKey: 'type', header: 'Interview type' },
       { accessorKey: 'interviewer', header: 'Interviewer' },
-      { accessorKey: 'date', header: 'Date' },
+      { accessorKey: 'date', header: 'Tanggal' },
       { accessorKey: 'time', header: 'Time' },
       {
         accessorKey: 'status',
@@ -53,7 +53,7 @@ export default function TalentInterviewsPage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/talent/interviews" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Review <ArrowRight className="h-3.5 w-3.5" />
@@ -135,10 +135,10 @@ export default function TalentInterviewsPage() {
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
+            <option value="All">Semua status</option>
             <option value="Scheduled">Terjadwal</option>
             <option value="Completed">Selesai</option>
-            <option value="Pending">Tertunda</option>
+            <option value="Menunggu">Tertunda</option>
           </select>
         </div>
 

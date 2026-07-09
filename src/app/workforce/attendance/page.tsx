@@ -34,14 +34,14 @@ export default function WorkforceAttendancePage() {
 
   const columns = useMemo<ColumnDef<typeof attendanceRecords[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
-      { accessorKey: 'department', header: 'Department' },
+      { accessorKey: 'employee', header: 'Karyawan' },
+      { accessorKey: 'department', header: 'Departemen' },
       { accessorKey: 'shift', header: 'Shift' },
-      { accessorKey: 'checkIn', header: 'Check in' },
-      { accessorKey: 'checkOut', header: 'Check out' },
-      { accessorKey: 'hours', header: 'Working hours' },
+      { accessorKey: 'checkIn', header: 'Waktu Masuk' },
+      { accessorKey: 'checkOut', header: 'Waktu Keluar' },
+      { accessorKey: 'hours', header: 'Jam Kerja' },
       {
-        accessorKey: 'late', header: 'Late', cell: ({ getValue }) => {
+        accessorKey: 'late', header: 'Terlambat', cell: ({ getValue }) => {
           const value = getValue() as string;
           return (
             <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${
@@ -58,7 +58,7 @@ export default function WorkforceAttendancePage() {
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Present'
+            value === 'Hadir'
               ? 'bg-emerald-50 text-emerald-200'
               : value === 'On Leave'
               ? 'bg-slate-600/15 text-slate-700'
@@ -70,10 +70,10 @@ export default function WorkforceAttendancePage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: ({ row }) => (
           <Link href={`/workforce/attendance`} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
-            Details <ArrowRight className="h-3.5 w-3.5" />
+            Detail <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         ),
       },
@@ -99,8 +99,8 @@ export default function WorkforceAttendancePage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Workforce / Attendance</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Attendance dashboard</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">Live attendance status, daily presence and employee operations in a single view.</p>
+            <h1 className="text-3xl font-semibold text-slate-900">Dashboard Presensi</h1>
+            <p className="mt-2 max-w-2xl text-sm text-slate-400">Status kehadiran langsung, presensi harian, dan operasi karyawan dalam satu tampilan.</p>
           </div>
           <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
             Kembali ke Workforce
@@ -110,13 +110,13 @@ export default function WorkforceAttendancePage() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         {[
-          { label: 'Attendance rate', value: attendanceOverview.attendanceRate },
-          { label: 'Present', value: attendanceOverview.present },
-          { label: 'Absent', value: attendanceOverview.absent },
-          { label: 'Late', value: attendanceOverview.late },
+          { label: 'Tingkat Kehadiran', value: attendanceOverview.attendanceRate },
+          { label: 'Hadir', value: attendanceOverview.present },
+          { label: 'Absen', value: attendanceOverview.absent },
+          { label: 'Terlambat', value: attendanceOverview.late },
           { label: 'WFH', value: attendanceOverview.wfh },
-          { label: 'Business Trip', value: attendanceOverview.businessTrip },
-          { label: 'Holiday', value: attendanceOverview.holiday },
+          { label: 'Dinas', value: attendanceOverview.businessTrip },
+          { label: 'Libur', value: attendanceOverview.holiday },
         ].map((item) => (
           <Card key={item.label} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{item.label}</p>
@@ -129,10 +129,10 @@ export default function WorkforceAttendancePage() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Attendance calendar</p>
-              <h2 className="mt-2 text-xl font-semibold text-slate-900">June snapshot</h2>
+              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Kalender Presensi</p>
+              <h2 className="mt-2 text-xl font-semibold text-slate-900">Ringkasan Juni</h2>
             </div>
-            <div className="text-sm text-slate-400">Weekend / holiday / business trip highlights</div>
+            <div className="text-sm text-slate-400">Sorotan akhir pekan / libur / dinas</div>
           </div>
           <div className="mt-6 grid grid-cols-7 gap-2 text-center text-[11px] uppercase tracking-[0.2em] text-slate-400">
             {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
@@ -148,28 +148,28 @@ export default function WorkforceAttendancePage() {
             ))}
           </div>
           <div className="mt-6 grid grid-cols-2 gap-3 text-sm text-slate-400">
-            <div className="rounded-3xl bg-white/80 p-4">Present / WFH / business trip statuses visualized</div>
-            <div className="rounded-3xl bg-white/80 p-4">Hover over days for operational notes and schedule context.</div>
+            <div className="rounded-3xl bg-white/80 p-4">Hadir / WFH / business trip statuses visualized</div>
+            <div className="rounded-3xl bg-white/80 p-4">Arahkan kursor pada hari untuk catatan operasional dan konteks jadwal.</div>
           </div>
         </Card>
 
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Attendance detail</p>
-              <h2 className="mt-2 text-xl font-semibold text-slate-900">Attendance heatmap</h2>
+              <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Detail Presensi</p>
+              <h2 className="mt-2 text-xl font-semibold text-slate-900">Heatmap Kehadiran</h2>
             </div>
-            <div className="rounded-full bg-white/80 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-700">Daily log</div>
+            <div className="rounded-full bg-white/80 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-700">Log harian</div>
           </div>
           <div className="mt-6 grid gap-3">
             <div className="rounded-3xl border border-slate-200 bg-white/80 p-4">
               <div className="flex items-center gap-3 text-sm text-slate-400">
                 <CalendarCheck className="h-4 w-4" />
-                <span>{'Trend continues with >97% coverage.'}</span>
+                <span>{'Tren berlanjut dengan cakupan >97%.'}</span>
               </div>
             </div>
             <div className="rounded-3xl bg-white/80 p-4 text-sm text-slate-400">
-              This view is designed to make attendance status, exceptions, and coverage visible at a glance.
+              Tampilan ini dirancang untuk membuat status kehadiran, pengecualian, dan cakupan terlihat sekilas.
             </div>
           </div>
         </Card>
@@ -178,8 +178,8 @@ export default function WorkforceAttendancePage() {
       <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Attendance table</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-900">Operational employee log</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Tabel Presensi</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">Log operasional karyawan</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
@@ -197,19 +197,19 @@ export default function WorkforceAttendancePage() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search employee, department or shift"
+              placeholder="Cari karyawan, departemen atau shift"
               className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500"
             />
           </div>
           <select value={department} onChange={(event) => setDepartment(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All departments</option>
+            <option value="All">Semua departemen</option>
             {workforceDepartmentOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
             ))}
           </select>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
-            <option value="Present">Present</option>
+            <option value="All">Semua status</option>
+            <option value="Hadir">Hadir</option>
             <option value="On Leave">On Leave</option>
             <option value="WFH">WFH</option>
           </select>

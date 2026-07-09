@@ -34,14 +34,14 @@ export default function BenefitsPage() {
 
   const columns = useMemo<ColumnDef<typeof benefits[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
-      { accessorKey: 'department', header: 'Department' },
+      { accessorKey: 'employee', header: 'Karyawan' },
+      { accessorKey: 'department', header: 'Departemen' },
       { accessorKey: 'benefitType', header: 'Benefit Type' },
       { accessorKey: 'provider', header: 'Provider' },
-      { accessorKey: 'startDate', header: 'Start Date' },
+      { accessorKey: 'startTanggal', header: 'Tanggal Mulai' },
       {
-        accessorKey: 'endDate',
-        header: 'End Date',
+        accessorKey: 'endTanggal',
+        header: 'Tanggal Selesai',
         cell: ({ getValue }) => getValue() || '—',
       },
       {
@@ -62,7 +62,7 @@ export default function BenefitsPage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/compensation/benefits" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             Edit <ArrowRight className="h-3.5 w-3.5" />
@@ -89,7 +89,7 @@ export default function BenefitsPage() {
 
   const totalBenefits = benefits.length;
   const activeBenefits = benefits.filter((b) => b.status === 'Active').length;
-  const uniqueEmployees = new Set(benefits.map((b) => b.employeeId)).size;
+  const uniqueKaryawans = new Set(benefits.map((b) => b.employeeId)).size;
   const uniqueDepartments = new Set(benefits.map((b) => b.department)).size;
 
   return (
@@ -115,8 +115,8 @@ export default function BenefitsPage() {
         </Card>
 
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Employees Covered</p>
-          <p className="mt-3 text-3xl font-semibold text-slate-900">{uniqueEmployees}</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Karyawans Covered</p>
+          <p className="mt-3 text-3xl font-semibold text-slate-900">{uniqueKaryawans}</p>
           <p className="mt-2 text-sm text-slate-400">Active enrollment</p>
         </Card>
 
@@ -186,7 +186,7 @@ export default function BenefitsPage() {
             ))}
           </select>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
+            <option value="All">Semua status</option>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
             <option value="Suspended">Suspended</option>

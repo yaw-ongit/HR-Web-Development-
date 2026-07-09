@@ -85,15 +85,15 @@ export function EmptyState({
 }
 
 /** Pre-composed empty states for common HRIS use cases */
-export function NoEmployeesEmptyState({ onAdd }: { onAdd?: () => void }) {
+export function NoKaryawansEmptyState({ onAdd }: { onAdd?: () => void }) {
   return (
     <EmptyState
       icon={<span className="text-2xl">👥</span>}
-      title="No employees found"
-      description="Your employee directory is empty or no records match the current filters. Add employees or adjust your search criteria."
-      ctaLabel="Add employee"
+      title="Tidak ada karyawan"
+      description="Direktori karyawan kosong atau tidak ada catatan yang cocok dengan filter saat ini. Tambahkan karyawan atau ubah kriteria pencarian."
+      ctaLabel="Tambah karyawan"
       onCtaClick={onAdd}
-      secondaryLabel="Import from CSV"
+      secondaryLabel="Impor dari CSV"
       secondaryHref="/people"
     />
   );
@@ -103,9 +103,9 @@ export function NoAttendanceEmptyState() {
   return (
     <EmptyState
       icon={<span className="text-2xl">📅</span>}
-      title="No attendance records"
-      description="No attendance data is available for the selected period or filters. Try adjusting the date range or department."
-      ctaLabel="View today"
+      title="Tidak ada data kehadiran"
+      description="Tidak ada data kehadiran untuk periode atau filter yang dipilih. Coba ubah rentang tanggal atau departemen."
+      ctaLabel="Lihat hari ini"
       href="/workforce/attendance"
     />
   );

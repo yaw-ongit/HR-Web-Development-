@@ -125,7 +125,7 @@ function WidgetTraining({ title }: { title: string }) {
   return (
     <Card title={title} description="Jadwal pelatihan dan kemajuan sesi.">
       <div className="space-y-4">
-        {[{ course: 'Manager Essentials', progress: 68 }, { course: 'Compliance Certification', progress: 92 }].map((item) => (
+        {[{ course: 'Manajer Essentials', progress: 68 }, { course: 'Compliance Certification', progress: 92 }].map((item) => (
           <div key={item.course} className="rounded-2xl bg-white/80 p-4">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-slate-900">{item.course}</p>
@@ -206,8 +206,8 @@ function WidgetDistribution({ title }: { title: string }) {
 function WidgetApprovals({ title }: { title: string }) {
   return (
     <Card title={title} description="Persetujuan tertunda yang membutuhkan tindakan Anda.">
-      <ul className="space-y-3" aria-label="Pending approvals">
-        {[{ label: 'Leave request — Jonah', status: 'Pending' }, { label: 'Contract extension — Finance', status: 'Review' }].map((item) => (
+      <ul className="space-y-3" aria-label="Menunggu approvals">
+        {[{ label: 'Leave request — Jonah', status: 'Menunggu' }, { label: 'Contract extension — Finance', status: 'Review' }].map((item) => (
           <li key={item.label} className="flex items-center justify-between rounded-2xl bg-white/80 p-4">
             <p className="text-sm font-semibold text-slate-900">{item.label}</p>
             <StatusBadge status={item.status} />
@@ -322,7 +322,7 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
 };
 
 function getRoleLabel(role: RoleKey) {
-  return roles.find((r) => r.key === role)?.label ?? 'Employee';
+  return roles.find((r) => r.key === role)?.label ?? 'Karyawan';
 }
 
 /* ---------------------------------------------------------------
@@ -333,7 +333,7 @@ export default function DashboardPage() {
   const quickActions = roleQuickActions[role];
   const kpis = dashboardKpis[role];
   const widgets = roleWidgets[role];
-  const today = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date());
+  const today = new Intl.TanggalTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Tanggal());
 
   const hero = useMemo(() => {
     const heroMap: Record<RoleKey, { title: string; subtitle: string; actions: string[] }> = {

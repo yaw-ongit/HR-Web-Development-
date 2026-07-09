@@ -31,8 +31,8 @@ export default function TalentTrainingPage() {
     { accessorKey: 'employee', header: 'Karyawan' },
     { accessorKey: 'program', header: 'Program' },
     { accessorKey: 'provider', header: 'Penyedia' },
-    { accessorKey: 'startDate', header: 'Tgl Mulai' },
-    { accessorKey: 'endDate', header: 'Tgl Selesai' },
+    { accessorKey: 'startTanggal', header: 'Tgl Mulai' },
+    { accessorKey: 'endTanggal', header: 'Tgl Selesai' },
     {
       accessorKey: 'progress',
       header: 'Progres',
@@ -73,8 +73,8 @@ export default function TalentTrainingPage() {
     { accessorKey: 'employee', header: 'Karyawan' },
     { accessorKey: 'certification', header: 'Sertifikasi' },
     { accessorKey: 'issuer', header: 'Penerbit' },
-    { accessorKey: 'issuedDate', header: 'Tgl Terbit' },
-    { accessorKey: 'expiryDate', header: 'Kadaluarsa' },
+    { accessorKey: 'issuedTanggal', header: 'Tgl Terbit' },
+    { accessorKey: 'expiryTanggal', header: 'Kadaluarsa' },
     {
       accessorKey: 'status',
       header: 'Status',
@@ -101,7 +101,7 @@ export default function TalentTrainingPage() {
     { accessorKey: 'employee', header: 'Karyawan' },
     { accessorKey: 'competency', header: 'Kompetensi' },
     { accessorKey: 'level', header: 'Level' },
-    { accessorKey: 'assessmentDate', header: 'Tgl Penilaian' },
+    { accessorKey: 'assessmentTanggal', header: 'Tgl Penilaian' },
     { accessorKey: 'assessor', header: 'Penilai' },
     {
       id: 'actions',

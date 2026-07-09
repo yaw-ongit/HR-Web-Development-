@@ -5,7 +5,7 @@ export default function PeopleLoading() {
     <div
       className="space-y-6 py-6"
       role="status"
-      aria-label="Loading People workspace"
+      aria-label="Memuat area People"
     >
       <SkeletonPageHeader />
 

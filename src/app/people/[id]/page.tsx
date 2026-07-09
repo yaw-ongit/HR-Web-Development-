@@ -21,12 +21,12 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
   const stats = useMemo(
     () => [
-      { label: 'Attendance rate', value: profile?.stats.attendanceRate ?? '—', icon: CalendarDays },
-      { label: 'Remaining leave', value: profile?.stats.remainingLeave ?? '—', icon: CheckCircle2 },
-      { label: 'Training completed', value: profile?.stats.trainingCompleted ?? '—', icon: BookOpen },
-      { label: 'Benefits', value: profile?.stats.benefits ?? '—', icon: HeartPulse },
-      { label: 'Years of service', value: profile?.stats.yearsOfService ?? '—', icon: Star },
-      { label: 'Performance', value: profile?.stats.performance ?? '—', icon: ClipboardList },
+      { label: 'Kehadiran', value: profile?.stats.attendanceRate ?? '—', icon: CalendarDays },
+      { label: 'Sisa cuti', value: profile?.stats.remainingLeave ?? '—', icon: CheckCircle2 },
+      { label: 'Pelatihan selesai', value: profile?.stats.trainingCompleted ?? '—', icon: BookOpen },
+      { label: 'Benefit', value: profile?.stats.benefits ?? '—', icon: HeartPulse },
+      { label: 'Masa kerja', value: profile?.stats.yearsOfService ?? '—', icon: Star },
+      { label: 'Kinerja', value: profile?.stats.performance ?? '—', icon: ClipboardList },
     ],
     [profile],
   );
@@ -35,8 +35,8 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
     return (
       <div className="grid min-h-screen place-items-center bg-white text-slate-900">
         <div className="rounded-[28px] border border-slate-200 bg-slate-50/90 p-10 text-center shadow-card">
-          <p className="text-xl font-semibold">Employee not found</p>
-          <p className="mt-3 text-sm text-slate-400">The requested employee profile does not exist in the People directory.</p>
+          <p className="text-xl font-semibold">Karyawan tidak ditemukan</p>
+          <p className="mt-3 text-sm text-slate-400">Profil karyawan yang diminta tidak tersedia dalam direktori People.</p>
         </div>
       </div>
     );
@@ -65,25 +65,25 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Button variant="secondary" className="rounded-full px-5 py-3">
-                <Mail className="h-4 w-4" /> Message
+                <Mail className="h-4 w-4" /> Kirim pesan
               </Button>
               <Button variant="secondary" className="rounded-full px-5 py-3">
-                <Phone className="h-4 w-4" /> Call
+                <Phone className="h-4 w-4" /> Panggil
               </Button>
               <Button variant="primary" className="rounded-full px-5 py-3">
-                <ArrowRight className="h-4 w-4" /> Edit profile
+                <ArrowRight className="h-4 w-4" /> Edit profil
               </Button>
             </div>
           </div>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { label: 'Manager', value: profile.manager, icon: Users },
-              { label: 'Branch', value: profile.branch, icon: MapPin },
-              { label: 'Location', value: profile.location, icon: MapPin },
+              { label: 'Manajer', value: profile.manager, icon: Users },
+              { label: 'Cabang', value: profile.branch, icon: MapPin },
+              { label: 'Lokasi', value: profile.location, icon: MapPin },
               { label: 'Email', value: profile.email, icon: Mail },
-              { label: 'Phone', value: profile.phone, icon: Phone },
-              { label: 'Contract', value: profile.contractType, icon: Briefcase },
+              { label: 'Telepon', value: profile.phone, icon: Phone },
+              { label: 'Kontrak', value: profile.contractType, icon: Briefcase },
             ].map((item) => (
               <div key={item.label} className="rounded-3xl bg-white/80 p-5">
                 <div className="flex items-center gap-3 text-slate-400">
@@ -116,7 +116,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
       <section className="space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Employee 360</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Profil karyawan 360</p>
             <h2 className="text-2xl font-semibold text-slate-900">{activeTab}</h2>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -141,17 +141,17 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Summary</p>
-                    <h3 className="mt-3 text-xl font-semibold text-slate-900">Professional snapshot</h3>
+                    <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Ringkasan</p>
+                    <h3 className="mt-3 text-xl font-semibold text-slate-900">Profil singkat</h3>
                   </div>
                 </div>
                 <p className="mt-5 text-sm leading-7 text-slate-400">{profile.summary}</p>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {[
-                    { label: 'Work mode', value: profile.workMode },
-                    { label: 'Hire date', value: profile.hireDate },
-                    { label: 'Emergency contact', value: `${profile.emergencyContact.name} • ${profile.emergencyContact.relationship}` },
-                    { label: 'Office', value: profile.location },
+                    { label: 'Mode kerja', value: profile.workMode },
+                    { label: 'Tanggal bergabung', value: profile.hireTanggal },
+                    { label: 'Kontak darurat', value: `${profile.emergencyContact.name} • ${profile.emergencyContact.relationship}` },
+                    { label: 'Kantor', value: profile.location },
                   ].map((item) => (
                     <div key={item.label} className="rounded-3xl bg-white/80 p-4">
                       <p className="text-xs uppercase tracking-[0.28em] text-slate-400">{item.label}</p>
@@ -162,15 +162,15 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               </Card>
 
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Organization</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Organisasi</p>
                 <div className="mt-5 rounded-[28px] border border-slate-200 bg-white/80 p-6">
                   <div className="space-y-4">
                     <div className="rounded-3xl bg-slate-50/90 p-4">
-                      <p className="text-sm text-slate-400">Manager</p>
+                      <p className="text-sm text-slate-400">Manajer</p>
                       <p className="mt-2 text-base font-semibold text-slate-900">{profile.manager}</p>
                     </div>
                     <div className="rounded-3xl bg-slate-50/90 p-4">
-                      <p className="text-sm text-slate-400">Department</p>
+                      <p className="text-sm text-slate-400">Departemen</p>
                       <p className="mt-2 text-base font-semibold text-slate-900">{profile.department}</p>
                     </div>
                   </div>
@@ -180,7 +180,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             <div className="space-y-6">
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Employment information</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Riwayat pekerjaan</p>
                 <div className="mt-5 grid gap-4">
                   {profile.employmentHistory.map((item) => (
                     <div key={item.period} className="rounded-3xl bg-white/80 p-4">
@@ -193,14 +193,14 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               </Card>
 
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Contract summary</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Ringkasan kontrak</p>
                 <div className="mt-5 space-y-4">
-                  <p className="text-sm text-slate-400">{profile.contractType} contract in place since {profile.hireDate}.</p>
+                  <p className="text-sm text-slate-400">Kontrak {profile.contractType} dimulai sejak {profile.hireTanggal}.</p>
                   <div className="grid gap-4 sm:grid-cols-2">
                     {profile.leaveBalance.map((leave) => (
                       <div key={leave.type} className="rounded-3xl bg-white/80 p-4">
                         <p className="text-sm text-slate-400">{leave.type}</p>
-                        <p className="mt-2 text-base font-semibold text-slate-900">{leave.remaining} remaining</p>
+                        <p className="mt-2 text-base font-semibold text-slate-900">Sisa {leave.remaining}</p>
                       </div>
                     ))}
                   </div>
@@ -214,7 +214,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
           <section className="space-y-6">
             {activeTab === 'Pekerjaan' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Employment history</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Riwayat pekerjaan</p>
                 <div className="mt-6 space-y-4">
                   {profile.employmentHistory.map((item) => (
                     <div key={item.period} className="rounded-3xl bg-white/80 p-5">
@@ -229,32 +229,32 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Kehadiran' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Attendance details</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Detail kehadiran</p>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   <div className="rounded-3xl bg-white/80 p-5">
-                    <p className="text-sm text-slate-400">Attendance rate</p>
+                    <p className="text-sm text-slate-400">Persentase kehadiran</p>
                     <p className="mt-3 text-2xl font-semibold text-slate-900">{profile.stats.attendanceRate}</p>
                   </div>
                   <div className="rounded-3xl bg-white/80 p-5">
-                    <p className="text-sm text-slate-400">Last review</p>
+                    <p className="text-sm text-slate-400">Review terakhir</p>
                     <p className="mt-3 text-xl font-semibold text-slate-900">April 2026</p>
                   </div>
                 </div>
                 <div className="mt-6 rounded-3xl bg-white/80 p-5 text-sm text-slate-400">
-                  Attendance is measured against the regional performance benchmark and includes remote site days.
+                  Kehadiran diukur berdasarkan tolok ukur kinerja regional dan mencakup hari kerja di lokasi remote.
                 </div>
               </Card>
             )}
 
             {activeTab === 'Cuti' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Leave balance</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Saldo cuti</p>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {profile.leaveBalance.map((leave) => (
                     <div key={leave.type} className="rounded-3xl bg-white/80 p-5">
                       <p className="text-sm text-slate-400">{leave.type}</p>
-                      <p className="mt-3 text-xl font-semibold text-slate-900">{leave.remaining} days remaining</p>
-                      <p className="text-sm text-slate-400">{leave.used} days used</p>
+                      <p className="mt-3 text-xl font-semibold text-slate-900">Sisa {leave.remaining} hari</p>
+                      <p className="text-sm text-slate-400">Terpakai {leave.used} hari</p>
                     </div>
                   ))}
                 </div>
@@ -263,7 +263,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Pelatihan' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Training progress</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Progres pelatihan</p>
                 <div className="mt-6 space-y-4">
                   {profile.trainingRecords.map((training) => (
                     <div key={training.title} className="rounded-3xl bg-white/80 p-5">
@@ -272,7 +272,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
                           <p className="text-lg font-semibold text-slate-900">{training.title}</p>
                           <p className="mt-2 text-sm text-slate-400">{training.status}</p>
                         </div>
-                        <span className="rounded-full bg-slate-50/90 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-700">Due {training.due}</span>
+                        <span className="rounded-full bg-slate-50/90 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-700">Jatuh tempo {training.due}</span>
                       </div>
                     </div>
                   ))}
@@ -282,13 +282,13 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Medis' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Medical compliance</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Kepatuhan medis</p>
                 <div className="mt-6 space-y-4">
                   {profile.medicalRecords.map((record) => (
                     <div key={record.label} className="rounded-3xl bg-white/80 p-5">
                       <p className="text-lg font-semibold text-slate-900">{record.label}</p>
                       <p className="mt-2 text-sm text-slate-400">Status: {record.status}</p>
-                      <p className="mt-2 text-sm text-slate-400">Expires {record.expires}</p>
+                      <p className="mt-2 text-sm text-slate-400">Berlaku hingga {record.expires}</p>
                     </div>
                   ))}
                 </div>
@@ -297,7 +297,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Benefit' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Benefits overview</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Ringkasan benefit</p>
                 <div className="mt-6 space-y-4">
                   {profile.benefitSummary.map((benefit) => (
                     <div key={benefit.name} className="rounded-3xl bg-white/80 p-5">
@@ -311,17 +311,17 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Asuransi' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Insurance policies</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Polis asuransi</p>
                 <div className="mt-6 space-y-4">
                   <div className="rounded-3xl bg-white/80 p-5">
-                    <p className="text-lg font-semibold text-slate-900">Health Insurance</p>
-                    <p className="mt-2 text-sm text-slate-400">Active • PT Asuransi Kesehatan Indonesia</p>
-                    <p className="mt-3 text-sm text-slate-400">Coverage: Self + Dependents • Expires: 2026-01-14</p>
+                    <p className="text-lg font-semibold text-slate-900">Asuransi kesehatan</p>
+                    <p className="mt-2 text-sm text-slate-400">Aktif • PT Asuransi Kesehatan Indonesia</p>
+                    <p className="mt-3 text-sm text-slate-400">Cakupan: Diri sendiri + Keluarga • Berlaku hingga 2026-01-14</p>
                   </div>
                   <div className="rounded-3xl bg-white/80 p-5">
-                    <p className="text-lg font-semibold text-slate-900">Life Insurance</p>
-                    <p className="mt-2 text-sm text-slate-400">Active • PT Asuransi Jiwa Bersama</p>
-                    <p className="mt-3 text-sm text-slate-400">Coverage: 500% annual salary • Expires: 2026-01-14</p>
+                    <p className="text-lg font-semibold text-slate-900">Asuransi jiwa</p>
+                    <p className="mt-2 text-sm text-slate-400">Aktif • PT Asuransi Jiwa Bersama</p>
+                    <p className="mt-3 text-sm text-slate-400">Cakupan: 500% gaji tahunan • Berlaku hingga 2026-01-14</p>
                   </div>
                 </div>
               </Card>
@@ -329,24 +329,24 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Klaim' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Claims history</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Riwayat klaim</p>
                 <div className="mt-6 space-y-4">
                   <div className="rounded-3xl bg-white/80 p-5">
                     <div className="flex items-center justify-between gap-4">
                       <div>
-                        <p className="text-lg font-semibold text-slate-900">Medical - Hospitalization</p>
-                        <p className="mt-2 text-sm text-slate-400">Rp 15.0M • May 2026</p>
+                        <p className="text-lg font-semibold text-slate-900">Klaim medis - rawat inap</p>
+                        <p className="mt-2 text-sm text-slate-400">Rp 15,0M • Mei 2026</p>
                       </div>
-                      <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">Approved</span>
+                      <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">Disetujui</span>
                     </div>
                   </div>
                   <div className="rounded-3xl bg-white/80 p-5">
                     <div className="flex items-center justify-between gap-4">
                       <div>
-                        <p className="text-lg font-semibold text-slate-900">Medical - Preventive Care</p>
-                        <p className="mt-2 text-sm text-slate-400">Rp 0.8M • June 2026</p>
+                        <p className="text-lg font-semibold text-slate-900">Klaim medis - pemeriksaan preventif</p>
+                        <p className="mt-2 text-sm text-slate-400">Rp 0,8M • Juni 2026</p>
                       </div>
-                      <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-200">Pending</span>
+                      <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-200">Menunggu</span>
                     </div>
                   </div>
                 </div>
@@ -355,17 +355,17 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Fasilitas' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Enrolled programs</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Program terdaftar</p>
                 <div className="mt-6 space-y-4">
                   <div className="rounded-3xl bg-white/80 p-5">
-                    <p className="text-lg font-semibold text-slate-900">Fitness & Wellness Program</p>
-                    <p className="mt-2 text-sm text-slate-400">Active enrollment</p>
-                    <p className="mt-3 text-sm text-slate-400">Gym membership & health monitoring via Elite Fitness Centers</p>
+                    <p className="text-lg font-semibold text-slate-900">Program kebugaran & kesejahteraan</p>
+                    <p className="mt-2 text-sm text-slate-400">Pendaftaran aktif</p>
+                    <p className="mt-3 text-sm text-slate-400">Keanggotaan gym dan pemantauan kesehatan untuk pegawai operasional.</p>
                   </div>
                   <div className="rounded-3xl bg-white/80 p-5">
-                    <p className="text-lg font-semibold text-slate-900">Employee Meal Vouchers</p>
-                    <p className="mt-2 text-sm text-slate-400">Active enrollment</p>
-                    <p className="mt-3 text-sm text-slate-400">Daily meal vouchers at PT Indocater Catering for operational staff</p>
+                    <p className="text-lg font-semibold text-slate-900">Voucher makan karyawan</p>
+                    <p className="mt-2 text-sm text-slate-400">Pendaftaran aktif</p>
+                    <p className="mt-3 text-sm text-slate-400">Voucher harian untuk karyawan PT Indocater Catering.</p>
                   </div>
                 </div>
               </Card>
@@ -373,18 +373,18 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Penggajian' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Payroll configuration</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Konfigurasi payroll</p>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   <div className="rounded-3xl bg-white/80 p-5">
-                    <p className="text-sm text-slate-400">Basic Salary</p>
+                    <p className="text-sm text-slate-400">Gaji pokok</p>
                     <p className="mt-3 text-xl font-semibold text-slate-900">Rp 12.0M</p>
                   </div>
                   <div className="rounded-3xl bg-white/80 p-5">
-                    <p className="text-sm text-slate-400">Employment Type</p>
-                    <p className="mt-3 text-xl font-semibold text-slate-900">Permanent</p>
+                    <p className="text-sm text-slate-400">Jenis pekerjaan</p>
+                    <p className="mt-3 text-xl font-semibold text-slate-900">Permanen</p>
                   </div>
                   <div className="rounded-3xl bg-white/80 p-5">
-                    <p className="text-sm text-slate-400">Bank Account</p>
+                    <p className="text-sm text-slate-400">Rekening bank</p>
                     <p className="mt-3 text-xl font-semibold text-slate-900">1234567890</p>
                   </div>
                   <div className="rounded-3xl bg-white/80 p-5">
@@ -393,15 +393,15 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
                   </div>
                 </div>
                 <div className="mt-6 rounded-3xl bg-white/80 p-5">
-                  <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Payroll status</p>
-                  <p className="mt-3 text-base font-semibold text-emerald-300">Ready for integration</p>
+                  <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Status payroll</p>
+                  <p className="mt-3 text-base font-semibold text-emerald-300">Siap integrasi</p>
                 </div>
               </Card>
             )}
 
             {activeTab === 'Dokumen' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Employee documents</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Dokumen karyawan</p>
                 <div className="mt-6 space-y-4">
                   {profile.documents.map((doc) => (
                     <div key={doc.title} className="rounded-3xl bg-white/80 p-5">
@@ -412,7 +412,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
                         </div>
                         <span className="rounded-full bg-slate-50/90 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-700">{doc.status}</span>
                       </div>
-                      <p className="mt-3 text-sm text-slate-400">Added {doc.date}</p>
+                      <p className="mt-3 text-sm text-slate-400">Ditambahkan {doc.date}</p>
                     </div>
                   ))}
                 </div>
@@ -421,7 +421,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Riwayat' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Timeline</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Riwayat</p>
                 <div className="mt-6 space-y-4">
                   {profile.timeline.map((event) => (
                     <div key={event.date} className="rounded-3xl bg-white/80 p-5">
@@ -436,7 +436,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
             {activeTab === 'Log Aktivitas' && (
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Activity log</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Log aktivitas</p>
                 <div className="mt-6 space-y-4">
                   {profile.activityLog.map((entry) => (
                     <div key={entry.time} className="rounded-3xl bg-white/80 p-5">

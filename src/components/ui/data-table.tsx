@@ -133,7 +133,7 @@ export function DataTable<TData>({
                   className="px-4 py-16 text-center"
                 >
                   {emptyContent ?? (
-                    <p className="text-sm text-slate-400">No records found.</p>
+                    <p className="text-sm text-slate-400">Tidak ada data yang ditemukan.</p>
                   )}
                 </td>
               </tr>
@@ -147,8 +147,8 @@ export function DataTable<TData>({
           {/* Selection info */}
           <p className="text-xs text-slate-500" aria-live="polite">
             {selectedCount > 0
-              ? `${selectedCount} of ${totalCount} row${totalCount !== 1 ? 's' : ''} selected`
-              : `${totalCount} row${totalCount !== 1 ? 's' : ''}`}
+              ? `${selectedCount} dari ${totalCount} baris dipilih`
+              : `${totalCount} baris`}
           </p>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -159,9 +159,9 @@ export function DataTable<TData>({
                 size="sm"
                 leftIcon={<Download className="h-3.5 w-3.5" />}
                 onClick={onExport}
-                aria-label="Export table data"
+                aria-label="Ekspor data tabel"
               >
-                Export
+                Ekspor
               </Button>
             )}
 

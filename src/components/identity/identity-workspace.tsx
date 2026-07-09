@@ -251,7 +251,7 @@ function sessionColumns(): ColumnDef<SessionRecord>[] {
     { accessorKey: 'location', header: 'Location' },
     { accessorKey: 'lastActivity', header: 'Last activity' },
     { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
-    { id: 'actions', header: 'Actions', cell: () => <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500">Terminate</button> },
+    { id: 'actions', header: 'Aksi', cell: () => <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500">Terminate</button> },
   ];
 }
 
@@ -287,7 +287,7 @@ function LoginHistoryView({ compact = false }: { compact?: boolean }) {
       {!compact && (
         <Card title="Login filters" description="Filter by date, success, failed and location.">
           <div className="grid gap-3 md:grid-cols-4">
-            {['Date', 'Success', 'Failed', 'Location'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
+            {['Tanggal', 'Success', 'Failed', 'Location'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
           </div>
           <div className="mt-4"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Apply filters</Button></div>
         </Card>

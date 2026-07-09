@@ -32,7 +32,7 @@ export default function ClaimsPage() {
 
   const columns = useMemo<ColumnDef<typeof claims[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
+      { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'claimType', header: 'Claim Type' },
       {
         accessorKey: 'amount',
@@ -42,29 +42,29 @@ export default function ClaimsPage() {
           return `Rp ${(value / 1000000).toFixed(1)}M`;
         },
       },
-      { accessorKey: 'submissionDate', header: 'Submission Date' },
+      { accessorKey: 'submissionTanggal', header: 'Submission Tanggal' },
       {
         accessorKey: 'status',
         header: 'Status',
         cell: ({ getValue }) => {
           const value = getValue() as string;
           const color =
-            value === 'Approved'
+            value === 'Disetujui'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Pending'
+              : value === 'Menunggu'
               ? 'bg-amber-50 text-amber-200'
               : value === 'Processing'
               ? 'bg-brand-50 text-brand-500'
-              : value === 'Rejected'
+              : value === 'Ditolak'
               ? 'bg-rose-50 text-rose-200'
               : 'bg-slate-600/15 text-slate-700';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
         },
       },
-      { accessorKey: 'approver', header: 'Approver' },
+      { accessorKey: 'approver', header: 'Penyetuju' },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/compensation/claims" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             View <ArrowRight className="h-3.5 w-3.5" />
@@ -87,12 +87,12 @@ export default function ClaimsPage() {
     enableRowSelection: true,
   });
 
-  const pendingClaims = claims.filter((c) => c.status === 'Pending').length;
-  const approvedClaims = claims.filter((c) => c.status === 'Approved').length;
-  const rejectedClaims = claims.filter((c) => c.status === 'Rejected').length;
+  const pendingClaims = claims.filter((c) => c.status === 'Menunggu').length;
+  const approvedClaims = claims.filter((c) => c.status === 'Disetujui').length;
+  const rejectedClaims = claims.filter((c) => c.status === 'Ditolak').length;
   const processingClaims = claims.filter((c) => c.status === 'Processing').length;
   const totalClaimAmount = claims.reduce((sum, c) => sum + c.amount, 0);
-  const approvedAmount = claims.filter((c) => c.status === 'Approved').reduce((sum, c) => sum + c.amount, 0);
+  const approvedAmount = claims.filter((c) => c.status === 'Disetujui').reduce((sum, c) => sum + c.amount, 0);
 
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
@@ -117,13 +117,13 @@ export default function ClaimsPage() {
         </Card>
 
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Pending Claims</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Menunggu Claims</p>
           <p className="mt-3 text-3xl font-semibold text-slate-900">{pendingClaims}</p>
           <p className="mt-2 text-sm text-amber-600">Awaiting review</p>
         </Card>
 
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Approved Claims</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Disetujui Claims</p>
           <p className="mt-3 text-3xl font-semibold text-slate-900">{approvedClaims}</p>
           <p className="mt-2 text-sm text-emerald-600">Rp {(approvedAmount / 1000000).toFixed(0)}M approved</p>
         </Card>
@@ -141,10 +141,10 @@ export default function ClaimsPage() {
           <h2 className="mt-2 text-lg font-semibold text-slate-900">Workflow Status</h2>
           <div className="mt-6 space-y-3">
             {[
-              { label: 'Pending Review', count: pendingClaims, color: 'amber' },
+              { label: 'Menunggu Review', count: pendingClaims, color: 'amber' },
               { label: 'Processing', count: processingClaims, color: 'sky' },
-              { label: 'Approved', count: approvedClaims, color: 'emerald' },
-              { label: 'Rejected', count: rejectedClaims, color: 'rose' },
+              { label: 'Disetujui', count: approvedClaims, color: 'emerald' },
+              { label: 'Ditolak', count: rejectedClaims, color: 'rose' },
             ].map((item) => (
               <div key={item.label} className={`rounded-2xl bg-white/80 p-3 border border-${item.color}-500/20`}>
                 <div className="flex items-center justify-between">
@@ -158,7 +158,7 @@ export default function ClaimsPage() {
 
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Processing</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-900">Pending Actions</h2>
+          <h2 className="mt-2 text-lg font-semibold text-slate-900">Menunggu Actions</h2>
           <div className="mt-6 space-y-3">
             <div className="flex items-start gap-3 rounded-2xl bg-white/80 p-3 border border-amber-500/20">
               <AlertCircle className="h-4 w-4 mt-0.5 text-amber-600 flex-shrink-0" />
@@ -171,7 +171,7 @@ export default function ClaimsPage() {
               <AlertCircle className="h-4 w-4 mt-0.5 text-amber-600 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-slate-900">Dodi Hermawan - CLM005</p>
-                <p className="text-xs text-slate-400 mt-1">Medical Outpatient - Rejected (2 days ago)</p>
+                <p className="text-xs text-slate-400 mt-1">Medical Outpatient - Ditolak (2 days ago)</p>
               </div>
             </div>
             <div className="flex items-start gap-3 rounded-2xl bg-white/80 p-3 border border-amber-500/20">
@@ -239,11 +239,11 @@ export default function ClaimsPage() {
             />
           </div>
           <select value={claimStatus} onChange={(event) => setClaimStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
-            <option value="Pending">Pending</option>
+            <option value="All">Semua status</option>
+            <option value="Menunggu">Menunggu</option>
             <option value="Processing">Processing</option>
-            <option value="Approved">Approved</option>
-            <option value="Rejected">Rejected</option>
+            <option value="Disetujui">Disetujui</option>
+            <option value="Ditolak">Ditolak</option>
             <option value="Paid">Paid</option>
           </select>
         </div>

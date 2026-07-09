@@ -68,7 +68,7 @@ function StatusBadge({ value }: { value: string }) {
   const color =
     value === 'Active' || value === 'Success' || value === 'Configured'
       ? 'bg-emerald-50 text-emerald-200'
-      : value === 'Warning' || value === 'Review' || value === 'Draft' || value === 'Pending'
+      : value === 'Warning' || value === 'Review' || value === 'Draft' || value === 'Menunggu'
         ? 'bg-amber-50 text-amber-200'
         : value === 'Failed' || value === 'Disabled'
           ? 'bg-rose-50 text-rose-200'
@@ -291,7 +291,7 @@ function MasterDataView() {
     { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
     {
       id: 'actions',
-      header: 'Actions',
+      header: 'Aksi',
       cell: () => (
         <div className="flex flex-wrap justify-end gap-2">
           <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500"><Edit3 className="inline h-3.5 w-3.5" /> Edit</button>
@@ -396,14 +396,14 @@ function UserManagementView() {
         </div>
       ),
     },
-    { accessorKey: 'employeeId', header: 'Employee ID' },
-    { accessorKey: 'department', header: 'Department' },
+    { accessorKey: 'employeeId', header: 'Karyawan ID' },
+    { accessorKey: 'department', header: 'Departemen' },
     { accessorKey: 'role', header: 'Role' },
     { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
     { accessorKey: 'lastLogin', header: 'Last login' },
     {
       id: 'actions',
-      header: 'Actions',
+      header: 'Aksi',
       cell: () => <div className="flex flex-wrap justify-end gap-2">{['Reset password', 'Disable', 'Enable', 'Assign role', 'Activity'].map((action) => <button key={action} className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500">{action}</button>)}</div>,
     },
   ], []);
@@ -457,7 +457,7 @@ function PermissionManagementView() {
                   <td key={`${module}-${role}`} className="px-4 py-4">
                     <div className="grid grid-cols-4 gap-1 sm:grid-cols-7">
                       {permissionActions.map((action, actionIndex) => {
-                        const checked = role === 'Administrator' || role === 'HR Manager' || action === 'Read' || (roleIndex + moduleIndex + actionIndex) % 4 === 0;
+                        const checked = role === 'Administrator' || role === 'HR Manajer' || action === 'Read' || (roleIndex + moduleIndex + actionIndex) % 4 === 0;
                         return (
                           <label key={action} title={action} className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white">
                             <input type="checkbox" checked={checked} readOnly className="h-3.5 w-3.5 rounded border-slate-400 bg-slate-100 text-brand-600" />
@@ -500,7 +500,7 @@ function ApprovalMatrixView() {
     <Card title="Approval matrix" description="Department approver, backup approver and approval-level governance.">
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm text-slate-800">
-          <thead><tr className="text-xs uppercase tracking-[0.24em] text-slate-400">{['Department', 'Approval level', 'Approver', 'Backup approver', 'Status'].map((h) => <th key={h} className="px-4 py-3">{h}</th>)}</tr></thead>
+          <thead><tr className="text-xs uppercase tracking-[0.24em] text-slate-400">{['Departemen', 'Approval level', 'Penyetuju', 'Backup approver', 'Status'].map((h) => <th key={h} className="px-4 py-3">{h}</th>)}</tr></thead>
           <tbody>{approvalMatrix.map((row) => <tr key={row.department} className="border-t border-slate-200"><td className="px-4 py-4 font-semibold">{row.department}</td><td className="px-4 py-4">{row.level}</td><td className="px-4 py-4">{row.approver}</td><td className="px-4 py-4">{row.backup}</td><td className="px-4 py-4"><StatusBadge value={row.status} /></td></tr>)}</tbody>
         </table>
       </div>
@@ -556,9 +556,9 @@ function AuditLogView() {
   const table = useReactTable({ data: auditLogs, columns, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), getPaginationRowModel: getPaginationRowModel() });
   return (
     <>
-      <Card title="Audit filters" description="Date, module, user and action filters with timeline/table mode.">
+      <Card title="Audit filters" description="Tanggal, module, user and action filters with timeline/table mode.">
         <div className="grid gap-3 md:grid-cols-4">
-          {['Date range', 'Module', 'User', 'Action'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
+          {['Tanggal range', 'Module', 'User', 'Action'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
         </div>
         <div className="mt-4 flex gap-2"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Timeline view</Button><Button variant="ghost" className="rounded-full"><Eye className="h-4 w-4" /> Table view</Button></div>
       </Card>

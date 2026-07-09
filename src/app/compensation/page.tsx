@@ -30,7 +30,7 @@ export default function CompensationDashboard() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Employees Covered</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Karyawans Covered</p>
               <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.employeesCovered}</p>
               <p className="mt-2 text-sm text-emerald-600">↑ 12 this month</p>
             </div>
@@ -63,8 +63,8 @@ export default function CompensationDashboard() {
         <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Claims Pending</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.claimsPending}</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Claims Menunggu</p>
+              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.claimsMenunggu}</p>
               <p className="mt-2 text-sm text-brand-600">Awaiting approval</p>
             </div>
             <FileText className="h-8 w-8 text-brand-600" />
@@ -178,7 +178,7 @@ export default function CompensationDashboard() {
                 <Legend />
                 <Bar dataKey="active" fill="#10b981" name="Active" />
                 <Bar dataKey="expired" fill="#ef4444" name="Expired" />
-                <Bar dataKey="pending" fill="#f59e0b" name="Pending" />
+                <Bar dataKey="pending" fill="#f59e0b" name="Menunggu" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -226,8 +226,8 @@ export default function CompensationDashboard() {
                 <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #64748b' }} />
                 <Legend />
                 <Line type="monotone" dataKey="submitted" stroke="#0ea5e9" strokeWidth={2} name="Submitted" />
-                <Line type="monotone" dataKey="approved" stroke="#10b981" strokeWidth={2} name="Approved" />
-                <Line type="monotone" dataKey="rejected" stroke="#ef4444" strokeWidth={2} name="Rejected" />
+                <Line type="monotone" dataKey="approved" stroke="#10b981" strokeWidth={2} name="Disetujui" />
+                <Line type="monotone" dataKey="rejected" stroke="#ef4444" strokeWidth={2} name="Ditolak" />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -245,7 +245,7 @@ export default function CompensationDashboard() {
               <YAxis stroke="#94a3b8" />
               <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #64748b' }} />
               <Legend />
-              <Bar dataKey="employees" fill="#0ea5e9" name="Employees" />
+              <Bar dataKey="employees" fill="#0ea5e9" name="Karyawans" />
               <Bar dataKey="coverage" fill="#10b981" name="Coverage %" />
             </BarChart>
           </ResponsiveContainer>

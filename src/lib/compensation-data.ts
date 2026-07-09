@@ -3,13 +3,13 @@
 
 export type BenefitType = 'Health Insurance' | 'Life Insurance' | 'Transportation' | 'Meal Allowance' | 'Accommodation' | 'Project Allowance' | 'Communication Allowance' | 'Operational Allowance' | 'Uniform' | 'PPE Allocation' | 'Other';
 
-export type BenefitStatus = 'Active' | 'Inactive' | 'Suspended' | 'Expired';
+export type BenefitStatus = 'Aktif' | 'Inactive' | 'Suspended' | 'Kedaluwarsa';
 
-export type InsuranceStatus = 'Active' | 'Expired' | 'Pending' | 'Cancelled';
+export type InsuranceStatus = 'Aktif' | 'Kedaluwarsa' | 'Menunggu' | 'Dibatalkan';
 
-export type MedicalStatus = 'Completed' | 'Scheduled' | 'Overdue' | 'Expired';
+export type MedicalStatus = 'Selesai' | 'Dijadwalkan' | 'Overdue' | 'Kedaluwarsa';
 
-export type ClaimStatus = 'Pending' | 'Approved' | 'Rejected' | 'Processing' | 'Paid';
+export type ClaimStatus = 'Menunggu' | 'Approved' | 'Ditolak' | 'Processing' | 'Paid';
 
 export interface Benefit {
   id: string;
@@ -59,7 +59,7 @@ export interface MedicalRecord {
   provider: string;
   issueDate: string;
   expiryDate: string;
-  result: 'Fit' | 'Conditional' | 'Unfit' | 'Pending';
+  result: 'Fit' | 'Conditional' | 'Unfit' | 'Menunggu';
   status: MedicalStatus;
   doctorNotes?: string;
   attachments: number;
@@ -89,7 +89,7 @@ export interface EmployeeWelfareProgram {
   budget: number;
   participants: number;
   provider?: string;
-  status: 'Active' | 'Inactive';
+  status: 'Aktif' | 'Inactive';
 }
 
 export interface PayrollReady {
@@ -116,7 +116,7 @@ export interface PayrollReady {
   bankAccount: string;
   bankName: string;
   employmentType: 'Permanent' | 'Contract' | 'Probation';
-  payrollIntegrationStatus: 'Ready' | 'Pending' | 'Error';
+  payrollIntegrationStatus: 'Ready' | 'Menunggu' | 'Error';
 }
 
 export interface CompensationKpi {
@@ -139,7 +139,7 @@ export const benefits: Benefit[] = [
     provider: 'PT Asuransi Kesehatan Indonesia',
     startDate: '2025-01-15',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
     coverage: 'Self + 2 dependents',
   },
   {
@@ -151,7 +151,7 @@ export const benefits: Benefit[] = [
     provider: 'Internal',
     startDate: '2026-06-01',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
     amount: 5000000,
   },
   {
@@ -163,7 +163,7 @@ export const benefits: Benefit[] = [
     provider: 'PT Asuransi Kesehatan Indonesia',
     startDate: '2024-06-01',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
     coverage: 'Self + 1 dependent',
   },
   {
@@ -175,7 +175,7 @@ export const benefits: Benefit[] = [
     provider: 'Internal',
     startDate: '2025-01-01',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
     amount: 1200000,
   },
   {
@@ -187,7 +187,7 @@ export const benefits: Benefit[] = [
     provider: 'PT Asuransi Kesehatan Indonesia',
     startDate: '2025-02-01',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
   },
   {
     id: 'BEN006',
@@ -198,7 +198,7 @@ export const benefits: Benefit[] = [
     provider: 'Internal',
     startDate: '2025-02-01',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
     amount: 800000,
   },
   {
@@ -210,7 +210,7 @@ export const benefits: Benefit[] = [
     provider: 'PT Indocater Company Housing',
     startDate: '2025-02-01',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
     amount: 2000000,
   },
   {
@@ -222,7 +222,7 @@ export const benefits: Benefit[] = [
     provider: 'PT Asuransi Kesehatan Indonesia',
     startDate: '2025-03-15',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
   },
   {
     id: 'BEN009',
@@ -233,7 +233,7 @@ export const benefits: Benefit[] = [
     provider: 'Internal',
     startDate: '2025-03-15',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
     amount: 3500000,
   },
   {
@@ -245,7 +245,7 @@ export const benefits: Benefit[] = [
     provider: 'PT Asuransi Kesehatan Indonesia',
     startDate: '2025-04-01',
     endDate: null,
-    status: 'Active',
+    status: 'Aktif',
   },
 ];
 
@@ -262,7 +262,7 @@ export const insurancePolicies: InsurancePolicy[] = [
     monthlyPremium: 850000,
     issueDate: '2025-01-15',
     expiryDate: '2026-01-14',
-    status: 'Active',
+    status: 'Aktif',
     dependents: 2,
     claimLimit: 500000000,
   },
@@ -277,7 +277,7 @@ export const insurancePolicies: InsurancePolicy[] = [
     monthlyPremium: 125000,
     issueDate: '2025-01-15',
     expiryDate: '2026-01-14',
-    status: 'Active',
+    status: 'Aktif',
     dependents: 0,
     claimLimit: 2500000000,
   },
@@ -292,7 +292,7 @@ export const insurancePolicies: InsurancePolicy[] = [
     monthlyPremium: 650000,
     issueDate: '2024-06-01',
     expiryDate: '2026-05-31',
-    status: 'Active',
+    status: 'Aktif',
     dependents: 1,
     claimLimit: 300000000,
   },
@@ -307,7 +307,7 @@ export const insurancePolicies: InsurancePolicy[] = [
     monthlyPremium: 950000,
     issueDate: '2025-02-01',
     expiryDate: '2026-07-31',
-    status: 'Active',
+    status: 'Aktif',
     dependents: 0,
     claimLimit: 600000000,
   },
@@ -322,7 +322,7 @@ export const insurancePolicies: InsurancePolicy[] = [
     monthlyPremium: 200000,
     issueDate: '2025-02-01',
     expiryDate: '2026-01-31',
-    status: 'Active',
+    status: 'Aktif',
     dependents: 0,
     claimLimit: 1000000000,
   },
@@ -337,7 +337,7 @@ export const insurancePolicies: InsurancePolicy[] = [
     monthlyPremium: 900000,
     issueDate: '2025-03-15',
     expiryDate: '2026-08-31',
-    status: 'Active',
+    status: 'Aktif',
     dependents: 3,
     claimLimit: 800000000,
   },
@@ -407,7 +407,7 @@ export const medicalRecords: MedicalRecord[] = [
     issueDate: '2025-06-15',
     expiryDate: '2026-06-14',
     result: 'Fit',
-    status: 'Completed',
+    status: 'Selesai',
     doctorNotes: 'All parameters within normal range. Fit for offshore operations.',
     attachments: 3,
   },
@@ -421,7 +421,7 @@ export const medicalRecords: MedicalRecord[] = [
     issueDate: '2025-12-01',
     expiryDate: '2026-12-01',
     result: 'Fit',
-    status: 'Completed',
+    status: 'Selesai',
     attachments: 1,
   },
   {
@@ -434,7 +434,7 @@ export const medicalRecords: MedicalRecord[] = [
     issueDate: '2025-07-20',
     expiryDate: '2026-07-19',
     result: 'Fit',
-    status: 'Completed',
+    status: 'Selesai',
     attachments: 3,
   },
   {
@@ -447,7 +447,7 @@ export const medicalRecords: MedicalRecord[] = [
     issueDate: '2025-05-10',
     expiryDate: '2026-05-09',
     result: 'Fit',
-    status: 'Completed',
+    status: 'Selesai',
     doctorNotes: 'Slight elevation in cholesterol. Recommend dietary modification.',
     attachments: 3,
   },
@@ -461,7 +461,7 @@ export const medicalRecords: MedicalRecord[] = [
     issueDate: '2025-08-05',
     expiryDate: '2026-08-04',
     result: 'Fit',
-    status: 'Completed',
+    status: 'Selesai',
     doctorNotes: 'Fit for mining operations. HSE clearance granted.',
     attachments: 4,
   },
@@ -475,7 +475,7 @@ export const medicalRecords: MedicalRecord[] = [
     issueDate: '2024-09-12',
     expiryDate: '2025-09-11',
     result: 'Fit',
-    status: 'Expired',
+    status: 'Kedaluwarsa',
     attachments: 3,
   },
   {
@@ -487,8 +487,8 @@ export const medicalRecords: MedicalRecord[] = [
     provider: 'Klinik Kesehatan Kerja Jakarta',
     issueDate: '2026-06-20',
     expiryDate: '2027-06-19',
-    result: 'Pending',
-    status: 'Scheduled',
+    result: 'Menunggu',
+    status: 'Dijadwalkan',
     attachments: 0,
   },
 ];
@@ -539,7 +539,7 @@ export const claims: Claim[] = [
     claimType: 'Medical - Dental',
     amount: 2000000,
     submissionDate: '2026-06-18',
-    status: 'Pending',
+    status: 'Menunggu',
     approver: 'Eka Puspita (HR Manager)',
     documents: 3,
   },
@@ -550,7 +550,7 @@ export const claims: Claim[] = [
     claimType: 'Medical - Outpatient',
     amount: 1500000,
     submissionDate: '2026-06-20',
-    status: 'Rejected',
+    status: 'Ditolak',
     approver: 'Eka Puspita (HR Manager)',
     rejectionReason: 'Claim exceeds policy limits for outpatient treatment.',
     approvalDate: '2026-06-22',
@@ -564,7 +564,7 @@ export const claims: Claim[] = [
     claimType: 'Medical - Preventive Care',
     amount: 800000,
     submissionDate: '2026-06-22',
-    status: 'Pending',
+    status: 'Menunggu',
     approver: 'Eka Puspita (HR Manager)',
     documents: 2,
   },
@@ -581,7 +581,7 @@ export const welfarePrograms: EmployeeWelfareProgram[] = [
     budget: 500000000,
     participants: 45,
     provider: 'PT Indocater HR Department',
-    status: 'Active',
+    status: 'Aktif',
   },
   {
     id: 'WEL002',
@@ -592,7 +592,7 @@ export const welfarePrograms: EmployeeWelfareProgram[] = [
     budget: 300000000,
     participants: 156,
     provider: 'Elite Fitness Centers',
-    status: 'Active',
+    status: 'Aktif',
   },
   {
     id: 'WEL003',
@@ -603,7 +603,7 @@ export const welfarePrograms: EmployeeWelfareProgram[] = [
     budget: 1200000000,
     participants: 89,
     provider: 'PT Indocater Real Estate',
-    status: 'Active',
+    status: 'Aktif',
   },
   {
     id: 'WEL004',
@@ -614,7 +614,7 @@ export const welfarePrograms: EmployeeWelfareProgram[] = [
     budget: 450000000,
     participants: 78,
     provider: 'PT Indocater Transport',
-    status: 'Active',
+    status: 'Aktif',
   },
   {
     id: 'WEL005',
@@ -625,7 +625,7 @@ export const welfarePrograms: EmployeeWelfareProgram[] = [
     budget: 800000000,
     participants: 234,
     provider: 'PT Indocater Catering',
-    status: 'Active',
+    status: 'Aktif',
   },
   {
     id: 'WEL006',
@@ -636,7 +636,7 @@ export const welfarePrograms: EmployeeWelfareProgram[] = [
     budget: 600000000,
     participants: 123,
     provider: 'PT Asuransi Kesehatan Indonesia',
-    status: 'Active',
+    status: 'Aktif',
   },
   {
     id: 'WEL007',
@@ -647,7 +647,7 @@ export const welfarePrograms: EmployeeWelfareProgram[] = [
     budget: 200000000,
     participants: 234,
     provider: 'PT Indocater HR Department',
-    status: 'Active',
+    status: 'Aktif',
   },
   {
     id: 'WEL008',
@@ -658,7 +658,7 @@ export const welfarePrograms: EmployeeWelfareProgram[] = [
     budget: 150000000,
     participants: 34,
     provider: 'Professional Counseling Services',
-    status: 'Active',
+    status: 'Aktif',
   },
 ];
 

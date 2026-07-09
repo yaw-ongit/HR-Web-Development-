@@ -34,12 +34,12 @@ export default function MedicalPage() {
 
   const columns = useMemo<ColumnDef<typeof medicalRecords[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
-      { accessorKey: 'department', header: 'Department' },
+      { accessorKey: 'employee', header: 'Karyawan' },
+      { accessorKey: 'department', header: 'Departemen' },
       { accessorKey: 'medicalType', header: 'Medical Type' },
       { accessorKey: 'provider', header: 'Provider' },
-      { accessorKey: 'issueDate', header: 'Issue Date' },
-      { accessorKey: 'expiryDate', header: 'Expiry Date' },
+      { accessorKey: 'issueTanggal', header: 'Issue Tanggal' },
+      { accessorKey: 'expiryTanggal', header: 'Expiry Tanggal' },
       {
         accessorKey: 'result',
         header: 'Result',
@@ -74,7 +74,7 @@ export default function MedicalPage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/compensation/medical" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             View <ArrowRight className="h-3.5 w-3.5" />
@@ -220,14 +220,14 @@ export default function MedicalPage() {
             />
           </div>
           <select value={medicalType} onChange={(event) => setMedicalType(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All types</option>
+            <option value="All">Semua jenis</option>
             <option value="MCU">MCU</option>
             <option value="Vaccination">Vaccination</option>
             <option value="Health Check">Health Check</option>
             <option value="Specialist Review">Specialist Review</option>
           </select>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
+            <option value="All">Semua status</option>
             <option value="Completed">Completed</option>
             <option value="Scheduled">Scheduled</option>
             <option value="Overdue">Overdue</option>

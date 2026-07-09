@@ -32,15 +32,15 @@ export default function LoginPage() {
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl items-center gap-10 lg:grid-cols-[1fr_420px]">
         {/* Brand panel */}
         <section aria-label="Branding HRIS PT Indocater" className="space-y-6">
-          <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-gradient-to-br from-brand-700 to-brand-500 ring-1 ring-brand-600" aria-hidden="true">
-            <ShieldCheck className="h-7 w-7 text-white" />
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-brand-200" aria-hidden="true">
+            <img src="/logo.svg" alt="PT Indocater" className="h-12 w-12 object-contain" />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">PT Indocater HRIS</p>
-            <h1 className="mt-2 max-w-lg text-4xl font-semibold text-slate-900 lg:text-5xl">
-              Platform HR internal yang aman
+            <p className="text-xs uppercase tracking-[0.3em] text-indogold-600 font-bold">PT Indocater</p>
+            <h1 className="mt-2 max-w-lg text-4xl font-bold text-brand-900 lg:text-5xl">
+              Enterprise HRIS System
             </h1>
-            <p className="mt-4 max-w-md text-sm leading-7 text-slate-400">
+            <p className="mt-4 max-w-md text-sm leading-7 text-slate-500">
               Masuk untuk mengelola operasi HR, persetujuan, data karyawan, dan analitik dari satu portal terpadu.
             </p>
           </div>

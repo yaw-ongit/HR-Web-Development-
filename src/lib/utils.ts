@@ -8,15 +8,15 @@ export function cn(...inputs: ClassValue[]) {
 /** Format a number as a locale string with optional compact notation */
 export function formatNumber(value: number, compact = false): string {
   if (compact && value >= 1_000) {
-    return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(value);
+    return new Intl.NumberFormat('id-ID', { notation: 'compact', maximumFractionDigits: 1 }).format(value);
   }
-  return new Intl.NumberFormat('en-US').format(value);
+  return new Intl.NumberFormat('id-ID').format(value);
 }
 
 /** Format a date string or Date object to a readable locale string */
 export function formatDate(date: string | Date, options?: Intl.DateTimeFormatOptions): string {
   const d = typeof date === 'string' ? new Date(date) : date;
-  return d.toLocaleDateString('en-US', options ?? { year: 'numeric', month: 'short', day: 'numeric' });
+  return d.toLocaleDateString('id-ID', options ?? { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
 /** Truncate a string to the given length with an ellipsis */
@@ -39,10 +39,10 @@ export type StatusVariant = 'success' | 'warning' | 'danger' | 'info' | 'neutral
 
 export function getStatusVariant(status: string): StatusVariant {
   const s = status.toLowerCase();
-  if (['active', 'present', 'approved', 'completed', 'good', 'passed'].includes(s)) return 'success';
-  if (['pending', 'on leave', 'review', 'upcoming', 'expiring'].includes(s)) return 'warning';
-  if (['inactive', 'absent', 'rejected', 'failed', 'critical', 'expired'].includes(s)) return 'danger';
-  if (['wfh', 'info', 'processing', 'submitted'].includes(s)) return 'info';
+  if (['active', 'aktif', 'present', 'approved', 'completed', 'good', 'passed', 'disetujui', 'selesai', 'layak'].includes(s)) return 'success';
+  if (['pending', 'on leave', 'review', 'upcoming', 'expiring', 'cuti', 'menunggu', 'sedang berlangsung', 'terjadwal', 'magang', 'kontrak'].includes(s)) return 'warning';
+  if (['inactive', 'absent', 'rejected', 'failed', 'critical', 'expired', 'ditolak', 'kedaluwarsa', 'error', 'tidak aktif'].includes(s)) return 'danger';
+  if (['wfh', 'info', 'processing', 'submitted', 'dalam proses', 'diproses', 'pending'].includes(s)) return 'info';
   return 'neutral';
 }
 

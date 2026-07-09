@@ -34,9 +34,9 @@ export default function PayrollReadyPage() {
 
   const columns = useMemo<ColumnDef<typeof payrollReady[number]>[]>(
     () => [
-      { accessorKey: 'employee', header: 'Employee' },
+      { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'position', header: 'Position' },
-      { accessorKey: 'department', header: 'Department' },
+      { accessorKey: 'department', header: 'Departemen' },
       {
         accessorKey: 'basicSalary',
         header: 'Basic Salary',
@@ -57,7 +57,7 @@ export default function PayrollReadyPage() {
           const color =
             value === 'Ready'
               ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Pending'
+              : value === 'Menunggu'
               ? 'bg-amber-50 text-amber-200'
               : 'bg-rose-50 text-rose-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
@@ -65,7 +65,7 @@ export default function PayrollReadyPage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/compensation/payroll-ready" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             View <ArrowRight className="h-3.5 w-3.5" />
@@ -164,7 +164,7 @@ export default function PayrollReadyPage() {
           <div className="mt-6 space-y-3">
             {[
               { status: 'Ready', count: readyCount, color: 'bg-emerald-500' },
-              { status: 'Pending', count: payrollReady.filter((p) => p.payrollIntegrationStatus === 'Pending').length, color: 'bg-amber-500' },
+              { status: 'Menunggu', count: payrollReady.filter((p) => p.payrollIntegrationStatus === 'Menunggu').length, color: 'bg-amber-500' },
               { status: 'Error', count: payrollReady.filter((p) => p.payrollIntegrationStatus === 'Error').length, color: 'bg-rose-500' },
             ].map((item) => (
               <div key={item.status} className="rounded-2xl bg-white/80 p-3 border border-slate-100">
@@ -220,14 +220,14 @@ export default function PayrollReadyPage() {
           >
             {departments.map((dept) => (
               <option key={dept} value={dept}>
-                {dept === 'All' ? 'All departments' : dept}
+                {dept === 'All' ? 'Semua departemen' : dept}
               </option>
             ))}
           </select>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
+            <option value="All">Semua status</option>
             <option value="Ready">Ready</option>
-            <option value="Pending">Pending</option>
+            <option value="Menunggu">Menunggu</option>
             <option value="Error">Error</option>
           </select>
         </div>

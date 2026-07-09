@@ -33,9 +33,9 @@ export default function TalentHiringPage() {
     () => [
       { accessorKey: 'candidate', header: 'Kandidat' },
       { accessorKey: 'position', header: 'Position' },
-      { accessorKey: 'department', header: 'Department' },
-      { accessorKey: 'manager', header: 'Manager' },
-      { accessorKey: 'hireDate', header: 'Hire date' },
+      { accessorKey: 'department', header: 'Departemen' },
+      { accessorKey: 'manager', header: 'Manajer' },
+      { accessorKey: 'hireTanggal', header: 'Hire date' },
       { accessorKey: 'salaryBand', header: 'Salary band' },
       {
         accessorKey: 'status',
@@ -53,7 +53,7 @@ export default function TalentHiringPage() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: 'Aksi',
         cell: () => (
           <Link href="/talent/hiring" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
             View <ArrowRight className="h-3.5 w-3.5" />
@@ -77,7 +77,7 @@ export default function TalentHiringPage() {
   });
 
   const metrics = [
-    { label: 'Offers extended', value: '6', subtext: 'Pending response' },
+    { label: 'Offers extended', value: '6', subtext: 'Menunggu response' },
     { label: 'Accepted', value: '14', subtext: 'This quarter' },
     { label: 'Offer acceptance rate', value: '88%', subtext: 'Historical' },
     { label: 'Time to hire', value: '24 days', subtext: 'Average' },
@@ -135,10 +135,10 @@ export default function TalentHiringPage() {
             />
           </div>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
-            <option value="All">All statuses</option>
+            <option value="All">Semua status</option>
             <option value="Offer Extended">Tawaran Diperpanjang</option>
             <option value="Accepted">Diterima</option>
-            <option value="Rejected">Ditolak</option>
+            <option value="Ditolak">Ditolak</option>
             <option value="Onboarding">Onboarding</option>
           </select>
         </div>
