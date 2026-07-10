@@ -42,7 +42,7 @@ function WidgetCalendar({ title }: { title: string }) {
   return (
     <Card title={title} description="Ringkasan kehadiran dan ketidakhadiran bulanan.">
       <div className="grid grid-cols-7 gap-1.5 text-[11px] text-slate-400">
-        {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((d) => (
+        {['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map((d) => (
           <span key={d} className="text-center font-semibold text-slate-400">{d}</span>
         ))}
         {Array.from({ length: 28 }).map((_, i) => (
@@ -57,7 +57,7 @@ function WidgetBalance({ title }: { title: string }) {
   return (
     <Card title={title} description="Ringkasan saldo cuti dan akrual.">
       <div className="grid grid-cols-3 gap-3">
-        {[{ label: 'Annual', value: '9 days' }, { label: 'Sick', value: '4 days' }, { label: 'Personal', value: '2 days' }].map((item) => (
+        {[{ label: 'Tahunan', value: '9 hari' }, { label: 'Sakit', value: '4 hari' }, { label: 'Pribadi', value: '2 hari' }].map((item) => (
           <div key={item.label} className="rounded-2xl bg-white/90 p-3 text-center">
             <p className="text-[10px] uppercase tracking-[0.24em] text-slate-400">{item.label}</p>
             <p className="mt-2 text-xl font-semibold text-slate-900">{item.value}</p>
@@ -125,7 +125,7 @@ function WidgetTraining({ title }: { title: string }) {
   return (
     <Card title={title} description="Jadwal pelatihan dan kemajuan sesi.">
       <div className="space-y-4">
-        {[{ course: 'Manajer Essentials', progress: 68 }, { course: 'Compliance Certification', progress: 92 }].map((item) => (
+        {[{ course: 'Kepemimpinan Manajer', progress: 68 }, { course: 'Sertifikasi Kepatuhan', progress: 92 }].map((item) => (
           <div key={item.course} className="rounded-2xl bg-white/80 p-4">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-slate-900">{item.course}</p>
@@ -143,7 +143,7 @@ function WidgetTraining({ title }: { title: string }) {
 
 function WidgetWorkforce({ title }: { title: string }) {
   return (
-    <Card title={title} description="Headcount trend over six months.">
+    <Card title={title} description="Tren headcount selama enam bulan.">
       <div className="h-64" aria-label="Headcount trend chart">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={employeeMetrics.headcountTrend} margin={{ top: 8, right: 12, left: -12, bottom: 8 }}>
@@ -167,7 +167,7 @@ function WidgetWorkforce({ title }: { title: string }) {
 
 function WidgetComparison({ title }: { title: string }) {
   return (
-    <Card title={title} description="Comparative department performance.">
+    <Card title={title} description="Perbandingan kinerja departemen.">
       <div className="h-64" aria-label="Department comparison chart">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={employeeMetrics.departments} margin={{ top: 16, right: 16, left: 0, bottom: 0 }}>
@@ -186,7 +186,7 @@ function WidgetComparison({ title }: { title: string }) {
 function WidgetDistribution({ title }: { title: string }) {
   const PIE_COLORS = ['#38bdf8', '#7c3aed', '#22c55e', '#f97316', '#0ea5e9'];
   return (
-    <Card title={title} description="Org distribution by department.">
+    <Card title={title} description="Distribusi organisasi per departemen.">
       <div className="h-64" aria-label="Department distribution chart">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -207,7 +207,7 @@ function WidgetApprovals({ title }: { title: string }) {
   return (
     <Card title={title} description="Persetujuan tertunda yang membutuhkan tindakan Anda.">
       <ul className="space-y-3" aria-label="Menunggu approvals">
-        {[{ label: 'Leave request — Jonah', status: 'Menunggu' }, { label: 'Contract extension — Finance', status: 'Review' }].map((item) => (
+        {[{ label: 'Permintaan cuti — Lia Pratiwi', status: 'Menunggu' }, { label: 'Perpanjangan kontrak — Keuangan', status: 'Review' }].map((item) => (
           <li key={item.label} className="flex items-center justify-between rounded-2xl bg-white/80 p-4">
             <p className="text-sm font-semibold text-slate-900">{item.label}</p>
             <StatusBadge status={item.status} />
@@ -259,7 +259,7 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
   birthdays: ({ title }) => (
     <Card title={title} description="Rekan kerja yang merayakan ulang tahun minggu ini.">
       <ul className="space-y-3">
-        {['Maya Thompson', 'Noah Brooks', 'Avery Patel'].map((name) => (
+        {['Maya Sari', 'Noor Fadhila', 'Aulia Rizky'].map((name) => (
           <li key={name} className="rounded-2xl bg-white/80 p-4">
             <p className="text-sm font-semibold text-slate-900">🎂 {name}</p>
             <p className="text-xs text-slate-400">Anggota Tim</p>
@@ -286,7 +286,7 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
   server: ({ title }) => (
     <Card title={title} description="Kesehatan server — CPU, memori, disk." footer={<p className="text-xs text-slate-400">Diperbarui barusan</p>}>
       <div className="space-y-3">
-        {[{ metric: 'CPU', value: '58%' }, { metric: 'Memory', value: '72%' }, { metric: 'Disk', value: '41%' }].map((item) => (
+        {[{ metric: 'CPU', value: '58%' }, { metric: 'Memori', value: '72%' }, { metric: 'Disk', value: '41%' }].map((item) => (
           <div key={item.metric} className="rounded-2xl bg-white/80 p-4">
             <p className="text-sm text-slate-400">{item.metric}</p>
             <p className="mt-1.5 text-xl font-semibold text-slate-900">{item.value}</p>
@@ -298,10 +298,10 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
   logs: ({ title }) => (
     <Card title={title} description="Entri audit terbaru.">
       <ul className="space-y-3">
-        {['User access updated', 'Policy audit completed', 'SSH key rotation'].map((item) => (
+        {['Akses pengguna diperbarui', 'Audit kebijakan selesai', 'Rotasi kunci SSH'].map((item) => (
           <li key={item} className="rounded-2xl bg-white/80 p-4">
             <p className="text-sm text-slate-900">{item}</p>
-            <p className="text-xs text-slate-400">Completed</p>
+            <p className="text-xs text-slate-400">Selesai</p>
           </li>
         ))}
       </ul>
@@ -310,7 +310,7 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
   alerts: ({ title }) => (
     <Card title={title} description="Peringatan keamanan yang membutuhkan tinjauan admin.">
       <ul className="space-y-3">
-        {[{ label: 'MFA configured', level: 'Info' }, { label: 'Unusual login pattern', level: 'Critical' }].map((item) => (
+        {[{ label: 'MFA dikonfigurasi', level: 'Info' }, { label: 'Pola login tidak biasa', level: 'Kritis' }].map((item) => (
           <li key={item.label} className="rounded-2xl bg-white/80 p-4">
             <p className="text-sm font-semibold text-slate-900">{item.label}</p>
             <StatusBadge status={item.level} className="mt-1" />

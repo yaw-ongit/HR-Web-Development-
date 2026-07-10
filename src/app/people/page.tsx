@@ -14,7 +14,7 @@ import { SectionContainer } from '@/components/layout/section-container';
 import { NoKaryawansEmptyState } from '@/components/ui/empty-state';
 import {
   employeeDirectory, departmentOptions, positionOptions, statusOptions,
-  contractOptions, branchOptions, locationOptions, genderOptions, EmployeeRecord,
+  contractOptions, branchOptions, locationOptions, genderOptions, KaryawanRecord,
 } from '@/lib/people-data';
 
 export default function PeopleDirectoryPage() {
@@ -40,7 +40,7 @@ export default function PeopleDirectoryPage() {
     });
   }, [search, department, position, status, contractType, branch]);
 
-  const columns = useMemo<ColumnDef<EmployeeRecord>[]>(() => [
+  const columns = useMemo<ColumnDef<KaryawanRecord>[]>(() => [
     {
       id: 'select',
       header: ({ table }) => (

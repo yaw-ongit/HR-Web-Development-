@@ -72,11 +72,11 @@ export const workforceKpis: WorkforceKpi[] = [
 ];
 
 export const workforceQuickActions: WorkforceQuickAction[] = [
-  { label: 'Ajukan Cuti', href: '/workforce/leave-management', description: 'Submit a new leave request.' },
-  { label: 'Setujui Cuti', href: '/workforce/leave-management', description: 'Review pending approvals.' },
-  { label: 'Buat Laporan Kehadiran', href: '/workforce/attendance', description: 'Export today’s attendance data.' },
-  { label: 'Jadwalkan Shift', href: '/workforce/shift-management', description: 'Map people to shift templates.' },
-  { label: 'Setujui Lembur', href: '/workforce/overtime', description: 'Review overtime permintaan.' },
+  { label: 'Ajukan Cuti', href: '/workforce/leave-management', description: 'Kirim pengajuan cuti baru.' },
+  { label: 'Setujui Cuti', href: '/workforce/leave-management', description: 'Tinjau persetujuan yang tertunda.' },
+  { label: 'Buat Laporan Kehadiran', href: '/workforce/attendance', description: 'Ekspor data kehadiran hari ini.' },
+  { label: 'Jadwalkan Shift', href: '/workforce/shift-management', description: 'Atur template shift karyawan.' },
+  { label: 'Setujui Lembur', href: '/workforce/overtime', description: 'Tinjau permintaan lembur.' },
 ];
 
 export const attendanceTrend = [
@@ -84,7 +84,7 @@ export const attendanceTrend = [
   { month: 'Feb', rate: 94 },
   { month: 'Mar', rate: 96 },
   { month: 'Apr', rate: 97 },
-  { month: 'May', rate: 98 },
+  { month: 'Mei', rate: 98 },
   { month: 'Jun', rate: 97 },
 ];
 
@@ -93,7 +93,7 @@ export const lateArrivalTrend = [
   { month: 'Feb', value: 68 },
   { month: 'Mar', value: 54 },
   { month: 'Apr', value: 48 },
-  { month: 'May', value: 42 },
+  { month: 'Mei', value: 42 },
   { month: 'Jun', value: 43 },
 ];
 
@@ -102,7 +102,7 @@ export const leaveTrend = [
   { month: 'Feb', value: 128 },
   { month: 'Mar', value: 132 },
   { month: 'Apr', value: 126 },
-  { month: 'May', value: 120 },
+  { month: 'Mei', value: 120 },
   { month: 'Jun', value: 118 },
 ];
 
@@ -111,7 +111,7 @@ export const overtimeTrend = [
   { month: 'Feb', value: 78 },
   { month: 'Mar', value: 84 },
   { month: 'Apr', value: 82 },
-  { month: 'May', value: 90 },
+  { month: 'Mei', value: 90 },
   { month: 'Jun', value: 78 },
 ];
 
@@ -135,36 +135,36 @@ export const attendanceOverview = {
 };
 
 export const attendanceCalendar: WorkforceCalendarDay[] = [
-  { day: 1, weekday: 'Mo', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Most karyawan on site' },
-  { day: 2, weekday: 'Tu', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Minimal late arrivals' },
-  { day: 3, weekday: 'We', status: 'Terlambat', color: 'bg-amber-50 text-amber-200', note: 'Executive town hall' },
-  { day: 4, weekday: 'Th', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Normal attendance' },
-  { day: 5, weekday: 'Fr', status: 'WFH', color: 'bg-brand-50/50 text-brand-500', note: 'Remote work day' },
-  { day: 6, weekday: 'Sa', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Company holiday' },
-  { day: 7, weekday: 'Su', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Weekend' },
-  { day: 8, weekday: 'Mo', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'High attendance' },
-  { day: 9, weekday: 'Tu', status: 'Absen', color: 'bg-rose-50 text-rose-200', note: 'Planned leave starts' },
-  { day: 10, weekday: 'We', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Steady attendance' },
-  { day: 11, weekday: 'Th', status: 'Dinas', color: 'bg-violet-500/10 text-violet-200', note: 'Sales team travel' },
-  { day: 12, weekday: 'Fr', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Team planning session' },
-  { day: 13, weekday: 'Sa', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Weekend' },
-  { day: 14, weekday: 'Su', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Weekend' },
-  { day: 15, weekday: 'Mo', status: 'Terlambat', color: 'bg-amber-50 text-amber-200', note: 'Traffic delay' },
-  { day: 16, weekday: 'Tu', status: 'WFH', color: 'bg-brand-50/50 text-brand-500', note: 'Remote day' },
-  { day: 17, weekday: 'We', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Strong attendance' },
-  { day: 18, weekday: 'Th', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Operational cadence' },
-  { day: 19, weekday: 'Fr', status: 'Terlambat', color: 'bg-amber-50 text-amber-200', note: 'Station closure' },
-  { day: 20, weekday: 'Sa', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Weekend' },
-  { day: 21, weekday: 'Su', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Weekend' },
-  { day: 22, weekday: 'Mo', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Core workforce present' },
-  { day: 23, weekday: 'Tu', status: 'Dinas', color: 'bg-violet-500/10 text-violet-200', note: 'Regional team travel' },
-  { day: 24, weekday: 'We', status: 'Absen', color: 'bg-rose-50 text-rose-200', note: 'Office maintenance' },
-  { day: 25, weekday: 'Th', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Strong operations' },
-  { day: 26, weekday: 'Fr', status: 'Terlambat', color: 'bg-amber-50 text-amber-200', note: 'Late shift handoff' },
-  { day: 27, weekday: 'Sa', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Weekend' },
-  { day: 28, weekday: 'Su', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Weekend' },
-  { day: 29, weekday: 'Mo', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Planning day' },
-  { day: 30, weekday: 'Tu', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Regular attendance' },
+  { day: 1, weekday: 'Sen', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Sebagian besar karyawan hadir' },
+  { day: 2, weekday: 'Sel', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Keterlambatan minim' },
+  { day: 3, weekday: 'Rab', status: 'Terlambat', color: 'bg-amber-50 text-amber-200', note: 'Town hall eksekutif' },
+  { day: 4, weekday: 'Kam', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Kehadiran normal' },
+  { day: 5, weekday: 'Jum', status: 'WFH', color: 'bg-brand-50/50 text-brand-500', note: 'Hari kerja remote' },
+  { day: 6, weekday: 'Sab', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Hari libur perusahaan' },
+  { day: 7, weekday: 'Min', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Akhir pekan' },
+  { day: 8, weekday: 'Sen', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Kehadiran tinggi' },
+  { day: 9, weekday: 'Sel', status: 'Absen', color: 'bg-rose-50 text-rose-200', note: 'Dimulainya cuti terencana' },
+  { day: 10, weekday: 'Rab', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Kehadiran stabil' },
+  { day: 11, weekday: 'Kam', status: 'Dinas', color: 'bg-violet-500/10 text-violet-200', note: 'Perjalanan tim penjualan' },
+  { day: 12, weekday: 'Jum', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Sesi perencanaan tim' },
+  { day: 13, weekday: 'Sab', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Akhir pekan' },
+  { day: 14, weekday: 'Min', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Akhir pekan' },
+  { day: 15, weekday: 'Sen', status: 'Terlambat', color: 'bg-amber-50 text-amber-200', note: 'Keterlambatan lalu lintas' },
+  { day: 16, weekday: 'Sel', status: 'WFH', color: 'bg-brand-50/50 text-brand-500', note: 'Hari remote' },
+  { day: 17, weekday: 'Rab', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Kehadiran kuat' },
+  { day: 18, weekday: 'Kam', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Operasional lancar' },
+  { day: 19, weekday: 'Jum', status: 'Terlambat', color: 'bg-amber-50 text-amber-200', note: 'Penutupan stasiun' },
+  { day: 20, weekday: 'Sab', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Akhir pekan' },
+  { day: 21, weekday: 'Min', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Akhir pekan' },
+  { day: 22, weekday: 'Sen', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Tenaga kerja inti hadir' },
+  { day: 23, weekday: 'Sel', status: 'Dinas', color: 'bg-violet-500/10 text-violet-200', note: 'Perjalanan tim regional' },
+  { day: 24, weekday: 'Rab', status: 'Absen', color: 'bg-rose-50 text-rose-200', note: 'Pemeliharaan kantor' },
+  { day: 25, weekday: 'Kam', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Operasional lancar' },
+  { day: 26, weekday: 'Jum', status: 'Terlambat', color: 'bg-amber-50 text-amber-200', note: 'Pergantian shift terlambat' },
+  { day: 27, weekday: 'Sab', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Akhir pekan' },
+  { day: 28, weekday: 'Min', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Akhir pekan' },
+  { day: 29, weekday: 'Sen', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Hari perencanaan' },
+  { day: 30, weekday: 'Sel', status: 'Hadir', color: 'bg-emerald-50 text-emerald-200', note: 'Kehadiran reguler' },
 ];
 
 export const leaveTypes = [
@@ -182,17 +182,17 @@ export const leaveOverview = {
   pending: 12,
   approved: 64,
   rejected: 8,
-  balance: '14 days',
+  balance: '14 hari',
 };
 
 export const leaveCalendar: WorkforceCalendarDay[] = [
-  { day: 1, weekday: 'Mo', status: 'Disetujui', color: 'bg-emerald-50 text-emerald-200', note: 'Annual leave' },
-  { day: 2, weekday: 'Tu', status: 'Menunggu', color: 'bg-amber-50 text-amber-200', note: 'Request review' },
-  { day: 3, weekday: 'We', status: 'Sick', color: 'bg-rose-50 text-rose-200', note: 'Sick leave' },
-  { day: 4, weekday: 'Th', status: 'Disetujui', color: 'bg-emerald-50 text-emerald-200', note: 'Marriage leave' },
-  { day: 5, weekday: 'Fr', status: 'Disetujui', color: 'bg-emerald-50 text-emerald-200', note: 'Annual leave' },
-  { day: 6, weekday: 'Sa', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Weekend' },
-  { day: 7, weekday: 'Su', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Weekend' },
+  { day: 1, weekday: 'Sen', status: 'Disetujui', color: 'bg-emerald-50 text-emerald-200', note: 'Cuti tahunan' },
+  { day: 2, weekday: 'Sel', status: 'Menunggu', color: 'bg-amber-50 text-amber-200', note: 'Review pengajuan' },
+  { day: 3, weekday: 'Rab', status: 'Sakit', color: 'bg-rose-50 text-rose-200', note: 'Cuti sakit' },
+  { day: 4, weekday: 'Kam', status: 'Disetujui', color: 'bg-emerald-50 text-emerald-200', note: 'Cuti menikah' },
+  { day: 5, weekday: 'Jum', status: 'Disetujui', color: 'bg-emerald-50 text-emerald-200', note: 'Cuti tahunan' },
+  { day: 6, weekday: 'Sab', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Akhir pekan' },
+  { day: 7, weekday: 'Min', status: 'Libur', color: 'bg-slate-600/10 text-slate-800', note: 'Akhir pekan' },
 ];
 
 export const workforceDepartmentOptions = [
@@ -213,7 +213,7 @@ export const shiftOverview = [
 ];
 
 export const overtimeOverview = [
-  { label: 'Total Lembur', value: '78 hrs' },
+  { label: 'Total Lembur', value: '78 jam' },
   { label: 'Menunggu Persetujuan', value: '18 permintaan' },
   { label: 'Disetujui', value: '52 permintaan' },
   { label: 'Ditolak', value: '8 permintaan' },
@@ -233,27 +233,27 @@ export const attendanceRecords: AttendanceRecord[] = [
 ];
 
 export const leaveRequests: LeaveRequest[] = [
-  { id: 'l1', employee: 'Zara Nurhidayah', leaveType: 'Cuti Tahunan', startDate: '2026-07-05', endDate: '2026-07-09', duration: '5 days', status: 'Menunggu', approver: 'Maya Sari' },
-  { id: 'l2', employee: 'Emily Putri', leaveType: 'Cuti Sakit', startDate: '2026-06-21', endDate: '2026-06-23', duration: '3 days', status: 'Disetujui', approver: 'Leo Wibowo' },
-  { id: 'l3', employee: 'Lia Pratiwi', leaveType: 'Cuti Menikah', startDate: '2026-08-02', endDate: '2026-08-06', duration: '5 days', status: 'Menunggu', approver: 'Noor Fadhila' },
-  { id: 'l4', employee: 'Aulia Rizky', leaveType: 'Cuti Tahunan', startDate: '2026-07-12', endDate: '2026-07-16', duration: '5 days', status: 'Disetujui', approver: 'Noor Fadhila' },
-  { id: 'l5', employee: 'Caleb Santoso', leaveType: 'Cuti Sakit', startDate: '2026-06-17', endDate: '2026-06-18', duration: '2 days', status: 'Ditolak', approver: 'Aulia Rizky' },
-  { id: 'l6', employee: 'Juni Rahmawati', leaveType: 'Cuti di Luar Tanggungan', startDate: '2026-06-29', endDate: '2026-07-01', duration: '3 days', status: 'Menunggu', approver: 'Maya Sari' },
-  { id: 'l7', employee: 'Sophia Septiani', leaveType: 'Cuti Khusus', startDate: '2026-09-14', endDate: '2026-09-16', duration: '3 days', status: 'Disetujui', approver: 'Zara Nurhidayah' },
+  { id: 'l1', employee: 'Zara Nurhidayah', leaveType: 'Cuti Tahunan', startDate: '2026-07-05', endDate: '2026-07-09', duration: '5 hari', status: 'Menunggu', approver: 'Maya Sari' },
+  { id: 'l2', employee: 'Emily Putri', leaveType: 'Cuti Sakit', startDate: '2026-06-21', endDate: '2026-06-23', duration: '3 hari', status: 'Disetujui', approver: 'Leo Wibowo' },
+  { id: 'l3', employee: 'Lia Pratiwi', leaveType: 'Cuti Menikah', startDate: '2026-08-02', endDate: '2026-08-06', duration: '5 hari', status: 'Menunggu', approver: 'Noor Fadhila' },
+  { id: 'l4', employee: 'Aulia Rizky', leaveType: 'Cuti Tahunan', startDate: '2026-07-12', endDate: '2026-07-16', duration: '5 hari', status: 'Disetujui', approver: 'Noor Fadhila' },
+  { id: 'l5', employee: 'Caleb Santoso', leaveType: 'Cuti Sakit', startDate: '2026-06-17', endDate: '2026-06-18', duration: '2 hari', status: 'Ditolak', approver: 'Aulia Rizky' },
+  { id: 'l6', employee: 'Juni Rahmawati', leaveType: 'Cuti di Luar Tanggungan', startDate: '2026-06-29', endDate: '2026-07-01', duration: '3 hari', status: 'Menunggu', approver: 'Maya Sari' },
+  { id: 'l7', employee: 'Sophia Septiani', leaveType: 'Cuti Khusus', startDate: '2026-09-14', endDate: '2026-09-16', duration: '3 hari', status: 'Disetujui', approver: 'Zara Nurhidayah' },
 ];
 
 export const shiftSchedules: ShiftSchedule[] = [
-  { id: 's1', shiftName: 'Shift Pagi', karyawan: 112, workingHours: '08:00 - 16:00', manager: 'Noor Fadhila', status: 'Active' },
-  { id: 's2', shiftName: 'Shift Sore', karyawan: 86, workingHours: '12:00 - 20:00', manager: 'Lia Pratiwi', status: 'Active' },
-  { id: 's3', shiftName: 'Shift Malam', karyawan: 42, workingHours: '22:00 - 06:00', manager: 'Emily Putri', status: 'Active' },
-  { id: 's4', shiftName: 'Shift Akhir Pekan', karyawan: 28, workingHours: '09:00 - 17:00', manager: 'Aulia Rizky', status: 'Planned' },
+  { id: 's1', shiftName: 'Shift Pagi', karyawan: 112, workingHours: '08:00 - 16:00', manager: 'Noor Fadhila', status: 'Aktif' },
+  { id: 's2', shiftName: 'Shift Sore', karyawan: 86, workingHours: '12:00 - 20:00', manager: 'Lia Pratiwi', status: 'Aktif' },
+  { id: 's3', shiftName: 'Shift Malam', karyawan: 42, workingHours: '22:00 - 06:00', manager: 'Emily Putri', status: 'Aktif' },
+  { id: 's4', shiftName: 'Shift Akhir Pekan', karyawan: 28, workingHours: '09:00 - 17:00', manager: 'Aulia Rizky', status: 'Direncanakan' },
 ];
 
 export const overtimeRequests: OvertimeRequest[] = [
-  { id: 'o1', employee: 'Leo Wibowo', department: 'Teknologi', date: '2026-06-18', jam: '3.5', reason: 'Release support', status: 'Menunggu' },
-  { id: 'o2', employee: 'Caleb Santoso', department: 'Keuangan', date: '2026-06-17', jam: '2.0', reason: 'Month-end close', status: 'Disetujui' },
-  { id: 'o3', employee: 'Lia Pratiwi', department: 'Layanan Pelanggan', date: '2026-06-18', jam: '1.5', reason: 'Client onboarding', status: 'Menunggu' },
-  { id: 'o4', employee: 'Maya Sari', department: 'SDM', date: '2026-06-16', jam: '2.5', reason: 'Event prep', status: 'Disetujui' },
-  { id: 'o5', employee: 'Juni Rahmawati', department: 'Hukum', date: '2026-06-15', jam: '3.0', reason: 'Contract review', status: 'Ditolak' },
-  { id: 'o6', employee: 'Sophia Septiani', department: 'Produk', date: '2026-06-18', jam: '2.0', reason: 'Launch readiness', status: 'Menunggu' },
+  { id: 'o1', employee: 'Leo Wibowo', department: 'Teknologi', date: '2026-06-18', jam: '3.5', reason: 'Dukungan rilis', status: 'Menunggu' },
+  { id: 'o2', employee: 'Caleb Santoso', department: 'Keuangan', date: '2026-06-17', jam: '2.0', reason: 'Tutup buku akhir bulan', status: 'Disetujui' },
+  { id: 'o3', employee: 'Lia Pratiwi', department: 'Layanan Pelanggan', date: '2026-06-18', jam: '1.5', reason: 'Onboarding klien', status: 'Menunggu' },
+  { id: 'o4', employee: 'Maya Sari', department: 'SDM', date: '2026-06-16', jam: '2.5', reason: 'Persiapan acara', status: 'Disetujui' },
+  { id: 'o5', employee: 'Juni Rahmawati', department: 'Hukum', date: '2026-06-15', jam: '3.0', reason: 'Review kontrak', status: 'Ditolak' },
+  { id: 'o6', employee: 'Sophia Septiani', department: 'Produk', date: '2026-06-18', jam: '2.0', reason: 'Persiapan peluncuran', status: 'Menunggu' },
 ];

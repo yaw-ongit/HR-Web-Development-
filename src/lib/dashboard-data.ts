@@ -165,19 +165,19 @@ export const employeeMetrics = {
     { name: 'Keahlian', value: 68 },
   ],
   departments: [
-    { name: 'Engineering', value: 28 },
-    { name: 'Personalia', value: 18 },
-    { name: 'Sales', value: 24 },
-    { name: 'Marketing', value: 14 },
-    { name: 'Finance', value: 16 },
+    { name: 'Teknologi', value: 28 },
+    { name: 'SDM', value: 18 },
+    { name: 'Penjualan', value: 24 },
+    { name: 'Pemasaran', value: 14 },
+    { name: 'Keuangan', value: 16 },
   ],
 };
 
 export const recentActivity = [
-  { actor: 'Maya Thompson', role: 'HR Officer', action: 'Menyetujui permintaan cuti untuk Leo Hunter', time: '12m lalu', status: 'success' },
-  { actor: 'Avery Patel', role: 'Supervisor', action: 'Menugaskan pelatihan ke tim produk', time: '28m lalu', status: 'info' },
-  { actor: 'Riley Chen', role: 'Administrator', action: 'Memperbarui izin role untuk grup keamanan', time: '1j lalu', status: 'warning' },
-  { actor: 'Noah Brooks', role: 'Karyawan', action: 'Mengajukan permintaan biaya perjalanan dinas', time: '2j lalu', status: 'neutral' },
+  { actor: 'Maya Sari', role: 'Staf SDM', action: 'Menyetujui permintaan cuti untuk Leo Wibowo', time: '12m lalu', status: 'success' },
+  { actor: 'Aulia Rizky', role: 'Supervisor', action: 'Menugaskan pelatihan ke tim produk', time: '28m lalu', status: 'info' },
+  { actor: 'Caleb Santoso', role: 'Administrator', action: 'Memperbarui izin role untuk grup keamanan', time: '1j lalu', status: 'warning' },
+  { actor: 'Noor Fadhila', role: 'Manajer SDM', action: 'Mengajukan permintaan biaya perjalanan dinas', time: '2j lalu', status: 'neutral' },
 ];
 
 export const systemStatus = [

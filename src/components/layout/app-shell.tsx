@@ -92,7 +92,7 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                   {/* Notification dot */}
                   <span
                     className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-brand-500"
-                    aria-label="3 unread notifications"
+                    aria-label="3 pemberitahuan belum dibaca"
                   />
                 </button>
 
@@ -112,7 +112,7 @@ export function AppShell({ children, pageTitle, moduleName }: AppShellProps) {
                 {/* User menu */}
                 <button
                   type="button"
-                  aria-label="Menu pengguna — Maya Thompson"
+                  aria-label="Menu pengguna — Maya Sari"
                   aria-haspopup="true"
                   className={cn(
                     'inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white px-2.5 py-1.5',

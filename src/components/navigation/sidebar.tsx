@@ -148,8 +148,8 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 M
               </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-medium text-white">Maya Thompson</p>
-                <p className="truncate text-xs text-brand-300">HR Officer</p>
+                <p className="truncate text-sm font-medium text-white">Maya Sari</p>
+                <p className="truncate text-xs text-brand-300">Staf SDM</p>
               </div>
             </div>
           </div>
