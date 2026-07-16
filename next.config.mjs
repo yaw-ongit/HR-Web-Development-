@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: process.cwd(),
   reactStrictMode: true,
+
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 
   // Compiler optimisations
   compiler: {

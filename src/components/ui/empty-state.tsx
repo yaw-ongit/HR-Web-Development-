@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import { BarChart3, Bell, BookOpen, CalendarDays, ClipboardList, FolderOpen, Users2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface EmptyStateProps {
-  /** Icon to display — can be a string emoji or a ReactNode (e.g. a Lucide icon) */
   icon?: ReactNode;
   title: string;
   description: string;
@@ -37,9 +37,8 @@ export function EmptyState({
         className,
       )}
     >
-      {/* Icon */}
       {icon && (
-        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-50 ring-1 ring-brand-100 text-brand-600">
+        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
           {icon}
         </div>
       )}
@@ -49,14 +48,13 @@ export function EmptyState({
 
       {children}
 
-      {/* Actions */}
       {(ctaLabel || secondaryLabel) && (
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          {ctaLabel && (
-            href ? (
+          {ctaLabel &&
+            (href ? (
               <Link
                 href={href}
-                className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-white"
               >
                 {ctaLabel}
               </Link>
@@ -64,16 +62,15 @@ export function EmptyState({
               <button
                 type="button"
                 onClick={onCtaClick}
-                className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-white"
               >
                 {ctaLabel}
               </button>
-            )
-          )}
+            ))}
           {secondaryLabel && secondaryHref && (
             <Link
               href={secondaryHref}
-              className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-brand-700 transition hover:border-brand-400 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
+              className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-brand-700 transition hover:border-brand-400 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-white"
             >
               {secondaryLabel}
             </Link>
@@ -84,11 +81,10 @@ export function EmptyState({
   );
 }
 
-/** Pre-composed empty states for common HRIS use cases */
 export function NoKaryawansEmptyState({ onAdd }: { onAdd?: () => void }) {
   return (
     <EmptyState
-      icon={<span className="text-2xl">👥</span>}
+      icon={<Users2 className="h-7 w-7" aria-hidden="true" />}
       title="Tidak ada karyawan"
       description="Direktori karyawan kosong atau tidak ada catatan yang cocok dengan filter saat ini. Tambahkan karyawan atau ubah kriteria pencarian."
       ctaLabel="Tambah karyawan"
@@ -102,7 +98,7 @@ export function NoKaryawansEmptyState({ onAdd }: { onAdd?: () => void }) {
 export function NoAttendanceEmptyState() {
   return (
     <EmptyState
-      icon={<span className="text-2xl">📅</span>}
+      icon={<CalendarDays className="h-7 w-7" aria-hidden="true" />}
       title="Tidak ada data kehadiran"
       description="Tidak ada data kehadiran untuk periode atau filter yang dipilih. Coba ubah rentang tanggal atau departemen."
       ctaLabel="Lihat hari ini"
@@ -114,10 +110,10 @@ export function NoAttendanceEmptyState() {
 export function NoTrainingEmptyState() {
   return (
     <EmptyState
-      icon={<span className="text-2xl">📚</span>}
-      title="No training programs"
-      description="No training programs have been assigned. Create a new program or enroll employees from the talent module."
-      ctaLabel="Manage training"
+      icon={<BookOpen className="h-7 w-7" aria-hidden="true" />}
+      title="Belum ada program pelatihan"
+      description="Belum ada program pelatihan yang ditetapkan. Buat program baru atau daftarkan karyawan dari modul talenta."
+      ctaLabel="Kelola pelatihan"
       href="/talent/training"
     />
   );
@@ -126,10 +122,10 @@ export function NoTrainingEmptyState() {
 export function NoClaimsEmptyState() {
   return (
     <EmptyState
-      icon={<span className="text-2xl">📋</span>}
-      title="No claims submitted"
-      description="No claims have been submitted yet. Eligible employees can submit medical and welfare claims through the compensation module."
-      ctaLabel="View claims"
+      icon={<ClipboardList className="h-7 w-7" aria-hidden="true" />}
+      title="Belum ada klaim"
+      description="Belum ada klaim yang diajukan. Karyawan yang memenuhi syarat dapat mengajukan klaim kesehatan dan kesejahteraan melalui modul kompensasi."
+      ctaLabel="Lihat klaim"
       href="/compensation/claims"
     />
   );
@@ -138,10 +134,10 @@ export function NoClaimsEmptyState() {
 export function NoReportsEmptyState() {
   return (
     <EmptyState
-      icon={<span className="text-2xl">📊</span>}
-      title="No reports available"
-      description="No reports have been generated for this period. Generate a report to analyze workforce data and trends."
-      ctaLabel="Go to analytics"
+      icon={<BarChart3 className="h-7 w-7" aria-hidden="true" />}
+      title="Belum ada laporan"
+      description="Belum ada laporan yang dibuat untuk periode ini. Buat laporan untuk menganalisis data dan tren tenaga kerja."
+      ctaLabel="Buka analitik"
       href="/analytics"
     />
   );
@@ -150,9 +146,9 @@ export function NoReportsEmptyState() {
 export function NoNotificationsEmptyState() {
   return (
     <EmptyState
-      icon={<span className="text-2xl">🔔</span>}
-      title="All caught up"
-      description="You have no new notifications. We'll notify you when something requires your attention."
+      icon={<Bell className="h-7 w-7" aria-hidden="true" />}
+      title="Tidak ada pemberitahuan baru"
+      description="Tidak ada pemberitahuan baru. Kami akan memberi tahu saat ada hal yang memerlukan perhatian Anda."
     />
   );
 }
@@ -160,10 +156,10 @@ export function NoNotificationsEmptyState() {
 export function NoDataEmptyState({ module }: { module?: string }) {
   return (
     <EmptyState
-      icon={<span className="text-2xl">📂</span>}
-      title={`No ${module ?? 'data'} available`}
-      description="There are no records to display at this time. This section will populate once data is available."
-      ctaLabel="Return home"
+      icon={<FolderOpen className="h-7 w-7" aria-hidden="true" />}
+      title={`Belum ada ${module ?? 'data'}`}
+      description="Belum ada catatan untuk ditampilkan saat ini. Bagian ini akan terisi setelah data tersedia."
+      ctaLabel="Kembali ke beranda"
       href="/"
     />
   );

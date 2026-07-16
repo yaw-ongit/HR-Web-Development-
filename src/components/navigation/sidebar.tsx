@@ -1,25 +1,26 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  X,
-  LayoutDashboard,
-  Users2,
+  BookOpen,
+  Briefcase,
+  CalendarCheck,
+  Clock,
+  FileText,
+  HeartPulse,
   Layers,
-  ShieldCheck,
+  LayoutDashboard,
   PieChart,
   Settings,
-  Briefcase,
-  FileText,
-  Clock,
-  CalendarCheck,
-  BookOpen,
+  ShieldAlert,
+  ShieldCheck,
   Sparkles,
   UserPlus,
+  Users2,
   Wallet,
-  ShieldAlert,
-  HeartPulse,
+  X,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -58,7 +59,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
   return (
     <>
-      {/* Mobile backdrop */}
       {open && (
         <div
           className="fixed inset-0 z-30 bg-slate-950/40 backdrop-blur-sm lg:hidden"
@@ -67,10 +67,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         />
       )}
 
-      {/* Sidebar panel */}
       <aside
         id="sidebar"
-        aria-label="Main navigation"
+        aria-label="Navigasi utama"
         className={cn(
           'fixed left-0 top-0 z-40 flex h-full w-72 shrink-0 flex-col overflow-y-auto',
           'border-r border-brand-800/80 bg-[linear-gradient(180deg,#002952_0%,#071f3d_100%)] px-4 py-6 shadow-2xl shadow-brand-950/25',
@@ -78,21 +77,19 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           open ? 'translate-x-0' : '-translate-x-full',
         )}
       >
-        {/* Logo / Brand */}
         <div className="mb-8 flex items-center justify-between gap-3 px-2">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white ring-1 ring-brand-200" aria-hidden="true">
-              <img src="/logo.svg" alt="PT Indocater" className="h-10 w-10 object-contain" />
+              <Image src="/logo-indocater.jpg" alt="PT Indocater" width={40} height={40} className="h-10 w-10 object-contain" priority />
             </div>
             <div>
               <p className="text-[10px] uppercase tracking-[0.3em] text-brand-300">PT Indocater</p>
               <p className="text-sm font-semibold text-white">Enterprise HRIS</p>
             </div>
           </div>
-          {/* Mobile close button */}
           <button
             type="button"
-            aria-label="Close navigation"
+            aria-label="Tutup navigasi"
             onClick={onClose}
             className="rounded-full p-1.5 text-brand-200 transition hover:bg-brand-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-500 lg:hidden"
           >
@@ -100,8 +97,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           </button>
         </div>
 
-        {/* Navigation */}
-        <nav aria-label="Main menu">
+        <nav aria-label="Menu utama">
           <p className="mb-3 px-2 text-[10px] uppercase tracking-[0.3em] text-brand-200/90">
             Navigasi
           </p>
@@ -118,15 +114,12 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                       'flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
                       'focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 focus:ring-offset-brand-900',
                       active
-                        ? 'bg-gradient-to-r from-brand-700 to-brand-600 text-white ring-1 ring-brand-400/40 shadow-sm'
+                        ? 'bg-gradient-to-r from-brand-700 to-brand-600 text-white shadow-sm ring-1 ring-brand-400/40'
                         : 'text-brand-100 hover:bg-brand-800/70 hover:text-white',
                     )}
                   >
                     <item.icon
-                      className={cn(
-                        'h-4 w-4 shrink-0',
-                        active ? 'text-white' : 'text-brand-300',
-                      )}
+                      className={cn('h-4 w-4 shrink-0', active ? 'text-white' : 'text-brand-300')}
                       aria-hidden="true"
                     />
                     <span>{item.label}</span>
@@ -137,7 +130,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           </ul>
         </nav>
 
-        {/* Footer */}
         <div className="mt-auto pt-6">
           <div className="rounded-2xl border border-brand-700/70 bg-brand-950/50 px-4 py-4">
             <div className="flex items-center gap-3">
