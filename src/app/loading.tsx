@@ -7,7 +7,7 @@ export default function Loading() {
       role="status"
       aria-label="Loading dashboard"
     >
-      <div className="mx-auto max-w-[1680px] px-4 pb-10 pt-6 sm:px-6 lg:px-8">
+      <div className="w-full px-4 pb-10 pt-6 sm:px-6 lg:px-8">
         <div className="space-y-6">
           <SkeletonPageHeader />
 
