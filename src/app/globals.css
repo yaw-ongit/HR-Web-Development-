@@ -85,8 +85,9 @@ html {
 
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  color: #0f172a;
+  background: var(--color-brand-900);
+  background-image: radial-gradient(circle at top right, rgba(0, 102, 204, 0.15), transparent 40%), radial-gradient(circle at bottom left, rgba(212, 175, 55, 0.05), transparent 40%);
+  color: #f1f5f9;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
