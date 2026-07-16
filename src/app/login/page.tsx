@@ -29,27 +29,27 @@ export default function LoginPage() {
   }
 
   return (
-    <main id="main-content" className="min-h-screen bg-[linear-gradient(135deg,#f8fafc_0%,#f1f5f9_100%)] px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
-      <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl items-center gap-10 lg:grid-cols-[1fr_420px]">
+    <main id="main-content" className="min-h-screen bg-transparent px-4 py-8 text-white sm:px-6 lg:px-8">
+      <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl items-center gap-10 lg:grid-cols-[1fr_420px]">
         {/* Brand panel */}
         <section aria-label="Branding HRIS PT Indocater" className="space-y-6">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-brand-200" aria-hidden="true">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm" aria-hidden="true">
             <Image src="/logo-indocater.jpg" alt="PT Indocater" width={48} height={48} className="h-12 w-12 object-contain" priority />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-indogold-600 font-bold">PT Indocater</p>
-            <h1 className="mt-2 max-w-lg text-4xl font-bold text-brand-900 lg:text-5xl">
+            <p className="text-xs uppercase tracking-[0.3em] text-indogold-500 font-bold">PT Indocater</p>
+            <h1 className="mt-2 max-w-lg text-4xl font-bold text-white lg:text-5xl">
               Sistem Enterprise HRIS
             </h1>
-            <p className="mt-4 max-w-md text-sm leading-7 text-slate-500">
+            <p className="mt-4 max-w-md text-sm leading-7 text-brand-100">
               Masuk untuk mengelola operasi HR, persetujuan, data karyawan, dan analitik dari satu portal terpadu.
             </p>
           </div>
           <ul className="grid gap-3 sm:grid-cols-3" aria-label="Fitur keamanan">
             {['SSO siap', 'MFA aktif', 'Audit logging'].map((item) => (
-              <li key={item} className="rounded-2xl border border-brand-100/80 bg-white/80 p-4 shadow-sm">
-                <LockKeyhole className="h-4 w-4 text-brand-600" aria-hidden="true" />
-                <p className="mt-2 text-sm font-semibold text-slate-900">{item}</p>
+              <li key={item} className="rounded-2xl border border-brand-700/50 bg-brand-800/50 p-4 shadow-sm backdrop-blur-sm">
+                <LockKeyhole className="h-4 w-4 text-brand-300" aria-hidden="true" />
+                <p className="mt-2 text-sm font-semibold text-white">{item}</p>
               </li>
             ))}
           </ul>

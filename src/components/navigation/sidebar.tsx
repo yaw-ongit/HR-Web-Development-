@@ -72,7 +72,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         aria-label="Navigasi utama"
         className={cn(
           'fixed left-0 top-0 z-40 flex h-full w-72 shrink-0 flex-col overflow-y-auto',
-          'border-r border-brand-800/80 bg-[linear-gradient(180deg,#002952_0%,#071f3d_100%)] px-4 py-6 shadow-2xl shadow-brand-950/25',
+          'bg-transparent px-4 py-6',
           'transition-transform duration-300 lg:translate-x-0',
           open ? 'translate-x-0' : '-translate-x-full',
         )}

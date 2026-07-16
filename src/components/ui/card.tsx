@@ -36,7 +36,7 @@ export function Card({
     <Tag
       {...(ariaLabel ? { 'aria-label': ariaLabel } : {})}
       className={cn(
-        'rounded-[28px] border border-brand-100/70 bg-white/95 shadow-[0_16px_45px_rgba(2,34,74,0.08)]',
+        'rounded-[28px] border border-brand-100/70 bg-white/95 shadow-[0_16px_45px_rgba(2,34,74,0.08)] text-slate-900',
         className,
       )}
     >
