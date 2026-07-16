@@ -21,6 +21,9 @@ export type EmployeeRecord = {
   office: string;
 };
 
+/** Alias bahasa Indonesia untuk halaman direktori karyawan. */
+export type KaryawanRecord = EmployeeRecord;
+
 export const departmentOptions = ['SDM', 'Teknologi', 'Penjualan', 'Keuangan', 'Produk', 'Hukum', 'Layanan Pelanggan'];
 export const positionOptions = ['Generalist SDM', 'Manajer SDM', 'Pengembang Perangkat Lunak', 'Kepala Penjualan', 'Analis Produk', 'Desainer Produk', 'Konsultan Hukum', 'Direktur Layanan Pelanggan', 'Manajer Keuangan'];
 export const statusOptions = ['Aktif', 'Cuti', 'Kontrak', 'Probation', 'Magang'];

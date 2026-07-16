@@ -19,14 +19,13 @@ export default function NotFoundPage() {
           404
         </p>
 
-        <p className="mt-2 text-xs uppercase tracking-[0.3em] text-brand-600">Page not found</p>
+        <p className="mt-2 text-xs uppercase tracking-[0.3em] text-brand-600">Halaman tidak ditemukan</p>
 
         <h1 className="mt-3 text-2xl font-semibold text-brand-900">
-          This page doesn't exist
+          Halaman ini tidak tersedia
         </h1>
         <p className="mt-3 text-sm leading-7 text-slate-500">
-          The route you tried to access doesn't exist or may have been moved. Check the URL or
-          navigate back to the dashboard.
+          Rute yang Anda akses tidak tersedia atau telah dipindahkan. Periksa URL atau kembali ke dasbor.
         </p>
 
         <div className="mt-6 flex flex-wrap justify-center gap-3">
@@ -35,7 +34,7 @@ export default function NotFoundPage() {
             className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-700 to-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:from-brand-600 hover:to-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
           >
             <Home className="h-4 w-4" aria-hidden="true" />
-            Go to dashboard
+            Kembali ke dasbor
           </Link>
           <button
             type="button"
@@ -43,7 +42,7 @@ export default function NotFoundPage() {
             className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-brand-700 transition hover:border-brand-400 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            Go back
+            Kembali
           </button>
         </div>
       </div>

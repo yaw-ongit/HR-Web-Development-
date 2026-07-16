@@ -2,6 +2,7 @@
 
 import { useState, useId } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Eye, EyeOff, LockKeyhole, ShieldCheck, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -33,12 +34,12 @@ export default function LoginPage() {
         {/* Brand panel */}
         <section aria-label="Branding HRIS PT Indocater" className="space-y-6">
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-brand-200" aria-hidden="true">
-            <img src="/logo.svg" alt="PT Indocater" className="h-12 w-12 object-contain" />
+            <Image src="/logo-indocater.jpg" alt="PT Indocater" width={48} height={48} className="h-12 w-12 object-contain" priority />
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-indogold-600 font-bold">PT Indocater</p>
             <h1 className="mt-2 max-w-lg text-4xl font-bold text-brand-900 lg:text-5xl">
-              Enterprise HRIS System
+              Sistem Enterprise HRIS
             </h1>
             <p className="mt-4 max-w-md text-sm leading-7 text-slate-500">
               Masuk untuk mengelola operasi HR, persetujuan, data karyawan, dan analitik dari satu portal terpadu.
@@ -54,9 +55,9 @@ export default function LoginPage() {
           </ul>
         </section>
 
-        {/* Login form */}
+        {/* Form masuk */}
         <Card title="Masuk" description="Gunakan akun perusahaan untuk masuk.">
-          <form className="space-y-5" onSubmit={handleSubmit} noValidate aria-label="Login form">
+          <form className="space-y-5" onSubmit={handleSubmit} noValidate aria-label="Formulir masuk">
             {/* Email */}
             <div>
               <label htmlFor={emailId} className="block text-xs uppercase tracking-[0.24em] text-slate-400">
@@ -105,7 +106,7 @@ export default function LoginPage() {
                 />
                 <button
                   type="button"
-                  aria-label={visible ? 'Hide password' : 'Show password'}
+                  aria-label={visible ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
                   onClick={() => setVisible((v) => !v)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 rounded p-0.5 text-slate-400 transition hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >

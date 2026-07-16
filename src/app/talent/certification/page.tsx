@@ -114,7 +114,7 @@ export default function TalentCertificationPage() {
             <AlertCircle className="h-5 w-5 mt-0.5 text-amber-600 flex-shrink-0" />
             <div>
               <p className="text-sm font-semibold text-amber-200">Segera kedaluwarsa</p>
-              <p className="text-sm text-amber-100 mt-1">Zoe Kim's CSPO certification expires on 2026-11-20 (147 days).</p>
+              <p className="text-sm text-amber-100 mt-1">Sertifikasi CSPO Zoe Kim kedaluwarsa pada 20-11-2026 (147 hari lagi).</p>
             </div>
           </div>
           <div className="flex items-start gap-3 rounded-3xl border border-rose-500/20 bg-rose-500/5 p-4">
