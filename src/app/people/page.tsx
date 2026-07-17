@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { ColumnDef, getCoreRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
 import { Plus, Upload, Download, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -12,12 +12,14 @@ import { PageHeader } from '@/components/ui/page-header';
 import { FilterBar, SearchInput, SelectFilter } from '@/components/ui/filter-bar';
 import { SectionContainer } from '@/components/layout/section-container';
 import { NoKaryawansEmptyState } from '@/components/ui/empty-state';
+import { PeopleService } from '@/lib/services';
 import {
   employeeDirectory, departmentOptions, positionOptions, statusOptions,
   contractOptions, branchOptions, locationOptions, genderOptions, KaryawanRecord,
 } from '@/lib/people-data';
 
 export default function PeopleDirectoryPage() {
+  const [employees, setEmployees] = useState<KaryawanRecord[]>(employeeDirectory);
   const [search, setSearch] = useState('');
   const [department, setDepartment] = useState('All');
   const [position, setPosition] = useState('All');
@@ -27,9 +29,18 @@ export default function PeopleDirectoryPage() {
   const [sorting, setSorting] = useState<any[]>([]);
   const [rowSelection, setRowSelection] = useState({});
 
+  useEffect(() => {
+    PeopleService.getEmployees(employeeDirectory).then((data) => {
+      // Map data if schema differs or use as-is
+      if (Array.isArray(data) && data.length > 0) {
+        setEmployees(data as unknown as KaryawanRecord[]);
+      }
+    });
+  }, []);
+
   const filteredData = useMemo(() => {
     const q = search.toLowerCase();
-    return employeeDirectory.filter((e) => {
+    return employees.filter((e) => {
       const matchSearch = !q || e.fullName.toLowerCase().includes(q) || e.employeeId.toLowerCase().includes(q) || e.email.toLowerCase().includes(q) || e.department.toLowerCase().includes(q);
       return matchSearch
         && (department === 'All' || e.department === department)
@@ -38,7 +49,7 @@ export default function PeopleDirectoryPage() {
         && (contractType === 'All' || e.contractType === contractType)
         && (branch === 'All' || e.branch === branch);
     });
-  }, [search, department, position, status, contractType, branch]);
+  }, [employees, search, department, position, status, contractType, branch]);
 
   const columns = useMemo<ColumnDef<KaryawanRecord>[]>(() => [
     {
@@ -150,8 +161,8 @@ export default function PeopleDirectoryPage() {
           <Card title="Area karyawan" description="Statistik singkat dan tindakan modul cepat.">
             <div className="mt-2 grid grid-cols-2 gap-3">
               <div className="rounded-2xl bg-white/80 p-4">
-                <p className="text-xs text-slate-400">Total karyawan</p>
-                <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-900">{employeeDirectory.length}</p>
+                <p className="text-xs text-slate-400">Total Karyawan</p>
+                <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-900">{employees.length}</p>
               </div>
               <div className="rounded-2xl bg-white/80 p-4">
                 <p className="text-xs text-slate-400">Cabang</p>

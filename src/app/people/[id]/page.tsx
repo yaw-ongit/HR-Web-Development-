@@ -1,10 +1,11 @@
 'use client';
 
-import { useMemo, useState, use } from 'react';
+import { useMemo, useState, use, useEffect } from 'react';
 import { ArrowRight, Briefcase, BookOpen, CalendarDays, CheckCircle2, ClipboardList, HeartPulse, Mail, MapPin, Phone, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { getEmployeeProfile } from '@/lib/people-data';
+import { PeopleService } from '@/lib/services';
 
 interface EmployeePageProps {
   params: Promise<{
@@ -14,19 +15,28 @@ interface EmployeePageProps {
 
 export default function EmployeeProfilePage(props: EmployeePageProps) {
   const params = use(props.params);
-  const profile = getEmployeeProfile(params.id);
+  const localProfile = getEmployeeProfile(params.id);
+  const [profile, setProfile] = useState<any>(localProfile || {});
   const [activeTab, setActiveTab] = useState('Ringkasan');
+
+  useEffect(() => {
+    PeopleService.getEmployeeById(params.id, localProfile).then((data) => {
+      if (data) {
+        setProfile(data);
+      }
+    });
+  }, [params.id, localProfile]);
 
   const tabs = ['Ringkasan', 'Pekerjaan', 'Pendidikan', 'Keluarga', 'Asuransi', 'Pelatihan', 'Kehadiran', 'Cuti', 'Medis', 'Benefit', 'Klaim', 'Fasilitas', 'Penggajian', 'Dokumen', 'Riwayat'];
 
   const stats = useMemo(
     () => [
-      { label: 'Kehadiran', value: profile?.stats.attendanceRate ?? '—', icon: CalendarDays },
-      { label: 'Sisa cuti', value: profile?.stats.remainingLeave ?? '—', icon: CheckCircle2 },
-      { label: 'Pelatihan selesai', value: profile?.stats.trainingCompleted ?? '—', icon: BookOpen },
-      { label: 'Benefit', value: profile?.stats.benefits ?? '—', icon: HeartPulse },
-      { label: 'Masa kerja', value: profile?.stats.yearsOfService ?? '—', icon: Star },
-      { label: 'Kinerja', value: profile?.stats.performance ?? '—', icon: ClipboardList },
+      { label: 'Kehadiran', value: profile?.stats?.attendanceRate ?? '—', icon: CalendarDays },
+      { label: 'Sisa cuti', value: profile?.stats?.remainingLeave ?? '—', icon: CheckCircle2 },
+      { label: 'Pelatihan selesai', value: profile?.stats?.trainingCompleted ?? '—', icon: BookOpen },
+      { label: 'Benefit', value: profile?.stats?.benefits ?? '—', icon: HeartPulse },
+      { label: 'Masa kerja', value: profile?.stats?.yearsOfService ?? '—', icon: Star },
+      { label: 'Kinerja', value: profile?.stats?.performance ?? '—', icon: ClipboardList },
     ],
     [profile],
   );
@@ -182,7 +192,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Riwayat pekerjaan</p>
                 <div className="mt-5 grid gap-4">
-                  {profile.employmentHistory.map((item) => (
+                  {profile.employmentHistory?.map((item: any) => (
                     <div key={item.period} className="rounded-3xl bg-white/80 p-4">
                       <p className="text-sm text-slate-400">{item.period}</p>
                       <p className="mt-2 text-base font-semibold text-slate-900">{item.role}</p>
@@ -197,7 +207,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
                 <div className="mt-5 space-y-4">
                   <p className="text-sm text-slate-400">Kontrak {profile.contractType} dimulai sejak {profile.hireDate}.</p>
                   <div className="grid gap-4 sm:grid-cols-2">
-                    {profile.leaveBalance.map((leave) => (
+                    {profile.leaveBalance?.map((leave: any) => (
                       <div key={leave.type} className="rounded-3xl bg-white/80 p-4">
                         <p className="text-sm text-slate-400">{leave.type}</p>
                         <p className="mt-2 text-base font-semibold text-slate-900">Sisa {leave.remaining}</p>
@@ -216,7 +226,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Riwayat pekerjaan</p>
                 <div className="mt-6 space-y-4">
-                  {profile.employmentHistory.map((item) => (
+                  {profile.employmentHistory?.map((item: any) => (
                     <div key={item.period} className="rounded-3xl bg-white/80 p-5">
                       <p className="text-sm text-slate-400">{item.period}</p>
                       <p className="mt-2 text-lg font-semibold text-slate-900">{item.role}</p>
@@ -250,7 +260,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Saldo cuti</p>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  {profile.leaveBalance.map((leave) => (
+                  {profile.leaveBalance?.map((leave: any) => (
                     <div key={leave.type} className="rounded-3xl bg-white/80 p-5">
                       <p className="text-sm text-slate-400">{leave.type}</p>
                       <p className="mt-3 text-xl font-semibold text-slate-900">Sisa {leave.remaining} hari</p>
@@ -265,7 +275,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Progres pelatihan</p>
                 <div className="mt-6 space-y-4">
-                  {profile.trainingRecords.map((training) => (
+                  {profile.trainingRecords?.map((training: any) => (
                     <div key={training.title} className="rounded-3xl bg-white/80 p-5">
                       <div className="flex items-center justify-between gap-4">
                         <div>
@@ -284,7 +294,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Kepatuhan medis</p>
                 <div className="mt-6 space-y-4">
-                  {profile.medicalRecords.map((record) => (
+                  {profile.medicalRecords?.map((record: any) => (
                     <div key={record.label} className="rounded-3xl bg-white/80 p-5">
                       <p className="text-lg font-semibold text-slate-900">{record.label}</p>
                       <p className="mt-2 text-sm text-slate-400">Status: {record.status}</p>
@@ -299,7 +309,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Ringkasan benefit</p>
                 <div className="mt-6 space-y-4">
-                  {profile.benefitSummary.map((benefit) => (
+                  {profile.benefitSummary?.map((benefit: any) => (
                     <div key={benefit.name} className="rounded-3xl bg-white/80 p-5">
                       <p className="text-lg font-semibold text-slate-900">{benefit.name}</p>
                       <p className="mt-2 text-sm text-slate-400">{benefit.detail}</p>
@@ -403,7 +413,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Dokumen karyawan</p>
                 <div className="mt-6 space-y-4">
-                  {profile.documents.map((doc) => (
+                  {profile.documents?.map((doc: any) => (
                     <div key={doc.title} className="rounded-3xl bg-white/80 p-5">
                       <div className="flex items-center justify-between gap-4">
                         <div>
@@ -423,7 +433,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Riwayat</p>
                 <div className="mt-6 space-y-4">
-                  {profile.timeline.map((event) => (
+                  {profile.timeline?.map((event: any) => (
                     <div key={event.date} className="rounded-3xl bg-white/80 p-5">
                       <p className="text-sm font-semibold text-slate-900">{event.date}</p>
                       <p className="mt-2 text-base text-slate-800">{event.label}</p>
@@ -438,7 +448,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
                 <p className="text-sm uppercase tracking-[0.3em] text-slate-700">Log aktivitas</p>
                 <div className="mt-6 space-y-4">
-                  {profile.activityLog.map((entry) => (
+                  {profile.activityLog?.map((entry: any) => (
                     <div key={entry.time} className="rounded-3xl bg-white/80 p-5">
                       <div className="flex items-center justify-between gap-4">
                         <p className="text-base font-semibold text-slate-900">{entry.description}</p>
