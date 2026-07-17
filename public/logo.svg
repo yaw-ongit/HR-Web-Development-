@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150">
-  <g transform="translate(10, 10)">
-    <path d="M 80 20 C 30 20 0 50 0 70 C 0 90 30 120 80 120 C 60 90 60 50 80 20 Z" fill="#003d7a"/>
-    <path d="M 80 20 C 60 50 60 90 80 120 C 100 90 100 50 80 20 Z" fill="#dc2626"/>
-    <path d="M 80 20 C 100 50 100 90 80 120 C 130 120 160 90 160 70 C 160 50 130 20 80 20 Z" fill="#003d7a"/>
-    <rect x="120" y="65" width="45" height="10" fill="#003d7a" />
-    <text x="80" y="150" font-family="'Oswald', 'Arial Narrow', sans-serif" font-weight="bold" font-size="34" fill="#b8962c" text-anchor="middle" transform="scale(1, 1.2) translate(0, -20)">INDOCATER</text>
-  </g>
-</svg>

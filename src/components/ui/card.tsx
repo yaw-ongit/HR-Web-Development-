@@ -36,14 +36,14 @@ export function Card({
     <Tag
       {...(ariaLabel ? { 'aria-label': ariaLabel } : {})}
       className={cn(
-        'rounded-[28px] border border-brand-100/70 bg-white/95 shadow-[0_16px_45px_rgba(2,34,74,0.08)] text-slate-900',
+        'rounded-[28px] border border-border bg-card shadow-soft text-card-foreground',
         className,
       )}
     >
       {(title || description || headerActions) && (
         <div
           className={cn(
-            'flex items-start justify-between gap-4 border-b border-brand-100/80 bg-gradient-to-r from-white to-brand-50/40',
+            'flex items-start justify-between gap-4 border-b border-border bg-surface',
             paddingClasses[padding],
           )}
         >

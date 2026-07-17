@@ -10,11 +10,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
-  primary: 'bg-gradient-to-r from-brand-700 to-brand-600 text-white hover:from-brand-600 hover:to-brand-500 shadow-lg shadow-brand-500/20 border border-transparent',
-  secondary: 'bg-brand-50 text-brand-800 hover:bg-brand-100 border border-brand-200',
-  ghost: 'bg-transparent text-brand-700 hover:bg-brand-50 border border-transparent',
-  destructive: 'bg-rose-600 text-white hover:bg-rose-500 shadow-lg shadow-rose-500/20 border border-transparent',
-  outline: 'bg-white text-brand-700 border border-brand-200 hover:bg-brand-50 hover:text-brand-800',
+  primary: 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 border border-transparent',
+  secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-transparent',
+  ghost: 'bg-transparent text-foreground hover:bg-secondary border border-transparent',
+  destructive: 'bg-danger text-white hover:bg-danger/90 shadow-lg shadow-danger/20 border border-transparent',
+  outline: 'bg-transparent text-foreground border border-border hover:bg-secondary',
 };
 
 const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
@@ -55,7 +55,7 @@ export const Button = forwardRef(
         onClick={handleClick}
         className={cn(
           'inline-flex items-center justify-center font-semibold transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950',
+          'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
           'disabled:cursor-not-allowed disabled:opacity-60',
           variantStyles[variant],
           sizeStyles[size],
