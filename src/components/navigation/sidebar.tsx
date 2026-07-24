@@ -21,6 +21,7 @@ import {
   Users2,
   Wallet,
   X,
+  LogOut,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -51,6 +52,11 @@ interface SidebarProps {
 
 export function Sidebar({ open, onClose }: SidebarProps) {
   const pathname = usePathname();
+
+  const handleLogout = () => {
+    document.cookie = 'hris_session=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    window.location.href = '/login';
+  };
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
@@ -132,17 +138,26 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
         <div className="mt-auto pt-6">
           <div className="rounded-2xl border border-brand-700/70 bg-brand-950/50 px-4 py-4">
-            <div className="flex items-center gap-3">
-              <div
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-sm font-bold text-white"
-                aria-hidden="true"
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-3 min-w-0">
+                <div
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-sm font-bold text-white"
+                  aria-hidden="true"
+                >
+                  M
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-medium text-white">Maya Sari</p>
+                  <p className="truncate text-xs text-brand-300">Staf SDM</p>
+                </div>
+              </div>
+              <button
+                onClick={handleLogout}
+                title="Keluar"
+                className="p-1.5 text-brand-300 hover:text-white rounded-lg hover:bg-brand-800 transition"
               >
-                M
-              </div>
-              <div className="min-w-0">
-                <p className="truncate text-sm font-medium text-white">Maya Sari</p>
-                <p className="truncate text-xs text-brand-300">Staf SDM</p>
-              </div>
+                <LogOut className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>

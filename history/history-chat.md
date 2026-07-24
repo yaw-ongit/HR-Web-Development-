@@ -26,3 +26,9 @@
 - Integrated certifications history into Employee 360 profiles.
 - Integrated automated certificate generation workflow replacing placeholders (`{{employee_name}}` etc.) and auto-saving issued credentials into employee records.
 - Hided unfinished modules from navigation layout and dashboard quick actions to lock focus on the training module.
+
+### 6. Authentication, Selector and PDF Fixes
+- **Login & Auth**: Created `/login` page with default credentials (`admin`/`admin`), cookie-based persistence, route guard middleware, and log out button in the sidebar.
+- **Contrast Audit**: Realigned Tailwind primary and text variables in `.dark` theme config to meet accessibility guidelines on dark backgrounds.
+- **Selector Fix**: Passed `employeeDirectory` correctly as fallback data, enabling instant employee selection and option rendering.
+- **PDF Downloader**: Integrated `jsPDF` vector generator to automatically compile A4 Landscape certificates on the client and download as `certificate-{employee_name}.pdf`.

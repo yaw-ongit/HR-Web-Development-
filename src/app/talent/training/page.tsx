@@ -23,6 +23,8 @@ import { SectionContainer } from '@/components/layout/section-container';
 import { StatusBadge } from '@/components/ui/status-badge';
 import { Dialog } from '@/components/ui/dialog';
 import { TalentService, PeopleService } from '@/lib/services';
+import { employeeDirectory } from '@/lib/people-data';
+import { jsPDF } from 'jspdf';
 
 export default function TalentTrainingPage() {
   // Page states
@@ -79,7 +81,7 @@ export default function TalentTrainingPage() {
 
   // Load Initial Data
   const loadData = () => {
-    PeopleService.getEmployees([]).then((res: any) => {
+    PeopleService.getEmployees(employeeDirectory).then((res: any) => {
       if (res && res.data) setEmployees(res.data);
     });
     TalentService.getTrainingPrograms([]).then((res: any) => {
@@ -358,6 +360,206 @@ export default function TalentTrainingPage() {
       issuer: 'PT Indocater HRD Department',
       issued_date: new Date().toISOString().split('T')[0]
     });
+  };
+
+  const handleDownloadPdf = (data: any) => {
+    const doc = new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: 'a4'
+    });
+
+    const w = 297;
+    const h = 210;
+
+    // Navy Border
+    doc.setDrawColor(10, 37, 64);
+    doc.setLineWidth(3);
+    doc.rect(8, 8, w - 16, h - 16);
+
+    // Gold Border
+    doc.setDrawColor(212, 175, 55);
+    doc.setLineWidth(0.8);
+    doc.rect(10, 10, w - 20, h - 20);
+
+    // Corner Accents
+    // Top-Left
+    doc.setDrawColor(10, 37, 64);
+    doc.setLineWidth(2.5);
+    doc.line(8, 8, 38, 8);
+    doc.line(8, 8, 8, 38);
+    doc.setDrawColor(163, 0, 0);
+    doc.setLineWidth(0.8);
+    doc.line(12, 12, 32, 12);
+    doc.line(12, 12, 12, 32);
+
+    // Top-Right
+    doc.setDrawColor(10, 37, 64);
+    doc.setLineWidth(2.5);
+    doc.line(w - 8, 8, w - 38, 8);
+    doc.line(w - 8, 8, w - 8, 38);
+    doc.setDrawColor(163, 0, 0);
+    doc.setLineWidth(0.8);
+    doc.line(w - 12, 12, w - 32, 12);
+    doc.line(w - 12, 12, w - 12, 32);
+
+    // Bottom-Left
+    doc.setDrawColor(10, 37, 64);
+    doc.setLineWidth(2.5);
+    doc.line(8, h - 8, 38, h - 8);
+    doc.line(8, h - 8, 8, h - 38);
+    doc.setDrawColor(163, 0, 0);
+    doc.setLineWidth(0.8);
+    doc.line(12, h - 12, 32, h - 12);
+    doc.line(12, h - 12, 12, h - 32);
+
+    // Bottom-Right
+    doc.setDrawColor(10, 37, 64);
+    doc.setLineWidth(2.5);
+    doc.line(w - 8, h - 8, w - 38, h - 8);
+    doc.line(w - 8, h - 8, w - 8, h - 38);
+    doc.setDrawColor(163, 0, 0);
+    doc.setLineWidth(0.8);
+    doc.line(w - 12, h - 12, w - 32, h - 12);
+    doc.line(w - 12, h - 12, w - 12, h - 32);
+
+    // Logo Block in Header
+    const logoX = (w - 70) / 2;
+    const logoY = 18;
+    // Navy rect
+    doc.setFillColor(10, 37, 64);
+    doc.roundedRect(logoX, logoY, 70, 18, 1, 1, 'F');
+    // Red triangle
+    doc.setFillColor(163, 0, 0);
+    doc.triangle(logoX + 4, logoY + 14, logoX + 9, logoY + 4, logoX + 14, logoY + 14, 'F');
+    // Gold triangle
+    doc.setFillColor(255, 215, 0);
+    doc.triangle(logoX + 6, logoY + 13, logoX + 9, logoY + 7, logoX + 12, logoY + 13, 'F');
+    // White circle
+    doc.setFillColor(10, 37, 64);
+    doc.circle(logoX + 9, logoY + 11, 1.5, 'F');
+    // Text logo
+    doc.setTextColor(255, 255, 255);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.text("PT INDOCATER", logoX + 18, logoY + 8);
+    doc.setTextColor(255, 215, 0);
+    doc.setFontSize(5);
+    doc.text("ENTERPRISE HR SERVICES", logoX + 18, logoY + 13);
+
+    // Header texts
+    doc.setTextColor(10, 37, 64);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.text("PT INDOCATER", w / 2, 42, { align: 'center' });
+
+    doc.setFont('times', 'normal');
+    doc.setFontSize(32);
+    doc.text("CERTIFICATE", w / 2, 54, { align: 'center' });
+
+    doc.setTextColor(163, 0, 0);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.text("OF TRAINING COMPLETION", w / 2, 60, { align: 'center' });
+
+    // Presentation text
+    doc.setTextColor(100, 100, 100);
+    doc.setFont('times', 'italic');
+    doc.setFontSize(12);
+    doc.text("This certificate is proudly presented to:", w / 2, 72, { align: 'center' });
+
+    // Recipient Name
+    doc.setTextColor(10, 37, 64);
+    doc.setFont('times', 'bold');
+    doc.setFontSize(26);
+    doc.text(data.employee_name, w / 2, 85, { align: 'center' });
+
+    // Gold line under name
+    doc.setDrawColor(212, 175, 55);
+    doc.setLineWidth(0.8);
+    doc.line(w / 2 - 60, 88, w / 2 + 60, 88);
+
+    // Recipient ID
+    doc.setTextColor(100, 100, 100);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.text(`Employee ID: ${data.employee_id}`, w / 2, 93, { align: 'center' });
+
+    // Completion text
+    doc.setFontSize(10.5);
+    doc.text("for successfully completing the training program:", w / 2, 104, { align: 'center' });
+
+    // Training Title
+    doc.setTextColor(163, 0, 0);
+    doc.setFont('times', 'bold');
+    doc.setFontSize(18);
+    doc.text(data.training_title, w / 2, 114, { align: 'center' });
+
+    // Metadata box (gray bg)
+    const boxX = w / 2 - 90;
+    const boxY = 122;
+    const boxW = 180;
+    const boxH = 10;
+    doc.setFillColor(248, 249, 250);
+    doc.setDrawColor(226, 232, 240);
+    doc.setLineWidth(0.2);
+    doc.roundedRect(boxX, boxY, boxW, boxH, 1, 1, 'FD');
+
+    doc.setTextColor(50, 50, 50);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+
+    const colW = boxW / 4;
+    doc.text(`Category: ${data.training_category}`, boxX + 6, boxY + 6.5);
+    doc.text(`Date: ${data.training_date}`, boxX + colW + 6, boxY + 6.5);
+    doc.text(`Duration: ${data.training_duration}`, boxX + (colW * 2) + 6, boxY + 6.5);
+    doc.text(`Trainer: ${data.trainer_name}`, boxX + (colW * 3) + 6, boxY + 6.5);
+
+    // Footer left (Details)
+    doc.setTextColor(100, 100, 100);
+    doc.setFontSize(7.5);
+    doc.text(`Certificate Number: ${data.certificate_number}`, 22, 158);
+    doc.text(`Issued Date: ${data.issued_date}`, 22, 163);
+    doc.text(`Issuer: ${data.issuer}`, 22, 168);
+
+    // Footer center (Official Seal Stamp)
+    const stampX = w / 2;
+    const stampY = 162;
+    doc.setDrawColor(163, 0, 0);
+    doc.setLineWidth(0.8);
+    doc.circle(stampX, stampY, 14, 'D');
+    doc.setLineWidth(0.2);
+    doc.circle(stampX, stampY, 12, 'D');
+    doc.setTextColor(163, 0, 0);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(5);
+    doc.text("PT INDOCATER", stampX, stampY - 5, { align: 'center' });
+    doc.setFontSize(6.5);
+    doc.text("HR DEPT", stampX, stampY + 1.5, { align: 'center' });
+    doc.setFontSize(5);
+    doc.text("OFFICIAL SEAL", stampX, stampY + 6, { align: 'center' });
+
+    // Footer right (Signatures)
+    const sigX = w - 68;
+    const sigY = 145;
+    doc.setDrawColor(26, 54, 93);
+    doc.setLineWidth(0.8);
+    doc.line(sigX + 10, sigY + 8, sigX + 16, sigY + 2);
+    doc.line(sigX + 16, sigY + 2, sigX + 22, sigY + 10);
+    doc.line(sigX + 22, sigY + 10, sigX + 30, sigY + 4);
+    doc.line(sigX + 30, sigY + 4, sigX + 38, sigY + 8);
+    doc.setDrawColor(163, 0, 0);
+    doc.setLineWidth(0.3);
+    doc.line(sigX, sigY + 12, sigX + 46, sigY + 12);
+    doc.setTextColor(10, 37, 64);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8.5);
+    doc.text("Training Manager", sigX + 23, sigY + 16, { align: 'center' });
+    doc.setTextColor(100, 100, 100);
+    doc.setFontSize(7);
+    doc.text("HUMAN RESOURCE DEPARTMENT", sigX + 23, sigY + 20, { align: 'center' });
+
+    doc.save(`certificate-${data.employee_name.replace(/\s+/g, '_')}.pdf`);
   };
 
   // Filtered lists for rendering
@@ -1031,7 +1233,7 @@ export default function TalentTrainingPage() {
               </span>
               <div className="flex gap-2">
                 <button
-                  onClick={() => window.print()}
+                  onClick={() => handleDownloadPdf(previewCertificateData)}
                   className="inline-flex items-center gap-1 px-4 py-2 bg-slate-800 text-white rounded-xl text-xs font-semibold hover:bg-slate-700 transition"
                 >
                   <Printer className="h-4 w-4" /> Cetak / Unduh PDF

@@ -77,18 +77,18 @@
   --background: #081C3A; /* App Background: Navy Gelap */
   --surface: #0D274D;    /* Surface Background */
   --card: #12325D;       /* Card */
-  --primary: #0E5DB3;    /* Primary Button: Corporate Blue */
-  --primary-foreground: #ffffff;
-  --secondary: #0B2342;  /* Secondary Button/Sidebar: Dark Navy */
+  --primary: #3B82F6;    /* Bright Corporate Blue for high contrast */
+  --primary-foreground: #081C3A;
+  --secondary: #12325D;  /* Adjusted to match card style */
   --secondary-foreground: #f1f5f9;
-  --accent: #C8A34D;     /* Accent Gold */
-  --accent-foreground: #ffffff;
-  --success: #22C55E;
+  --accent: #D4AF37;     /* Accent Gold */
+  --accent-foreground: #081C3A;
+  --success: #10B981;
   --warning: #F59E0B;
   --danger: #EF4444;
-  --foreground: #FFFFFF; /* Text Primary: White */
-  --muted: #C8D4E5;      /* Text Secondary: Light Gray */
-  --muted-foreground: #8FA3BF;
+  --foreground: #F8FAFC; /* Softened from #FFFFFF to reduce eye strain */
+  --muted: #94A3B8;      /* Legible secondary text */
+  --muted-foreground: #64748B;
   --border-color: rgba(255, 255, 255, 0.08); /* Border */
   --ring: rgba(14, 93, 179, 0.8);
 }
