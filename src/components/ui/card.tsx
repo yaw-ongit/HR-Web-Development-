@@ -49,10 +49,10 @@ export function Card({
         >
           <div className="space-y-0.5">
             {title && (
-              <h2 className="text-base font-semibold text-brand-900">{title}</h2>
+              <h2 className="text-base font-semibold text-foreground">{title}</h2>
             )}
             {description && (
-              <p className="text-sm text-slate-500">{description}</p>
+              <p className="text-sm text-muted">{description}</p>
             )}
           </div>
           {headerActions && (
@@ -66,7 +66,7 @@ export function Card({
       </div>
 
       {footer && (
-        <div className={cn('border-t border-brand-100/80', paddingClasses[padding])}>
+        <div className={cn('border-t border-border/60', paddingClasses[padding])}>
           {footer}
         </div>
       )}

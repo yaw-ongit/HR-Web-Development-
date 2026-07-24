@@ -41,12 +41,12 @@ const iconMap = {
 function WidgetCalendar({ title }: { title: string }) {
   return (
     <Card title={title} description="Ringkasan kehadiran dan ketidakhadiran bulanan.">
-      <div className="grid grid-cols-7 gap-1.5 text-[11px] text-slate-400">
+      <div className="grid grid-cols-7 gap-1.5 text-[11px] text-muted">
         {['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map((d) => (
-          <span key={d} className="text-center font-semibold text-slate-400">{d}</span>
+          <span key={d} className="text-center font-semibold text-muted">{d}</span>
         ))}
         {Array.from({ length: 28 }).map((_, i) => (
-          <div key={i} className="h-10 rounded-xl bg-slate-50/80 ring-1 ring-slate-100" />
+          <div key={i} className="h-10 rounded-xl bg-surface/80 ring-1 ring-border/60" />
         ))}
       </div>
     </Card>
@@ -58,9 +58,9 @@ function WidgetBalance({ title }: { title: string }) {
     <Card title={title} description="Ringkasan saldo cuti dan akrual.">
       <div className="grid grid-cols-3 gap-3">
         {[{ label: 'Tahunan', value: '9 hari' }, { label: 'Sakit', value: '4 hari' }, { label: 'Pribadi', value: '2 hari' }].map((item) => (
-          <div key={item.label} className="rounded-2xl bg-white/90 p-3 text-center">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-slate-400">{item.label}</p>
-            <p className="mt-2 text-xl font-semibold text-slate-900">{item.value}</p>
+          <div key={item.label} className="rounded-2xl bg-surface/90 p-3 text-center">
+            <p className="text-[10px] uppercase tracking-[0.24em] text-muted">{item.label}</p>
+            <p className="mt-2 text-xl font-semibold text-foreground">{item.value}</p>
           </div>
         ))}
       </div>
@@ -73,13 +73,13 @@ function WidgetActivity({ title }: { title: string }) {
     <Card title={title} description="Peristiwa sistem dan workforce terbaru.">
       <ul className="space-y-3" aria-label="Recent activity">
         {recentActivity.map((item) => (
-          <li key={item.actor} className="rounded-2xl border border-slate-100 bg-white/80 p-4">
+          <li key={item.actor} className="rounded-2xl border border-border/60 bg-card/80 p-4">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold text-slate-900">{item.actor}</p>
-                <p className="text-sm text-slate-400">{item.action}</p>
+                <p className="text-sm font-semibold text-foreground">{item.actor}</p>
+                <p className="text-sm text-muted">{item.action}</p>
               </div>
-              <span className="shrink-0 text-xs text-slate-400">{item.time}</span>
+              <span className="shrink-0 text-xs text-muted">{item.time}</span>
             </div>
           </li>
         ))}
@@ -93,9 +93,9 @@ function WidgetAnnouncements({ title }: { title: string }) {
     <Card title={title} description="Pengumuman penting organisasi.">
       <ul className="space-y-3" aria-label="Announcements">
         {announcements.map((notice) => (
-          <li key={notice.title} className="rounded-2xl bg-white/80 p-4 ring-1 ring-slate-100">
-            <p className="text-sm font-semibold text-slate-900">{notice.title}</p>
-            <p className="mt-1 text-sm text-slate-400">{notice.subtitle}</p>
+          <li key={notice.title} className="rounded-2xl bg-card/80 p-4 ring-1 ring-border/60">
+            <p className="text-sm font-semibold text-foreground">{notice.title}</p>
+            <p className="mt-1 text-sm text-muted">{notice.subtitle}</p>
           </li>
         ))}
       </ul>
@@ -108,10 +108,10 @@ function WidgetStatus({ title }: { title: string }) {
     <Card title={title} description="Metrik kesehatan platform saat ini.">
       <ul className="space-y-3" aria-label="System status">
         {systemStatus.map((item) => (
-          <li key={item.label} className="flex items-center justify-between rounded-2xl bg-white/80 p-4">
+          <li key={item.label} className="flex items-center justify-between rounded-2xl bg-card/80 p-4">
             <div>
-              <p className="text-sm font-semibold text-slate-900">{item.label}</p>
-              <p className="text-sm text-slate-400">{item.value}</p>
+              <p className="text-sm font-semibold text-foreground">{item.label}</p>
+              <p className="text-sm text-muted">{item.value}</p>
             </div>
             <StatusBadge status={item.status} />
           </li>
@@ -126,12 +126,12 @@ function WidgetTraining({ title }: { title: string }) {
     <Card title={title} description="Jadwal pelatihan dan kemajuan sesi.">
       <div className="space-y-4">
         {[{ course: 'Kepemimpinan Manajer', progress: 68 }, { course: 'Sertifikasi Kepatuhan', progress: 92 }].map((item) => (
-          <div key={item.course} className="rounded-2xl bg-white/80 p-4">
+          <div key={item.course} className="rounded-2xl bg-card/80 p-4">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-slate-900">{item.course}</p>
-              <p className="text-sm text-slate-400">{item.progress}%</p>
+              <p className="text-sm font-semibold text-foreground">{item.course}</p>
+              <p className="text-sm text-muted">{item.progress}%</p>
             </div>
-            <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-50" role="progressbar" aria-valuenow={item.progress} aria-valuemin={0} aria-valuemax={100} aria-label={`${item.course} progress`}>
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-surface" role="progressbar" aria-valuenow={item.progress} aria-valuemin={0} aria-valuemax={100} aria-label={`${item.course} progress`}>
               <div className="h-full rounded-full bg-brand-500 transition-all" style={{ width: `${item.progress}%` }} />
             </div>
           </div>
@@ -208,8 +208,8 @@ function WidgetApprovals({ title }: { title: string }) {
     <Card title={title} description="Persetujuan tertunda yang membutuhkan tindakan Anda.">
       <ul className="space-y-3" aria-label="Menunggu approvals">
         {[{ label: 'Permintaan cuti — Lia Pratiwi', status: 'Menunggu' }, { label: 'Perpanjangan kontrak — Keuangan', status: 'Review' }].map((item) => (
-          <li key={item.label} className="flex items-center justify-between rounded-2xl bg-white/80 p-4">
-            <p className="text-sm font-semibold text-slate-900">{item.label}</p>
+          <li key={item.label} className="flex items-center justify-between rounded-2xl bg-card/80 p-4">
+            <p className="text-sm font-semibold text-foreground">{item.label}</p>
             <StatusBadge status={item.status} />
           </li>
         ))}
@@ -233,10 +233,10 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Acara kalender perusahaan hari ini.">
       <ul className="space-y-3">
         {[{ label: 'Q2 All-hands', time: 'Hari ini 14:00', status: 'Live' }, { label: 'Workshop Kepemimpinan', time: 'Kam 09:00', status: 'Mendatang' }].map((e) => (
-          <li key={e.label} className="flex items-center justify-between rounded-2xl bg-white/80 p-4">
+          <li key={e.label} className="flex items-center justify-between rounded-2xl bg-card/80 p-4">
             <div>
-              <p className="text-sm font-semibold text-slate-900">{e.label}</p>
-              <p className="text-sm text-slate-400">{e.time}</p>
+              <p className="text-sm font-semibold text-foreground">{e.label}</p>
+              <p className="text-sm text-muted">{e.time}</p>
             </div>
             <StatusBadge status={e.status} />
           </li>
@@ -248,9 +248,9 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Sumber kandidat aktif dan perkembangan perekrutan.">
       <div className="space-y-3">
         {[{ label: 'Karyawan Baru', value: '16 dalam proses' }, { label: 'Posisi Terbuka', value: '24 pencarian aktif' }].map((item) => (
-          <div key={item.label} className="rounded-2xl bg-white/80 p-4">
-            <p className="text-sm text-slate-400">{item.label}</p>
-            <p className="mt-1.5 text-lg font-semibold text-slate-900">{item.value}</p>
+          <div key={item.label} className="rounded-2xl bg-card/80 p-4">
+            <p className="text-sm text-muted">{item.label}</p>
+            <p className="mt-1.5 text-lg font-semibold text-foreground">{item.value}</p>
           </div>
         ))}
       </div>
@@ -260,9 +260,9 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Rekan kerja yang merayakan ulang tahun minggu ini.">
       <ul className="space-y-3">
         {['Maya Sari', 'Noor Fadhila', 'Aulia Rizky'].map((name) => (
-          <li key={name} className="rounded-2xl bg-white/80 p-4">
-            <p className="text-sm font-semibold text-slate-900">🎂 {name}</p>
-            <p className="text-xs text-slate-400">Anggota Tim</p>
+          <li key={name} className="rounded-2xl bg-card/80 p-4">
+            <p className="text-sm font-semibold text-foreground">🎂 {name}</p>
+            <p className="text-xs text-muted">Anggota Tim</p>
           </li>
         ))}
       </ul>
@@ -284,12 +284,12 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     </Card>
   ),
   server: ({ title }) => (
-    <Card title={title} description="Kesehatan server — CPU, memori, disk." footer={<p className="text-xs text-slate-400">Diperbarui barusan</p>}>
+    <Card title={title} description="Kesehatan server — CPU, memori, disk." footer={<p className="text-xs text-muted">Diperbarui barusan</p>}>
       <div className="space-y-3">
         {[{ metric: 'CPU', value: '58%' }, { metric: 'Memori', value: '72%' }, { metric: 'Disk', value: '41%' }].map((item) => (
-          <div key={item.metric} className="rounded-2xl bg-white/80 p-4">
-            <p className="text-sm text-slate-400">{item.metric}</p>
-            <p className="mt-1.5 text-xl font-semibold text-slate-900">{item.value}</p>
+          <div key={item.metric} className="rounded-2xl bg-card/80 p-4">
+            <p className="text-sm text-muted">{item.metric}</p>
+            <p className="mt-1.5 text-xl font-semibold text-foreground">{item.value}</p>
           </div>
         ))}
       </div>
@@ -299,9 +299,9 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Entri audit terbaru.">
       <ul className="space-y-3">
         {['Akses pengguna diperbarui', 'Audit kebijakan selesai', 'Rotasi kunci SSH'].map((item) => (
-          <li key={item} className="rounded-2xl bg-white/80 p-4">
-            <p className="text-sm text-slate-900">{item}</p>
-            <p className="text-xs text-slate-400">Selesai</p>
+          <li key={item} className="rounded-2xl bg-card/80 p-4">
+            <p className="text-sm text-foreground">{item}</p>
+            <p className="text-xs text-muted">Selesai</p>
           </li>
         ))}
       </ul>
@@ -311,8 +311,8 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
     <Card title={title} description="Peringatan keamanan yang membutuhkan tinjauan admin.">
       <ul className="space-y-3">
         {[{ label: 'MFA dikonfigurasi', level: 'Info' }, { label: 'Pola login tidak biasa', level: 'Kritis' }].map((item) => (
-          <li key={item.label} className="rounded-2xl bg-white/80 p-4">
-            <p className="text-sm font-semibold text-slate-900">{item.label}</p>
+          <li key={item.label} className="rounded-2xl bg-card/80 p-4">
+            <p className="text-sm font-semibold text-foreground">{item.label}</p>
             <StatusBadge status={item.level} className="mt-1" />
           </li>
         ))}
@@ -330,7 +330,9 @@ function getRoleLabel(role: RoleKey) {
 --------------------------------------------------------------- */
 export default function DashboardPage() {
   const role: RoleKey = 'hr-manager';
-  const quickActions = roleQuickActions[role];
+  const quickActions = (roleQuickActions[role] || []).filter((action) =>
+    ['Tambah Karyawan', 'Buat Pelatihan', 'Lihat Tim', 'Unduh Dokumen', 'Pelatihan & Sertifikasi', 'Kelola Pelatihan'].includes(action.label) || action.icon === 'BookOpen'
+  );
   const kpis = dashboardKpis[role];
   const widgets = roleWidgets[role];
   const today = new Intl.DateTimeFormat('id-ID', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date());
@@ -354,28 +356,28 @@ export default function DashboardPage() {
         <Card>
           <div className="grid gap-6 p-6 lg:grid-cols-[1fr_260px]">
             <div className="space-y-3 min-w-0">
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Hari Ini</p>
-              <h1 className="text-3xl font-semibold text-slate-900">{hero.title}</h1>
-              <p className="max-w-xl text-sm leading-7 text-slate-400">{hero.subtitle}</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-primary">Hari Ini</p>
+              <h1 className="text-3xl font-semibold text-foreground">{hero.title}</h1>
+              <p className="max-w-xl text-sm leading-7 text-muted">{hero.subtitle}</p>
               <div className="flex flex-wrap gap-3 pt-2">
                 {hero.actions.map((label) => (
                   <Button key={label} variant="outline" size="sm">{label}</Button>
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-white/90 p-5">
+            <div className="rounded-2xl border border-border bg-surface/90 p-5">
               <div className="flex items-center gap-4">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand-600" aria-hidden="true">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-primary" aria-hidden="true">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Status Kerja</p>
-                  <p className="mt-1.5 text-2xl font-semibold text-slate-900">Aktif</p>
+                  <p className="text-xs uppercase tracking-[0.28em] text-muted">Status Kerja</p>
+                  <p className="mt-1.5 text-2xl font-semibold text-foreground">Aktif</p>
                 </div>
               </div>
-              <div className="mt-4 space-y-2 rounded-xl bg-slate-50/80 p-4 text-sm text-slate-400">
-                <div className="flex justify-between"><span>Check-in</span><span className="text-slate-800">08:34</span></div>
-                <div className="flex justify-between"><span>Jam Pulang</span><span className="text-slate-800">17:30</span></div>
+              <div className="mt-4 space-y-2 rounded-xl bg-surface/80 p-4 text-sm text-muted">
+                <div className="flex justify-between"><span>Check-in</span><span className="text-foreground">08:34</span></div>
+                <div className="flex justify-between"><span>Jam Pulang</span><span className="text-foreground">17:30</span></div>
               </div>
             </div>
           </div>
@@ -404,12 +406,12 @@ export default function DashboardPage() {
             {quickActions.map((action) => (
               <Card key={action.label} className="p-5 transition hover:border-brand-500/30">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-50/50 text-brand-600" aria-hidden="true">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-50/50 text-primary" aria-hidden="true">
                     {createElement(iconMap[action.icon as keyof typeof iconMap] ?? Sparkles, { className: 'h-5 w-5' })}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-slate-900">{action.label}</p>
-                    <p className="mt-1 text-xs text-slate-400">{action.hint}</p>
+                    <p className="text-sm font-semibold text-foreground">{action.label}</p>
+                    <p className="mt-1 text-xs text-muted">{action.hint}</p>
                   </div>
                 </div>
               </Card>
@@ -437,11 +439,11 @@ export default function DashboardPage() {
             >
               <ul className="space-y-3" aria-label="Notification list">
                 {roleNotifications.map((n) => (
-                  <li key={n.title} className="rounded-2xl border border-slate-100 bg-white/80 p-4">
+                  <li key={n.title} className="rounded-2xl border border-border/60 bg-card/80 p-4">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="text-sm font-semibold text-slate-900">{n.title}</p>
-                        <p className="mt-1 text-xs text-slate-400">{n.description}</p>
+                        <p className="text-sm font-semibold text-foreground">{n.title}</p>
+                        <p className="mt-1 text-xs text-muted">{n.description}</p>
                       </div>
                       <StatusBadge status={n.type} />
                     </div>
@@ -452,9 +454,9 @@ export default function DashboardPage() {
 
             {/* Insights mini-charts */}
             <div className="mt-5 space-y-4">
-              <div className="rounded-2xl border border-slate-200 bg-white/85 p-5">
-                <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Tren Kehadiran</p>
-                <p className="mt-1 text-lg font-semibold text-slate-900">Siklus Saat Ini</p>
+              <div className="rounded-2xl border border-border bg-white/85 p-5">
+                <p className="text-xs uppercase tracking-[0.28em] text-muted">Tren Kehadiran</p>
+                <p className="mt-1 text-lg font-semibold text-foreground">Siklus Saat Ini</p>
                 <div className="mt-4 h-36" aria-label="Attendance trend chart">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={employeeMetrics.attendance} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
@@ -467,9 +469,9 @@ export default function DashboardPage() {
                   </ResponsiveContainer>
                 </div>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white/85 p-5">
-                <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Penyelesaian Pelatihan</p>
-                <p className="mt-1 text-lg font-semibold text-slate-900">Tingkat Partisipasi</p>
+              <div className="rounded-2xl border border-border bg-white/85 p-5">
+                <p className="text-xs uppercase tracking-[0.28em] text-muted">Penyelesaian Pelatihan</p>
+                <p className="mt-1 text-lg font-semibold text-foreground">Tingkat Partisipasi</p>
                 <div className="mt-4 h-36" aria-label="Training completion chart">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={employeeMetrics.trainingCompletion} margin={{ top: 4, right: 0, left: -16, bottom: 0 }}>

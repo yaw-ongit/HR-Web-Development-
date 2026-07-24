@@ -15,11 +15,11 @@ export default function TalentHomePage() {
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <section className="space-y-6">
-        <div className="flex flex-col gap-4 rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 rounded-[28px] border border-border bg-surface/95 px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Talenta</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Siklus talenta</h1>
-            <p className="mt-3 max-w-2xl text-sm text-slate-400">Pengelolaan talenta menyeluruh mulai dari rekrutmen hingga pengembangan karir dan sertifikasi.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-primary">Talenta</p>
+            <h1 className="mt-2 text-3xl font-semibold text-foreground">Siklus talenta</h1>
+            <p className="mt-3 max-w-2xl text-sm text-muted">Pengelolaan talenta menyeluruh mulai dari rekrutmen hingga pengembangan karir dan sertifikasi.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link href="/talent/candidates">
@@ -47,10 +47,10 @@ export default function TalentHomePage() {
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {talentKpis.map((kpi) => (
-            <Card key={kpi.label} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{kpi.label}</p>
-              <p className="mt-4 text-3xl font-semibold text-slate-900">{kpi.value}</p>
-              <p className="mt-2 text-sm text-slate-400">{kpi.note}</p>
+            <Card key={kpi.label} className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">{kpi.label}</p>
+              <p className="mt-4 text-3xl font-semibold text-foreground">{kpi.value}</p>
+              <p className="mt-2 text-sm text-muted">{kpi.note}</p>
             </Card>
           ))}
         </div>
@@ -141,15 +141,15 @@ export default function TalentHomePage() {
 
       <SectionContainer title="Operasi Talenta" className="space-y-4">
         <div className="grid gap-4 xl:grid-cols-3">
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kesehatan pipeline</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">84 kandidat</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Kesehatan pipeline</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">84 kandidat</p>
               </div>
-              <Users className="h-6 w-6 text-brand-600" />
+              <Users className="h-6 w-6 text-primary" />
             </div>
-            <div className="mt-6 space-y-2 text-sm text-slate-400">
+            <div className="mt-6 space-y-2 text-sm text-muted">
               <p>• 24 pengajuan baru</p>
               <p>• 18 dalam tahap penyaringan</p>
               <p>• 28 kandidat memenuhi syarat</p>
@@ -157,30 +157,30 @@ export default function TalentHomePage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Onboarding aktif</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">4 karyawan</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Onboarding aktif</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">4 karyawan</p>
               </div>
               <UserCheck className="h-6 w-6 text-emerald-300" />
             </div>
-            <div className="mt-6 space-y-2 text-sm text-slate-400">
+            <div className="mt-6 space-y-2 text-sm text-muted">
               <p>• 15 tugas total tertunda</p>
               <p>• 8 tugas selesai</p>
               <p>• Rata-rata: 3.2 hari sampai selesai</p>
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Fokus pengembangan</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">28 program</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Fokus pengembangan</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">28 program</p>
               </div>
               <BookOpen className="h-6 w-6 text-amber-300" />
             </div>
-            <div className="mt-6 space-y-2 text-sm text-slate-400">
+            <div className="mt-6 space-y-2 text-sm text-muted">
               <p>• 31 selesai bulan ini</p>
               <p>• 30 dalam proses</p>
               <p>• 156 sertifikasi aktif</p>

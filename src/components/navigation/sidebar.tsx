@@ -79,7 +79,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
       >
         <div className="mb-8 flex items-center justify-between gap-3 px-2">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white ring-1 ring-brand-200" aria-hidden="true">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-card ring-1 ring-brand-200" aria-hidden="true">
               <Image src="/logo-indocater.jpg" alt="PT Indocater" width={40} height={40} className="h-10 w-10 object-contain" priority />
             </div>
             <div>
@@ -102,7 +102,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             Navigasi
           </p>
           <ul className="space-y-0.5" role="list">
-            {navItems.map((item) => {
+            {navItems.filter(item => ['Dashboard', 'Data Karyawan', 'Pelatihan & Sertifikasi'].includes(item.label)).map((item) => {
               const active = isActive(item.href);
               return (
                 <li key={item.label} role="listitem">

@@ -15,64 +15,64 @@ export default function RecruitmentAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
+              <Button className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Analitik Rekrutmen</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-primary">Analitik</p>
+              <h1 className="text-3xl font-semibold text-foreground">Analitik Rekrutmen</h1>
             </div>
           </div>
         </div>
       </SectionContainer>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Total Lamaran</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">346</p>
-              <p className="mt-2 text-sm text-slate-400">6 bulan terakhir</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Total Lamaran</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">346</p>
+              <p className="mt-2 text-sm text-muted">6 bulan terakhir</p>
             </div>
-            <Briefcase className="h-8 w-8 text-brand-600" />
+            <Briefcase className="h-8 w-8 text-primary" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Rata-rata Waktu Hire</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">29 hari</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Rata-rata Waktu Hire</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">29 hari</p>
               <p className="mt-2 text-sm text-emerald-600">↓ 3 hari dari bulan lalu</p>
             </div>
             <TrendingUp className="h-8 w-8 text-emerald-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Penerimaan Tawaran</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">88%</p>
-              <p className="mt-2 text-sm text-brand-600">Kuartal ini</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Penerimaan Tawaran</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">88%</p>
+              <p className="mt-2 text-sm text-primary">Kuartal ini</p>
             </div>
-            <TrendingUp className="h-8 w-8 text-brand-600" />
+            <TrendingUp className="h-8 w-8 text-primary" />
           </div>
         </Card>
       </div>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Funnel Rekrutmen</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Funnel Rekrutmen</p>
           <div className="space-y-3">
             {hiringFunnelData.map((stage) => (
-              <div key={stage.stage} className="rounded-2xl bg-white/80 p-4">
+              <div key={stage.stage} className="rounded-2xl bg-card/80 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-slate-900">{stage.stage}</p>
-                  <span className="text-sm font-semibold text-brand-600">{stage.count} candidates • {stage.percentage.toFixed(1)}%</span>
+                  <p className="text-sm font-semibold text-foreground">{stage.stage}</p>
+                  <span className="text-sm font-semibold text-primary">{stage.count} candidates • {stage.percentage.toFixed(1)}%</span>
                 </div>
-                <div className="h-2 w-full bg-slate-50/50 rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-surface/70 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full"
                     style={{ width: `${stage.percentage}%` }}
@@ -86,8 +86,8 @@ export default function RecruitmentAnalyticsPage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Waktu Hire</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tren Waktu Hire</p>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={timeToHireData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -105,8 +105,8 @@ export default function RecruitmentAnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tingkat Penerimaan Tawaran</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tingkat Penerimaan Tawaran</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={offerAcceptanceData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -126,22 +126,22 @@ export default function RecruitmentAnalyticsPage() {
       </div>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Lowongan Saat Ini</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Lowongan Saat Ini</p>
           <div className="space-y-3">
             {vacancyStatusData.map((vacancy) => (
-              <div key={vacancy.position} className="rounded-2xl bg-white/80 p-4">
+              <div key={vacancy.position} className="rounded-2xl bg-card/80 p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <p className="text-sm font-semibold text-slate-900">{vacancy.position}</p>
-                    <p className="mt-1 text-xs text-slate-400">
+                    <p className="text-sm font-semibold text-foreground">{vacancy.position}</p>
+                    <p className="mt-1 text-xs text-muted">
                       {vacancy.applications} lamaran • Diposting {vacancy.posted}
                     </p>
                   </div>
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-[0.2em] ${
                     vacancy.status === 'Open' ? 'bg-emerald-50 text-emerald-300' : 
-                    vacancy.status === 'Sedang Berlangsung' ? 'bg-brand-50 text-brand-600' :
-                    'bg-slate-500/15 text-slate-700'
+                    vacancy.status === 'Sedang Berlangsung' ? 'bg-brand-50 text-primary' :
+                    'bg-surface0/15 text-muted-foreground'
                   }`}>
                     {vacancy.status}
                   </span>

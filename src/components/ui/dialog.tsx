@@ -90,16 +90,16 @@ export function Dialog({ open, onClose, title, description, children, className,
         {/* Header */}
         <div className="flex items-start justify-between gap-4 border-b border-brand-100/80 px-6 py-5">
           <div>
-            <h2 id="dialog-title" className="text-lg font-semibold text-brand-900">{title}</h2>
+            <h2 id="dialog-title" className="text-lg font-semibold text-foreground">{title}</h2>
             {description && (
-              <p id="dialog-description" className="mt-1 text-sm text-slate-500">{description}</p>
+              <p id="dialog-description" className="mt-1 text-sm text-muted">{description}</p>
             )}
           </div>
           <button
             type="button"
             aria-label="Close dialog"
             onClick={onClose}
-            className="rounded-full p-1.5 text-slate-500 transition hover:bg-brand-50 hover:text-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="rounded-full p-1.5 text-muted transition hover:bg-brand-50 hover:text-primary focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             <X className="h-4 w-4" />
           </button>

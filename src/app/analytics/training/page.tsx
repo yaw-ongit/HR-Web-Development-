@@ -17,35 +17,35 @@ export default function TrainingAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
+              <Button className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Analitik Pelatihan</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-primary">Analitik</p>
+              <h1 className="text-3xl font-semibold text-foreground">Analitik Pelatihan</h1>
             </div>
           </div>
         </div>
       </SectionContainer>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tingkat Penyelesaian</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">87.5%</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Tingkat Penyelesaian</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">87.5%</p>
               <p className="mt-2 text-sm text-emerald-600">↑ 2.1% dari bulan lalu</p>
             </div>
             <Award className="h-8 w-8 text-emerald-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Segera Kedaluwarsa</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">38</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Segera Kedaluwarsa</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">38</p>
               <p className="mt-2 text-sm text-amber-600">Dalam 60 hari</p>
             </div>
             <AlertCircle className="h-8 w-8 text-amber-600" />
@@ -54,24 +54,24 @@ export default function TrainingAnalyticsPage() {
       </div>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Kepatuhan Pelatihan Wajib</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Kepatuhan Pelatihan Wajib</p>
           <div className="space-y-3">
             {mandatoryTrainingData.map((training) => (
-              <div key={training.training} className="rounded-2xl bg-white/80 p-4">
+              <div key={training.training} className="rounded-2xl bg-card/80 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-slate-900">{training.training}</p>
+                  <p className="text-sm font-semibold text-foreground">{training.training}</p>
                   <span className={`text-sm font-semibold ${training.compliance >= 95 ? 'text-emerald-600' : training.compliance >= 85 ? 'text-amber-600' : 'text-rose-600'}`}>
                     {training.compliance.toFixed(1)}%
                   </span>
                 </div>
-                <div className="h-2 w-full bg-slate-50/50 rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-surface/70 rounded-full overflow-hidden">
                   <div 
                     className={`h-full rounded-full ${training.compliance >= 95 ? 'bg-emerald-500' : training.compliance >= 85 ? 'bg-amber-500' : 'bg-rose-500'}`}
                     style={{ width: `${training.compliance}%` }}
                   />
                 </div>
-                <div className="mt-2 text-xs text-slate-400">
+                <div className="mt-2 text-xs text-muted">
                   {training.completed} completed • {training.pending} pending
                 </div>
               </div>
@@ -81,12 +81,12 @@ export default function TrainingAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Status Kedaluwarsa Sertifikat</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Status Kedaluwarsa Sertifikat</p>
           <div className="space-y-3">
             {expiredCertificatesData.map((cert) => (
-              <div key={cert.certificate} className="rounded-2xl bg-white/80 p-4">
-                <p className="text-sm font-semibold text-slate-900 mb-3">{cert.certificate}</p>
+              <div key={cert.certificate} className="rounded-2xl bg-card/80 p-4">
+                <p className="text-sm font-semibold text-foreground mb-3">{cert.certificate}</p>
                   <div className="grid grid-cols-3 gap-2">
                     <div>
                       <p className="text-xs text-rose-600 font-semibold">{cert.expired} Kedaluwarsa</p>
@@ -106,8 +106,8 @@ export default function TrainingAnalyticsPage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Penyelesaian Pelatihan</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tren Penyelesaian Pelatihan</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={trainingCompletionData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -126,17 +126,17 @@ export default function TrainingAnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Matriks Kompetensi</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Matriks Kompetensi</p>
             <div className="space-y-3">
               {competencyMatrixData.map((competency) => (
-                <div key={competency.competency} className="rounded-2xl bg-white/80 p-3">
+                <div key={competency.competency} className="rounded-2xl bg-card/80 p-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-semibold text-slate-900">{competency.competency}</p>
-                      <p className="text-xs text-slate-400">{competency.level}</p>
+                      <p className="text-sm font-semibold text-foreground">{competency.competency}</p>
+                      <p className="text-xs text-muted">{competency.level}</p>
                     </div>
-                    <span className="text-sm font-semibold text-brand-600">{competency.employees}</span>
+                    <span className="text-sm font-semibold text-primary">{competency.employees}</span>
                   </div>
                 </div>
               ))}

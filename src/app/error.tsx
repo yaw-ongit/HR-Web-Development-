@@ -19,10 +19,10 @@ export default function ErrorPage({
   return (
     <main
       id="main-content"
-      className="grid min-h-screen place-items-center bg-white px-6 py-12"
+      className="grid min-h-screen place-items-center bg-card px-6 py-12"
       role="main"
     >
-      <div className="flex w-full max-w-md flex-col items-center rounded-[28px] border border-rose-500/20 bg-slate-50/90 p-10 text-center shadow-card">
+      <div className="flex w-full max-w-md flex-col items-center rounded-[28px] border border-rose-500/20 bg-surface/90 p-10 text-center shadow-card">
         {/* Icon */}
         <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-rose-50 ring-1 ring-rose-200">
           <AlertTriangle className="h-8 w-8 text-rose-600" aria-hidden="true" />
@@ -31,16 +31,16 @@ export default function ErrorPage({
         {/* Label */}
         <p className="text-xs uppercase tracking-[0.3em] text-rose-600">Error 500</p>
 
-        <h1 className="mt-3 text-2xl font-semibold text-slate-900">
+        <h1 className="mt-3 text-2xl font-semibold text-foreground">
           Something went wrong
         </h1>
-        <p className="mt-3 text-sm leading-7 text-slate-400">
+        <p className="mt-3 text-sm leading-7 text-muted">
           A technical issue prevented the application from loading. Our team has been notified.
           Try refreshing the page or return to the dashboard.
         </p>
 
         {error.digest && (
-          <p className="mt-3 rounded-2xl bg-white/80 px-4 py-2 text-xs text-slate-400">
+          <p className="mt-3 rounded-2xl bg-card/80 px-4 py-2 text-xs text-muted">
             Error ID: {error.digest}
           </p>
         )}
@@ -56,7 +56,7 @@ export default function ErrorPage({
           </button>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-5 py-2.5 text-sm font-semibold text-foreground transition hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-slate-950"
           >
             <Home className="h-4 w-4" aria-hidden="true" />
             Dashboard

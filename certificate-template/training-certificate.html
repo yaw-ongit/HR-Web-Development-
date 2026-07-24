@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sertifikat Pelatihan - {{employee_name}}</title>
+  <link rel="stylesheet" href="certificate-style.css">
+</head>
+<body>
+
+  <div class="certificate-container">
+    <!-- Border Accents -->
+    <div class="border-outer"></div>
+    <div class="border-inner"></div>
+    <div class="corner-accent-tl"></div>
+    <div class="corner-accent-tr"></div>
+    <div class="corner-accent-bl"></div>
+    <div class="corner-accent-br"></div>
+
+    <div class="certificate-content">
+      <!-- Header Section -->
+      <div class="certificate-header">
+        <div class="logo-container">
+          <img src="assets/logo-placeholder.svg" alt="PT Indocater Logo" class="logo-img">
+        </div>
+        <h2 class="company-title">PT INDOCATER</h2>
+        <h1 class="certificate-title-main">CERTIFICATE</h1>
+        <div class="certificate-title-sub">OF TRAINING COMPLETION</div>
+      </div>
+
+      <!-- Body Section -->
+      <div class="certificate-body">
+        <p class="presentation-text">This certificate is proudly presented to:</p>
+        <div class="recipient-name">{{employee_name}}</div>
+        <div class="recipient-id">Employee ID: {{employee_id}}</div>
+        
+        <p class="completion-text">for successfully completing the training program:</p>
+        <div class="training-title">{{training_title}}</div>
+
+        <!-- Metadata / Info Box -->
+        <div class="training-meta">
+          <div class="meta-item">
+            <span class="meta-label">Category:</span>
+            <span>{{training_category}}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Date:</span>
+            <span>{{training_date}}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Duration:</span>
+            <span>{{training_duration}}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Trainer:</span>
+            <span>{{trainer_name}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Section -->
+      <div class="certificate-footer">
+        <div class="footer-left">
+          <div><strong>Certificate Number:</strong> <span class="cert-number">{{certificate_number}}</span></div>
+          <div><strong>Issued Date:</strong> {{issued_date}}</div>
+          <div><strong>Issuer:</strong> {{issuer}}</div>
+        </div>
+
+        <div class="footer-center">
+          <img src="assets/stamp-placeholder.svg" alt="Official Stamp" class="stamp-img">
+        </div>
+
+        <div class="footer-right">
+          <div class="signature-container">
+            <img src="assets/signature-placeholder.svg" alt="Signature" class="signature-img">
+          </div>
+          <p class="signer-name">Training Manager</p>
+          <p class="signer-title">Human Resource Department</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -46,7 +46,7 @@ export default function TalentHiringPage() {
             value === 'Accepted'
               ? 'bg-emerald-50 text-emerald-200'
               : value === 'Offer Extended'
-              ? 'bg-brand-50 text-brand-500'
+              ? 'bg-brand-50 text-primary'
               : 'bg-amber-50 text-amber-200';
           return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
         },
@@ -55,7 +55,7 @@ export default function TalentHiringPage() {
         id: 'actions',
         header: 'Aksi',
         cell: () => (
-          <Link href="/talent/hiring" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 transition hover:border-brand-500">
+          <Link href="/talent/hiring" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground transition hover:border-brand-500">
             View <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         ),
@@ -88,11 +88,11 @@ export default function TalentHiringPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Talent / Hiring</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Offer management</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">Track offer extensions, acceptances, and prepare candidates for onboarding.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-primary">Talent / Hiring</p>
+            <h1 className="text-3xl font-semibold text-foreground">Offer management</h1>
+            <p className="mt-2 max-w-2xl text-sm text-muted">Track offer extensions, acceptances, and prepare candidates for onboarding.</p>
           </div>
-          <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
+          <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-brand-500">
             Kembali ke Talent
           </Link>
         </div>
@@ -100,19 +100,19 @@ export default function TalentHiringPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {metrics.map((item) => (
-          <Card key={item.label} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{item.label}</p>
-            <p className="mt-3 text-3xl font-semibold text-slate-900">{item.value}</p>
-            <p className="mt-2 text-sm text-slate-400">{item.subtext}</p>
+          <Card key={item.label} className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted">{item.label}</p>
+            <p className="mt-3 text-3xl font-semibold text-foreground">{item.value}</p>
+            <p className="mt-2 text-sm text-muted">{item.subtext}</p>
           </Card>
         ))}
       </div>
 
-      <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+      <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Hiring table</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-900">Offer pipeline</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-primary">Hiring table</p>
+            <h2 className="mt-2 text-xl font-semibold text-foreground">Offer pipeline</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" className="rounded-full px-5 py-3">
@@ -126,15 +126,15 @@ export default function TalentHiringPage() {
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Cari kandidat, posisi, atau departemen"
-              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500"
+              className="w-full rounded-3xl border border-border bg-surface/90 py-4 pl-11 pr-4 text-sm text-foreground outline-none transition focus:border-brand-500"
             />
           </div>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
+          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-border bg-surface/90 p-4 text-sm text-foreground outline-none focus:border-brand-500">
             <option value="All">Semua status</option>
             <option value="Offer Extended">Tawaran Diperpanjang</option>
             <option value="Accepted">Diterima</option>

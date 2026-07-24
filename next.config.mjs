@@ -2,6 +2,8 @@
 const nextConfig = {
   outputFileTracingRoot: process.cwd(),
   reactStrictMode: true,
+  poweredByHeader: false,
+  skipTrailingSlashRedirect: true,
 
   eslint: {
     ignoreDuringBuilds: true,

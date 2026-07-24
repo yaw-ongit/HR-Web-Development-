@@ -23,13 +23,13 @@ export default function WorkforceAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
+              <Button className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Analitik Workforce</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-primary">Analitik</p>
+              <h1 className="text-3xl font-semibold text-foreground">Analitik Workforce</h1>
             </div>
           </div>
         </div>
@@ -37,8 +37,8 @@ export default function WorkforceAnalyticsPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Distribusi Usia</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Distribusi Usia</p>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie data={ageDistribution} dataKey="count" nameKey="age" cx="50%" cy="50%" outerRadius={80} label>
@@ -56,8 +56,8 @@ export default function WorkforceAnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Distribusi Gender</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Distribusi Gender</p>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie data={genderDistribution} dataKey="count" nameKey="gender" cx="50%" cy="50%" outerRadius={80} label>
@@ -75,8 +75,8 @@ export default function WorkforceAnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Lama Bekerja</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Lama Bekerja</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={yearsOfServiceData} layout="vertical" margin={{ top: 10, right: 30, left: 100, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -94,8 +94,8 @@ export default function WorkforceAnalyticsPage() {
       </div>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Perbandingan Departemen</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Perbandingan Departemen</p>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={departmentComparisonData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -114,16 +114,16 @@ export default function WorkforceAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Struktur Organisasi - Headcount per Departemen</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Struktur Organisasi - Headcount per Departemen</p>
           <div className="space-y-3">
             {departmentComparisonData.map((dept) => (
-              <div key={dept.department} className="rounded-2xl bg-white/80 p-4">
+              <div key={dept.department} className="rounded-2xl bg-card/80 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-slate-900">{dept.department}</p>
-                  <span className="text-sm font-semibold text-brand-600">{dept.headcount} employees</span>
+                  <p className="text-sm font-semibold text-foreground">{dept.department}</p>
+                  <span className="text-sm font-semibold text-primary">{dept.headcount} employees</span>
                 </div>
-                <div className="h-2 w-full bg-slate-50/50 rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-surface/70 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full"
                     style={{ width: `${(dept.headcount / 85) * 100}%` }}
@@ -136,8 +136,8 @@ export default function WorkforceAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Headcount per Departemen</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tren Headcount per Departemen</p>
           <ResponsiveContainer width="100%" height={350}>
             <LineChart data={workforceTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />

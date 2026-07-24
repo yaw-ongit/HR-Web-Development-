@@ -25,18 +25,18 @@ export default function AnalyticsPage() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Intelijen Perusahaan</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Pusat Analitik</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">
+            <p className="text-xs uppercase tracking-[0.3em] text-primary">Intelijen Perusahaan</p>
+            <h1 className="text-3xl font-semibold text-foreground">Pusat Analitik</h1>
+            <p className="mt-2 max-w-2xl text-sm text-muted">
               Platform analitik tenaga kerja komprehensif untuk keputusan strategis dan wawasan operasional.
             </p>
           </div>
           <div className="flex gap-2">
-            <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500 hover:text-brand-600">
+            <Button className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
               <Filter className="h-4 w-4 mr-2" />
               Filter
             </Button>
-            <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500 hover:text-brand-600">
+            <Button className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
               <Download className="h-4 w-4 mr-2" />
               Ekspor
             </Button>
@@ -46,47 +46,47 @@ export default function AnalyticsPage() {
 
       <SectionContainer>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Total Karyawan</p>
-                <p className="mt-3 text-3xl font-semibold text-slate-900">{executiveKpi.totalEmployees}</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Total Karyawan</p>
+                <p className="mt-3 text-3xl font-semibold text-foreground">{executiveKpi.totalEmployees}</p>
                 <p className="mt-2 text-sm text-emerald-600">↑ {executiveKpi.headcountGrowth} bulan ini</p>
               </div>
-              <Users className="h-8 w-8 text-brand-600" />
+              <Users className="h-8 w-8 text-primary" />
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tingkat Kehadiran</p>
-                <p className="mt-3 text-3xl font-semibold text-slate-900">{executiveKpi.attendanceRate}%</p>
-                <p className="mt-2 text-sm text-slate-400">Rata-rata</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Tingkat Kehadiran</p>
+                <p className="mt-3 text-3xl font-semibold text-foreground">{executiveKpi.attendanceRate}%</p>
+                <p className="mt-2 text-sm text-muted">Rata-rata</p>
               </div>
               <Activity className="h-8 w-8 text-emerald-600" />
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tingkat Turnover</p>
-                <p className="mt-3 text-3xl font-semibold text-slate-900">{executiveKpi.turnoverRate}%</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Tingkat Turnover</p>
+                <p className="mt-3 text-3xl font-semibold text-foreground">{executiveKpi.turnoverRate}%</p>
                 <p className="mt-2 text-sm text-rose-600">Bulan ini</p>
               </div>
               <TrendingUp className="h-8 w-8 text-rose-600" />
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kepatuhan Pelatihan</p>
-                <p className="mt-3 text-3xl font-semibold text-slate-900">{executiveKpi.trainingCompliance}%</p>
-                <p className="mt-2 text-sm text-brand-600">Selesai</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Kepatuhan Pelatihan</p>
+                <p className="mt-3 text-3xl font-semibold text-foreground">{executiveKpi.trainingCompliance}%</p>
+                <p className="mt-2 text-sm text-primary">Selesai</p>
               </div>
-              <BookOpen className="h-8 w-8 text-brand-600" />
+              <BookOpen className="h-8 w-8 text-primary" />
             </div>
           </Card>
         </div>
@@ -94,8 +94,8 @@ export default function AnalyticsPage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Jumlah Karyawan</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tren Jumlah Karyawan</p>
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={workforceTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
@@ -118,8 +118,8 @@ export default function AnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Perkembangan Funnel Rekrutmen</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Perkembangan Funnel Rekrutmen</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={hiringTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -140,8 +140,8 @@ export default function AnalyticsPage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Turnover</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tren Turnover</p>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={turnoverTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -159,8 +159,8 @@ export default function AnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Pertumbuhan Departemen</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Pertumbuhan Departemen</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={departmentGrowthData} margin={{ top: 10, right: 30, left: 0, bottom: 60 }} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -179,8 +179,8 @@ export default function AnalyticsPage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tingkat Penyelesaian Pelatihan</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tingkat Penyelesaian Pelatihan</p>
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={trainingCompletionData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
@@ -203,8 +203,8 @@ export default function AnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Perbandingan Cuti vs Kehadiran</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Perbandingan Cuti vs Kehadiran</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={attendanceTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -226,68 +226,68 @@ export default function AnalyticsPage() {
       <SectionContainer>
         <div className="grid gap-4 md:grid-cols-3">
           <Link href="/analytics/workforce">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
-                <Users className="h-5 w-5 text-brand-600" />
+                <p className="text-sm uppercase tracking-[0.2em] text-muted">Lihat Detail</p>
+                <Users className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-900">Analitik Workforce</h3>
-              <p className="mt-2 text-sm text-slate-400">Headcount, demografi, dan struktur organisasi</p>
+              <h3 className="text-xl font-semibold text-foreground">Analitik Workforce</h3>
+              <p className="mt-2 text-sm text-muted">Headcount, demografi, dan struktur organisasi</p>
             </Card>
           </Link>
 
           <Link href="/analytics/attendance">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
+                <p className="text-sm uppercase tracking-[0.2em] text-muted">Lihat Detail</p>
                 <Activity className="h-5 w-5 text-emerald-600" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-900">Analitik Absensi</h3>
-              <p className="mt-2 text-sm text-slate-400">Heatmap absensi, tren keterlambatan, dan lembur</p>
+              <h3 className="text-xl font-semibold text-foreground">Analitik Absensi</h3>
+              <p className="mt-2 text-sm text-muted">Heatmap absensi, tren keterlambatan, dan lembur</p>
             </Card>
           </Link>
 
           <Link href="/analytics/leave">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
+                <p className="text-sm uppercase tracking-[0.2em] text-muted">Lihat Detail</p>
                 <BookOpen className="h-5 w-5 text-amber-600" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-900">Analitik Cuti</h3>
-              <p className="mt-2 text-sm text-slate-400">Saldo cuti, jenis, dan perbandingan departemen</p>
+              <h3 className="text-xl font-semibold text-foreground">Analitik Cuti</h3>
+              <p className="mt-2 text-sm text-muted">Saldo cuti, jenis, dan perbandingan departemen</p>
             </Card>
           </Link>
 
           <Link href="/analytics/recruitment">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
+                <p className="text-sm uppercase tracking-[0.2em] text-muted">Lihat Detail</p>
                 <Briefcase className="h-5 w-5 text-purple-600" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-900">Analitik Rekrutmen</h3>
-              <p className="mt-2 text-sm text-slate-400">Funnel rekrutmen, waktu hire, dan penerimaan tawaran</p>
+              <h3 className="text-xl font-semibold text-foreground">Analitik Rekrutmen</h3>
+              <p className="mt-2 text-sm text-muted">Funnel rekrutmen, waktu hire, dan penerimaan tawaran</p>
             </Card>
           </Link>
 
           <Link href="/analytics/training">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
+                <p className="text-sm uppercase tracking-[0.2em] text-muted">Lihat Detail</p>
                 <Award className="h-5 w-5 text-pink-400" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-900">Analitik Pelatihan</h3>
-              <p className="mt-2 text-sm text-slate-400">Tingkat penyelesaian, sertifikat, dan kompetensi</p>
+              <h3 className="text-xl font-semibold text-foreground">Analitik Pelatihan</h3>
+              <p className="mt-2 text-sm text-muted">Tingkat penyelesaian, sertifikat, dan kompetensi</p>
             </Card>
           </Link>
 
           <Link href="/analytics/compliance">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
+            <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card hover:border-brand-500 cursor-pointer transition">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Lihat Detail</p>
+                <p className="text-sm uppercase tracking-[0.2em] text-muted">Lihat Detail</p>
                 <Heart className="h-5 w-5 text-red-400" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-900">Analitik Kepatuhan</h3>
-              <p className="mt-2 text-sm text-slate-400">Kepatuhan medis, kedaluwarsa sertifikat, dan persyaratan</p>
+              <h3 className="text-xl font-semibold text-foreground">Analitik Kepatuhan</h3>
+              <p className="mt-2 text-sm text-muted">Kepatuhan medis, kedaluwarsa sertifikat, dan persyaratan</p>
             </Card>
           </Link>
         </div>

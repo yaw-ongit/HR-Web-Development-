@@ -30,10 +30,14 @@ export default function PeopleDirectoryPage() {
   const [rowSelection, setRowSelection] = useState({});
 
   useEffect(() => {
-    PeopleService.getEmployees(employeeDirectory).then((data) => {
-      // Map data if schema differs or use as-is
-      if (Array.isArray(data) && data.length > 0) {
-        setEmployees(data as unknown as KaryawanRecord[]);
+    PeopleService.getEmployees(employeeDirectory).then((result) => {
+      if (result.error) {
+        console.error('People directory data unavailable:', result.error);
+        return;
+      }
+
+      if (Array.isArray(result.data) && result.data.length > 0) {
+        setEmployees(result.data as unknown as KaryawanRecord[]);
       }
     });
   }, []);
@@ -56,11 +60,11 @@ export default function PeopleDirectoryPage() {
       id: 'select',
       header: ({ table }) => (
         <input type="checkbox" aria-label="Select all rows" checked={table.getIsAllRowsSelected()} onChange={table.getToggleAllRowsSelectedHandler()}
-          className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-brand-600 focus:ring-brand-500" />
+          className="h-4 w-4 rounded border-slate-400 bg-secondary text-primary focus:ring-brand-500" />
       ),
       cell: ({ row }) => (
         <input type="checkbox" aria-label={`Select ${row.original.fullName}`} checked={row.getIsSelected()} onChange={row.getToggleSelectedHandler()}
-          className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-brand-600 focus:ring-brand-500" />
+          className="h-4 w-4 rounded border-slate-400 bg-secondary text-primary focus:ring-brand-500" />
       ),
     },
     {
@@ -70,12 +74,12 @@ export default function PeopleDirectoryPage() {
       enableSorting: true,
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-sm font-semibold text-brand-500" aria-hidden="true">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-sm font-semibold text-primary" aria-hidden="true">
             {row.original.initials}
           </div>
           <div>
-            <p className="text-sm font-semibold text-slate-900">{row.original.fullName}</p>
-            <p className="text-xs text-slate-400">{row.original.email}</p>
+            <p className="text-sm font-semibold text-foreground">{row.original.fullName}</p>
+            <p className="text-xs text-muted">{row.original.email}</p>
           </div>
         </div>
       ),
@@ -95,7 +99,7 @@ export default function PeopleDirectoryPage() {
       cell: ({ row }) => (
         <div className="flex justify-end gap-2">
           <Link href={`/people/${row.original.id}`}
-            className="rounded-full border border-slate-200 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-900 transition hover:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
+            className="rounded-full border border-border bg-surface/90 px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
             Profil
           </Link>
         </div>
@@ -160,13 +164,13 @@ export default function PeopleDirectoryPage() {
         <aside className="space-y-4" aria-label="Ringkasan modul People">
           <Card title="Area karyawan" description="Statistik singkat dan tindakan modul cepat.">
             <div className="mt-2 grid grid-cols-2 gap-3">
-              <div className="rounded-2xl bg-white/80 p-4">
-                <p className="text-xs text-slate-400">Total Karyawan</p>
-                <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-900">{employees.length}</p>
+              <div className="rounded-2xl bg-card/80 p-4">
+                <p className="text-xs text-muted">Total Karyawan</p>
+                <p className="mt-2 text-2xl font-semibold tabular-nums text-foreground">{employees.length}</p>
               </div>
-              <div className="rounded-2xl bg-white/80 p-4">
-                <p className="text-xs text-slate-400">Cabang</p>
-                <p className="mt-2 text-2xl font-semibold tabular-nums text-slate-900">{branchOptions.length}</p>
+              <div className="rounded-2xl bg-card/80 p-4">
+                <p className="text-xs text-muted">Cabang</p>
+                <p className="mt-2 text-2xl font-semibold tabular-nums text-foreground">{branchOptions.length}</p>
               </div>
             </div>
           </Card>
@@ -179,9 +183,9 @@ export default function PeopleDirectoryPage() {
                 ].map((link) => (
                   <li key={link.href}>
                     <Link href={link.href}
-                      className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 transition hover:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                      className="flex items-center justify-between rounded-2xl border border-border bg-surface/90 px-4 py-3 text-sm text-foreground transition hover:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
                       <span>{link.label}</span>
-                      <ChevronRight className="h-4 w-4 text-slate-400" aria-hidden="true" />
+                      <ChevronRight className="h-4 w-4 text-muted" aria-hidden="true" />
                     </Link>
                   </li>
                 ))}

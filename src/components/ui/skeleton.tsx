@@ -9,7 +9,7 @@ interface SkeletonProps {
 export function Skeleton({ className, style }: SkeletonProps) {
   return (
     <div
-      className={cn('animate-pulse rounded-3xl bg-slate-100/80', className)}
+      className={cn('animate-pulse rounded-3xl bg-surface/70', className)}
       style={style}
       aria-hidden="true"
     />
@@ -20,7 +20,7 @@ export function SkeletonCard({ className }: SkeletonProps) {
   return (
     <div
       className={cn(
-        'rounded-[28px] border border-slate-200 bg-slate-50/90 p-6 shadow-card',
+        'rounded-[28px] border border-border/70 bg-card/80 p-6 shadow-card',
         className,
       )}
       aria-hidden="true"
@@ -35,12 +35,12 @@ export function SkeletonCard({ className }: SkeletonProps) {
 export function SkeletonTable({ rows = 5, cols = 5 }: { rows?: number; cols?: number }) {
   return (
     <div
-      className="rounded-[28px] border border-slate-200 bg-slate-50/90 shadow-card overflow-hidden"
+      className="rounded-[28px] border border-border/70 bg-card/80 shadow-card overflow-hidden"
       aria-hidden="true"
       aria-label="Loading table"
     >
       {/* Header */}
-      <div className="flex gap-4 border-b border-slate-200 bg-white/95 px-4 py-4">
+      <div className="flex gap-4 border-b border-border/60 bg-surface/80 px-4 py-4">
         {Array.from({ length: cols }).map((_, i) => (
           <Skeleton key={i} className="h-3 flex-1 rounded-full" />
         ))}
@@ -49,7 +49,7 @@ export function SkeletonTable({ rows = 5, cols = 5 }: { rows?: number; cols?: nu
       {Array.from({ length: rows }).map((_, rowIndex) => (
         <div
           key={rowIndex}
-          className="flex gap-4 border-b border-slate-100 px-4 py-4 last:border-0"
+          className="flex gap-4 border-b border-border/60 px-4 py-4 last:border-0"
         >
           {Array.from({ length: cols }).map((_, colIndex) => (
             <Skeleton
@@ -67,7 +67,7 @@ export function SkeletonChart({ className }: SkeletonProps) {
   return (
     <div
       className={cn(
-        'rounded-[28px] border border-slate-200 bg-slate-50/90 p-6 shadow-card',
+        'rounded-[28px] border border-border/70 bg-card/80 p-6 shadow-card',
         className,
       )}
       aria-hidden="true"
@@ -104,7 +104,7 @@ export function SkeletonForm({ fields = 4 }: { fields?: number }) {
 export function SkeletonPageHeader() {
   return (
     <div
-      className="rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6"
+      className="rounded-[28px] border border-border/70 bg-card/80 px-6 py-6"
       aria-hidden="true"
     >
       <Skeleton className="mb-2 h-3 w-24 rounded-full" />

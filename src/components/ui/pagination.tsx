@@ -27,18 +27,18 @@ export function Pagination({
   const end = totalItems && pageSize ? Math.min(currentPage * pageSize, totalItems) : undefined;
 
   const buttonBase =
-    'inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-brand-200 bg-white/90 text-sm text-slate-700 transition hover:border-brand-500 hover:bg-brand-50 hover:text-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:cursor-not-allowed disabled:opacity-40';
+    'inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-border bg-surface/80 text-sm text-muted-foreground transition hover:border-primary hover:bg-surface hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-40';
 
   return (
     <nav
       aria-label={label}
       className={cn(
-        'flex flex-col items-center justify-between gap-3 border-t border-brand-100/80 px-4 py-4 sm:flex-row',
+        'flex flex-col items-center justify-between gap-3 border-t border-border/60 px-4 py-4 sm:flex-row',
         className,
       )}
     >
       {/* Count info */}
-      <p className="text-xs text-slate-500" aria-live="polite">
+      <p className="text-xs text-muted" aria-live="polite">
         {start && end && totalItems
           ? `Showing ${start}–${end} of ${totalItems} results`
           : `Page ${currentPage} of ${totalPages}`}
@@ -86,7 +86,7 @@ export function Pagination({
               onClick={() => onPageChange(page)}
               className={cn(
                 buttonBase,
-                currentPage === page && 'border-brand-500 bg-brand-50 text-brand-600',
+                currentPage === page && 'border-primary bg-primary/10 text-primary',
               )}
             >
               {page}

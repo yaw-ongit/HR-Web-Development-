@@ -13,9 +13,9 @@ interface KpiCardProps {
 }
 
 const trendColorMap = {
-  up: 'text-emerald-600',
-  down: 'text-rose-600',
-  neutral: 'text-slate-400',
+  up: 'text-success',
+  down: 'text-danger',
+  neutral: 'text-muted',
 };
 
 export function KpiCard({
@@ -30,7 +30,7 @@ export function KpiCard({
   return (
     <div
       className={cn(
-        'rounded-[28px] border border-brand-100/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fbff_100%)] p-5 shadow-[0_18px_48px_rgba(2,34,74,0.08)]',
+        'rounded-[28px] border border-border/70 bg-card/80 p-5 shadow-[0_18px_48px_rgba(2,34,74,0.16)]',
         className,
       )}
       role="region"
@@ -38,13 +38,13 @@ export function KpiCard({
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-xs uppercase tracking-[0.28em] text-brand-600">{label}</p>
-          <p className="mt-3 text-3xl font-semibold text-brand-900 tabular-nums">{value}</p>
+          <p className="truncate text-xs uppercase tracking-[0.28em] text-muted-foreground">{label}</p>
+          <p className="mt-3 text-3xl font-semibold text-foreground tabular-nums">{value}</p>
           {trend && (
             <p className={cn('mt-2 text-sm', trendColorMap[trendVariant])}>{trend}</p>
           )}
           {subLabel && !trend && (
-            <p className="mt-2 text-sm text-slate-500">{subLabel}</p>
+            <p className="mt-2 text-sm text-muted">{subLabel}</p>
           )}
         </div>
         {icon && (

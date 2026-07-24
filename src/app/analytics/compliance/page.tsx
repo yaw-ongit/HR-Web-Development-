@@ -17,65 +17,65 @@ export default function ComplianceAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
+              <Button className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Analitik Kepatuhan</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-primary">Analitik</p>
+              <h1 className="text-3xl font-semibold text-foreground">Analitik Kepatuhan</h1>
             </div>
           </div>
         </div>
       </SectionContainer>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kepatuhan Total</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">90.4%</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Kepatuhan Total</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">90.4%</p>
               <p className="mt-2 text-sm text-emerald-600">↑ 1.2% dari bulan lalu</p>
             </div>
             <CheckCircle2 className="h-8 w-8 text-emerald-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Berisiko</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">28</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Berisiko</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">28</p>
               <p className="mt-2 text-sm text-rose-600">Karyawan dengan masalah</p>
             </div>
             <AlertCircle className="h-8 w-8 text-rose-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kepatuhan Medis</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">91.3%</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Kepatuhan Medis</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">91.3%</p>
               <p className="mt-2 text-sm text-emerald-600">Sesuai target</p>
             </div>
-            <Shield className="h-8 w-8 text-brand-600" />
+            <Shield className="h-8 w-8 text-primary" />
           </div>
         </Card>
       </div>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Status Kedaluwarsa Medis</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Status Kedaluwarsa Medis</p>
           <div className="space-y-3">
             {medicalExpiryData.map((item) => (
-              <div key={item.description} className="rounded-2xl bg-white/80 p-4">
+              <div key={item.description} className="rounded-2xl bg-card/80 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-slate-900">{item.description}</p>
+                  <p className="text-sm font-semibold text-foreground">{item.description}</p>
                   <span className={`text-sm font-semibold ${
                     item.level === 'critical' ? 'text-rose-600' :
                     item.level === 'warning' ? 'text-amber-600' :
-                    item.level === 'info' ? 'text-brand-600' :
+                    item.level === 'info' ? 'text-primary' :
                     'text-emerald-600'
                   }`}>{item.count} employees</span>
                 </div>
@@ -97,13 +97,13 @@ export default function ComplianceAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Status Kedaluwarsa Sertifikat</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Status Kedaluwarsa Sertifikat</p>
           <div className="space-y-3">
             {certificateExpiryData.map((item) => (
-              <div key={item.description} className="rounded-2xl bg-white/80 p-4">
+              <div key={item.description} className="rounded-2xl bg-card/80 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-slate-900">{item.description}</p>
+                  <p className="text-sm font-semibold text-foreground">{item.description}</p>
                   <span className={`text-sm font-semibold ${
                     item.level === 'critical' ? 'text-rose-600' :
                     item.level === 'warning' ? 'text-amber-600' :
@@ -127,8 +127,8 @@ export default function ComplianceAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tingkat Kepatuhan per Kategori</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tingkat Kepatuhan per Kategori</p>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={complianceRateData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -147,14 +147,14 @@ export default function ComplianceAnalyticsPage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Persyaratan Tidak Lengkap</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Persyaratan Tidak Lengkap</p>
           <div className="space-y-3">
             {missingRequirementsData.map((item) => (
-              <div key={item.requirement} className="rounded-2xl bg-white/80 p-4 flex items-center justify-between">
+              <div key={item.requirement} className="rounded-2xl bg-card/80 p-4 flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">{item.requirement}</p>
-                  <p className="mt-1 text-xs text-slate-400">{item.department}</p>
+                  <p className="text-sm font-semibold text-foreground">{item.requirement}</p>
+                  <p className="mt-1 text-xs text-muted">{item.department}</p>
                 </div>
                 <span className="text-lg font-semibold text-rose-600">{item.missing}</span>
               </div>

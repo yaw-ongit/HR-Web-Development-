@@ -20,74 +20,74 @@ export default function AttendanceAnalyticsPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 hover:border-brand-500">
+              <Button className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Analitik</p>
-              <h1 className="text-3xl font-semibold text-slate-900">Analitik Absensi</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-primary">Analitik</p>
+              <h1 className="text-3xl font-semibold text-foreground">Analitik Absensi</h1>
             </div>
           </div>
         </div>
       </SectionContainer>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Rata-rata Kehadiran Mingguan</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">94.2%</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Rata-rata Kehadiran Mingguan</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">94.2%</p>
               <p className="mt-2 text-sm text-emerald-600">↑ 0.5% dari minggu lalu</p>
             </div>
             <TrendingUp className="h-8 w-8 text-emerald-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kasus Terlambat</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">41</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Kasus Terlambat</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">41</p>
               <p className="mt-2 text-sm text-amber-600">Minggu ini</p>
             </div>
             <Clock className="h-8 w-8 text-amber-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tingkat Ketidakhadiran</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">3.2%</p>
-              <p className="mt-2 text-sm text-slate-400">9 karyawan absen hari ini</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Tingkat Ketidakhadiran</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">3.2%</p>
+              <p className="mt-2 text-sm text-muted">9 karyawan absen hari ini</p>
             </div>
-            <AlertCircle className="h-8 w-8 text-brand-600" />
+            <AlertCircle className="h-8 w-8 text-primary" />
           </div>
         </Card>
       </div>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Heatmap Absensi per Departemen</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Heatmap Absensi per Departemen</p>
           <div className="space-y-3">
             {attendanceHeatmapData.map((dept) => (
-              <div key={dept.department} className="rounded-2xl bg-white/80 p-4">
+              <div key={dept.department} className="rounded-2xl bg-card/80 p-4">
                 <div className="flex items-center justify-between mb-3">
-                  <p className="text-sm font-semibold text-slate-900">{dept.department}</p>
-                  <span className="text-sm font-semibold text-brand-600">{dept.weekAvg}%</span>
+                  <p className="text-sm font-semibold text-foreground">{dept.department}</p>
+                  <span className="text-sm font-semibold text-primary">{dept.weekAvg}%</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
                   <div>
-                    <p className="text-xs text-slate-400">Kehadiran</p>
-                    <p className="text-sm font-semibold text-slate-900">{dept.weekAvg}%</p>
+                    <p className="text-xs text-muted">Kehadiran</p>
+                    <p className="text-sm font-semibold text-foreground">{dept.weekAvg}%</p>
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Ketidakhadiran</p>
+                    <p className="text-xs text-muted">Ketidakhadiran</p>
                     <p className="text-sm font-semibold text-rose-600">{dept.absenceRate}%</p>
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Terlambat</p>
+                    <p className="text-xs text-muted">Terlambat</p>
                     <p className="text-sm font-semibold text-amber-600">{dept.lateRate}%</p>
                   </div>
                 </div>
@@ -99,8 +99,8 @@ export default function AttendanceAnalyticsPage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Keterlambatan per Hari</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tren Keterlambatan per Hari</p>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={lateTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -117,8 +117,8 @@ export default function AttendanceAnalyticsPage() {
         </SectionContainer>
 
         <SectionContainer>
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Lembur</p>
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tren Lembur</p>
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={overtimeTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
@@ -142,8 +142,8 @@ export default function AttendanceAnalyticsPage() {
       </div>
 
       <SectionContainer>
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">Tren Kehadiran Harian</p>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted mb-6">Tren Kehadiran Harian</p>
           <ResponsiveContainer width="100%" height={350}>
             <AreaChart data={attendanceTrendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>

@@ -72,7 +72,7 @@ function StatusBadge({ value }: { value: string }) {
         ? 'bg-amber-50 text-amber-200'
         : value === 'Failed' || value === 'Disabled'
           ? 'bg-rose-50 text-rose-200'
-          : 'bg-brand-50 text-brand-500';
+          : 'bg-brand-50 text-primary';
 
   return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
 }
@@ -98,12 +98,12 @@ function AdminShell({ children, section }: { children: ReactNode; section?: stri
 
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
-      <section className="rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card">
+      <section className="rounded-[28px] border border-border bg-surface/95 px-6 py-6 shadow-card">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Administration</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-900">{currentTitle}</h1>
-            <p className="mt-3 max-w-3xl text-sm text-slate-400">
+            <p className="text-xs uppercase tracking-[0.3em] text-primary">Administration</p>
+            <h1 className="mt-2 text-3xl font-semibold text-foreground">{currentTitle}</h1>
+            <p className="mt-3 max-w-3xl text-sm text-muted">
               Enterprise control center for HR administrators and system administrators to govern data, identity, roles, workflows, integrations, auditability and platform preferences.
             </p>
           </div>
@@ -125,11 +125,11 @@ function AdminShell({ children, section }: { children: ReactNode; section?: stri
                 key={item.label}
                 href={item.href}
                 className={`rounded-3xl border px-4 py-3 text-sm transition ${
-                  active ? 'border-brand-500 bg-brand-50/50 text-sky-100' : 'border-slate-200 bg-white/70 text-slate-700 hover:border-brand-500'
+                  active ? 'border-primary bg-primary/10 text-primary' : 'border-border bg-surface/70 text-muted-foreground hover:border-primary'
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <item.icon className="h-4 w-4 text-brand-600" />
+                  <item.icon className="h-4 w-4 text-primary" />
                   <span>{item.label}</span>
                 </div>
               </Link>
@@ -155,9 +155,9 @@ function DashboardView() {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {adminKpis.map((kpi) => (
           <Card key={kpi.label} className="p-6">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{kpi.label}</p>
-            <p className="mt-4 text-3xl font-semibold text-slate-900">{kpi.value}</p>
-            <p className="mt-2 text-sm text-slate-400">{kpi.note}</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-muted">{kpi.label}</p>
+            <p className="mt-4 text-3xl font-semibold text-foreground">{kpi.value}</p>
+            <p className="mt-2 text-sm text-muted">{kpi.note}</p>
           </Card>
         ))}
       </div>
@@ -165,21 +165,21 @@ function DashboardView() {
       <div className="grid gap-4 xl:grid-cols-[1.4fr_1fr]">
         <Card title="Global master data search" description="Search across departments, positions, project sites, branches, benefit catalogs and compliance records.">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
               value={globalSearch}
               onChange={(event) => setGlobalSearch(event.target.value)}
               placeholder="Search every master data catalog"
-              className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-brand-500"
+              className="w-full rounded-3xl border border-border bg-surface/90 py-4 pl-11 pr-4 text-sm text-foreground outline-none transition focus:border-brand-500"
             />
           </div>
           <div className="mt-5 grid gap-3">
             {results.map((record) => (
-              <Link key={record.id} href="/administration/master-data" className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-brand-500">
+              <Link key={record.id} href="/administration/master-data" className="rounded-3xl border border-border bg-card/80 px-4 py-4 transition hover:border-brand-500">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-slate-900">{record.name}</p>
-                    <p className="mt-1 text-sm text-slate-400">{record.code} - {record.owner} - {record.records} records</p>
+                    <p className="text-sm font-semibold text-foreground">{record.name}</p>
+                    <p className="mt-1 text-sm text-muted">{record.code} - {record.owner} - {record.records} records</p>
                   </div>
                   <StatusBadge value={record.status} />
                 </div>
@@ -191,18 +191,18 @@ function DashboardView() {
         <Card title="Quick actions" description="High-frequency administration operations.">
           <div className="grid gap-3">
             {adminQuickActions.map((action) => (
-              <Link key={action.label} href={action.href} className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-brand-500">
+              <Link key={action.label} href={action.href} className="rounded-3xl border border-border bg-card/80 px-4 py-4 transition hover:border-brand-500">
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-brand-50">
-                      <action.icon className="h-4 w-4 text-brand-600" />
+                      <action.icon className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-slate-900">{action.label}</p>
-                      <p className="mt-1 text-xs text-slate-400">{action.description}</p>
+                      <p className="text-sm font-semibold text-foreground">{action.label}</p>
+                      <p className="mt-1 text-xs text-muted">{action.description}</p>
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-slate-400" />
+                  <ArrowRight className="h-4 w-4 text-muted" />
                 </div>
               </Link>
             ))}
@@ -247,9 +247,9 @@ function DashboardView() {
           </div>
           <div className="grid gap-2">
             {accessDistribution.map((item, index) => (
-              <div key={item.name} className="flex items-center justify-between rounded-2xl bg-white/80 px-3 py-2 text-sm">
-                <span className="flex items-center gap-2 text-slate-700"><span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: pieColors[index % pieColors.length] }} />{item.name}</span>
-                <span className="font-semibold text-slate-900">{item.value}</span>
+              <div key={item.name} className="flex items-center justify-between rounded-2xl bg-card/80 px-3 py-2 text-sm">
+                <span className="flex items-center gap-2 text-muted-foreground"><span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: pieColors[index % pieColors.length] }} />{item.name}</span>
+                <span className="font-semibold text-foreground">{item.value}</span>
               </div>
             ))}
           </div>
@@ -280,8 +280,8 @@ function MasterDataView() {
       header: 'Catalog',
       cell: ({ row }) => (
         <div>
-          <p className="font-semibold text-slate-900">{row.original.name}</p>
-          <p className="text-xs text-slate-400">{row.original.history}</p>
+          <p className="font-semibold text-foreground">{row.original.name}</p>
+          <p className="text-xs text-muted">{row.original.history}</p>
         </div>
       ),
     },
@@ -294,9 +294,9 @@ function MasterDataView() {
       header: 'Aksi',
       cell: () => (
         <div className="flex flex-wrap justify-end gap-2">
-          <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500"><Edit3 className="inline h-3.5 w-3.5" /> Edit</button>
-          <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500"><Archive className="inline h-3.5 w-3.5" /> Archive</button>
-          <button className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500"><History className="inline h-3.5 w-3.5" /> History</button>
+          <button className="rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground hover:border-brand-500"><Edit3 className="inline h-3.5 w-3.5" /> Edit</button>
+          <button className="rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground hover:border-brand-500"><Archive className="inline h-3.5 w-3.5" /> Archive</button>
+          <button className="rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground hover:border-brand-500"><History className="inline h-3.5 w-3.5" /> History</button>
         </div>
       ),
     },
@@ -317,10 +317,10 @@ function MasterDataView() {
       <Card title="Master data catalogs" description="Departments, positions, job levels, employment types, branches, business units, project sites and enterprise reference data.">
         <div className="grid gap-4 xl:grid-cols-[1.5fr_0.6fr_auto]">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search catalog, owner or history" className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 pl-11 pr-4 text-sm text-slate-900 outline-none focus:border-brand-500" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search catalog, owner or history" className="w-full rounded-3xl border border-border bg-surface/90 py-4 pl-11 pr-4 text-sm text-foreground outline-none focus:border-brand-500" />
           </div>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900 outline-none focus:border-brand-500">
+          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-border bg-surface/90 p-4 text-sm text-foreground outline-none focus:border-brand-500">
             <option>All</option>
             <option>Active</option>
             <option>Draft</option>
@@ -330,7 +330,7 @@ function MasterDataView() {
         </div>
         <div className="mt-5 flex flex-wrap gap-2">
           {masterDataCategories.map((category) => (
-            <span key={category} className="rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs text-slate-700">{category}</span>
+            <span key={category} className="rounded-full border border-border bg-card/80 px-3 py-2 text-xs text-muted-foreground">{category}</span>
           ))}
         </div>
       </Card>
@@ -354,12 +354,12 @@ function OrganizationView() {
         </div>
         <div className="mt-8 space-y-4">
           {organizationNodes.map((node, index) => (
-            <div key={node.level} className="relative rounded-3xl border border-slate-200 bg-white/80 p-4" style={{ marginLeft: `${Math.min(index * 18, 90)}px` }}>
+            <div key={node.level} className="relative rounded-3xl border border-border bg-card/80 p-4" style={{ marginLeft: `${Math.min(index * 18, 90)}px` }}>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-brand-600">{node.level}</p>
-                  <p className="mt-1 text-base font-semibold text-slate-900">{node.name}</p>
-                  <p className="mt-1 text-sm text-slate-400">{node.count}</p>
+                  <p className="text-xs uppercase tracking-[0.3em] text-primary">{node.level}</p>
+                  <p className="mt-1 text-base font-semibold text-foreground">{node.name}</p>
+                  <p className="mt-1 text-sm text-muted">{node.count}</p>
                 </div>
                 <StatusBadge value={node.status} />
               </div>
@@ -370,9 +370,9 @@ function OrganizationView() {
       <Card title="Structure health" description="Org governance checks.">
         <div className="space-y-3">
           {['Every active employee has a manager', '2 departments require backup approvers', '4 project sites pending geo-fence review', '1 vacant director position requires owner'].map((item, index) => (
-            <div key={item} className="flex items-center gap-3 rounded-3xl bg-white/80 p-4">
+            <div key={item} className="flex items-center gap-3 rounded-3xl bg-card/80 p-4">
               {index === 0 ? <Check className="h-5 w-5 text-emerald-300" /> : <ShieldAlert className="h-5 w-5 text-amber-300" />}
-              <span className="text-sm text-slate-700">{item}</span>
+              <span className="text-sm text-muted-foreground">{item}</span>
             </div>
           ))}
         </div>
@@ -388,10 +388,10 @@ function UserManagementView() {
       header: 'User',
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-brand-50 text-sm font-semibold text-slate-900">{row.original.avatar}</div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-brand-50 text-sm font-semibold text-foreground">{row.original.avatar}</div>
           <div>
-            <p className="font-semibold text-slate-900">{row.original.name}</p>
-            <p className="text-xs text-slate-400">{row.original.email}</p>
+            <p className="font-semibold text-foreground">{row.original.name}</p>
+            <p className="text-xs text-muted">{row.original.email}</p>
           </div>
         </div>
       ),
@@ -404,7 +404,7 @@ function UserManagementView() {
     {
       id: 'actions',
       header: 'Aksi',
-      cell: () => <div className="flex flex-wrap justify-end gap-2">{['Reset password', 'Disable', 'Enable', 'Assign role', 'Activity'].map((action) => <button key={action} className="rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-900 hover:border-brand-500">{action}</button>)}</div>,
+      cell: () => <div className="flex flex-wrap justify-end gap-2">{['Reset password', 'Disable', 'Enable', 'Assign role', 'Activity'].map((action) => <button key={action} className="rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground hover:border-brand-500">{action}</button>)}</div>,
     },
   ], []);
 
@@ -417,19 +417,19 @@ function RoleManagementView() {
     <div className="grid gap-4 xl:grid-cols-7">
       {roleCatalog.map((role) => (
         <Card key={role.role} className="p-5 xl:col-span-1">
-          <p className="text-sm font-semibold text-slate-900">{role.role}</p>
-          <p className="mt-3 text-2xl font-semibold text-brand-500">{role.users}</p>
-          <p className="mt-1 text-xs text-slate-400">assigned users</p>
+          <p className="text-sm font-semibold text-foreground">{role.role}</p>
+          <p className="mt-3 text-2xl font-semibold text-primary">{role.users}</p>
+          <p className="mt-1 text-xs text-muted">assigned users</p>
         </Card>
       ))}
       <Card title="Role detail" description="Permissions, accessible modules, approval rights and navigation visibility." className="xl:col-span-7">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {roleCatalog.map((role) => (
-            <div key={role.role} className="rounded-3xl border border-slate-200 bg-white/80 p-4">
-              <p className="text-base font-semibold text-slate-900">{role.role}</p>
-              <p className="mt-3 text-sm text-slate-400">Modules: {role.modules}</p>
-              <p className="mt-2 text-sm text-slate-400">Approval rights: {role.approvalRights}</p>
-              <p className="mt-2 text-sm text-slate-400">Navigation: {role.visibility}</p>
+            <div key={role.role} className="rounded-3xl border border-border bg-card/80 p-4">
+              <p className="text-base font-semibold text-foreground">{role.role}</p>
+              <p className="mt-3 text-sm text-muted">Modules: {role.modules}</p>
+              <p className="mt-2 text-sm text-muted">Approval rights: {role.approvalRights}</p>
+              <p className="mt-2 text-sm text-muted">Navigation: {role.visibility}</p>
             </div>
           ))}
         </div>
@@ -445,22 +445,22 @@ function PermissionManagementView() {
         <table className="min-w-full w-full table-auto border-separate border-spacing-0 text-left text-sm">
           <thead>
             <tr>
-              <th className="sticky left-0 bg-slate-50 px-4 py-3 text-xs uppercase tracking-[0.24em] text-slate-400">Module</th>
-              {permissionRoles.map((role) => <th key={role} className="px-4 py-3 text-xs uppercase tracking-[0.18em] text-slate-400">{role}</th>)}
+              <th className="sticky left-0 bg-surface px-4 py-3 text-xs uppercase tracking-[0.24em] text-muted">Module</th>
+              {permissionRoles.map((role) => <th key={role} className="px-4 py-3 text-xs uppercase tracking-[0.18em] text-muted">{role}</th>)}
             </tr>
           </thead>
           <tbody>
             {permissionModules.map((module, moduleIndex) => (
-              <tr key={module} className="border-t border-slate-200">
-                <td className="sticky left-0 bg-slate-50 px-4 py-4 font-semibold text-slate-900">{module}</td>
+              <tr key={module} className="border-t border-border">
+                <td className="sticky left-0 bg-surface px-4 py-4 font-semibold text-foreground">{module}</td>
                 {permissionRoles.map((role, roleIndex) => (
                   <td key={`${module}-${role}`} className="px-4 py-4">
                     <div className="grid grid-cols-4 gap-1 sm:grid-cols-7">
                       {permissionActions.map((action, actionIndex) => {
                         const checked = role === 'Administrator' || role === 'HR Manajer' || action === 'Read' || (roleIndex + moduleIndex + actionIndex) % 4 === 0;
                         return (
-                          <label key={action} title={action} className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white">
-                            <input type="checkbox" checked={checked} readOnly className="h-3.5 w-3.5 rounded border-slate-400 bg-slate-100 text-brand-600" />
+                          <label key={action} title={action} className="flex h-7 w-7 items-center justify-center rounded-lg border border-border bg-card">
+                            <input type="checkbox" checked={checked} readOnly className="h-3.5 w-3.5 rounded border-slate-400 bg-secondary text-primary" />
                           </label>
                         );
                       })}
@@ -484,8 +484,8 @@ function WorkflowView() {
           <div className="flex flex-wrap items-center gap-3">
             {workflow.steps.map((step, index) => (
               <div key={step} className="flex items-center gap-3">
-                <div className="rounded-3xl border border-brand-500/30 bg-brand-50/50 px-4 py-3 text-sm font-semibold text-sky-100">{step}</div>
-                {index < workflow.steps.length - 1 && <ArrowRight className="h-4 w-4 text-slate-400" />}
+                <div className="rounded-3xl border border-primary/20 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary">{step}</div>
+                {index < workflow.steps.length - 1 && <ArrowRight className="h-4 w-4 text-muted" />}
               </div>
             ))}
           </div>
@@ -499,9 +499,9 @@ function ApprovalMatrixView() {
   return (
     <Card title="Approval matrix" description="Department approver, backup approver and approval-level governance.">
       <div className="overflow-x-auto">
-        <table className="min-w-full text-left text-sm text-slate-800">
-          <thead><tr className="text-xs uppercase tracking-[0.24em] text-slate-400">{['Departemen', 'Approval level', 'Penyetuju', 'Backup approver', 'Status'].map((h) => <th key={h} className="px-4 py-3">{h}</th>)}</tr></thead>
-          <tbody>{approvalMatrix.map((row) => <tr key={row.department} className="border-t border-slate-200"><td className="px-4 py-4 font-semibold">{row.department}</td><td className="px-4 py-4">{row.level}</td><td className="px-4 py-4">{row.approver}</td><td className="px-4 py-4">{row.backup}</td><td className="px-4 py-4"><StatusBadge value={row.status} /></td></tr>)}</tbody>
+        <table className="min-w-full text-left text-sm text-foreground">
+          <thead><tr className="text-xs uppercase tracking-[0.24em] text-muted">{['Departemen', 'Approval level', 'Penyetuju', 'Backup approver', 'Status'].map((h) => <th key={h} className="px-4 py-3">{h}</th>)}</tr></thead>
+          <tbody>{approvalMatrix.map((row) => <tr key={row.department} className="border-t border-border"><td className="px-4 py-4 font-semibold">{row.department}</td><td className="px-4 py-4">{row.level}</td><td className="px-4 py-4">{row.approver}</td><td className="px-4 py-4">{row.backup}</td><td className="px-4 py-4"><StatusBadge value={row.status} /></td></tr>)}</tbody>
         </table>
       </div>
     </Card>
@@ -513,9 +513,9 @@ function CompanySettingsView() {
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       {companySettings.map((setting) => (
         <Card key={setting.label} className="p-6">
-          <setting.icon className="h-6 w-6 text-brand-600" />
-          <p className="mt-4 text-sm uppercase tracking-[0.24em] text-slate-400">{setting.label}</p>
-          <p className="mt-2 text-base font-semibold text-slate-900">{setting.value}</p>
+          <setting.icon className="h-6 w-6 text-primary" />
+          <p className="mt-4 text-sm uppercase tracking-[0.24em] text-muted">{setting.label}</p>
+          <p className="mt-2 text-base font-semibold text-foreground">{setting.value}</p>
         </Card>
       ))}
     </div>
@@ -527,11 +527,11 @@ function NotificationView() {
     <Card title="Notification center" description="Manage email, in-app, SMS placeholder and push placeholder templates.">
       <div className="grid gap-3">
         {notificationTemplates.map((template) => (
-          <div key={template.event} className="rounded-3xl border border-slate-200 bg-white/80 p-4">
+          <div key={template.event} className="rounded-3xl border border-border bg-card/80 p-4">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
-                <p className="font-semibold text-slate-900">{template.event}</p>
-                <p className="mt-1 text-sm text-slate-400">{template.owner} - {template.channels.join(', ')}</p>
+                <p className="font-semibold text-foreground">{template.event}</p>
+                <p className="mt-1 text-sm text-muted">{template.owner} - {template.channels.join(', ')}</p>
               </div>
               <StatusBadge value={template.status} />
             </div>
@@ -558,7 +558,7 @@ function AuditLogView() {
     <>
       <Card title="Audit filters" description="Tanggal, module, user and action filters with timeline/table mode.">
         <div className="grid gap-3 md:grid-cols-4">
-          {['Date range', 'Module', 'User', 'Action'].map((label) => <select key={label} className="rounded-3xl border border-slate-200 bg-white/90 p-4 text-sm text-slate-900"><option>{label}</option></select>)}
+          {['Date range', 'Module', 'User', 'Action'].map((label) => <select key={label} className="rounded-3xl border border-border bg-surface/90 p-4 text-sm text-foreground"><option>{label}</option></select>)}
         </div>
         <div className="mt-4 flex gap-2"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Timeline view</Button><Button variant="ghost" className="rounded-full"><Eye className="h-4 w-4" /> Table view</Button></div>
       </Card>
@@ -572,9 +572,9 @@ function ActivityLogView() {
     <div className="grid gap-4 md:grid-cols-2">
       {activityLogs.map((activity) => (
         <Card key={activity.detail} className="p-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-600">{activity.category}</p>
-          <p className="mt-3 text-base font-semibold text-slate-900">{activity.detail}</p>
-          <p className="mt-2 text-sm text-slate-400">{activity.time}</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-primary">{activity.category}</p>
+          <p className="mt-3 text-base font-semibold text-foreground">{activity.detail}</p>
+          <p className="mt-2 text-sm text-muted">{activity.time}</p>
         </Card>
       ))}
     </div>
@@ -588,8 +588,8 @@ function SystemPreferencesView() {
         <Card key={preference.label} className="p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{preference.label}</p>
-              <p className="mt-3 text-base font-semibold text-slate-900">{preference.value}</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">{preference.label}</p>
+              <p className="mt-3 text-base font-semibold text-foreground">{preference.value}</p>
             </div>
             <StatusBadge value={preference.status} />
           </div>
@@ -605,11 +605,11 @@ function IntegrationView() {
       {integrationCards.map((integration) => (
         <Card key={integration.name} className="p-6">
           <div className="flex items-start justify-between gap-4">
-            <integration.icon className="h-7 w-7 text-brand-600" />
+            <integration.icon className="h-7 w-7 text-primary" />
             <StatusBadge value={integration.status} />
           </div>
-          <p className="mt-5 text-base font-semibold text-slate-900">{integration.name}</p>
-          <p className="mt-2 text-sm text-slate-400">{integration.description}</p>
+          <p className="mt-5 text-base font-semibold text-foreground">{integration.name}</p>
+          <p className="mt-2 text-sm text-muted">{integration.description}</p>
         </Card>
       ))}
     </div>

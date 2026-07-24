@@ -16,6 +16,7 @@ export default function LoginPage() {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
 
   const emailError = submitted && !email.includes('@') ? 'Masukkan alamat email perusahaan yang valid.' : '';
   const passwordError = submitted && password.length > 0 && password.length < 8 ? 'Kata sandi harus minimal 8 karakter.' : '';
@@ -25,7 +26,11 @@ export default function LoginPage() {
     setSubmitted(true);
     if (emailError || passwordError) return;
     setLoading(true);
-    window.setTimeout(() => setLoading(false), 1200);
+    setStatusMessage('Autentikasi demo aktif. Pengalihan ke area aplikasi setelah validasi lokal.');
+    window.setTimeout(() => {
+      setLoading(false);
+      setStatusMessage('');
+    }, 1200);
   }
 
   return (
@@ -33,7 +38,7 @@ export default function LoginPage() {
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl items-center gap-10 lg:grid-cols-[1fr_420px]">
         {/* Brand panel */}
         <section aria-label="Branding HRIS PT Indocater" className="space-y-6">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm" aria-hidden="true">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-card shadow-sm" aria-hidden="true">
             <Image src="/logo-indocater.jpg" alt="PT Indocater" width={48} height={48} className="h-12 w-12 object-contain" priority />
           </div>
           <div>
@@ -60,7 +65,7 @@ export default function LoginPage() {
           <form className="space-y-5" onSubmit={handleSubmit} noValidate aria-label="Formulir masuk">
             {/* Email */}
             <div>
-              <label htmlFor={emailId} className="block text-xs uppercase tracking-[0.24em] text-slate-400">
+              <label htmlFor={emailId} className="block text-xs uppercase tracking-[0.24em] text-muted">
                 Alamat email <span aria-hidden="true" className="text-rose-600">*</span>
               </label>
               <input
@@ -73,7 +78,7 @@ export default function LoginPage() {
                 aria-required="true"
                 aria-invalid={!!emailError}
                 aria-describedby={emailError ? `${emailId}-error` : undefined}
-                className={`mt-2 w-full rounded-3xl border bg-white/95 p-4 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
+                className={`mt-2 w-full rounded-3xl border bg-surface/95 p-4 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
                   emailError ? 'border-rose-500 focus:border-rose-400' : 'border-brand-200 focus:border-brand-500'
                 }`}
               />
@@ -86,7 +91,7 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label htmlFor={passwordId} className="block text-xs uppercase tracking-[0.24em] text-slate-400">
+              <label htmlFor={passwordId} className="block text-xs uppercase tracking-[0.24em] text-muted">
                 Kata sandi <span aria-hidden="true" className="text-rose-600">*</span>
               </label>
               <div className="relative mt-2">
@@ -100,7 +105,7 @@ export default function LoginPage() {
                   aria-required="true"
                   aria-invalid={!!passwordError}
                   aria-describedby={passwordError ? `${passwordId}-error` : undefined}
-                  className={`w-full rounded-3xl border bg-white/95 p-4 pr-12 text-sm text-slate-900 outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
+                  className={`w-full rounded-3xl border bg-surface/95 p-4 pr-12 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-brand-500/30 ${
                     passwordError ? 'border-rose-500 focus:border-rose-400' : 'border-brand-200 focus:border-brand-500'
                   }`}
                 />
@@ -108,7 +113,7 @@ export default function LoginPage() {
                   type="button"
                   aria-label={visible ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
                   onClick={() => setVisible((v) => !v)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded p-0.5 text-slate-400 transition hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded p-0.5 text-muted transition hover:text-foreground focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
                   {visible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -122,18 +127,18 @@ export default function LoginPage() {
 
             {/* Remember + forgot */}
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
+              <label className="flex cursor-pointer items-center gap-2 text-sm text-muted-foreground">
                 <input
                   type="checkbox"
                   checked={remember}
                   onChange={(e) => setRemember(e.target.checked)}
-                  className="h-4 w-4 rounded border-slate-400 bg-slate-100 text-brand-600 focus:ring-brand-500"
+                  className="h-4 w-4 rounded border-slate-400 bg-secondary text-primary focus:ring-brand-500"
                 />
                 Ingat saya
               </label>
               <Link
                 href="/identity"
-                className="text-sm font-semibold text-brand-600 transition hover:text-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 rounded"
+                className="text-sm font-semibold text-primary transition hover:text-primary focus:outline-none focus:ring-2 focus:ring-brand-500 rounded"
               >
                 Lupa kata sandi?
               </Link>
@@ -149,9 +154,15 @@ export default function LoginPage() {
               Masuk
             </Button>
 
-            <p className="text-center text-sm text-slate-400">
+            {statusMessage && (
+              <p className="rounded-2xl border border-brand-200 bg-brand-50/80 px-4 py-3 text-sm text-primary">
+                {statusMessage}
+              </p>
+            )}
+
+            <p className="text-center text-sm text-muted">
               Butuh akses?{' '}
-              <Link href="/identity" className="font-semibold text-brand-600 transition hover:text-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 rounded">
+              <Link href="/identity" className="font-semibold text-primary transition hover:text-primary focus:outline-none focus:ring-1 focus:ring-brand-500 rounded">
                 Hubungi administrator
               </Link>
             </p>

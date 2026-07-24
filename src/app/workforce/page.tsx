@@ -26,11 +26,11 @@ export default function WorkforceHomePage() {
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <section className="space-y-6">
-        <div className="flex flex-col gap-4 rounded-[28px] border border-slate-200 bg-slate-50/95 px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 rounded-[28px] border border-border bg-surface/95 px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Presensi & Workforce</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Pusat operasional HR</h1>
-            <p className="mt-3 max-w-2xl text-sm text-slate-400">Satu tampilan operasional untuk absensi, cuti, penjadwalan shift, dan persetujuan lembur.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-primary">Presensi & Workforce</p>
+            <h1 className="mt-2 text-3xl font-semibold text-foreground">Pusat operasional HR</h1>
+            <p className="mt-3 max-w-2xl text-sm text-muted">Satu tampilan operasional untuk absensi, cuti, penjadwalan shift, dan persetujuan lembur.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link href="/workforce/attendance">
@@ -60,10 +60,10 @@ export default function WorkforceHomePage() {
           <div className="space-y-6">
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {workforceKpis.map((kpi) => (
-                <Card key={kpi.label} className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{kpi.label}</p>
-                  <p className="mt-4 text-3xl font-semibold text-slate-900">{kpi.value}</p>
-                  <p className="mt-2 text-sm text-slate-400">{kpi.note}</p>
+                <Card key={kpi.label} className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted">{kpi.label}</p>
+                  <p className="mt-4 text-3xl font-semibold text-foreground">{kpi.value}</p>
+                  <p className="mt-2 text-sm text-muted">{kpi.note}</p>
                 </Card>
               ))}
             </div>
@@ -76,20 +76,20 @@ export default function WorkforceHomePage() {
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
                     placeholder="Cari karyawan, departemen, shift, atau status"
-                    className="w-full rounded-3xl border border-slate-200 bg-white/90 py-4 px-5 text-sm text-slate-900 outline-none transition focus:border-brand-500"
+                    className="w-full rounded-3xl border border-border bg-surface/90 py-4 px-5 text-sm text-foreground outline-none transition focus:border-brand-500"
                   />
-                  <Search className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                  <Search className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
                 </div>
-                <div className="mt-6 space-y-3 text-sm text-slate-400">
+                <div className="mt-6 space-y-3 text-sm text-muted">
                   {filteredWorkforce.length ? (
                     filteredWorkforce.slice(0, 5).map((row) => (
-                      <div key={row.id} className="rounded-3xl bg-white/80 p-4">
+                      <div key={row.id} className="rounded-3xl bg-card/80 p-4">
                         <div className="flex items-center justify-between gap-3">
                           <div>
-                            <p className="text-sm font-semibold text-slate-900">{row.employee}</p>
-                            <p className="text-sm text-slate-400">{row.department} · {row.shift}</p>
+                            <p className="text-sm font-semibold text-foreground">{row.employee}</p>
+                            <p className="text-sm text-muted">{row.department} · {row.shift}</p>
                           </div>
-                          <span className="rounded-full bg-slate-50/90 px-3 py-1 text-xs uppercase tracking-[0.24em] text-slate-700">{row.status}</span>
+                          <span className="rounded-full bg-surface/90 px-3 py-1 text-xs uppercase tracking-[0.24em] text-muted-foreground">{row.status}</span>
                         </div>
                       </div>
                     ))
@@ -102,13 +102,13 @@ export default function WorkforceHomePage() {
               <Card title="Aksi cepat" description="Tindakan operasional umum untuk tim HR.">
                 <div className="grid gap-3">
                   {workforceQuickActions.map((action) => (
-                    <Link key={action.label} href={action.href} className="rounded-3xl border border-slate-200 bg-white/80 px-4 py-4 transition hover:border-brand-500">
+                    <Link key={action.label} href={action.href} className="rounded-3xl border border-border bg-card/80 px-4 py-4 transition hover:border-brand-500">
                       <div className="flex items-center justify-between gap-4">
                         <div>
-                          <p className="text-sm font-semibold text-slate-900">{action.label}</p>
-                          <p className="mt-1 text-sm text-slate-400">{action.description}</p>
+                          <p className="text-sm font-semibold text-foreground">{action.label}</p>
+                          <p className="mt-1 text-sm text-muted">{action.description}</p>
                         </div>
-                        <ArrowRight className="h-4 w-4 text-slate-400" />
+                        <ArrowRight className="h-4 w-4 text-muted" />
                       </div>
                     </Link>
                   ))}
@@ -157,13 +157,13 @@ export default function WorkforceHomePage() {
 
       <SectionContainer title="Analitik Workforce" className="space-y-4">
         <div className="grid gap-4 xl:grid-cols-4">
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-center justify-between gap-4">
                 <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tren Keterlambatan</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">43 insiden</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Tren Keterlambatan</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">43 insiden</p>
               </div>
-              <TrendingUp className="h-6 w-6 text-brand-600" />
+              <TrendingUp className="h-6 w-6 text-primary" />
             </div>
             <div className="mt-6 h-28">
               <ResponsiveContainer width="100%" height="100%">
@@ -178,13 +178,13 @@ export default function WorkforceHomePage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
                 <div className="flex items-center justify-between gap-4">
                 <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tren Cuti</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">118 laporan</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Tren Cuti</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">118 laporan</p>
               </div>
-              <FileText className="h-6 w-6 text-brand-600" />
+              <FileText className="h-6 w-6 text-primary" />
             </div>
             <div className="mt-6 h-28">
               <ResponsiveContainer width="100%" height="100%">
@@ -205,13 +205,13 @@ export default function WorkforceHomePage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
                 <div className="flex items-center justify-between gap-4">
                 <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tren Lembur</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">78 jam</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Tren Lembur</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">78 jam</p>
               </div>
-              <Clock className="h-6 w-6 text-brand-600" />
+              <Clock className="h-6 w-6 text-primary" />
             </div>
             <div className="mt-6 h-28">
               <ResponsiveContainer width="100%" height="100%">
@@ -226,15 +226,15 @@ export default function WorkforceHomePage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
                 <div className="flex items-center justify-between gap-4">
                 <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Kesiapan Operasional</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900">Tampilan staf real-time</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Kesiapan Operasional</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">Tampilan staf real-time</p>
               </div>
-              <ShieldCheck className="h-6 w-6 text-brand-600" />
+              <ShieldCheck className="h-6 w-6 text-primary" />
             </div>
-            <div className="mt-6 space-y-3 text-sm text-slate-400">
+            <div className="mt-6 space-y-3 text-sm text-muted">
               <p>Absensi, cuti, shift, dan lembur disinkronkan ke pusat komando workforce.</p>
             </div>
           </Card>

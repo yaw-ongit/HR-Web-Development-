@@ -3,12 +3,12 @@ import { cn } from '@/lib/utils';
 type BadgeVariant = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
 
 const variantClasses: Record<BadgeVariant, string> = {
-  default: 'bg-slate-200/40 text-slate-700',
-  primary: 'bg-brand-50 text-brand-500',
-  success: 'bg-emerald-50 text-emerald-200',
-  warning: 'bg-amber-50 text-amber-200',
-  danger: 'bg-rose-50 text-rose-200',
-  info: 'bg-brand-50 text-brand-500',
+  default: 'bg-surface/80 text-muted-foreground border border-border/60',
+  primary: 'bg-primary/10 text-primary border border-primary/20',
+  success: 'bg-success/10 text-success border border-success/20',
+  warning: 'bg-warning/10 text-warning border border-warning/20',
+  danger: 'bg-danger/10 text-danger border border-danger/20',
+  info: 'bg-accent/10 text-accent border border-accent/20',
 };
 
 interface BadgeProps {

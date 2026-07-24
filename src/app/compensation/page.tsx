@@ -14,79 +14,79 @@ export default function CompensationDashboard() {
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-600">Core Modules</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Compensation & Services</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">
+            <p className="text-xs uppercase tracking-[0.3em] text-primary">Core Modules</p>
+            <h1 className="text-3xl font-semibold text-foreground">Compensation & Services</h1>
+            <p className="mt-2 max-w-2xl text-sm text-muted">
               Manage employee benefits, insurance, medical records, welfare programs, and payroll readiness across the organization.
             </p>
           </div>
-          <Link href="/" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-brand-500">
+          <Link href="/" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-brand-500">
             Back to dashboard
           </Link>
         </div>
       </SectionContainer>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Karyawans Covered</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.employeesCovered}</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Karyawans Covered</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">{compensationKpi.employeesCovered}</p>
               <p className="mt-2 text-sm text-emerald-600">↑ 12 this month</p>
             </div>
-            <Users className="h-8 w-8 text-brand-600" />
+            <Users className="h-8 w-8 text-primary" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Active Insurance</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.activeInsurance}</p>
-              <p className="mt-2 text-sm text-slate-400">Policies active</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Active Insurance</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">{compensationKpi.activeInsurance}</p>
+              <p className="mt-2 text-sm text-muted">Policies active</p>
             </div>
             <Shield className="h-8 w-8 text-emerald-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Medical Due</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.medicalDue}</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Medical Due</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">{compensationKpi.medicalDue}</p>
               <p className="mt-2 text-sm text-amber-600">Next 30 days</p>
             </div>
             <Heart className="h-8 w-8 text-amber-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Claims Menunggu</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.claimsPending}</p>
-              <p className="mt-2 text-sm text-brand-600">Awaiting approval</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Claims Menunggu</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">{compensationKpi.claimsPending}</p>
+              <p className="mt-2 text-sm text-primary">Awaiting approval</p>
             </div>
-            <FileText className="h-8 w-8 text-brand-600" />
+            <FileText className="h-8 w-8 text-primary" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Benefit Utilization</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.benefitUtilization}%</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Benefit Utilization</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">{compensationKpi.benefitUtilization}%</p>
               <p className="mt-2 text-sm text-emerald-600">Of eligible benefits</p>
             </div>
             <TrendingUp className="h-8 w-8 text-emerald-600" />
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Certs Expiring</p>
-              <p className="mt-3 text-3xl font-semibold text-slate-900">{compensationKpi.certificatesExpiring}</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted">Certs Expiring</p>
+              <p className="mt-3 text-3xl font-semibold text-foreground">{compensationKpi.certificatesExpiring}</p>
               <p className="mt-2 text-sm text-rose-600">In next 60 days</p>
             </div>
             <AlertCircle className="h-8 w-8 text-rose-600" />
@@ -96,22 +96,22 @@ export default function CompensationDashboard() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <Link href="/compensation/benefits" className="group">
-          <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-5 shadow-card transition group-hover:border-brand-500 cursor-pointer">
+          <Card className="rounded-[28px] border border-border bg-surface/95 p-5 shadow-card transition group-hover:border-brand-500 cursor-pointer">
             <div className="flex items-center justify-between mb-3">
-              <p className="text-sm font-semibold text-slate-900">Quick Actions</p>
-              <span className="text-xs text-brand-600">→</span>
+              <p className="text-sm font-semibold text-foreground">Quick Actions</p>
+              <span className="text-xs text-primary">→</span>
             </div>
             <div className="space-y-2">
-              <button className="w-full flex items-center gap-3 rounded-2xl bg-white/80 px-4 py-2 text-sm text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                 <Plus className="h-4 w-4" /> Assign Benefit
               </button>
-              <button className="w-full flex items-center gap-3 rounded-2xl bg-white/80 px-4 py-2 text-sm text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                 <FileText className="h-4 w-4" /> Submit Claim
               </button>
-              <button className="w-full flex items-center gap-3 rounded-2xl bg-white/80 px-4 py-2 text-sm text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                 <Clock className="h-4 w-4" /> Schedule Medical
               </button>
-              <button className="w-full flex items-center gap-3 rounded-2xl bg-white/80 px-4 py-2 text-sm text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                 <Download className="h-4 w-4" /> Export Benefits
               </button>
             </div>
@@ -120,25 +120,25 @@ export default function CompensationDashboard() {
 
         <div className="grid gap-4">
           <Link href="/compensation/benefits" className="group">
-            <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-5 shadow-card transition group-hover:border-brand-500 cursor-pointer">
-              <p className="text-sm font-semibold text-slate-900 mb-3">Modules</p>
+            <Card className="rounded-[28px] border border-border bg-surface/95 p-5 shadow-card transition group-hover:border-brand-500 cursor-pointer">
+              <p className="text-sm font-semibold text-foreground mb-3">Modules</p>
               <div className="grid grid-cols-2 gap-2">
-                <Link href="/compensation/benefits" className="rounded-2xl bg-white/80 px-3 py-2 text-xs font-medium text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+                <Link href="/compensation/benefits" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                   Benefits
                 </Link>
-                <Link href="/compensation/insurance" className="rounded-2xl bg-white/80 px-3 py-2 text-xs font-medium text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+                <Link href="/compensation/insurance" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                   Insurance
                 </Link>
-                <Link href="/compensation/medical" className="rounded-2xl bg-white/80 px-3 py-2 text-xs font-medium text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+                <Link href="/compensation/medical" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                   Medical
                 </Link>
-                <Link href="/compensation/claims" className="rounded-2xl bg-white/80 px-3 py-2 text-xs font-medium text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+                <Link href="/compensation/claims" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                   Claims
                 </Link>
-                <Link href="/compensation/welfare" className="rounded-2xl bg-white/80 px-3 py-2 text-xs font-medium text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+                <Link href="/compensation/welfare" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                   Welfare
                 </Link>
-                <Link href="/compensation/payroll-ready" className="rounded-2xl bg-white/80 px-3 py-2 text-xs font-medium text-slate-700 transition hover:bg-brand-50/50 hover:text-brand-600">
+                <Link href="/compensation/payroll-ready" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
                   Payroll
                 </Link>
               </div>
@@ -148,9 +148,9 @@ export default function CompensationDashboard() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Analytics</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-900">Benefit Distribution</h2>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-sm uppercase tracking-[0.3em] text-primary">Analytics</p>
+          <h2 className="mt-2 text-lg font-semibold text-foreground">Benefit Distribution</h2>
           <div className="mt-6 h-80">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -165,9 +165,9 @@ export default function CompensationDashboard() {
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Analytics</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-900">Insurance Coverage</h2>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-sm uppercase tracking-[0.3em] text-primary">Analytics</p>
+          <h2 className="mt-2 text-lg font-semibold text-foreground">Insurance Coverage</h2>
           <div className="mt-6 h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={insuranceCoverageData}>
@@ -186,9 +186,9 @@ export default function CompensationDashboard() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Analytics</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-900">Medical Compliance Trend</h2>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-sm uppercase tracking-[0.3em] text-primary">Analytics</p>
+          <h2 className="mt-2 text-lg font-semibold text-foreground">Medical Compliance Trend</h2>
           <div className="mt-6 h-80">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={medicalComplianceData}>
@@ -214,9 +214,9 @@ export default function CompensationDashboard() {
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-          <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Analytics</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-900">Claim Trend Analysis</h2>
+        <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+          <p className="text-sm uppercase tracking-[0.3em] text-primary">Analytics</p>
+          <h2 className="mt-2 text-lg font-semibold text-foreground">Claim Trend Analysis</h2>
           <div className="mt-6 h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={claimTrendData}>
@@ -234,9 +234,9 @@ export default function CompensationDashboard() {
         </Card>
       </div>
 
-      <Card className="rounded-[28px] border border-slate-200 bg-slate-50/95 p-6 shadow-card">
-        <p className="text-sm uppercase tracking-[0.3em] text-brand-600">Analytics</p>
-        <h2 className="mt-2 text-lg font-semibold text-slate-900">Department Comparison</h2>
+      <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
+        <p className="text-sm uppercase tracking-[0.3em] text-primary">Analytics</p>
+        <h2 className="mt-2 text-lg font-semibold text-foreground">Department Comparison</h2>
         <div className="mt-6 h-80">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={departmentComparisonData}>

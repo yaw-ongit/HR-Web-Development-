@@ -67,9 +67,9 @@ export function PageHeader({
           {module && !breadcrumbs && (
             <p className="text-xs uppercase tracking-[0.3em] text-brand-300">{module}</p>
           )}
-          <h1 className="text-3xl font-semibold text-white">{title}</h1>
+          <h1 className="text-3xl font-semibold text-foreground">{title}</h1>
           {description && (
-            <p className="max-w-2xl text-sm text-brand-100/80">{description}</p>
+            <p className="max-w-2xl text-sm text-muted">{description}</p>
           )}
         </div>
         {actions && (

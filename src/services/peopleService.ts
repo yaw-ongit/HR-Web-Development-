@@ -2,6 +2,10 @@ import { supabase, safeQuery } from './baseService';
 
 export const PeopleService = {
   async getEmployees(fallback: any[]) {
+    if (!supabase) {
+      return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
+    }
+
     return safeQuery(
       supabase.from('employees').select('*, employee_profiles(*)'),
       fallback
@@ -9,6 +13,10 @@ export const PeopleService = {
   },
 
   async getEmployeeById(id: string | number, fallback: any) {
+    if (!supabase) {
+      return fallback;
+    }
+
     try {
       const { data, error } = await supabase
         .from('employees')
@@ -23,6 +31,10 @@ export const PeopleService = {
   },
 
   async getOrgStructure(fallback: any) {
+    if (!supabase) {
+      return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
+    }
+
     return safeQuery(
       supabase.from('departments').select('*, units(*, positions(*))'),
       fallback
@@ -30,6 +42,10 @@ export const PeopleService = {
   },
 
   async getDocuments(fallback: any[]) {
+    if (!supabase) {
+      return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
+    }
+
     return safeQuery(
       supabase.from('employee_documents').select('*'),
       fallback

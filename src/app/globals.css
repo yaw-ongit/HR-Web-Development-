@@ -177,6 +177,31 @@ input[type='search']::-webkit-search-cancel-button {
 }
 
 /* ============================================================
+   Component layer
+   ============================================================ */
+@layer components {
+  .surface-panel {
+    @apply rounded-[28px] border border-border/70 bg-card/80 shadow-[0_18px_48px_rgba(2,34,74,0.18)] backdrop-blur-sm;
+  }
+
+  .surface-card {
+    @apply rounded-[28px] border border-border/60 bg-card/80;
+  }
+
+  .surface-subtle {
+    @apply rounded-[28px] border border-border/60 bg-surface/80;
+  }
+
+  .theme-input {
+    @apply w-full rounded-3xl border border-border bg-surface/90 py-4 pl-11 pr-4 text-sm text-foreground outline-none transition focus:border-primary focus:ring-1 focus:ring-ring;
+  }
+
+  .theme-muted {
+    @apply text-muted;
+  }
+}
+
+/* ============================================================
    Utility layer
    ============================================================ */
 @layer utilities {

@@ -35,7 +35,7 @@ export function Tooltip({ content, children, side = 'top', className }: TooltipP
         <div
           role="tooltip"
           className={cn(
-            'pointer-events-none absolute z-50 whitespace-nowrap rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 shadow-card',
+            'pointer-events-none absolute z-50 whitespace-nowrap rounded-2xl border border-border bg-surface px-3 py-2 text-xs text-foreground shadow-card',
             sideClasses[side],
           )}
         >
