@@ -108,7 +108,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             Navigasi
           </p>
           <ul className="space-y-0.5" role="list">
-            {navItems.filter(item => ['Dashboard', 'Data Karyawan', 'Pelatihan & Sertifikasi'].includes(item.label)).map((item) => {
+            {navItems.map((item) => {
               const active = isActive(item.href);
               return (
                 <li key={item.label} role="listitem">
