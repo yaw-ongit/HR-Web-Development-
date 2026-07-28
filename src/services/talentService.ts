@@ -23,6 +23,32 @@ let localParticipants = [
   { id: 'tp4', training_id: 't3', employee_id: 'emp1', employee_name: 'Leo Wibowo', employee_email: 'leo@indocater.co.id', status: 'Selesai', certificate_generated: false, certificate_number: '' }
 ];
 
+export let localPlannings = [
+  { id: 'plan-1', title: 'Pelatihan Keselamatan Kerja K3', unit: 'Teknologi', location: 'Lantai 3 Ruang Mawar', start_date: '2026-08-01', start_time: '09:00', training_type: 'Compliance', provider: 'PT Indocater', trainer: 'Internal Learning Coordinator', cost: 1500000, notes: 'Wajib untuk departemen IT', period: '2026-Q3' },
+  { id: 'plan-2', title: 'Food Safety Management', unit: 'SDM', location: 'Lantai 2 Ruang Melati', start_date: '2026-08-15', start_time: '10:00', training_type: 'Food Safety', provider: 'Food Safety Indonesia', trainer: 'Maya Sari', cost: 3500000, notes: 'Sertifikasi kepatuhan', period: '2026-Q3' },
+  { id: 'plan-3', title: 'ISO 9001:2015 Quality Lead Auditor', unit: 'Produk', location: 'Zoom Meeting', start_date: '2026-09-01', start_time: '08:00', training_type: 'ISO', provider: 'SGS Academy', trainer: 'External Expert', cost: 12000000, notes: 'Sertifikasi auditor mutu', period: '2026-Q3' }
+];
+
+export let localRealizations = [
+  { id: 'real-1', planning_id: 'plan-1', status: 'Ongoing' },
+  { id: 'real-2', planning_id: 'plan-2', status: 'Draft' },
+  { id: 'real-3', planning_id: 'plan-3', status: 'Completed' }
+];
+
+export let localNewParticipants = [
+  { id: 'part-1', realization_id: 'real-1', employee_id: 'leo-wibowo', employee_name: 'Leo Wibowo', employee_email: 'leo.wibowo@indocater.co.id', company: 'PT Indocater', position: 'Pengembang Perangkat Lunak', is_external: false },
+  { id: 'part-2', realization_id: 'real-1', employee_id: 'maya-sari', employee_name: 'Maya Sari', employee_email: 'maya.sari@indocater.co.id', company: 'PT Indocater', position: 'Generalist SDM', is_external: false },
+  { id: 'part-3', realization_id: 'real-3', employee_id: 'zara-nurhidayah', employee_name: 'Zara Nurhidayah', employee_email: 'zara.nurhidayah@indocater.co.id', company: 'PT Indocater', position: 'Desainer Produk', is_external: false }
+];
+
+export let localEvaluations = [
+  { id: 'eval-1', realization_id: 'real-3', score: 90, notes: 'Peserta menunjukkan pemahaman luar biasa.', recommendation: 'Diberikan sertifikat kelulusan utama', document_url: '' }
+];
+
+export let localNewCertificates = [
+  { id: 'cert-gen-1', realization_id: 'real-3', participant_id: 'part-3', certificate_number: 'CERT-INDC-2026-0001', issued_date: '2026-09-02', document_url: '' }
+];
+
 export const TalentService = {
   // --- CANDIDATES, INTERVIEWS, ONBOARDING ---
   async getCandidates(fallback: any[]) {
@@ -355,6 +381,241 @@ export const TalentService = {
       })
       .eq('id', id);
 
+    return { error };
+  },
+
+  // --- TRAINING PLANNING (LIFECYCLE STAGE 1) ---
+  async getPlannings() {
+    if (!supabase) {
+      return { data: localPlannings, error: null, isFallback: true };
+    }
+    return safeQuery(supabase.from('training_plannings').select('*').order('created_at', { ascending: false }), localPlannings);
+  },
+
+  async createPlanning(data: any) {
+    if (!supabase) {
+      const newPlan = {
+        id: 'plan-' + Math.random().toString(36).substr(2, 9),
+        title: data.title,
+        unit: data.unit,
+        location: data.location,
+        start_date: data.start_date,
+        start_time: data.start_time,
+        training_type: data.training_type,
+        provider: data.provider,
+        trainer: data.trainer,
+        cost: Number(data.cost || 0),
+        notes: data.notes,
+        period: data.period
+      };
+      localPlannings.unshift(newPlan);
+      return { data: newPlan, error: null };
+    }
+    const { data: dbData, error } = await supabase
+      .from('training_plannings')
+      .insert([data])
+      .select()
+      .single();
+    return { data: dbData, error };
+  },
+
+  async updatePlanning(id: string, data: any) {
+    if (!supabase) {
+      localPlannings = localPlannings.map(p => p.id === id ? { ...p, ...data } : p);
+      return { error: null };
+    }
+    const { error } = await supabase.from('training_plannings').update(data).eq('id', id);
+    return { error };
+  },
+
+  async deletePlanning(id: string) {
+    if (!supabase) {
+      localPlannings = localPlannings.filter(p => p.id !== id);
+      return { error: null };
+    }
+    const { error } = await supabase.from('training_plannings').delete().eq('id', id);
+    return { error };
+  },
+
+  // --- TRAINING REALIZATION (LIFECYCLE STAGE 2) ---
+  async getRealizations() {
+    if (!supabase) {
+      return { data: localRealizations, error: null, isFallback: true };
+    }
+    return safeQuery(supabase.from('training_realizations').select('*, training_plannings(*)'), localRealizations);
+  },
+
+  async createRealization(planningId: string) {
+    if (!supabase) {
+      const existing = localRealizations.find(r => r.planning_id === planningId);
+      if (existing) return { data: existing, error: null };
+      const newReal = {
+        id: 'real-' + Math.random().toString(36).substr(2, 9),
+        planning_id: planningId,
+        status: 'Draft'
+      };
+      localRealizations.unshift(newReal);
+      return { data: newReal, error: null };
+    }
+    const { data: existing } = await supabase
+      .from('training_realizations')
+      .select('*')
+      .eq('planning_id', planningId)
+      .maybeSingle();
+    if (existing) {
+      return { data: existing, error: null };
+    }
+    const { data: dbData, error } = await supabase
+      .from('training_realizations')
+      .insert([{ planning_id: planningId, status: 'Draft' }])
+      .select()
+      .single();
+    return { data: dbData, error };
+  },
+
+  async updateRealizationStatus(id: string, status: string) {
+    if (!supabase) {
+      localRealizations = localRealizations.map(r => r.id === id ? { ...r, status } : r);
+      return { error: null };
+    }
+    const { error } = await supabase.from('training_realizations').update({ status }).eq('id', id);
+    return { error };
+  },
+
+  async deleteRealization(id: string) {
+    if (!supabase) {
+      localRealizations = localRealizations.filter(r => r.id !== id);
+      return { error: null };
+    }
+    const { error } = await supabase.from('training_realizations').delete().eq('id', id);
+    return { error };
+  },
+
+  // --- TRAINING PARTICIPANTS (LIFECYCLE STAGE 3) ---
+  async getParticipants(realizationId: string) {
+    if (!supabase) {
+      return { data: localNewParticipants.filter(p => p.realization_id === realizationId), error: null, isFallback: true };
+    }
+    return safeQuery(supabase.from('training_participants').select('*').eq('realization_id', realizationId), localNewParticipants.filter(p => p.realization_id === realizationId));
+  },
+
+  async addParticipant(data: any) {
+    if (!supabase) {
+      const newPart = {
+        id: 'part-' + Math.random().toString(36).substr(2, 9),
+        realization_id: data.realization_id,
+        employee_id: data.employee_id || null,
+        employee_name: data.employee_name,
+        employee_email: data.employee_email || '',
+        company: data.company || 'PT Indocater',
+        position: data.position || '',
+        is_external: !!data.is_external
+      };
+      localNewParticipants.push(newPart);
+      return { data: newPart, error: null };
+    }
+    const { data: dbData, error } = await supabase
+      .from('training_participants')
+      .insert([data])
+      .select()
+      .single();
+    return { data: dbData, error };
+  },
+
+  async removeParticipant(id: string) {
+    if (!supabase) {
+      localNewParticipants = localNewParticipants.filter(p => p.id !== id);
+      return { error: null };
+    }
+    const { error } = await supabase.from('training_participants').delete().eq('id', id);
+    return { error };
+  },
+
+  // --- TRAINING EVALUATION (LIFECYCLE STAGE 4) ---
+  async getEvaluations(realizationId: string) {
+    if (!supabase) {
+      return { data: localEvaluations.filter(e => e.realization_id === realizationId), error: null, isFallback: true };
+    }
+    return safeQuery(supabase.from('training_evaluations').select('*').eq('realization_id', realizationId), localEvaluations.filter(e => e.realization_id === realizationId));
+  },
+
+  async saveEvaluation(data: any) {
+    if (!supabase) {
+      const idx = localEvaluations.findIndex(e => e.realization_id === data.realization_id);
+      const evalData = {
+        id: idx !== -1 ? localEvaluations[idx].id : 'eval-' + Math.random().toString(36).substr(2, 9),
+        realization_id: data.realization_id,
+        score: Number(data.score),
+        notes: data.notes,
+        recommendation: data.recommendation,
+        document_url: data.document_url || ''
+      };
+      if (idx !== -1) {
+        localEvaluations[idx] = evalData;
+      } else {
+        localEvaluations.push(evalData);
+      }
+      return { data: evalData, error: null };
+    }
+    const { data: existing } = await supabase
+      .from('training_evaluations')
+      .select('*')
+      .eq('realization_id', data.realization_id)
+      .maybeSingle();
+
+    if (existing) {
+      const { data: dbData, error } = await supabase
+        .from('training_evaluations')
+        .update(data)
+        .eq('id', existing.id)
+        .select()
+        .single();
+      return { data: dbData, error };
+    } else {
+      const { data: dbData, error } = await supabase
+        .from('training_evaluations')
+        .insert([data])
+        .select()
+        .single();
+      return { data: dbData, error };
+    }
+  },
+
+  // --- TRAINING CERTIFICATES (LIFECYCLE STAGE 5) ---
+  async getCertificatesByRealization(realizationId: string) {
+    if (!supabase) {
+      return { data: localNewCertificates.filter(c => c.realization_id === realizationId), error: null, isFallback: true };
+    }
+    return safeQuery(supabase.from('training_certificates').select('*').eq('realization_id', realizationId), localNewCertificates.filter(c => c.realization_id === realizationId));
+  },
+
+  async generateCertificate(data: any) {
+    if (!supabase) {
+      const newCert = {
+        id: 'cert-gen-' + Math.random().toString(36).substr(2, 9),
+        realization_id: data.realization_id,
+        participant_id: data.participant_id,
+        certificate_number: data.certificate_number,
+        issued_date: data.issued_date,
+        document_url: data.document_url || ''
+      };
+      localNewCertificates.push(newCert);
+      return { data: newCert, error: null };
+    }
+    const { data: dbData, error } = await supabase
+      .from('training_certificates')
+      .insert([data])
+      .select()
+      .single();
+    return { data: dbData, error };
+  },
+
+  async deleteCertificate(id: string) {
+    if (!supabase) {
+      localNewCertificates = localNewCertificates.filter(c => c.id !== id);
+      return { error: null };
+    }
+    const { error } = await supabase.from('training_certificates').delete().eq('id', id);
     return { error };
   }
 };
