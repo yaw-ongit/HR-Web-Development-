@@ -24,30 +24,63 @@ let localParticipants = [
 ];
 
 export let localPlannings = [
-  { id: 'plan-1', title: 'Pelatihan Keselamatan Kerja K3', unit: 'Teknologi', location: 'Lantai 3 Ruang Mawar', start_date: '2026-08-01', start_time: '09:00', training_type: 'Compliance', provider: 'PT Indocater', trainer: 'Internal Learning Coordinator', cost: 1500000, notes: 'Wajib untuk departemen IT', period: '2026-Q3' },
-  { id: 'plan-2', title: 'Food Safety Management', unit: 'SDM', location: 'Lantai 2 Ruang Melati', start_date: '2026-08-15', start_time: '10:00', training_type: 'Food Safety', provider: 'Food Safety Indonesia', trainer: 'Maya Sari', cost: 3500000, notes: 'Sertifikasi kepatuhan', period: '2026-Q3' },
-  { id: 'plan-3', title: 'ISO 9001:2015 Quality Lead Auditor', unit: 'Produk', location: 'Zoom Meeting', start_date: '2026-09-01', start_time: '08:00', training_type: 'ISO', provider: 'SGS Academy', trainer: 'External Expert', cost: 12000000, notes: 'Sertifikasi auditor mutu', period: '2026-Q3' }
+  { id: 'plan-1', planning_number: 'PLN-2026-0001', title: 'Pelatihan Keselamatan Kerja K3', unit: 'Teknologi', location: 'Lantai 3 Ruang Mawar', start_date: '2026-08-01', start_time: '09:00', training_type: 'Compliance', provider: 'PT Indocater', trainer: 'Internal Learning Coordinator', cost: 1500000, notes: 'Wajib untuk departemen IT', period: '2026-Q3', status: 'Approved', is_archived: false, is_cancelled: false },
+  { id: 'plan-2', planning_number: 'PLN-2026-0002', title: 'Food Safety Management', unit: 'SDM', location: 'Lantai 2 Ruang Melati', start_date: '2026-08-15', start_time: '10:00', training_type: 'Food Safety', provider: 'Food Safety Indonesia', trainer: 'Maya Sari', cost: 3500000, notes: 'Sertifikasi kepatuhan', period: '2026-Q3', status: 'Submitted', is_archived: false, is_cancelled: false },
+  { id: 'plan-3', planning_number: 'PLN-2026-0003', title: 'ISO 9001:2015 Quality Lead Auditor', unit: 'Produk', location: 'Zoom Meeting', start_date: '2026-09-01', start_time: '08:00', training_type: 'ISO', provider: 'SGS Academy', trainer: 'External Expert', cost: 12000000, notes: 'Sertifikasi auditor mutu', period: '2026-Q3', status: 'Draft', is_archived: false, is_cancelled: false }
 ];
 
 export let localRealizations = [
-  { id: 'real-1', planning_id: 'plan-1', status: 'Ongoing' },
-  { id: 'real-2', planning_id: 'plan-2', status: 'Draft' },
-  { id: 'real-3', planning_id: 'plan-3', status: 'Completed' }
+  { id: 'real-1', planning_id: 'plan-1', status: 'Ongoing' }
 ];
 
 export let localNewParticipants = [
   { id: 'part-1', realization_id: 'real-1', employee_id: 'leo-wibowo', employee_name: 'Leo Wibowo', employee_email: 'leo.wibowo@indocater.co.id', company: 'PT Indocater', position: 'Pengembang Perangkat Lunak', is_external: false },
-  { id: 'part-2', realization_id: 'real-1', employee_id: 'maya-sari', employee_name: 'Maya Sari', employee_email: 'maya.sari@indocater.co.id', company: 'PT Indocater', position: 'Generalist SDM', is_external: false },
-  { id: 'part-3', realization_id: 'real-3', employee_id: 'zara-nurhidayah', employee_name: 'Zara Nurhidayah', employee_email: 'zara.nurhidayah@indocater.co.id', company: 'PT Indocater', position: 'Desainer Produk', is_external: false }
+  { id: 'part-2', realization_id: 'real-1', employee_id: 'maya-sari', employee_name: 'Maya Sari', employee_email: 'maya.sari@indocater.co.id', company: 'PT Indocater', position: 'Generalist SDM', is_external: false }
 ];
 
 export let localEvaluations = [
-  { id: 'eval-1', realization_id: 'real-3', score: 90, notes: 'Peserta menunjukkan pemahaman luar biasa.', recommendation: 'Diberikan sertifikat kelulusan utama', document_url: '' }
+  { id: 'eval-1', realization_id: 'real-1', score: 85, effectiveness: 'Sangat Efektif', notes: 'Lulus dengan baik', recommendation: 'Diberikan sertifikat', document_url: '', evaluation_date: '2026-08-02' }
 ];
 
 export let localNewCertificates = [
-  { id: 'cert-gen-1', realization_id: 'real-3', participant_id: 'part-3', certificate_number: 'CERT-INDC-2026-0001', issued_date: '2026-09-02', document_url: '' }
+  { id: 'cert-gen-1', realization_id: 'real-1', participant_id: 'part-1', certificate_number: 'CERT-2026-000001', issued_date: '2026-08-02', expiration_date: '2029-08-02', status: 'Valid', qr_code_url: 'CERT-2026-000001|leo-wibowo|Pelatihan Keselamatan Kerja K3|2026-08-02', signature_manager_url: '/signatures/manager.png', signature_hr_url: '/signatures/hr.png', download_count: 1 }
 ];
+
+export let localApprovals = [
+  { id: 'appr-1', planning_id: 'plan-1', approval_status: 'Approved', approver: 'Fitri Novita', approval_date: '2026-07-28', approval_notes: 'Proposal disetujui, anggaran sesuai.' }
+];
+
+export let localAttendances = [
+  { id: 'att-1', participant_id: 'part-1', status: 'Present', attendance_date: '2026-08-01', notes: 'Hadir penuh waktu' },
+  { id: 'att-2', participant_id: 'part-2', status: 'Absent', attendance_date: '2026-08-01', notes: 'Sakit' }
+];
+
+export let localNotifications = [
+  { id: 'not-1', user_id: 'leo-wibowo', title: 'Upcoming Training', content: 'Pelatihan Keselamatan Kerja K3 akan dimulai tanggal 2026-08-01.', type: 'Training', is_read: false, created_at: '2026-07-28' },
+  { id: 'not-2', user_id: 'leo-wibowo', title: 'Certificate Generated', content: 'Sertifikat untuk Pelatihan Keselamatan Kerja K3 telah diterbitkan.', type: 'Certificate', is_read: true, created_at: '2026-07-28' }
+];
+
+export let localActivityLogs = [
+  { id: 'log-1', user_name: 'yawwwwwww', action: 'Added Training Planning', module: 'Training', status: 'Success', created_at: '2026-07-28 09:00:00' },
+  { id: 'log-2', user_name: 'yawwwwwww', action: 'Approved Training Proposal', module: 'Approval', status: 'Success', created_at: '2026-07-28 10:00:00' }
+];
+
+export let localFeedback = [
+  { id: 'fb-1', category: 'Suggestion', title: 'Peningkatan UI Kalender', description: 'Mohon tambahkan filter unit pada tampilan kalender.', priority: 'Medium', attachment_url: '', created_at: '2026-07-28' }
+];
+
+export let localSettings = {
+  companyName: 'PT Indocater',
+  timeZone: 'Asia/Jakarta',
+  dateFormat: 'DD/MM/YYYY',
+  theme: 'system',
+  language: 'id',
+  emailNotifications: true,
+  browserNotifications: true,
+  tableDensity: 'comfortable',
+  sidebarCollapse: false,
+  defaultDashboard: 'all'
+};
 
 export const TalentService = {
   // --- CANDIDATES, INTERVIEWS, ONBOARDING ---
@@ -394,8 +427,10 @@ export const TalentService = {
 
   async createPlanning(data: any) {
     if (!supabase) {
+      const planNum = data.planning_number || 'PLN-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
       const newPlan = {
         id: 'plan-' + Math.random().toString(36).substr(2, 9),
+        planning_number: planNum,
         title: data.title,
         unit: data.unit,
         location: data.location,
@@ -406,14 +441,18 @@ export const TalentService = {
         trainer: data.trainer,
         cost: Number(data.cost || 0),
         notes: data.notes,
-        period: data.period
+        period: data.period,
+        status: data.status || 'Draft',
+        is_archived: false,
+        is_cancelled: false
       };
       localPlannings.unshift(newPlan);
       return { data: newPlan, error: null };
     }
+    const planNum = data.planning_number || 'PLN-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
     const { data: dbData, error } = await supabase
       .from('training_plannings')
-      .insert([data])
+      .insert([{ ...data, planning_number: planNum }])
       .select()
       .single();
     return { data: dbData, error };
@@ -531,6 +570,15 @@ export const TalentService = {
     return { error };
   },
 
+  async updateParticipant(id: string, data: any) {
+    if (!supabase) {
+      localNewParticipants = localNewParticipants.map(p => p.id === id ? { ...p, ...data } : p);
+      return { error: null };
+    }
+    const { error } = await supabase.from('training_participants').update(data).eq('id', id);
+    return { error };
+  },
+
   // --- TRAINING EVALUATION (LIFECYCLE STAGE 4) ---
   async getEvaluations(realizationId: string) {
     if (!supabase) {
@@ -546,9 +594,11 @@ export const TalentService = {
         id: idx !== -1 ? localEvaluations[idx].id : 'eval-' + Math.random().toString(36).substr(2, 9),
         realization_id: data.realization_id,
         score: Number(data.score),
+        effectiveness: data.effectiveness || 'Efektif',
         notes: data.notes,
         recommendation: data.recommendation,
-        document_url: data.document_url || ''
+        document_url: data.document_url || '',
+        evaluation_date: data.evaluation_date || new Date().toISOString().split('T')[0]
       };
       if (idx !== -1) {
         localEvaluations[idx] = evalData;
@@ -597,7 +647,12 @@ export const TalentService = {
         participant_id: data.participant_id,
         certificate_number: data.certificate_number,
         issued_date: data.issued_date,
-        document_url: data.document_url || ''
+        expiration_date: data.expiration_date || '',
+        status: data.status || 'Valid',
+        qr_code_url: data.qr_code_url || '',
+        signature_manager_url: data.signature_manager_url || '',
+        signature_hr_url: data.signature_hr_url || '',
+        download_count: data.download_count || 1
       };
       localNewCertificates.push(newCert);
       return { data: newCert, error: null };
@@ -617,5 +672,217 @@ export const TalentService = {
     }
     const { error } = await supabase.from('training_certificates').delete().eq('id', id);
     return { error };
+  },
+
+  // --- APPROVAL WORKFLOW ---
+  async getApprovals(planningId: string) {
+    if (!supabase) {
+      return { data: localApprovals.filter(a => a.planning_id === planningId), error: null, isFallback: true };
+    }
+    return safeQuery(supabase.from('training_approvals').select('*').eq('planning_id', planningId), localApprovals.filter(a => a.planning_id === planningId));
+  },
+
+  async saveApproval(data: any) {
+    // Also update training_plannings status
+    const status = data.approval_status === 'Approved' ? 'Approved' : 'Rejected';
+    await this.updatePlanning(data.planning_id, { status });
+
+    if (!supabase) {
+      const idx = localApprovals.findIndex(a => a.planning_id === data.planning_id);
+      const appData = {
+        id: idx !== -1 ? localApprovals[idx].id : 'appr-' + Math.random().toString(36).substr(2, 9),
+        planning_id: data.planning_id,
+        approval_status: data.approval_status,
+        approver: data.approver || 'Manager HRD',
+        approval_date: new Date().toISOString().split('T')[0],
+        approval_notes: data.approval_notes
+      };
+      if (idx !== -1) {
+        localApprovals[idx] = appData;
+      } else {
+        localApprovals.push(appData);
+      }
+      return { data: appData, error: null };
+    }
+
+    const { data: existing } = await supabase
+      .from('training_approvals')
+      .select('*')
+      .eq('planning_id', data.planning_id)
+      .maybeSingle();
+
+    if (existing) {
+      const { data: dbData, error } = await supabase
+        .from('training_approvals')
+        .update(data)
+        .eq('id', existing.id)
+        .select()
+        .single();
+      return { data: dbData, error };
+    } else {
+      const { data: dbData, error } = await supabase
+        .from('training_approvals')
+        .insert([data])
+        .select()
+        .single();
+      return { data: dbData, error };
+    }
+  },
+
+  // --- ATTENDANCE SYSTEM ---
+  async getAttendances(realizationId: string) {
+    if (!supabase) {
+      // Find all participant IDs for this realization
+      const partIds = localNewParticipants.filter(p => p.realization_id === realizationId).map(p => p.id);
+      return { data: localAttendances.filter(a => partIds.includes(a.participant_id)), error: null, isFallback: true };
+    }
+    // Query attendance join training_participants
+    return safeQuery(supabase.from('training_attendances').select('*, training_participants(*)'), localAttendances);
+  },
+
+  async saveAttendance(data: any) {
+    if (!supabase) {
+      const idx = localAttendances.findIndex(a => a.participant_id === data.participant_id);
+      const attData = {
+        id: idx !== -1 ? localAttendances[idx].id : 'att-' + Math.random().toString(36).substr(2, 9),
+        participant_id: data.participant_id,
+        status: data.status,
+        attendance_date: data.attendance_date || new Date().toISOString().split('T')[0],
+        notes: data.notes || ''
+      };
+      if (idx !== -1) {
+        localAttendances[idx] = attData;
+      } else {
+        localAttendances.push(attData);
+      }
+      return { data: attData, error: null };
+    }
+
+    const { data: existing } = await supabase
+      .from('training_attendances')
+      .select('*')
+      .eq('participant_id', data.participant_id)
+      .maybeSingle();
+
+    if (existing) {
+      const { data: dbData, error } = await supabase
+        .from('training_attendances')
+        .update(data)
+        .eq('id', existing.id)
+        .select()
+        .single();
+      return { data: dbData, error };
+    } else {
+      const { data: dbData, error } = await supabase
+        .from('training_attendances')
+        .insert([data])
+        .select()
+        .single();
+      return { data: dbData, error };
+    }
+  },
+
+  // --- NOTIFICATION CENTER ---
+  async getNotifications() {
+    if (!supabase) {
+      return { data: localNotifications, error: null, isFallback: true };
+    }
+    return safeQuery(supabase.from('notifications').select('*').order('created_at', { ascending: false }), localNotifications);
+  },
+
+  async markNotificationRead(id: string) {
+    if (!supabase) {
+      localNotifications = localNotifications.map(n => n.id === id ? { ...n, is_read: true } : n);
+      return { error: null };
+    }
+    const { error } = await supabase.from('notifications').update({ is_read: true }).eq('id', id);
+    return { error };
+  },
+
+  async markAllNotificationsRead() {
+    if (!supabase) {
+      localNotifications = localNotifications.map(n => ({ ...n, is_read: true }));
+      return { error: null };
+    }
+    const { error } = await supabase.from('notifications').update({ is_read: true }).eq('is_read', false);
+    return { error };
+  },
+
+  async deleteNotification(id: string) {
+    if (!supabase) {
+      localNotifications = localNotifications.filter(n => n.id !== id);
+      return { error: null };
+    }
+    const { error } = await supabase.from('notifications').delete().eq('id', id);
+    return { error };
+  },
+
+  // --- ACTIVITY LOGS ---
+  async getActivityLogs() {
+    if (!supabase) {
+      return { data: localActivityLogs, error: null, isFallback: true };
+    }
+    return safeQuery(supabase.from('activity_logs').select('*').order('created_at', { ascending: false }), localActivityLogs);
+  },
+
+  async logActivity(action: string, module: string, status: string = 'Success') {
+    const newLog = {
+      id: 'log-' + Math.random().toString(36).substr(2, 9),
+      user_name: 'yawwwwwww',
+      action,
+      module,
+      status,
+      created_at: new Date().toISOString().replace('T', ' ').substring(0, 19)
+    };
+    if (!supabase) {
+      localActivityLogs.unshift(newLog);
+      return { data: newLog, error: null };
+    }
+    const { data: dbData, error } = await supabase
+      .from('activity_logs')
+      .insert([newLog])
+      .select()
+      .single();
+    return { data: dbData, error };
+  },
+
+  // --- USER FEEDBACK ---
+  async getFeedbacks() {
+    if (!supabase) {
+      return { data: localFeedback, error: null, isFallback: true };
+    }
+    return safeQuery(supabase.from('user_feedbacks').select('*').order('created_at', { ascending: false }), localFeedback);
+  },
+
+  async submitFeedback(data: any) {
+    const newFb = {
+      id: 'fb-' + Math.random().toString(36).substr(2, 9),
+      category: data.category,
+      title: data.title,
+      description: data.description,
+      priority: data.priority || 'Medium',
+      attachment_url: data.attachment_url || '',
+      created_at: new Date().toISOString().split('T')[0]
+    };
+    if (!supabase) {
+      localFeedback.unshift(newFb);
+      return { data: newFb, error: null };
+    }
+    const { data: dbData, error } = await supabase
+      .from('user_feedbacks')
+      .insert([newFb])
+      .select()
+      .single();
+    return { data: dbData, error };
+  },
+
+  // --- SETTINGS ---
+  async getSettings() {
+    return { data: localSettings, error: null };
+  },
+
+  async updateSettings(data: any) {
+    localSettings = { ...localSettings, ...data };
+    return { data: localSettings, error: null };
   }
 };

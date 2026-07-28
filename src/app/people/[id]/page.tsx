@@ -28,6 +28,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
   }, [params.id, localProfile]);
 
   const [certs, setCerts] = useState<any[]>([]);
+  const [userTrainings, setUserTrainings] = useState<any[]>([]);
 
   useEffect(() => {
     if (profile?.fullName) {
@@ -37,6 +38,40 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
             c.employee.toLowerCase() === profile.fullName.toLowerCase()
           );
           setCerts(matched);
+        }
+      });
+
+      Promise.all([
+        TalentService.getPlannings(),
+        TalentService.getRealizations()
+      ]).then(async ([plansRes, realsRes]) => {
+        if (plansRes.data && realsRes.data) {
+          const tempHistory: any[] = [];
+          for (const real of realsRes.data) {
+            const plan = plansRes.data.find(p => p.id === real.planning_id);
+            if (!plan) continue;
+
+            const partsRes = await TalentService.getParticipants(real.id);
+            if (partsRes.data) {
+              const matchedPart = partsRes.data.find(p => p.employee_id === profile.id || p.employee_name?.toLowerCase() === profile.fullName?.toLowerCase());
+              if (matchedPart) {
+                const attsRes = await TalentService.getAttendances(real.id);
+                const att = attsRes.data?.find(a => a.participant_id === matchedPart.id);
+                const certsRes = await TalentService.getCertificatesByRealization(real.id);
+                const cert = certsRes.data?.find(c => c.participant_id === matchedPart.id);
+
+                tempHistory.push({
+                  title: plan.title,
+                  date: plan.start_date,
+                  trainer: plan.trainer,
+                  attendance: att ? att.status : 'Absent',
+                  certificateNumber: cert ? cert.certificate_number : null,
+                  expirationDate: cert ? cert.expiration_date : null
+                });
+              }
+            }
+          }
+          setUserTrainings(tempHistory);
         }
       });
     }
@@ -289,21 +324,34 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
             {activeTab === 'Pelatihan' && (
               <div className="space-y-6">
                 <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
-                  <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">Progres pelatihan</p>
+                  <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">Riwayat Pelatihan Sistem</p>
                   <div className="mt-6 space-y-4">
-                    {profile.trainingRecords?.map((training: any) => (
+                    {userTrainings.map((training: any) => (
                       <div key={training.title} className="rounded-3xl bg-card/80 p-5">
                         <div className="flex items-center justify-between gap-4">
                           <div>
                             <p className="text-lg font-semibold text-foreground">{training.title}</p>
-                            <p className="mt-2 text-sm text-muted">{training.status}</p>
+                            <p className="mt-2 text-sm text-muted">Tanggal: {training.date} • Trainer: {training.trainer}</p>
+                            <p className="mt-1 text-xs">
+                              Kehadiran: <span className={`font-semibold ${training.attendance === 'Present' ? 'text-emerald-600' : 'text-rose-500'}`}>{training.attendance}</span>
+                            </p>
+                            {training.certificateNumber && (
+                              <p className="mt-1 text-xs font-mono text-primary">Sertifikat: {training.certificateNumber} (Exp: {training.expirationDate})</p>
+                            )}
                           </div>
-                          <span className="rounded-full bg-surface/90 px-3 py-1 text-xs uppercase tracking-[0.28em] text-muted-foreground">Jatuh tempo {training.due}</span>
+                          {training.certificateNumber && (
+                            <button
+                              onClick={() => alert(`Mengunduh sertifikat ${training.certificateNumber}...`)}
+                              className="rounded-xl border border-border px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-surface transition"
+                            >
+                              Unduh Sertifikat
+                            </button>
+                          )}
                         </div>
                       </div>
                     ))}
-                    {(!profile.trainingRecords || profile.trainingRecords.length === 0) && (
-                      <p className="text-sm text-muted">Belum ada riwayat pelatihan.</p>
+                    {userTrainings.length === 0 && (
+                      <p className="text-sm text-muted">Belum ada riwayat pelatihan terdaftar.</p>
                     )}
                   </div>
                 </Card>

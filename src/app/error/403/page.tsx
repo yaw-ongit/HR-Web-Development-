@@ -1,23 +1,23 @@
 'use client';
 
-import { EyeOff, ChevronLeft } from 'lucide-react';
+import { ShieldAlert, ChevronLeft } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 
-export default function NotFoundPage() {
+export default function ForbiddenPage() {
   const router = useRouter();
 
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center p-4">
       <Card className="max-w-md w-full rounded-[28px] border border-border p-8 text-center space-y-6 shadow-card">
-        <div className="mx-auto w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
-          <EyeOff className="h-10 w-10" />
+        <div className="mx-auto w-16 h-16 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-500">
+          <ShieldAlert className="h-10 w-10" />
         </div>
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-foreground">Halaman Tidak Ditemukan (404)</h1>
+          <h1 className="text-3xl font-bold text-foreground">Akses Ditolak (403)</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Maaf, halaman portal HRIS yang Anda cari tidak ditemukan atau telah dipindahkan ke alamat lain.
+            Maaf, Anda tidak memiliki izin otorisasi yang cukup untuk mengakses halaman ini. Hubungi administrator HRIS jika Anda merasa ini adalah kesalahan.
           </p>
         </div>
         <div className="pt-4 border-t border-border flex justify-center">

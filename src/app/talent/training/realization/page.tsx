@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { Search, Plus, Trash2, RefreshCw, Save, CheckSquare, Square, Users, BookOpen } from 'lucide-react';
+import { Search, Plus, Trash2, RefreshCw, Save, CheckSquare, Square, Users, BookOpen, Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
@@ -31,6 +31,8 @@ export default function TrainingRealizationPage() {
     company: '',
     position: ''
   });
+
+  const [editingParticipantId, setEditingParticipantId] = useState<string | null>(null);
 
   const loadData = () => {
     TalentService.getPlannings().then((res: any) => {
@@ -150,28 +152,59 @@ export default function TrainingRealizationPage() {
     e.preventDefault();
     if (!selectedRealization || !otherForm.name || !otherForm.company) return;
 
-    const { error } = await TalentService.addParticipant({
-      realization_id: selectedRealization.id,
-      employee_id: null,
-      employee_name: otherForm.name,
-      employee_email: '',
-      company: otherForm.company,
-      position: otherForm.position || '',
-      is_external: true
-    });
-
-    if (!error) {
-      alert('Peserta Eksternal berhasil ditambahkan!');
-      setOtherForm({ name: '', company: '', position: '' });
-      setIsAddOtherOpen(false);
-      
-      // Reload participants
-      TalentService.getParticipants(selectedRealization.id).then((res: any) => {
-        if (res && res.data) setParticipants(res.data);
+    if (editingParticipantId) {
+      const { error } = await TalentService.updateParticipant(editingParticipantId, {
+        employee_name: otherForm.name,
+        company: otherForm.company,
+        position: otherForm.position || ''
       });
+      if (!error) {
+        alert('Data peserta eksternal berhasil diperbarui!');
+        setEditingParticipantId(null);
+        setOtherForm({ name: '', company: '', position: '' });
+        setIsAddOtherOpen(false);
+        
+        // Reload participants
+        TalentService.getParticipants(selectedRealization.id).then((res: any) => {
+          if (res && res.data) setParticipants(res.data);
+        });
+      } else {
+        alert('Gagal memperbarui: ' + error);
+      }
     } else {
-      alert('Gagal menambahkan: ' + error);
+      const { error } = await TalentService.addParticipant({
+        realization_id: selectedRealization.id,
+        employee_id: null,
+        employee_name: otherForm.name,
+        employee_email: '',
+        company: otherForm.company,
+        position: otherForm.position || '',
+        is_external: true
+      });
+
+      if (!error) {
+        alert('Peserta Eksternal berhasil ditambahkan!');
+        setOtherForm({ name: '', company: '', position: '' });
+        setIsAddOtherOpen(false);
+        
+        // Reload participants
+        TalentService.getParticipants(selectedRealization.id).then((res: any) => {
+          if (res && res.data) setParticipants(res.data);
+        });
+      } else {
+        alert('Gagal menambahkan: ' + error);
+      }
     }
+  };
+
+  const handleEditOtherParticipant = (part: any) => {
+    setOtherForm({
+      name: part.employee_name,
+      company: part.company,
+      position: part.position || ''
+    });
+    setEditingParticipantId(part.id);
+    setIsAddOtherOpen(true);
   };
 
   const handleRemoveParticipant = async (id: string) => {
@@ -216,7 +249,7 @@ export default function TrainingRealizationPage() {
                   className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none focus:border-brand-500"
                 >
                   <option value="">-- Pilih Proposal --</option>
-                  {plannings.map(p => (
+                  {plannings.filter(p => p.status === 'Approved').map(p => (
                     <option key={p.id} value={p.id}>
                       {p.title} ({p.unit} - {p.period})
                     </option>
@@ -355,7 +388,17 @@ export default function TrainingRealizationPage() {
                             {part.is_external ? 'Eksternal' : 'Internal'}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-right flex justify-end">
+                        <td className="px-6 py-4 text-right flex justify-end gap-2">
+                          {part.is_external && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleEditOtherParticipant(part)}
+                              className="text-amber-500 hover:text-amber-700 hover:bg-amber-50"
+                            >
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                          )}
                           <Button
                             variant="ghost"
                             size="sm"
@@ -456,7 +499,7 @@ export default function TrainingRealizationPage() {
       {isAddOtherOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <Card className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-xl">
-            <h3 className="text-xl font-bold mb-4">Tambah Peserta Lain / Eksternal</h3>
+            <h3 className="text-xl font-bold mb-4">{editingParticipantId ? 'Edit Peserta Eksternal' : 'Tambah Peserta Lain / Eksternal'}</h3>
             <form onSubmit={handleAddOtherParticipant} className="space-y-4">
               <div>
                 <label className="text-xs font-semibold text-muted-foreground">Nama Lengkap</label>
@@ -492,7 +535,7 @@ export default function TrainingRealizationPage() {
               </div>
 
               <div className="flex justify-end gap-3 pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsAddOtherOpen(false)} className="rounded-xl">
+                <Button type="button" variant="outline" onClick={() => { setIsAddOtherOpen(false); setEditingParticipantId(null); setOtherForm({ name: '', company: '', position: '' }); }} className="rounded-xl">
                   Batal
                 </Button>
                 <Button type="submit" className="rounded-xl bg-brand-600 text-white hover:bg-brand-700 font-semibold">

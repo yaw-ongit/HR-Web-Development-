@@ -7,15 +7,19 @@ import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
 
+const effectivenessOptions = ['Sangat Efektif', 'Efektif', 'Cukup', 'Kurang'];
+
 export default function TrainingEvaluationPage() {
   const [plannings, setPlannings] = useState<any[]>([]);
   const [realizations, setRealizations] = useState<any[]>([]);
   const [selectedRealizationId, setSelectedRealizationId] = useState('');
   const [evaluation, setEvaluation] = useState({
     score: '',
+    effectiveness: 'Efektif',
     notes: '',
     recommendation: '',
-    document_url: ''
+    document_url: '',
+    evaluation_date: new Date().toISOString().split('T')[0]
   });
 
   const loadData = () => {
@@ -41,26 +45,32 @@ export default function TrainingEvaluationPage() {
           const evalObj = res.data[0];
           setEvaluation({
             score: String(evalObj.score || ''),
+            effectiveness: evalObj.effectiveness || 'Efektif',
             notes: evalObj.notes || '',
             recommendation: evalObj.recommendation || '',
-            document_url: evalObj.document_url || ''
+            document_url: evalObj.document_url || '',
+            evaluation_date: evalObj.evaluation_date || new Date().toISOString().split('T')[0]
           });
         } else {
           // Reset if none exists
           setEvaluation({
             score: '',
+            effectiveness: 'Efektif',
             notes: '',
             recommendation: '',
-            document_url: ''
+            document_url: '',
+            evaluation_date: new Date().toISOString().split('T')[0]
           });
         }
       });
     } else {
       setEvaluation({
         score: '',
+        effectiveness: 'Efektif',
         notes: '',
         recommendation: '',
-        document_url: ''
+        document_url: '',
+        evaluation_date: new Date().toISOString().split('T')[0]
       });
     }
   }, [selectedRealizationId]);
@@ -92,9 +102,11 @@ export default function TrainingEvaluationPage() {
     const payload = {
       realization_id: selectedRealizationId,
       score: Number(evaluation.score),
+      effectiveness: evaluation.effectiveness,
       notes: evaluation.notes,
       recommendation: evaluation.recommendation,
-      document_url: evaluation.document_url
+      document_url: evaluation.document_url,
+      evaluation_date: evaluation.evaluation_date
     };
 
     const { error } = await TalentService.saveEvaluation(payload);
@@ -176,18 +188,40 @@ export default function TrainingEvaluationPage() {
             <Card className="rounded-[28px] border border-border p-6 shadow-sm">
               <h3 className="text-xl font-bold text-foreground mb-6">Formulir Evaluasi & Penilaian</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="text-xs font-semibold text-muted-foreground">Skor Rata-rata Pelatihan (0 - 100)</label>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    required
-                    value={evaluation.score}
-                    onChange={(e) => setEvaluation({ ...evaluation, score: e.target.value })}
-                    className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none focus:border-brand-500"
-                    placeholder="Contoh: 85"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-muted-foreground">Skor Rata-rata Pelatihan (0 - 100)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      required
+                      value={evaluation.score}
+                      onChange={(e) => setEvaluation({ ...evaluation, score: e.target.value })}
+                      className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none focus:border-brand-500"
+                      placeholder="Contoh: 85"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-muted-foreground">Efektivitas Pelatihan</label>
+                    <select
+                      value={evaluation.effectiveness}
+                      onChange={(e) => setEvaluation({ ...evaluation, effectiveness: e.target.value })}
+                      className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none focus:border-brand-500"
+                    >
+                      {effectivenessOptions.map(o => <option key={o} value={o}>{o}</option>)}
+                    </select>
+                  </div>
+                  <div className="col-span-2">
+                    <label className="text-xs font-semibold text-muted-foreground">Tanggal Evaluasi</label>
+                    <input
+                      type="date"
+                      required
+                      value={evaluation.evaluation_date}
+                      onChange={(e) => setEvaluation({ ...evaluation, evaluation_date: e.target.value })}
+                      className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none focus:border-brand-500"
+                    />
+                  </div>
                 </div>
 
                 <div>

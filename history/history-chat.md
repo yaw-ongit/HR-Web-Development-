@@ -32,3 +32,13 @@
 - **Contrast Audit**: Realigned Tailwind primary and text variables in `.dark` theme config to meet accessibility guidelines on dark backgrounds.
 - **Selector Fix**: Passed `employeeDirectory` correctly as fallback data, enabling instant employee selection and option rendering.
 - **PDF Downloader**: Integrated `jsPDF` vector generator to automatically compile A4 Landscape certificates on the client and download as `certificate-{employee_name}.pdf`.
+
+### 7. Full Lifecycle Training Module & Supporting Pages (Phase 2)
+- **Lifecycle Integration**: Built a complete 7-stage workflow layout tracker spanning Planning, Approval, Realization, Attendance, Evaluation, Reporting, and Certificate Generation.
+- **Stage 2 Approval Workflow**: Required manager signatory name, status shifts, and comments before creating a realization entry.
+- **Stage 3 & 4 Realization / Attendance**: Limited employee recruitment to same-unit divisions, supported multi-selection adding, external inputs (add/edit/delete), and attendance tracking (Present, Absent, Late, Excused) affecting cert eligibility.
+- **Stage 5 & 6 Evaluation / Reports**: Updated evaluations with effectiveness ratings, added compliance matrices, expiration trackers, and bulk certificate ZIP downloads.
+- **Stage 7 Certificate Generator**: Integrated dynamic QR verification codes, customizable signatory names/roles, validity calendars, and client-side ZIP packaging (fflate).
+- **Verify Route**: Reserved the `/certificate/verify/[certificateNumber]` page showing verification checks.
+- **Enterprise Support Pages**: Implemented `/profile`, `/notifications`, `/settings`, `/help`, `/activity`, `/about`, `/release-notes`, `/guide`, `/feedback`, and error boundaries.
+- **Build Verification**: Clean eslint and successful compile.

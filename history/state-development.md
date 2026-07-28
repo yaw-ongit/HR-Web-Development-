@@ -1,25 +1,36 @@
 # Current Development State
 
 ## Current Completion Status
-- **Supabase Core Integration**: Completed. Client and server configurations are set up.
-- **Granular Database Service Layers**: Completed. Base service helper, PeopleService, TalentService, and WorkforceService implemented.
-- **Pages & Components Update**: Completed. UI workspaces and pages integrated with the granular services, retrieving live database data when available, and seamlessly falling back to local mockup constants.
-- **Professional Certificate Template System**: Completed. Reusable dynamic template for PT Indocater built in A4 Landscape, featuring navy corporate branding, red accents, and gold typography placeholders.
-- **Training & Employee Certification Management Module**: Completed. Built HTML/CSS Certificate template (`/certificate-template/`) with custom SVGs for branding logo, signature, and stamp.
-- **Simple Authentication Flow**: Completed. Implemented a `/login` page with default credentials (`admin`/`admin`), persistent cookie-based session tracking, route protection middleware (`src/middleware.ts`), and sidebar logout functionality.
-- **UI/UX Contrast Audit**: Completed. Adjusted dark mode variable mappings in `globals.css` (increased `--primary` legibility to `#3B82F6` and softened text `--foreground` to `#F8FAFC` for high contrast readability).
-- **Employee Selector Dropdown Fix**: Completed. Refactored the data loader to load `employeeDirectory` correctly, resolving select option initialization errors in both the Certification form and the Participant form.
-- **Automated Certificate PDF Download**: Completed. Replaced `window.print()` with a full vector-drawn `jsPDF` canvas generator, automatically formatting A4 Landscape certificates with official logo, borders, signature, stamp, and metadata. Downloads directly as `certificate-{employee_name}.pdf`.
+- **Enterprise Training Lifecycle (Planning -> Approval -> Realization -> Attendance -> Evaluation -> Report -> Certificate)**: Completed.
+  - **Stage 1: Planning**: Proposal form with budget, trainer details, duplicate, cancel, and archive actions. Uses unique planning numbers.
+  - **Stage 2: Approval**: Structured approval workflow requiring manager signature, status change, and approval notes before realization.
+  - **Stage 3: Realization**: Loads approved plannings as read-only. Supports single/multi participant addition filtered by the planning unit. Handles external other participants (add, edit, delete).
+  - **Stage 4: Attendance**: Presensi sheets where attendance affects certificate eligibility.
+  - **Stage 5: Evaluation**: Comprehensive scores, effectiveness ratings, follow-up recommendations, and documentation links.
+  - **Stage 6: Report & Matrix**: Multi-tab panel for Summary, Attendance, Compliance Matrix, Expiration status, and Report Cards (bulk printing).
+  - **Stage 7: Certificate**: Offline vector certificate generator complete with QR codes, digital signatures, valid/expired warnings, and browser ZIP download.
+- **Supporting Enterprise Pages**: Completed.
+  - `/profile` (My Profile) with personal tabs, employment read-only metrics, and dynamic training history logs.
+  - `/notifications` (Notification Center) with read badges, marking actions, and type filters.
+  - `/settings` (Settings) for system timezones, date formats, theme, language, and table density.
+  - `/help` (Help Center) featuring interactive FAQs, guides, and HR/IT contacts.
+  - `/activity` (Activity Log) for system log audits.
+  - `/about` & `/release-notes` & `/guide` detailing version metrics, visual timeline updates, and user guides.
+  - `/feedback` for suggestions, priority ratings, and bug reporting.
+  - `/error/403`, `/not-found`, and `/error` handling 403, 404, and 500 status codes.
+- **Supabase Core Integration & Failsafe**: Completed. Service layers expanded for all new entities (`training_plannings`, `training_realizations`, `training_participants`, `training_attendances`, `training_evaluations`, `training_certificates`, etc.) with in-memory failsafes.
+- **Build & Lint Verification**: Completed. Build is fully compiled and lint is 100% clean.
 
 ## Completed Features
-- Persistent authentication middleware in `src/middleware.ts`.
-- Brighter, high-contrast dark theme style definitions in `src/app/globals.css`.
-- Direct client-side PDF download integration using `jsPDF`.
-- Fully functional employee selector dropdown mapping `employeeDirectory` mock arrays to inputs.
+- Full Next.js client-side workflow layout.
+- QR Code generation and custom digital signatures on jsPDF canvas.
+- ZIP archiving of generated PDFs client-side using `fflate`.
+- Compliancy matrix calculations and remaining days warning highlights.
+- Profile management, user guides, notification center, system settings, error boundaries, and activity logs.
 
 ## Database & Supabase Status
-- Tables used: `employees`, `employee_documents`, `certifications`, `training_programs`, `training_participants`.
-- Failsafe fallback: Safe-query handler connects to Supabase, falling back to stateful memory data when offline or DNS is blocked.
+- Tables defined: `training_plannings`, `training_approvals`, `training_realizations`, `training_participants`, `training_attendances`, `training_evaluations`, `training_certificates`, `notifications`, `activity_logs`, `user_feedbacks`.
+- Failsafe fallback: Fully operational.
 
 ## Next Recommended Actions
 1. Map other modules (e.g. Compensation, Presence) as their features get refocused.
