@@ -11,8 +11,8 @@ export default function LoginPage() {
   const usernameId = useId();
   const passwordId = useId();
   
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('admin');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -84,7 +84,7 @@ export default function LoginPage() {
         </section>
 
         {/* Form masuk */}
-        <Card title="Masuk Ke Sistem" description="Gunakan akun admin perusahaan untuk mengakses.">
+        <Card title="Masuk Ke Sistem" description="Gunakan akun perusahaan Anda untuk mengakses.">
           <form className="space-y-5" onSubmit={handleSubmit} noValidate aria-label="Formulir masuk">
             {/* Username */}
             <div>
