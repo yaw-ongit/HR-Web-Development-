@@ -6,8 +6,10 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
 
 export default function UserFeedbackPage() {
+  const { addToast } = useToast();
   const [form, setForm] = useState({
     category: 'Suggestion',
     title: '',
@@ -20,7 +22,7 @@ export default function UserFeedbackPage() {
     e.preventDefault();
     const { error } = await TalentService.submitFeedback(form);
     if (!error) {
-      alert('Feedback Anda berhasil dikirim! Terima kasih atas kontribusi Anda.');
+      addToast({ title: 'Terkirim', description: 'Feedback Anda berhasil dikirim! Terima kasih atas kontribusi Anda.', variant: 'success' });
       setForm({
         category: 'Suggestion',
         title: '',
@@ -29,7 +31,7 @@ export default function UserFeedbackPage() {
         attachment_url: ''
       });
     } else {
-      alert('Gagal mengirim feedback: ' + error);
+      addToast({ title: 'Error', description: 'Gagal mengirim feedback: ' + error, variant: 'danger' });
     }
   };
 

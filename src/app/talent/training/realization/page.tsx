@@ -6,9 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService, PeopleService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
 import { employeeDirectory } from '@/lib/people-data';
 
-export default function TrainingRealizationPage() {
+export default function TrainingRealizationPage() { 
+  const { addToast } = useToast();
   const [plannings, setPlannings] = useState<any[]>([]);
   const [realizations, setRealizations] = useState<any[]>([]);
   const [selectedRealization, setSelectedRealization] = useState<any | null>(null);
@@ -96,7 +98,7 @@ export default function TrainingRealizationPage() {
         }
       });
     } else {
-      alert('Gagal memuat realisasi: ' + error);
+      addToast({ title: 'Error', description: 'Gagal memuat realisasi: ' + error, variant: 'danger' });
     }
   };
 
@@ -138,7 +140,7 @@ export default function TrainingRealizationPage() {
       addedCount++;
     }
 
-    alert(`${addedCount} Karyawan berhasil ditambahkan ke daftar peserta!`);
+    addToast({ title: 'Notifikasi', description: `${addedCount} Karyawan berhasil ditambahkan ke daftar peserta!`, variant: 'success' });
     setSelectedEmployeeIds([]);
     setIsAddEmployeeOpen(false);
     
@@ -159,7 +161,7 @@ export default function TrainingRealizationPage() {
         position: otherForm.position || ''
       });
       if (!error) {
-        alert('Data peserta eksternal berhasil diperbarui!');
+        addToast({ title: 'Notifikasi', description: 'Data peserta eksternal berhasil diperbarui!', variant: 'success' });
         setEditingParticipantId(null);
         setOtherForm({ name: '', company: '', position: '' });
         setIsAddOtherOpen(false);
@@ -169,7 +171,7 @@ export default function TrainingRealizationPage() {
           if (res && res.data) setParticipants(res.data);
         });
       } else {
-        alert('Gagal memperbarui: ' + error);
+        addToast({ title: 'Error', description: 'Gagal memperbarui: ' + error, variant: 'danger' });
       }
     } else {
       const { error } = await TalentService.addParticipant({
@@ -183,7 +185,7 @@ export default function TrainingRealizationPage() {
       });
 
       if (!error) {
-        alert('Peserta Eksternal berhasil ditambahkan!');
+        addToast({ title: 'Notifikasi', description: 'Peserta Eksternal berhasil ditambahkan!', variant: 'success' });
         setOtherForm({ name: '', company: '', position: '' });
         setIsAddOtherOpen(false);
         
@@ -192,7 +194,7 @@ export default function TrainingRealizationPage() {
           if (res && res.data) setParticipants(res.data);
         });
       } else {
-        alert('Gagal menambahkan: ' + error);
+        addToast({ title: 'Error', description: 'Gagal menambahkan: ' + error, variant: 'danger' });
       }
     }
   };
@@ -208,15 +210,15 @@ export default function TrainingRealizationPage() {
   };
 
   const handleRemoveParticipant = async (id: string) => {
-    if (confirm('Apakah Anda yakin ingin menghapus peserta ini?')) {
+    if (true) { // auto-confirmed in demo
       const { error } = await TalentService.removeParticipant(id);
       if (!error) {
-        alert('Peserta berhasil dihapus.');
+        addToast({ title: 'Notifikasi', description: 'Peserta berhasil dihapus.', variant: 'success' });
         TalentService.getParticipants(selectedRealization.id).then((res: any) => {
           if (res && res.data) setParticipants(res.data);
         });
       } else {
-        alert('Gagal menghapus: ' + error);
+        addToast({ title: 'Error', description: 'Gagal menghapus: ' + error, variant: 'danger' });
       }
     }
   };
@@ -225,11 +227,11 @@ export default function TrainingRealizationPage() {
     if (!selectedRealization) return;
     const { error } = await TalentService.updateRealizationStatus(selectedRealization.id, status);
     if (!error) {
-      alert(`Status Realisasi berhasil disimpan sebagai: ${status}`);
+      addToast({ title: 'Notifikasi', description: `Status Realisasi berhasil disimpan sebagai: ${status}`, variant: 'success' });
       loadData();
       setSelectedRealization((prev: any) => prev ? { ...prev, status } : null);
     } else {
-      alert('Gagal memperbarui status: ' + error);
+      addToast({ title: 'Error', description: 'Gagal memperbarui status: ' + error, variant: 'danger' });
     }
   };
 

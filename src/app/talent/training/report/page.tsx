@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
 import { employeeDirectory } from '@/lib/people-data';
 import { jsPDF } from 'jspdf';
 import { zipSync } from 'fflate';
@@ -28,7 +29,8 @@ const typeOptions = [
 
 type ReportType = 'summary' | 'attendance' | 'matrix' | 'certificate' | 'card' | 'report_card';
 
-export default function TrainingReportPage() {
+export default function TrainingReportPage() { 
+  const { addToast } = useToast();
   // Master lists
   const [plannings, setPlannings] = useState<any[]>([]);
   const [realizations, setRealizations] = useState<any[]>([]);
@@ -214,7 +216,7 @@ export default function TrainingReportPage() {
   // Bulk generate ZIP certificates
   const handleBulkGenerate = async () => {
     if (selectedIds.length === 0) {
-      alert('Pilih minimal satu peserta.');
+      addToast({ title: 'Notifikasi', description: 'Pilih minimal satu peserta.', variant: 'success' });
       return;
     }
     setIsGenerating(true);
@@ -254,12 +256,12 @@ export default function TrainingReportPage() {
       link.click();
       document.body.removeChild(link);
 
-      alert(`Penerbitan masal selesai! ${selectedIds.length} sertifikat berhasil diunduh dalam ZIP.`);
+      addToast({ title: 'Notifikasi', description: `Penerbitan masal selesai! ${selectedIds.length} sertifikat berhasil diunduh dalam ZIP.`, variant: 'success' });
       setSelectedIds([]);
       loadData();
     } catch (err) {
       console.error(err);
-      alert('Gagal menerbitkan sertifikat.');
+      addToast({ title: 'Error', description: 'Gagal menerbitkan sertifikat.', variant: 'danger' });
     } finally {
       setIsGenerating(false);
     }

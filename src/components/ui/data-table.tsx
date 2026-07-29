@@ -37,7 +37,7 @@ export function DataTable<TData>({
       return;
     }
     // Default client-side CSV export
-    const rows = table.getCoreRowModel().rows;
+    const rows = table.getFilteredRowModel().rows;
     if (rows.length === 0) return;
 
     const headers = table.getAllLeafColumns()

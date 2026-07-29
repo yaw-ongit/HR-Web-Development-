@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
 
-export default function ParticipantAttendancePage() {
+export default function ParticipantAttendancePage() { 
+  const { addToast } = useToast();
   const [plannings, setPlannings] = useState<any[]>([]);
   const [realizations, setRealizations] = useState<any[]>([]);
   const [selectedRealizationId, setSelectedRealizationId] = useState('');
@@ -113,7 +115,7 @@ export default function ParticipantAttendancePage() {
       savedCount++;
     }
 
-    alert(`Berhasil menyimpan kehadiran untuk ${savedCount} peserta.`);
+    addToast({ title: 'Notifikasi', description: `Berhasil menyimpan kehadiran untuk ${savedCount} peserta.`, variant: 'success' });
     // Reload state
     loadData();
   };

@@ -6,7 +6,18 @@ import { SectionContainer } from '@/components/layout/section-container';
 
 const releases = [
   {
-    version: 'v1.2.6 (Terbaru)',
+    version: 'v1.2.7 (Terbaru)',
+    date: '31 Juli 2026',
+    changes: [
+      'Menghapus seluruh pemanggilan alert() dan confirm() yang memblokir browser secara menyeluruh (koreksi Iterasi 1).',
+      'Memperbaiki fungsi ekspor CSV agar menggunakan data yang difilter (koreksi Iterasi 2).',
+      'Menghapus folder src/services/ sepenuhnya dan mengkonsolidasi TalentService ke dalam src/lib/services.ts (koreksi Iterasi 2).',
+      'Melengkapi file loading.tsx pada rute Dokumen, Profil, dan Persetujuan Pelatihan (koreksi Iterasi 2).',
+      'Memperbaiki beberapa tipe TypeScript yang sebelumnya implisit (any).'
+    ]
+  },
+  {
+    version: 'v1.2.6',
     date: '30 Juli 2026',
     changes: [
       'Memperluas fungsi ekspor CSV (semua baris aktif hasil filter, bukan hanya halaman saat ini).',

@@ -4,11 +4,13 @@ import { useState, useEffect, useMemo } from 'react';
 import { User, Phone, Mail, MapPin, Briefcase, Calendar, Award, Shield, FileText, Save, Camera, Download } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/toast';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
 
 export default function MyProfilePage() {
   const [activeTab, setActiveTab] = useState('general');
+  const { addToast } = useToast();
   const [userTrainings, setUserTrainings] = useState<any[]>([]);
 
   // Local state for user profile
@@ -74,7 +76,7 @@ export default function MyProfilePage() {
     e.preventDefault();
     setProfile(form);
     setIsEditing(false);
-    alert('Profil berhasil diperbarui!');
+    addToast({ title: 'Berhasil', description: 'Profil berhasil diperbarui!', variant: 'success' });
   };
 
   return (
@@ -247,7 +249,7 @@ export default function MyProfilePage() {
                       </div>
                     </div>
                     {t.certificateNumber && (
-                      <Button onClick={() => alert(`Mengunduh sertifikat ${t.certificateNumber}...`)} variant="outline" size="sm" className="rounded-xl flex items-center gap-1.5 self-start sm:self-center">
+                      <Button onClick={() => addToast({ title: 'Sertifikat diunduh', description: `Mengunduh sertifikat ${t.certificateNumber}...`, variant: 'success' })} variant="outline" size="sm" className="rounded-xl flex items-center gap-1.5 self-start sm:self-center">
                         <Download className="h-3.5 w-3.5" /> Unduh PDF
                       </Button>
                     )}

@@ -6,10 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
 import { jsPDF } from 'jspdf';
 import { zipSync } from 'fflate';
 
-export default function TrainingCertificatePage() {
+export default function TrainingCertificatePage() { 
+  const { addToast } = useToast();
   const [plannings, setPlannings] = useState<any[]>([]);
   const [realizations, setRealizations] = useState<any[]>([]);
   const [selectedRealizationId, setSelectedRealizationId] = useState('');
@@ -392,7 +394,7 @@ export default function TrainingCertificatePage() {
 
   const handleGenerateZip = async () => {
     if (selectedPartIds.length === 0 || !selectedRealizationDetail) {
-      alert('Pilih minimal satu peserta untuk membuat sertifikat.');
+      addToast({ title: 'Notifikasi', description: 'Pilih minimal satu peserta untuk membuat sertifikat.', variant: 'success' });
       return;
     }
 
@@ -442,7 +444,7 @@ export default function TrainingCertificatePage() {
       link.click();
       document.body.removeChild(link);
 
-      alert(`Penerbitan masal selesai! ${selectedPartIds.length} sertifikat telah dikompresi ke dalam ZIP.`);
+      addToast({ title: 'Notifikasi', description: `Penerbitan masal selesai! ${selectedPartIds.length} sertifikat telah dikompresi ke dalam ZIP.`, variant: 'success' });
       
       // Reload data and certificates
       loadData();
@@ -452,7 +454,7 @@ export default function TrainingCertificatePage() {
       setSelectedPartIds([]);
     } catch (err) {
       console.error(err);
-      alert('Gagal membuat ZIP sertifikat.');
+      addToast({ title: 'Error', description: 'Gagal membuat ZIP sertifikat.', variant: 'danger' });
     } finally {
       setIsGenerating(false);
     }

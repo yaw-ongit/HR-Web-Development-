@@ -6,8 +6,10 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
 
 export default function SettingsPage() {
+  const { addToast } = useToast();
   const [settings, setSettings] = useState({
     companyName: 'PT Indocater',
     timeZone: 'Asia/Jakarta',
@@ -31,9 +33,9 @@ export default function SettingsPage() {
     e.preventDefault();
     const { error } = await TalentService.updateSettings(settings);
     if (!error) {
-      alert('Pengaturan berhasil disimpan!');
+      addToast({ title: 'Tersimpan', description: 'Pengaturan berhasil disimpan!', variant: 'success' });
     } else {
-      alert('Gagal menyimpan: ' + error);
+      addToast({ title: 'Gagal', description: 'Gagal menyimpan: ' + error, variant: 'danger' });
     }
   };
 

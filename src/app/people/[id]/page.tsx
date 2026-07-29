@@ -4,6 +4,7 @@ import { useMemo, useState, use, useEffect } from 'react';
 import { ArrowRight, Briefcase, BookOpen, CalendarDays, CheckCircle2, ClipboardList, HeartPulse, Mail, MapPin, Phone, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { useToast } from '@/components/ui/toast';
 import { getEmployeeProfile } from '@/lib/people-data';
 import { PeopleService, TalentService } from '@/lib/services';
 
@@ -14,6 +15,7 @@ interface EmployeePageProps {
 }
 
 export default function EmployeeProfilePage(props: EmployeePageProps) {
+  const { addToast } = useToast();
   const params = use(props.params);
   const localProfile = getEmployeeProfile(params.id);
   const [profile, setProfile] = useState<any>(localProfile || {});
@@ -341,7 +343,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
                           </div>
                           {training.certificateNumber && (
                             <button
-                              onClick={() => alert(`Mengunduh sertifikat ${training.certificateNumber}...`)}
+                              onClick={() => addToast({ title: 'Sertifikat diunduh', description: `Sertifikat ${training.certificateNumber} sedang diunduh.`, variant: 'success' })}
                               className="rounded-xl border border-border px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-surface transition"
                             >
                               Unduh Sertifikat
@@ -377,7 +379,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
                         </div>
                         <div className="flex items-center gap-2">
                           <button
-                            onClick={() => alert(`Mengunduh dokumen sertifikasi ${cert.certification}...`)}
+                            onClick={() => addToast({ title: 'Dokumen diunduh', description: `Dokumen sertifikasi ${cert.certification} sedang diunduh.`, variant: 'success' })}
                             className="rounded-xl border border-border px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-surface transition"
                           >
                             Unduh Dokumen

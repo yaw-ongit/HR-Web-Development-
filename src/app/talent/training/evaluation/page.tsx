@@ -6,10 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
 
 const effectivenessOptions = ['Sangat Efektif', 'Efektif', 'Cukup', 'Kurang'];
 
-export default function TrainingEvaluationPage() {
+export default function TrainingEvaluationPage() { 
+  const { addToast } = useToast();
   const [plannings, setPlannings] = useState<any[]>([]);
   const [realizations, setRealizations] = useState<any[]>([]);
   const [selectedRealizationId, setSelectedRealizationId] = useState('');
@@ -111,10 +113,10 @@ export default function TrainingEvaluationPage() {
 
     const { error } = await TalentService.saveEvaluation(payload);
     if (!error) {
-      alert('Evaluasi Pelatihan berhasil disimpan!');
+      addToast({ title: 'Notifikasi', description: 'Evaluasi Pelatihan berhasil disimpan!', variant: 'success' });
       loadData();
     } else {
-      alert('Gagal menyimpan evaluasi: ' + error);
+      addToast({ title: 'Error', description: 'Gagal menyimpan evaluasi: ' + error, variant: 'danger' });
     }
   };
 

@@ -107,7 +107,7 @@ export default function WorkforceLeaveManagementPage() {
   });
 
   const handleExportTable = () => {
-    const rows = table.getCoreRowModel().rows;
+    const rows = table.getFilteredRowModel().rows;
     if (rows.length === 0) return;
     const headers = ['employee', 'leaveType', 'startDate', 'endDate', 'duration', 'status', 'approver'];
     const csvContent = [

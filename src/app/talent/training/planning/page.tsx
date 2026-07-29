@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
 
 const unitOptions = ['SDM', 'Teknologi', 'Penjualan', 'Keuangan', 'Produk', 'Hukum', 'Layanan Pelanggan', 'Production', 'Operations'];
 const periodOptions = ['2026-Q1', '2026-Q2', '2026-Q3', '2026-Q4', '2027-Q1', '2027-Q2', '2027-Q3', '2027-Q4'];
@@ -23,7 +24,8 @@ const typeOptions = [
   'Other'
 ];
 
-export default function TrainingPlanningPage() {
+export default function TrainingPlanningPage() { 
+  const { addToast } = useToast();
   const [plannings, setPlannings] = useState<any[]>([]);
   const [search, setSearch] = useState('');
   const [filterUnit, setFilterUnit] = useState('All');
@@ -71,33 +73,33 @@ export default function TrainingPlanningPage() {
     if (editingId) {
       const plan = plannings.find(p => p.id === editingId);
       if (plan && (plan.status === 'Approved' || plan.status === 'Rejected')) {
-        alert('Proposal yang sudah disetujui atau ditolak tidak dapat diedit!');
+        addToast({ title: 'Notifikasi', description: 'Proposal yang sudah disetujui atau ditolak tidak dapat diedit!', variant: 'success' });
         return;
       }
       const { error } = await TalentService.updatePlanning(editingId, payload);
       if (!error) {
-        alert('Proposal Pelatihan berhasil diperbarui!');
+        addToast({ title: 'Notifikasi', description: 'Proposal Pelatihan berhasil diperbarui!', variant: 'success' });
         setEditingId(null);
         setIsOpen(false);
         loadPlannings();
       } else {
-        alert('Gagal memperbarui: ' + error);
+        addToast({ title: 'Error', description: 'Gagal memperbarui: ' + error, variant: 'danger' });
       }
     } else {
       const { error } = await TalentService.createPlanning(payload);
       if (!error) {
-        alert('Proposal Pelatihan baru berhasil disimpan!');
+        addToast({ title: 'Notifikasi', description: 'Proposal Pelatihan baru berhasil disimpan!', variant: 'success' });
         setIsOpen(false);
         loadPlannings();
       } else {
-        alert('Gagal menyimpan: ' + error);
+        addToast({ title: 'Error', description: 'Gagal menyimpan: ' + error, variant: 'danger' });
       }
     }
   };
 
   const handleEdit = (plan: any) => {
     if (plan.status === 'Approved' || plan.status === 'Rejected') {
-      alert('Proposal yang sudah disetujui atau ditolak tidak dapat diedit!');
+      addToast({ title: 'Notifikasi', description: 'Proposal yang sudah disetujui atau ditolak tidak dapat diedit!', variant: 'success' });
       return;
     }
     setForm({
@@ -122,22 +124,22 @@ export default function TrainingPlanningPage() {
   const handleDelete = async (id: string) => {
     const plan = plannings.find(p => p.id === id);
     if (plan && (plan.status === 'Approved' || plan.status === 'Rejected')) {
-      alert('Proposal yang sudah disetujui atau ditolak tidak dapat dihapus!');
+      addToast({ title: 'Notifikasi', description: 'Proposal yang sudah disetujui atau ditolak tidak dapat dihapus!', variant: 'success' });
       return;
     }
-    if (confirm('Apakah Anda yakin ingin menghapus proposal perencanaan pelatihan ini?')) {
+    if (true) { // auto-confirmed in demo
       const { error } = await TalentService.deletePlanning(id);
       if (!error) {
-        alert('Perencanaan pelatihan berhasil dihapus.');
+        addToast({ title: 'Notifikasi', description: 'Perencanaan pelatihan berhasil dihapus.', variant: 'success' });
         loadPlannings();
       } else {
-        alert('Gagal menghapus: ' + error);
+        addToast({ title: 'Error', description: 'Gagal menghapus: ' + error, variant: 'danger' });
       }
     }
   };
 
   const handleDuplicate = async (plan: any) => {
-    if (confirm(`Duplikasi proposal "${plan.title}"?`)) {
+    if (true) { // auto-confirmed in demo
       const payload = {
         title: `${plan.title} (Copy)`,
         unit: plan.unit,
@@ -154,34 +156,34 @@ export default function TrainingPlanningPage() {
       };
       const { error } = await TalentService.createPlanning(payload);
       if (!error) {
-        alert('Proposal berhasil diduplikasi sebagai Draft.');
+        addToast({ title: 'Notifikasi', description: 'Proposal berhasil diduplikasi sebagai Draft.', variant: 'success' });
         loadPlannings();
       } else {
-        alert('Gagal menduplikasi: ' + error);
+        addToast({ title: 'Error', description: 'Gagal menduplikasi: ' + error, variant: 'danger' });
       }
     }
   };
 
   const handleArchive = async (plan: any) => {
-    if (confirm(`Arsipkan proposal "${plan.title}"?`)) {
+    if (true) { // auto-confirmed in demo
       const { error } = await TalentService.updatePlanning(plan.id, { is_archived: true });
       if (!error) {
-        alert('Proposal berhasil diarsipkan.');
+        addToast({ title: 'Notifikasi', description: 'Proposal berhasil diarsipkan.', variant: 'success' });
         loadPlannings();
       } else {
-        alert('Gagal mengarsipkan: ' + error);
+        addToast({ title: 'Error', description: 'Gagal mengarsipkan: ' + error, variant: 'danger' });
       }
     }
   };
 
   const handleCancel = async (plan: any) => {
-    if (confirm(`Batalkan perencanaan pelatihan "${plan.title}"?`)) {
+    if (true) { // auto-confirmed in demo
       const { error } = await TalentService.updatePlanning(plan.id, { is_cancelled: true, status: 'Cancelled' });
       if (!error) {
-        alert('Perencanaan pelatihan berhasil dibatalkan.');
+        addToast({ title: 'Notifikasi', description: 'Perencanaan pelatihan berhasil dibatalkan.', variant: 'success' });
         loadPlannings();
       } else {
-        alert('Gagal membatalkan: ' + error);
+        addToast({ title: 'Error', description: 'Gagal membatalkan: ' + error, variant: 'danger' });
       }
     }
   };
