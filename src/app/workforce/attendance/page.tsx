@@ -8,11 +8,11 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
-import { attendanceOverview, attendanceRecords, attendanceCalendar, workforceDepartmentOptions } from '@/lib/workforce-data';
+import { attendanceOverview, attendanceCalendar, workforceDepartmentOptions } from '@/lib/workforce-data';
 import { WorkforceService } from '@/lib/services';
 
 export default function WorkforceAttendancePage() {
-  const [dataList, setDataList] = useState<any[]>(attendanceRecords);
+  const [dataList, setDataList] = useState<any[]>([]);
   const [search, setSearch] = useState('');
   const [department, setDepartment] = useState('All');
   const [status, setStatus] = useState('All');
@@ -20,9 +20,9 @@ export default function WorkforceAttendancePage() {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   useEffect(() => {
-    WorkforceService.getAttendanceRecords(attendanceRecords).then((data) => {
-      if (Array.isArray(data) && data.length > 0) {
-        setDataList(data);
+    WorkforceService.getAttendanceRecords().then((data) => {
+      if (data.data && Array.isArray(data.data)) {
+        setDataList(data.data);
       }
     });
   }, []);
@@ -42,7 +42,7 @@ export default function WorkforceAttendancePage() {
     });
   }, [dataList, search, department, status]);
 
-  const columns = useMemo<ColumnDef<typeof attendanceRecords[number]>[]>(
+  const columns = useMemo<ColumnDef<any>[]>(
     () => [
       { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'department', header: 'Departemen' },

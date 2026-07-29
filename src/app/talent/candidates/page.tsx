@@ -8,19 +8,19 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
-import { candidates, candidatePipeline } from '@/lib/talent-data';
+import { candidatePipeline } from '@/lib/talent-data';
 import { TalentService } from '@/lib/services';
 
 export default function TalentCandidatesPage() {
-  const [dataList, setDataList] = useState<any[]>(candidates);
+  const [dataList, setDataList] = useState<any[]>([]);
   const [search, setSearch] = useState('');
   const [stage, setStage] = useState('All');
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   useEffect(() => {
-    TalentService.getCandidates(candidates).then((result) => {
-      if (result && Array.isArray(result.data) && result.data.length > 0) {
+    TalentService.getCandidates().then((result) => {
+      if (result && Array.isArray(result.data)) {
         setDataList(result.data);
       }
     });
@@ -39,7 +39,7 @@ export default function TalentCandidatesPage() {
     });
   }, [dataList, search, stage]);
 
-  const columns = useMemo<ColumnDef<typeof candidates[number]>[]>(
+  const columns = useMemo<ColumnDef<any>[]>(
     () => [
       { accessorKey: 'name', header: 'Name' },
       { accessorKey: 'position', header: 'Position' },

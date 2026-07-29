@@ -14,12 +14,12 @@ import { SectionContainer } from '@/components/layout/section-container';
 import { NoKaryawansEmptyState } from '@/components/ui/empty-state';
 import { PeopleService } from '@/lib/services';
 import {
-  employeeDirectory, departmentOptions, positionOptions, statusOptions,
+  departmentOptions, positionOptions, statusOptions,
   contractOptions, branchOptions, locationOptions, genderOptions, KaryawanRecord,
 } from '@/lib/people-data';
 
 export default function PeopleDirectoryPage() {
-  const [employees, setEmployees] = useState<KaryawanRecord[]>(employeeDirectory);
+  const [employees, setEmployees] = useState<KaryawanRecord[]>([]);
   const [search, setSearch] = useState('');
   const [department, setDepartment] = useState('All');
   const [position, setPosition] = useState('All');
@@ -30,7 +30,7 @@ export default function PeopleDirectoryPage() {
   const [rowSelection, setRowSelection] = useState({});
 
   useEffect(() => {
-    PeopleService.getEmployees(employeeDirectory).then((result) => {
+    PeopleService.getEmployees().then((result) => {
       if (result.error) {
         console.error('People directory data unavailable:', result.error);
         return;

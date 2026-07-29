@@ -9,11 +9,10 @@ import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
 import { Tooltip } from '@/components/ui/tooltip';
-import { medicalRecords } from '@/lib/compensation-data';
 import { CompensationService } from '@/lib/services';
 
 export default function MedicalPage() {
-  const [dataList, setDataList] = useState<any[]>(medicalRecords);
+  const [dataList, setDataList] = useState<any[]>([]);
   const [search, setSearch] = useState('');
   const [medicalType, setMedicalType] = useState('All');
   const [status, setStatus] = useState('All');
@@ -22,8 +21,8 @@ export default function MedicalPage() {
 
   useEffect(() => {
     // getMcuRecords fetches MCU/medical check-up records
-    CompensationService.getMcuRecords(medicalRecords).then((result) => {
-      if (result && Array.isArray(result.data) && result.data.length > 0) {
+    CompensationService.getMcuRecords().then((result) => {
+      if (result && Array.isArray(result.data)) {
         setDataList(result.data);
       }
     });
@@ -44,7 +43,7 @@ export default function MedicalPage() {
     });
   }, [dataList, search, medicalType, status]);
 
-  const columns = useMemo<ColumnDef<typeof medicalRecords[number]>[]>(
+  const columns = useMemo<ColumnDef<any>[]>(
     () => [
       { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'department', header: 'Departemen' },

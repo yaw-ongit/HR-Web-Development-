@@ -8,11 +8,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
-import { payrollReady } from '@/lib/compensation-data';
 import { CompensationService } from '@/lib/services';
 
 export default function PayrollReadyPage() {
-  const [dataList, setDataList] = useState<any[]>(payrollReady);
+  const [dataList, setDataList] = useState<any[]>([]);
   const [search, setSearch] = useState('');
   const [department, setDepartment] = useState('All');
   const [status, setStatus] = useState('All');
@@ -20,9 +19,9 @@ export default function PayrollReadyPage() {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   useEffect(() => {
-    CompensationService.getPayrollPeriods(payrollReady).then((data) => {
-      if (Array.isArray(data) && data.length > 0) {
-        setDataList(data);
+    CompensationService.getPayrollPeriods().then((data) => {
+      if (data.data && Array.isArray(data.data)) {
+        setDataList(data.data);
       }
     });
   }, []);
@@ -42,7 +41,7 @@ export default function PayrollReadyPage() {
     });
   }, [dataList, search, department, status]);
 
-  const columns = useMemo<ColumnDef<typeof payrollReady[number]>[]>(
+  const columns = useMemo<ColumnDef<any>[]>(
     () => [
       { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'position', header: 'Position' },

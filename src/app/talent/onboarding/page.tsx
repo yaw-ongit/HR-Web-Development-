@@ -8,19 +8,18 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
-import { onboardingTasks } from '@/lib/talent-data';
 import { TalentService } from '@/lib/services';
 
 export default function TalentOnboardingPage() {
-  const [dataList, setDataList] = useState<any[]>(onboardingTasks);
+  const [dataList, setDataList] = useState<any[]>([]);
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('All');
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   useEffect(() => {
-    TalentService.getOnboardingTasks(onboardingTasks).then((result) => {
-      if (result && Array.isArray(result.data) && result.data.length > 0) {
+    TalentService.getOnboardingTasks().then((result) => {
+      if (result && Array.isArray(result.data)) {
         setDataList(result.data);
       }
     });
@@ -39,7 +38,7 @@ export default function TalentOnboardingPage() {
     });
   }, [dataList, search, status]);
 
-  const columns = useMemo<ColumnDef<typeof onboardingTasks[number]>[]>(
+  const columns = useMemo<ColumnDef<any>[]>(
     () => [
       { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'task', header: 'Task' },

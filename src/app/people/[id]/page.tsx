@@ -5,7 +5,6 @@ import { ArrowRight, Briefcase, BookOpen, CalendarDays, CheckCircle2, ClipboardL
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useToast } from '@/components/ui/toast';
-import { getEmployeeProfile } from '@/lib/people-data';
 import { PeopleService, TalentService } from '@/lib/services';
 
 interface EmployeePageProps {
@@ -17,17 +16,16 @@ interface EmployeePageProps {
 export default function EmployeeProfilePage(props: EmployeePageProps) {
   const { addToast } = useToast();
   const params = use(props.params);
-  const localProfile = getEmployeeProfile(params.id);
-  const [profile, setProfile] = useState<any>(localProfile || {});
+  const [profile, setProfile] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('Ringkasan');
 
   useEffect(() => {
-    PeopleService.getEmployeeById(params.id, localProfile).then((data) => {
-      if (data) {
-        setProfile(data);
-      }
+    PeopleService.getEmployeeById(params.id).then((data) => {
+      setProfile(data);
+      setIsLoading(false);
     });
-  }, [params.id, localProfile]);
+  }, [params.id]);
 
   const [certs, setCerts] = useState<any[]>([]);
   const [userTrainings, setUserTrainings] = useState<any[]>([]);
@@ -92,6 +90,16 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
     ],
     [profile],
   );
+
+  if (isLoading) {
+    return (
+      <div className="grid min-h-screen place-items-center bg-card text-foreground">
+        <div className="rounded-[28px] border border-border bg-surface/90 p-10 text-center shadow-card">
+          <p className="text-xl font-semibold">Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!profile) {
     return (

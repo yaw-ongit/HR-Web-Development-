@@ -8,20 +8,20 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
-import { claims, claimTrendData } from '@/lib/compensation-data';
+import { claimTrendData } from '@/lib/compensation-data';
 import { CompensationService } from '@/lib/services';
 
 export default function ClaimsPage() {
-  const [dataList, setDataList] = useState<any[]>(claims);
+  const [dataList, setDataList] = useState<any[]>([]);
   const [search, setSearch] = useState('');
   const [claimStatus, setClaimStatus] = useState('All');
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   useEffect(() => {
-    CompensationService.getClaims(claims).then((data) => {
-      if (Array.isArray(data) && data.length > 0) {
-        setDataList(data);
+    CompensationService.getClaims().then((data) => {
+      if (data.data && Array.isArray(data.data)) {
+        setDataList(data.data);
       }
     });
   }, []);
@@ -40,7 +40,7 @@ export default function ClaimsPage() {
     });
   }, [dataList, search, claimStatus]);
 
-  const columns = useMemo<ColumnDef<typeof claims[number]>[]>(
+  const columns = useMemo<ColumnDef<any>[]>(
     () => [
       { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'claimType', header: 'Claim Type' },

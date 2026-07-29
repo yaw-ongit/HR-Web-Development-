@@ -8,20 +8,20 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
-import { shiftOverview, shiftSchedules } from '@/lib/workforce-data';
+import { shiftOverview } from '@/lib/workforce-data';
 import { WorkforceService } from '@/lib/services';
 
 export default function WorkforceShiftManagementPage() {
-  const [dataList, setDataList] = useState<any[]>(shiftSchedules);
+  const [dataList, setDataList] = useState<any[]>([]);
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('All');
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   useEffect(() => {
-    WorkforceService.getShiftSchedules(shiftSchedules).then((data) => {
-      if (Array.isArray(data) && data.length > 0) {
-        setDataList(data);
+    WorkforceService.getShiftSchedules().then((result) => {
+      if (result.data && Array.isArray(result.data)) {
+        setDataList(result.data);
       }
     });
   }, []);
@@ -38,7 +38,7 @@ export default function WorkforceShiftManagementPage() {
     });
   }, [dataList, search, status]);
 
-  const columns = useMemo<ColumnDef<typeof shiftSchedules[number]>[]>(
+  const columns = useMemo<ColumnDef<any>[]>(
     () => [
       { accessorKey: 'shiftName', header: 'Nama shift' },
       { accessorKey: 'employees', header: 'Karyawans' },
