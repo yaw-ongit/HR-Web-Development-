@@ -9,27 +9,27 @@ export interface ServiceQueryResult<T> {
   isFallback: boolean;
 }
 
-async function safeQuery<T>(queryPromise: any, fallbackData: T): Promise<ServiceQueryResult<T>> {
+async function safeQuery<T>(queryPromise: any, fallbackData?: T): Promise<ServiceQueryResult<T>> {
   if (!supabase) {
-    return { data: fallbackData, error: 'Supabase environment variables are not configured', isFallback: true };
+    return { data: fallbackData || ([] as any) || ([] as any), error: 'Supabase environment variables are not configured', isFallback: true };
   }
 
   try {
     const { data, error } = await queryPromise;
     if (error) {
       console.error('Supabase query error:', error);
-      return { data: fallbackData, error: error.message || 'Supabase query failed', isFallback: true };
+      return { data: fallbackData || ([] as any), error: error.message || 'Supabase query failed', isFallback: true };
     }
 
     if (!data) {
-      return { data: fallbackData, error: 'No data returned from Supabase', isFallback: true };
+      return { data: fallbackData || ([] as any), error: 'No data returned from Supabase', isFallback: true };
     }
 
     return { data: data as T, error: null, isFallback: false };
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown Supabase connection error';
     console.error('Supabase connection failed:', message);
-    return { data: fallbackData, error: message, isFallback: true };
+    return { data: fallbackData || ([] as any), error: message, isFallback: true };
   }
 }
 
@@ -63,7 +63,7 @@ export const IdentityService = {
     }
   },
   
-  async getNotifications(fallback: any[]) {
+  async getNotifications(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -74,7 +74,7 @@ export const IdentityService = {
     );
   },
 
-  async getAuditLogs(fallback: any[]) {
+  async getAuditLogs(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -90,7 +90,7 @@ export const IdentityService = {
 // 2. PEOPLE & EMPLOYEE SERVICES
 // ----------------------------------------------------
 export const PeopleService = {
-  async getEmployees(fallback: any[]) {
+  async getEmployees(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -101,9 +101,9 @@ export const PeopleService = {
     );
   },
 
-  async getEmployeeById(id: string | number, fallback: any) {
+  async getEmployeeById(id: string | number, fallback?: any) {
     if (!supabase) {
-      return fallback;
+      return null;
     }
 
     try {
@@ -112,14 +112,14 @@ export const PeopleService = {
         .select('*, employee_profiles(*), employee_families(*), employee_educations(*), employee_experiences(*)')
         .eq('id', id)
         .single();
-      if (error || !data) return fallback;
+      if (error || !data) return null;
       return data;
     } catch {
-      return fallback;
+      return null;
     }
   },
 
-  async getOrgStructure(fallback: any) {
+  async getOrgStructure(fallback?: any) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -130,7 +130,7 @@ export const PeopleService = {
     );
   },
 
-  async getDocuments(fallback: any[]) {
+  async getDocuments(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -146,7 +146,7 @@ export const PeopleService = {
 // 3. WORKFORCE & ATTENDANCE SERVICES
 // ----------------------------------------------------
 export const WorkforceService = {
-  async getAttendanceRecords(fallback: any[]) {
+  async getAttendanceRecords(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -157,7 +157,7 @@ export const WorkforceService = {
     );
   },
 
-  async getLeaveRequests(fallback: any[]) {
+  async getLeaveRequests(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -168,7 +168,7 @@ export const WorkforceService = {
     );
   },
 
-  async getShiftSchedules(fallback: any[]) {
+  async getShiftSchedules(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -179,7 +179,7 @@ export const WorkforceService = {
     );
   },
 
-  async getOvertimeRequests(fallback: any[]) {
+  async getOvertimeRequests(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -277,21 +277,21 @@ export let localSettings = {
 
 export const TalentService = {
   // --- CANDIDATES, INTERVIEWS, ONBOARDING ---
-  async getCandidates(fallback: any[]) {
+  async getCandidates(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
     return safeQuery(supabase.from('candidates').select('*'), fallback);
   },
 
-  async getInterviews(fallback: any[]) {
+  async getInterviews(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
     return safeQuery(supabase.from('interviews').select('*'), fallback);
   },
 
-  async getOnboardingTasks(fallback: any[]) {
+  async getOnboardingTasks(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -299,7 +299,7 @@ export const TalentService = {
   },
 
   // --- CERTIFICATIONS ---
-  async getCertifications(fallback: any[] = []) {
+  async getCertifications(fallback?: any[]) {
     if (!supabase) {
       return { data: localCertifications, error: null, isFallback: true };
     }
@@ -419,7 +419,7 @@ export const TalentService = {
   },
 
   // --- TRAINING PROGRAMS ---
-  async getTrainingPrograms(fallback: any[] = []) {
+  async getTrainingPrograms(fallback?: any[]) {
     if (!supabase) {
       return { data: localTrainingPrograms, error: null, isFallback: true };
     }
@@ -530,7 +530,7 @@ export const TalentService = {
   },
 
   // --- TRAINING PARTICIPANTS ---
-  async getTrainingParticipants(trainingId: string, fallback: any[] = []) {
+  async getTrainingParticipants(trainingId: string, fallback?: any[]) {
     if (!supabase) {
       return { data: localParticipants.filter(p => p.training_id === trainingId), error: null, isFallback: true };
     }
@@ -1085,7 +1085,7 @@ export const TalentService = {
 // 5. COMPENSATION & PAYROLL SERVICES
 // ----------------------------------------------------
 export const CompensationService = {
-  async getPayrollPeriods(fallback: any[]) {
+  async getPayrollPeriods(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -1096,7 +1096,7 @@ export const CompensationService = {
     );
   },
 
-  async getClaims(fallback: any[]) {
+  async getClaims(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -1107,7 +1107,7 @@ export const CompensationService = {
     );
   },
 
-  async getBenefits(fallback: any[]) {
+  async getBenefits(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -1118,7 +1118,7 @@ export const CompensationService = {
     );
   },
 
-  async getBpjsRecords(fallback: any[]) {
+  async getBpjsRecords(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -1129,7 +1129,7 @@ export const CompensationService = {
     );
   },
 
-  async getMcuRecords(fallback: any[]) {
+  async getMcuRecords(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -1145,7 +1145,7 @@ export const CompensationService = {
 // 6. ANALYTICS & DASHBOARD SERVICES
 // ----------------------------------------------------
 export const AnalyticsService = {
-  async getAnalyticsKpi(fallback: any) {
+  async getAnalyticsKpi(fallback?: any) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -1156,7 +1156,7 @@ export const AnalyticsService = {
     );
   },
 
-  async getDashboardSummary(fallback: any) {
+  async getDashboardSummary(fallback?: any) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
@@ -1172,7 +1172,7 @@ export const AnalyticsService = {
 // 7. ADMINISTRATION & SYSTEM SERVICES
 // ----------------------------------------------------
 export const AdministrationService = {
-  async getSystemSettings(fallback: any) {
+  async getSystemSettings(fallback?: any) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }

@@ -18,7 +18,7 @@ export default function LoginPage() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitted(true);
     setErrorMsg('');
@@ -30,16 +30,30 @@ export default function LoginPage() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      if (username === 'admin' && password === 'admin') {
-        // Set persistent cookie
-        document.cookie = 'hris_session=admin; path=/; max-age=86400; samesite=lax';
-        window.location.href = '/dashboard';
-      } else {
+    try {
+      const { createClient } = await import('@/lib/client');
+      const supabase = createClient();
+      if (!supabase) {
         setLoading(false);
-        setErrorMsg('Username atau kata sandi salah. Gunakan admin / admin.');
+        setErrorMsg('Sistem database belum dikonfigurasi.');
+        return;
       }
-    }, 800);
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email: username,
+        password: password,
+      });
+
+      if (error) {
+        setLoading(false);
+        setErrorMsg(error.message);
+      } else {
+        window.location.href = '/dashboard';
+      }
+    } catch (err) {
+      setLoading(false);
+      setErrorMsg('Gagal terhubung ke server.');
+    }
   }
 
   return (

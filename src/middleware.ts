@@ -1,11 +1,39 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { createServerClient } from '@supabase/ssr'
+import { NextResponse, type NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
-  const session = request.cookies.get('hris_session')?.value
+export async function middleware(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({
+    request,
+  })
+
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+
+  if (!url || !key) {
+    return supabaseResponse
+  }
+
+  const supabase = createServerClient(url, key, {
+    cookies: {
+      getAll() {
+        return request.cookies.getAll()
+      },
+      setAll(cookiesToSet) {
+        cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+        supabaseResponse = NextResponse.next({
+          request,
+        })
+        cookiesToSet.forEach(({ name, value, options }) =>
+          supabaseResponse.cookies.set(name, value, options)
+        )
+      },
+    },
+  })
+
+  const { data } = await supabase.auth.getSession()
+  const session = data?.session
+
   const { pathname } = request.nextUrl
-
-  // Define protected paths
   const isProtectedPath =
     pathname.startsWith('/dashboard') ||
     pathname.startsWith('/people') ||
@@ -18,7 +46,6 @@ export function middleware(request: NextRequest) {
 
   const isLoginPage = pathname.startsWith('/login')
 
-  // Enforce login check
   if (isProtectedPath && !session) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
@@ -27,11 +54,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
-  return NextResponse.next()
+  return supabaseResponse
 }
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|logo-indocater.jpg|.*\\.jpg|.*\\.png|.*\\.svg).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|logo-indocater.jpg|.*\.jpg|.*\.png|.*\.svg).*)',
   ],
 }

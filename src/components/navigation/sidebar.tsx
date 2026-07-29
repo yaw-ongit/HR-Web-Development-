@@ -54,8 +54,16 @@ interface SidebarProps {
 export function Sidebar({ open, onClose }: SidebarProps) {
   const pathname = usePathname();
 
-  const handleLogout = () => {
-    document.cookie = 'hris_session=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  const handleLogout = async () => {
+    try {
+      const { createClient } = await import('@/lib/client');
+      const supabase = createClient();
+      if (supabase) {
+        await supabase.auth.signOut();
+      }
+    } catch (e) {
+      console.error(e);
+    }
     window.location.href = '/login';
   };
 
