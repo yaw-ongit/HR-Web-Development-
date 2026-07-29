@@ -70,7 +70,7 @@ function ToastContainer({ toasts, removeToast }: { toasts: Toast[]; removeToast:
   return (
     <div
       aria-live="polite"
-      className="fixed bottom-0 right-0 z-[100] m-6 flex flex-col gap-3"
+      className="fixed bottom-0 left-0 right-0 z-[100] m-4 flex flex-col gap-3 sm:left-auto sm:right-0 sm:m-6"
     >
       {toasts.map((toast) => {
         const variant = toast.variant || 'info';

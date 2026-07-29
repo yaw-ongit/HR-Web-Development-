@@ -131,8 +131,8 @@ export default function NotificationCenterPage() {
                       <Check className="h-4 w-4" />
                     </Button>
                   )}
-                  <Button variant="ghost" size="sm" onClick={() => handleDelete(not.id)} className="text-rose-500 p-1" title="Hapus">
-                    <Trash2 className="h-4 w-4" />
+                  <Button variant="ghost" size="sm" onClick={() => handleDelete(not.id)} className="text-rose-500 p-1" title="Hapus" aria-label="Hapus Notifikasi">
+                    <Trash2 className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
               </Card>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import { MessageSquare, Save, AlertCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import { useToast } from '@/components/ui/toast';
 
 export default function UserFeedbackPage() {
   const { addToast } = useToast();
+  const formId = useId();
   const [form, setForm] = useState({
     category: 'Suggestion',
     title: '',
@@ -47,8 +48,9 @@ export default function UserFeedbackPage() {
         <Card className="max-w-xl mx-auto rounded-[28px] border border-border bg-card p-6 shadow-sm">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Kategori Masukan</label>
+              <label htmlFor={`${formId}-category`} className="text-xs font-semibold text-muted-foreground">Kategori Masukan</label>
               <select
+                id={`${formId}-category`}
                 value={form.category}
                 onChange={(e) => setForm({ ...form, category: e.target.value })}
                 className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none focus:border-brand-500"
@@ -60,8 +62,9 @@ export default function UserFeedbackPage() {
             </div>
 
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Judul / Subjek</label>
+              <label htmlFor={`${formId}-title`} className="text-xs font-semibold text-muted-foreground">Judul / Subjek</label>
               <input
+                id={`${formId}-title`}
                 type="text"
                 required
                 value={form.title}
@@ -72,8 +75,9 @@ export default function UserFeedbackPage() {
             </div>
 
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Tingkat Prioritas</label>
+              <label htmlFor={`${formId}-priority`} className="text-xs font-semibold text-muted-foreground">Tingkat Prioritas</label>
               <select
+                id={`${formId}-priority`}
                 value={form.priority}
                 onChange={(e) => setForm({ ...form, priority: e.target.value })}
                 className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none focus:border-brand-500"
@@ -85,8 +89,9 @@ export default function UserFeedbackPage() {
             </div>
 
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Penjelasan Lengkap</label>
+              <label htmlFor={`${formId}-description`} className="text-xs font-semibold text-muted-foreground">Penjelasan Lengkap</label>
               <textarea
+                id={`${formId}-description`}
                 required
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -96,8 +101,9 @@ export default function UserFeedbackPage() {
             </div>
 
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Tautan Lampiran (Opsional)</label>
+              <label htmlFor={`${formId}-attachment`} className="text-xs font-semibold text-muted-foreground">Tautan Lampiran (Opsional)</label>
               <input
+                id={`${formId}-attachment`}
                 type="text"
                 value={form.attachment_url}
                 onChange={(e) => setForm({ ...form, attachment_url: e.target.value })}

@@ -251,20 +251,25 @@ export default function WorkforceLeaveManagementPage() {
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="relative">
+            <label htmlFor="search-leave" className="sr-only">Cari Cuti</label>
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
+              id="search-leave"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Cari karyawan, jenis cuti atau pemberi persetujuan"
               className="w-full rounded-3xl border border-border bg-surface/90 py-4 pl-11 pr-4 text-sm text-foreground outline-none transition focus:border-brand-500"
             />
           </div>
-          <select value={status} onChange={(event) => setStatus(event.target.value)} className="rounded-3xl border border-border bg-surface/90 p-4 text-sm text-foreground outline-none focus:border-brand-500">
-            <option value="All">Semua status</option>
+          <div>
+            <label htmlFor="filter-status" className="sr-only">Filter Status</label>
+            <select id="filter-status" value={status} onChange={(event) => setStatus(event.target.value)} className="w-full rounded-3xl border border-border bg-surface/90 p-4 text-sm text-foreground outline-none focus:border-brand-500">
+              <option value="All">Semua status</option>
             <option value="Menunggu">Menunggu</option>
             <option value="Disetujui">Disetujui</option>
             <option value="Ditolak">Ditolak</option>
           </select>
+          </div>
         </div>
 
         <div className="mt-6">

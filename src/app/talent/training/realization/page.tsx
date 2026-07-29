@@ -397,8 +397,9 @@ export default function TrainingRealizationPage() {
                               size="sm"
                               onClick={() => handleEditOtherParticipant(part)}
                               className="text-amber-500 hover:text-amber-700 hover:bg-amber-50"
+                              aria-label="Edit Peserta"
                             >
-                              <Edit className="h-4 w-4" />
+                              <Edit className="h-4 w-4" aria-hidden="true" />
                             </Button>
                           )}
                           <Button
@@ -406,8 +407,9 @@ export default function TrainingRealizationPage() {
                             size="sm"
                             onClick={() => handleRemoveParticipant(part.id)}
                             className="text-rose-500 hover:text-rose-700 hover:bg-rose-50"
+                            aria-label="Hapus Peserta"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-4 w-4" aria-hidden="true" />
                           </Button>
                         </td>
                       </tr>

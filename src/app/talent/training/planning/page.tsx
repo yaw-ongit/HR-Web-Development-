@@ -344,23 +344,23 @@ export default function TrainingPlanningPage() {
                   <td className="px-6 py-4 text-right flex justify-end gap-1">
                     {plan.status !== 'Approved' && plan.status !== 'Rejected' && (
                       <>
-                        <Button variant="ghost" size="sm" onClick={() => handleEdit(plan)} className="text-amber-500 p-1">
-                          <Edit className="h-4 w-4" />
+                        <Button variant="ghost" size="sm" onClick={() => handleEdit(plan)} className="text-amber-500 p-1" aria-label="Edit Proposal">
+                          <Edit className="h-4 w-4" aria-hidden="true" />
                         </Button>
-                        <Button variant="ghost" size="sm" onClick={() => handleDelete(plan.id)} className="text-rose-500 p-1">
-                          <Trash2 className="h-4 w-4" />
+                        <Button variant="ghost" size="sm" onClick={() => handleDelete(plan.id)} className="text-rose-500 p-1" aria-label="Hapus Proposal">
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       </>
                     )}
-                    <Button variant="ghost" size="sm" onClick={() => handleDuplicate(plan)} className="text-blue-500 p-1" title="Duplikasi">
-                      <Copy className="h-4 w-4" />
+                    <Button variant="ghost" size="sm" onClick={() => handleDuplicate(plan)} className="text-blue-500 p-1" title="Duplikasi" aria-label="Duplikasi Proposal">
+                      <Copy className="h-4 w-4" aria-hidden="true" />
                     </Button>
-                    <Button variant="ghost" size="sm" onClick={() => handleArchive(plan)} className="text-purple-500 p-1" title="Arsipkan">
-                      <Archive className="h-4 w-4" />
+                    <Button variant="ghost" size="sm" onClick={() => handleArchive(plan)} className="text-purple-500 p-1" title="Arsipkan" aria-label="Arsipkan Proposal">
+                      <Archive className="h-4 w-4" aria-hidden="true" />
                     </Button>
                     {plan.status !== 'Cancelled' && plan.status !== 'Completed' && (
-                      <Button variant="ghost" size="sm" onClick={() => handleCancel(plan)} className="text-red-500 p-1" title="Batalkan">
-                        <Ban className="h-4 w-4" />
+                      <Button variant="ghost" size="sm" onClick={() => handleCancel(plan)} className="text-red-500 p-1" title="Batalkan" aria-label="Batalkan Proposal">
+                        <Ban className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     )}
                   </td>

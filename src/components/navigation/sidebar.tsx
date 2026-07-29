@@ -108,11 +108,11 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           <p className="mb-3 px-2 text-[10px] uppercase tracking-[0.3em] text-brand-200/90">
             Navigasi
           </p>
-          <ul className="space-y-0.5" role="list">
+          <ul className="space-y-0.5">
             {navItems.map((item) => {
               const active = isActive(item.href);
               return (
-                <li key={item.label} role="listitem">
+                <li key={item.label}>
                   <Link
                     href={item.href}
                     aria-current={active ? 'page' : undefined}

@@ -23,10 +23,20 @@ const sizeClasses = {
 
 export function Dialog({ open, onClose, title, description, children, className, size = 'md' }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
-  // Trap focus within dialog when open
+  // Trap focus within dialog when open and restore on close
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      if (previousFocusRef.current) {
+        previousFocusRef.current.focus();
+        previousFocusRef.current = null;
+      }
+      return;
+    }
+
+    previousFocusRef.current = document.activeElement as HTMLElement;
+
     const dialog = dialogRef.current;
     if (!dialog) return;
 

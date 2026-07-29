@@ -6,7 +6,20 @@ import { SectionContainer } from '@/components/layout/section-container';
 
 const releases = [
   {
-    version: 'v1.2.7 (Terbaru)',
+    version: 'v1.2.8 (Terbaru)',
+    date: '1 Agustus 2026',
+    changes: [
+      'Menyelesaikan audit responsivitas layar (375px hingga 1440px) pada Dashboard, People, Leave Management, dan Training.',
+      'Menyelesaikan audit aksesibilitas (keyboard navigation, form labels, ARIA attributes).',
+      'Mengaktifkan aturan eslint-plugin-jsx-a11y pada environment development.',
+      'Menambahkan caption pada seluruh DataTable untuk kompabilitas pembaca layar.',
+      'Memperbaiki fokus kembalian (focus return) pada komponen Dialog saat ditutup.',
+      'Memastikan seluruh icon-only button kini memiliki atribut aria-label.',
+      'Memperbaiki penumpukan form (form stacking) dan relasi label input pada Settings dan Feedback.'
+    ]
+  },
+  {
+    version: 'v1.2.7',
     date: '31 Juli 2026',
     changes: [
       'Menghapus seluruh pemanggilan alert() dan confirm() yang memblokir browser secara menyeluruh (koreksi Iterasi 1).',

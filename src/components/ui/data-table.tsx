@@ -69,14 +69,13 @@ export function DataTable<TData>({
 
   return (
     <div className="overflow-hidden rounded-[28px] border border-border/70 bg-card/80 shadow-[0_18px_48px_rgba(2,34,74,0.16)]">
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
       <div className="overflow-x-auto" role="region" aria-label={caption ?? 'Data table'} tabIndex={0}>
         <table
           className="min-w-full border-separate border-spacing-0 text-left text-sm text-foreground"
-          aria-label={caption}
+          aria-label={caption ?? 'Tabel Data'}
         >
-          {caption && (
-            <caption className="sr-only">{caption}</caption>
-          )}
+          <caption className="sr-only">{caption ?? 'Tabel Data'}</caption>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -116,6 +115,7 @@ export function DataTable<TData>({
                             }
                           : undefined
                       }
+                      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
                       tabIndex={canSort ? 0 : undefined}
                     >
                       {header.isPlaceholder ? null : (

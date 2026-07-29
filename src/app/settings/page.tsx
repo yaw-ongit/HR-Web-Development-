@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 import { Settings, Save, Globe, Eye, Volume2, ShieldAlert, Monitor } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import { useToast } from '@/components/ui/toast';
 
 export default function SettingsPage() {
   const { addToast } = useToast();
+  const formId = useId();
   const [settings, setSettings] = useState({
     companyName: 'PT Indocater',
     timeZone: 'Asia/Jakarta',
@@ -67,8 +68,9 @@ export default function SettingsPage() {
               />
             </div>
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Zona Waktu</label>
+              <label htmlFor={`${formId}-timeZone`} className="text-xs font-semibold text-muted-foreground">Zona Waktu</label>
               <select
+                id={`${formId}-timeZone`}
                 value={settings.timeZone}
                 onChange={(e) => setSettings({ ...settings, timeZone: e.target.value })}
                 className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none"
@@ -79,8 +81,9 @@ export default function SettingsPage() {
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Format Tanggal</label>
+              <label htmlFor={`${formId}-dateFormat`} className="text-xs font-semibold text-muted-foreground">Format Tanggal</label>
               <select
+                id={`${formId}-dateFormat`}
                 value={settings.dateFormat}
                 onChange={(e) => setSettings({ ...settings, dateFormat: e.target.value })}
                 className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none"
@@ -98,8 +101,9 @@ export default function SettingsPage() {
               <Monitor className="h-5 w-5 text-primary" /> Tampilan & Tema
             </h3>
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Tema Aplikasi</label>
+              <label htmlFor={`${formId}-theme`} className="text-xs font-semibold text-muted-foreground">Tema Aplikasi</label>
               <select
+                id={`${formId}-theme`}
                 value={settings.theme}
                 onChange={(e) => setSettings({ ...settings, theme: e.target.value })}
                 className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none"
@@ -110,8 +114,9 @@ export default function SettingsPage() {
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Bahasa Default</label>
+              <label htmlFor={`${formId}-language`} className="text-xs font-semibold text-muted-foreground">Bahasa Default</label>
               <select
+                id={`${formId}-language`}
                 value={settings.language}
                 onChange={(e) => setSettings({ ...settings, language: e.target.value })}
                 className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none"
@@ -121,8 +126,9 @@ export default function SettingsPage() {
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold text-muted-foreground">Kerapatan Tabel</label>
+              <label htmlFor={`${formId}-tableDensity`} className="text-xs font-semibold text-muted-foreground">Kerapatan Tabel</label>
               <select
+                id={`${formId}-tableDensity`}
                 value={settings.tableDensity}
                 onChange={(e) => setSettings({ ...settings, tableDensity: e.target.value })}
                 className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none"
