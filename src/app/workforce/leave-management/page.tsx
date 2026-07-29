@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
 import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, RowSelectionState, useReactTable, SortingState } from '@tanstack/react-table';
 import { Search, ArrowRight, CheckCircle2, ClipboardList, Download, Filter } from 'lucide-react';
+import { Dialog } from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/toast';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
@@ -18,6 +20,18 @@ export default function WorkforceLeaveManagementPage() {
   const [status, setStatus] = useState('All');
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  const { addToast } = useToast();
+  const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
+
+  const handleApprove = () => {
+    addToast({ title: 'Cuti disetujui', description: 'Permintaan cuti telah berhasil disetujui.', variant: 'success' });
+  };
+
+  const handleReject = () => {
+    setRejectDialogOpen(false);
+    addToast({ title: 'Cuti ditolak', description: 'Permintaan cuti telah ditolak.', variant: 'danger' });
+  };
 
   useEffect(() => {
     WorkforceService.getLeaveRequests(leaveRequests).then((result) => {
@@ -92,6 +106,23 @@ export default function WorkforceLeaveManagementPage() {
     enableRowSelection: true,
   });
 
+  const handleExportTable = () => {
+    const rows = table.getCoreRowModel().rows;
+    if (rows.length === 0) return;
+    const headers = ['employee', 'leaveType', 'startDate', 'endDate', 'duration', 'status', 'approver'];
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => headers.map(header => `"${String(row.getValue(header)).replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'leave-requests.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <SectionContainer>
@@ -150,13 +181,20 @@ export default function WorkforceLeaveManagementPage() {
           <div className="mt-6 space-y-4 text-sm text-muted">
             <p>Review leave requests, add comments, and move requests through the workflow.</p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Button variant="primary" className="rounded-full px-5 py-3">Approve</Button>
-              <Button variant="destructive" className="rounded-full px-5 py-3">Reject</Button>
-              <Button variant="secondary" className="rounded-full px-5 py-3">Request revision</Button>
-              <Button variant="ghost" className="rounded-full px-5 py-3">Add comment</Button>
+              <Button onClick={handleApprove} variant="primary" className="rounded-full px-5 py-3">Approve</Button>
+              <Button onClick={() => setRejectDialogOpen(true)} variant="destructive" className="rounded-full px-5 py-3">Reject</Button>
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">Request revision</Button>
+              <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">Add comment</Button>
             </div>
           </div>
         </Card>
+
+        <Dialog open={rejectDialogOpen} onClose={() => setRejectDialogOpen(false)} title="Tolak Cuti" description="Apakah Anda yakin ingin menolak permintaan cuti ini? Tindakan ini tidak dapat dibatalkan.">
+          <div className="mt-6 flex justify-end gap-3">
+            <Button variant="ghost" onClick={() => setRejectDialogOpen(false)}>Batal</Button>
+            <Button variant="destructive" onClick={handleReject}>Tolak Cuti</Button>
+          </div>
+        </Dialog>
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
@@ -202,10 +240,10 @@ export default function WorkforceLeaveManagementPage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">Request pipeline</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button variant="secondary" className="rounded-full px-5 py-3">
+            <Button variant="secondary" onClick={handleExportTable} className="rounded-full px-5 py-3">
               <Download className="h-4 w-4" /> Ekspor
             </Button>
-            <Button variant="ghost" className="rounded-full px-5 py-3">
+            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
               <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>

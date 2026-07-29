@@ -34,22 +34,22 @@ export default function WorkforceHomePage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link href="/workforce/attendance">
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <CalendarCheck className="h-4 w-4" /> Absensi
               </Button>
             </Link>
             <Link href="/workforce/leave-management">
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <CheckCircle2 className="h-4 w-4" /> Cuti
               </Button>
             </Link>
             <Link href="/workforce/shift-management">
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <Layers className="h-4 w-4" /> Shift
               </Button>
             </Link>
             <Link href="/workforce/overtime">
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <ClipboardList className="h-4 w-4" /> Lembur
               </Button>
             </Link>

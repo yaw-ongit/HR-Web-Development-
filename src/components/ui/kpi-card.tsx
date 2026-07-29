@@ -43,8 +43,8 @@ export function KpiCard({
           {trend && (
             <p className={cn('mt-2 text-sm', trendColorMap[trendVariant])}>{trend}</p>
           )}
-          {subLabel && !trend && (
-            <p className="mt-2 text-sm text-muted">{subLabel}</p>
+          {subLabel && (
+            <p className="mt-1 text-xs text-muted/80">{subLabel}</p>
           )}
         </div>
         {icon && (

@@ -15,7 +15,7 @@ import { SectionContainer } from '@/components/layout/section-container';
 import {
   dashboardKpis, roleQuickActions, roles, roleWidgets,
   announcements, employeeMetrics, recentActivity, systemStatus,
-  roleNotifications, RoleKey,
+  roleNotifications, RoleKey, attendanceActivity, complianceActivity,
 } from '@/lib/dashboard-data';
 import {
   AreaChart, Area, CartesianGrid, ResponsiveContainer, Tooltip,
@@ -73,6 +73,46 @@ function WidgetActivity({ title }: { title: string }) {
     <Card title={title} description="Peristiwa sistem dan workforce terbaru.">
       <ul className="space-y-3" aria-label="Recent activity">
         {recentActivity.map((item) => (
+          <li key={item.actor} className="rounded-2xl border border-border/60 bg-card/80 p-4">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold text-foreground">{item.actor}</p>
+                <p className="text-sm text-muted">{item.action}</p>
+              </div>
+              <span className="shrink-0 text-xs text-muted">{item.time}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+}
+
+function WidgetAttendanceActivity({ title }: { title: string }) {
+  return (
+    <Card title={title} description="Aktivitas kehadiran dan ketidakhadiran terbaru.">
+      <ul className="space-y-3" aria-label="Attendance activity">
+        {attendanceActivity.map((item) => (
+          <li key={item.actor} className="rounded-2xl border border-border/60 bg-card/80 p-4">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold text-foreground">{item.actor}</p>
+                <p className="text-sm text-muted">{item.action}</p>
+              </div>
+              <span className="shrink-0 text-xs text-muted">{item.time}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+}
+
+function WidgetComplianceActivity({ title }: { title: string }) {
+  return (
+    <Card title={title} description="Status kepatuhan dan audit terbaru.">
+      <ul className="space-y-3" aria-label="Compliance activity">
+        {complianceActivity.map((item) => (
           <li key={item.actor} className="rounded-2xl border border-border/60 bg-card/80 p-4">
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -222,6 +262,8 @@ const widgetComponents: Record<string, React.FC<{ title: string }>> = {
   calendar: WidgetCalendar,
   balance: WidgetBalance,
   activity: WidgetActivity,
+  attendance: WidgetAttendanceActivity,
+  compliance: WidgetComplianceActivity,
   announcements: WidgetAnnouncements,
   status: WidgetStatus,
   training: WidgetTraining,
@@ -361,7 +403,7 @@ export default function DashboardPage() {
               <p className="max-w-xl text-sm leading-7 text-muted">{hero.subtitle}</p>
               <div className="flex flex-wrap gap-3 pt-2">
                 {hero.actions.map((label) => (
-                  <Button key={label} variant="outline" size="sm">{label}</Button>
+                  <Button comingSoon key={label} variant="outline" size="sm">{label}</Button>
                 ))}
               </div>
             </div>
@@ -393,6 +435,7 @@ export default function DashboardPage() {
                 label={kpi.label}
                 value={kpi.value}
                 trend={kpi.trend}
+                subLabel={(kpi as any).subLabel}
                 trendVariant={kpi.valueColor?.includes('emerald') ? 'up' : kpi.valueColor?.includes('rose') ? 'down' : 'neutral'}
                 icon={createElement(iconMap[kpi.icon as keyof typeof iconMap] ?? Sparkles, { className: 'h-5 w-5', 'aria-hidden': true })}
               />
@@ -421,21 +464,46 @@ export default function DashboardPage() {
 
         <div className="grid gap-6 lg:grid-cols-[1fr_320px] items-start">
           {/* Widgets */}
-          <SectionContainer title="Widget Ruang Kerja" className="min-w-0">
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {widgets.map((widget) => {
-                const Component = widgetComponents[widget.type] ?? WidgetActivity;
-                return <Component key={widget.title} title={widget.title} />;
-              })}
-            </div>
-          </SectionContainer>
+          <div className="space-y-6 min-w-0">
+            {(() => {
+              const attentionTypes = ['approvals', 'attendance', 'compliance', 'alerts', 'announcements', 'status', 'server'];
+              const attentionWidgets = widgets.filter(w => attentionTypes.includes(w.type));
+              const analyticsWidgets = widgets.filter(w => !attentionTypes.includes(w.type));
+
+              return (
+                <>
+                  {attentionWidgets.length > 0 && (
+                    <SectionContainer title="Memerlukan Perhatian">
+                      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                        {attentionWidgets.map((widget) => {
+                          const Component = widgetComponents[widget.type] ?? WidgetActivity;
+                          return <Component key={widget.title} title={widget.title} />;
+                        })}
+                      </div>
+                    </SectionContainer>
+                  )}
+
+                  {analyticsWidgets.length > 0 && (
+                    <SectionContainer title="Analitik & Ikhtisar">
+                      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                        {analyticsWidgets.map((widget) => {
+                          const Component = widgetComponents[widget.type] ?? WidgetActivity;
+                          return <Component key={widget.title} title={widget.title} />;
+                        })}
+                      </div>
+                    </SectionContainer>
+                  )}
+                </>
+              );
+            })()}
+          </div>
 
           {/* Notifications sidebar */}
           <aside aria-label="Notifications" className="min-w-0">
             <Card
               title="Peringatan Terbaru"
               description="Notifikasi untuk peran Anda."
-              headerActions={<Button variant="ghost" size="sm">Lihat semua</Button>}
+              headerActions={<Button comingSoon variant="ghost" size="sm">Lihat semua</Button>}
             >
               <ul className="space-y-3" aria-label="Notification list">
                 {roleNotifications.map((n) => (

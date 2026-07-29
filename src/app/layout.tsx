@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
+import { ToastProvider } from '@/components/ui/toast';
+
 export const metadata: Metadata = {
   title: {
     default: 'PT Indocater HRIS',
@@ -34,14 +36,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           forcedTheme="dark"
           enableSystem={false}
         >
-          {/* Skip to main content — accessibility */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-2xl focus:bg-brand-700 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
-          >
-            Lewati ke konten utama
-          </a>
-          {children}
+          <ToastProvider>
+            {/* Skip to main content — accessibility */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-2xl focus:bg-brand-700 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+            >
+              Lewati ke konten utama
+            </a>
+            {children}
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

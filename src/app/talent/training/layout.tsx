@@ -18,11 +18,7 @@ export default function TrainingWorkflowLayout({ children }: { children: React.R
   const pathname = usePathname();
   const router = useRouter();
 
-  // Redirect from /talent/training root to planning stage
-  if (pathname === '/talent/training') {
-    router.replace('/talent/training/planning');
-    return null;
-  }
+  // No redirect; /talent/training will show the dashboard landing page
 
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">

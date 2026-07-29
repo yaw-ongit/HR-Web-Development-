@@ -80,13 +80,13 @@ function StatusBadge({ value }: { value: string }) {
 function ExportButtons() {
   return (
     <div className="flex flex-wrap gap-2">
-      <Button variant="secondary" className="rounded-full px-4 py-2 text-xs">
+      <Button comingSoon variant="secondary" className="rounded-full px-4 py-2 text-xs">
         <FileDown className="h-4 w-4" /> PDF
       </Button>
-      <Button variant="secondary" className="rounded-full px-4 py-2 text-xs">
+      <Button comingSoon variant="secondary" className="rounded-full px-4 py-2 text-xs">
         <FileSpreadsheet className="h-4 w-4" /> Excel
       </Button>
-      <Button variant="ghost" className="rounded-full px-4 py-2 text-xs">
+      <Button comingSoon variant="ghost" className="rounded-full px-4 py-2 text-xs">
         <Download className="h-4 w-4" /> CSV
       </Button>
     </div>
@@ -108,10 +108,10 @@ function AdminShell({ children, section }: { children: ReactNode; section?: stri
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button variant="primary" className="rounded-full px-5 py-3">
+            <Button comingSoon variant="primary" className="rounded-full px-5 py-3">
               <Plus className="h-4 w-4" /> Create
             </Button>
-            <Button variant="secondary" className="rounded-full px-5 py-3">
+            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
               <SlidersHorizontal className="h-4 w-4" /> Configure
             </Button>
             <ExportButtons />
@@ -326,7 +326,7 @@ function MasterDataView() {
             <option>Draft</option>
             <option>Archived</option>
           </select>
-          <Button className="rounded-full px-5 py-3"><Plus className="h-4 w-4" /> New catalog</Button>
+          <Button comingSoon className="rounded-full px-5 py-3"><Plus className="h-4 w-4" /> New catalog</Button>
         </div>
         <div className="mt-5 flex flex-wrap gap-2">
           {masterDataCategories.map((category) => (
@@ -346,11 +346,11 @@ function OrganizationView() {
     <div className="grid gap-4 xl:grid-cols-[1.4fr_0.8fr]">
       <Card title="Interactive organization chart" description="Company to employee structure with expand, collapse, search, move employee and move department controls.">
         <div className="flex flex-wrap gap-3">
-          <Button variant="secondary" className="rounded-full"><Search className="h-4 w-4" /> Search</Button>
-          <Button variant="secondary" className="rounded-full"><ChevronDown className="h-4 w-4" /> Expand</Button>
-          <Button variant="ghost" className="rounded-full"><ChevronRight className="h-4 w-4" /> Collapse</Button>
-          <Button className="rounded-full">Move employee</Button>
-          <Button variant="outline" className="rounded-full">Move department</Button>
+          <Button comingSoon variant="secondary" className="rounded-full"><Search className="h-4 w-4" /> Search</Button>
+          <Button comingSoon variant="secondary" className="rounded-full"><ChevronDown className="h-4 w-4" /> Expand</Button>
+          <Button comingSoon variant="ghost" className="rounded-full"><ChevronRight className="h-4 w-4" /> Collapse</Button>
+          <Button comingSoon className="rounded-full">Move employee</Button>
+          <Button comingSoon variant="outline" className="rounded-full">Move department</Button>
         </div>
         <div className="mt-8 space-y-4">
           {organizationNodes.map((node, index) => (
@@ -560,7 +560,7 @@ function AuditLogView() {
         <div className="grid gap-3 md:grid-cols-4">
           {['Date range', 'Module', 'User', 'Action'].map((label) => <select key={label} className="rounded-3xl border border-border bg-surface/90 p-4 text-sm text-foreground"><option>{label}</option></select>)}
         </div>
-        <div className="mt-4 flex gap-2"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Timeline view</Button><Button variant="ghost" className="rounded-full"><Eye className="h-4 w-4" /> Table view</Button></div>
+        <div className="mt-4 flex gap-2"><Button comingSoon variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Timeline view</Button><Button comingSoon variant="ghost" className="rounded-full"><Eye className="h-4 w-4" /> Table view</Button></div>
       </Card>
       <SectionContainer title="Enterprise audit viewer"><DataTable table={table} /></SectionContainer>
     </>

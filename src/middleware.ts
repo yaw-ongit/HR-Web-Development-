@@ -18,9 +18,12 @@ export function middleware(request: NextRequest) {
 
   const isLoginPage = pathname.startsWith('/login')
 
+  // Bypass login check for now
+  /*
   if (isProtectedPath && !session) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
+  */
 
   if (isLoginPage && session) {
     return NextResponse.redirect(new URL('/', request.url))

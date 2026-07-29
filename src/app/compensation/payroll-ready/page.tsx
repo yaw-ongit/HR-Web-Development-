@@ -204,10 +204,10 @@ export default function PayrollReadyPage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">All employees</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button variant="secondary" className="rounded-full px-5 py-3">
+            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
               <Download className="h-4 w-4" /> Export
             </Button>
-            <Button variant="ghost" className="rounded-full px-5 py-3">
+            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
               <Filter className="h-4 w-4" /> Filters
             </Button>
           </div>

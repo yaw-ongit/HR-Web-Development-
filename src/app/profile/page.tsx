@@ -42,17 +42,17 @@ export default function MyProfilePage() {
       if (plansRes.data && realsRes.data) {
         const tempHistory: any[] = [];
         for (const real of realsRes.data) {
-          const plan = plansRes.data.find(p => p.id === real.planning_id);
+          const plan = plansRes.data.find((p: any) => p.id === real.planning_id);
           if (!plan) continue;
 
           const partsRes = await TalentService.getParticipants(real.id);
           if (partsRes.data) {
-            const matchedPart = partsRes.data.find(p => p.employee_id === profile.id || p.employee_name?.toLowerCase() === profile.fullName.toLowerCase());
+            const matchedPart = partsRes.data.find((p: any) => p.employee_id === profile.id || p.employee_name?.toLowerCase() === profile.fullName.toLowerCase());
             if (matchedPart) {
               const attsRes = await TalentService.getAttendances(real.id);
-              const att = attsRes.data?.find(a => a.participant_id === matchedPart.id);
+              const att = attsRes.data?.find((a: any) => a.participant_id === matchedPart.id);
               const certsRes = await TalentService.getCertificatesByRealization(real.id);
-              const cert = certsRes.data?.find(c => c.participant_id === matchedPart.id);
+              const cert = certsRes.data?.find((c: any) => c.participant_id === matchedPart.id);
 
               tempHistory.push({
                 title: plan.title,
@@ -275,7 +275,7 @@ export default function MyProfilePage() {
                 </div>
               </div>
               <div className="flex justify-end pt-4">
-                <Button className="rounded-xl bg-slate-800 text-white hover:bg-slate-700 text-xs font-semibold">
+                <Button comingSoon className="rounded-xl bg-slate-800 text-white hover:bg-slate-700 text-xs font-semibold">
                   Ganti Kata Sandi
                 </Button>
               </div>

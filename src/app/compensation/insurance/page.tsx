@@ -21,9 +21,9 @@ export default function InsurancePage() {
 
   useEffect(() => {
     // getBpjsRecords gets insurance/BPJS records
-    CompensationService.getBpjsRecords(insurancePolicies).then((data) => {
-      if (Array.isArray(data) && data.length > 0) {
-        setDataList(data);
+    CompensationService.getBpjsRecords(insurancePolicies).then((result) => {
+      if (result && Array.isArray(result.data) && result.data.length > 0) {
+        setDataList(result.data);
       }
     });
   }, []);
@@ -196,10 +196,10 @@ export default function InsurancePage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">All policies</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button variant="secondary" className="rounded-full px-5 py-3">
+            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
               <Download className="h-4 w-4" /> Export
             </Button>
-            <Button variant="ghost" className="rounded-full px-5 py-3">
+            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
               <Filter className="h-4 w-4" /> Filters
             </Button>
           </div>

@@ -1,5 +1,6 @@
 import { ForwardedRef, forwardRef, ButtonHTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive' | 'outline';
@@ -7,6 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  comingSoon?: boolean;
 }
 
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
@@ -33,26 +35,21 @@ export const Button = forwardRef(
       loading = false,
       leftIcon,
       rightIcon,
+      comingSoon = false,
       children,
       disabled,
       ...props
     }: ButtonProps,
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (props.onClick) {
-        props.onClick(e);
-      } else if (props.type !== 'submit') {
-        alert("Fitur ini akan segera hadir.");
-      }
-    };
+    const isMissingAction = !props.onClick && props.type !== 'submit';
+    const isDisabled = disabled || loading || (isMissingAction && !comingSoon);
 
     return (
       <button
         ref={ref}
-        disabled={disabled || loading}
+        disabled={isDisabled}
         aria-busy={loading}
-        onClick={handleClick}
         className={cn(
           'inline-flex items-center justify-center font-semibold transition-all duration-200',
           'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
@@ -77,6 +74,11 @@ export const Button = forwardRef(
             {leftIcon && <span aria-hidden="true">{leftIcon}</span>}
             {children}
             {rightIcon && <span aria-hidden="true">{rightIcon}</span>}
+            {comingSoon && (
+              <Badge variant="default" className="ml-2 font-normal text-[10px] leading-none py-1">
+                Segera hadir
+              </Badge>
+            )}
           </>
         )}
       </button>

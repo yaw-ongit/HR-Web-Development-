@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { TalentService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
 
 export default function TrainingApprovalPage() {
   const [plannings, setPlannings] = useState<any[]>([]);
@@ -14,6 +15,7 @@ export default function TrainingApprovalPage() {
   
   // Approval Form state
   const [isOpen, setIsOpen] = useState(false);
+  const { addToast } = useToast();
   const [form, setForm] = useState({
     approval_status: 'Approved',
     approver: 'Fitri Novita (Director HRD)',
@@ -53,12 +55,20 @@ export default function TrainingApprovalPage() {
 
     const { error } = await TalentService.saveApproval(payload);
     if (!error) {
-      alert(`Proposal Pelatihan berhasil ${form.approval_status === 'Approved' ? 'disetujui' : 'ditolak'}!`);
+      addToast({
+        title: form.approval_status === 'Approved' ? 'Proposal Disetujui' : 'Proposal Ditolak',
+        description: `Proposal Pelatihan berhasil ${form.approval_status === 'Approved' ? 'disetujui' : 'ditolak'}!`,
+        variant: form.approval_status === 'Approved' ? 'success' : 'danger'
+      });
       setIsOpen(false);
       setSelectedPlan(null);
       loadPlannings();
     } else {
-      alert('Gagal menyimpan persetujuan: ' + error);
+      addToast({
+        title: 'Error',
+        description: 'Gagal menyimpan persetujuan.',
+        variant: 'danger'
+      });
     }
   };
 

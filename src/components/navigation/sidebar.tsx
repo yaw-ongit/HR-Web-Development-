@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
+  Award,
   BookOpen,
   Briefcase,
   CalendarCheck,
@@ -36,7 +37,7 @@ const navItems = [
   { label: 'Lembur', icon: Sparkles, href: '/workforce/overtime' },
   { label: 'Rekrutmen', icon: Briefcase, href: '/talent' },
   { label: 'Onboarding', icon: UserPlus, href: '/talent/onboarding' },
-  { label: 'Pelatihan & Sertifikasi', icon: ShieldCheck, href: '/talent/training' },
+  { label: 'Pelatihan & Sertifikasi', icon: Award, href: '/talent/training' },
   { label: 'Payroll', icon: Wallet, href: '/compensation/payroll-ready' },
   { label: 'Benefit', icon: ShieldAlert, href: '/compensation/benefits' },
   { label: 'BPJS & Asuransi', icon: ShieldCheck, href: '/compensation/insurance' },

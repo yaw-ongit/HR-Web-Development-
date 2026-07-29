@@ -32,11 +32,11 @@ export default function AnalyticsPage() {
             </p>
           </div>
           <div className="flex gap-2">
-            <Button className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
+            <Button comingSoon className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
               <Filter className="h-4 w-4 mr-2" />
               Filter
             </Button>
-            <Button className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
+            <Button comingSoon className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
               <Download className="h-4 w-4 mr-2" />
               Ekspor
             </Button>

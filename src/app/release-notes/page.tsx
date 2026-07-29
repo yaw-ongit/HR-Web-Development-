@@ -6,7 +6,33 @@ import { SectionContainer } from '@/components/layout/section-container';
 
 const releases = [
   {
-    version: 'v1.2.4 (Terbaru)',
+    version: 'v1.2.6 (Terbaru)',
+    date: '30 Juli 2026',
+    changes: [
+      'Memperluas fungsi ekspor CSV (semua baris aktif hasil filter, bukan hanya halaman saat ini).',
+      'Menambahkan penjelasan Tooltip pada halaman Kompensasi Medis (MCU).',
+      'Memperluas dukungan EmptyState bawaan pada seluruh tabel (DataTable).',
+      'Menambahkan skeleton loading screen pada semua halaman data.',
+      'Menyelaraskan gaya border-radius dan shadow komponen Toast & Dialog.',
+      'Membersihkan folder services duplikat yang tidak digunakan.'
+    ]
+  },
+  {
+    version: 'v1.2.5',
+    date: '29 Juli 2026',
+    changes: [
+      'Memperbaiki tombol "Segera hadir" dan menghapus alert browser yang memblokir.',
+      'Memperbaiki inkonsistensi data KPI jumlah karyawan pada dasbor.',
+      'Memperbarui halaman landing Pelatihan dengan tautan akses cepat modul.',
+      'Menambahkan komponen notifikasi Toast pada alur persetujuan Cuti.',
+      'Menambahkan Dialog konfirmasi untuk penolakan Cuti (aksi destruktif).',
+      'Mengaktifkan fitur Ekspor (CSV) bawaan pada tabel data.',
+      'Menyesuaikan warna badge status untuk meningkatkan rasio kontras visual.',
+      'Memperbaiki hierarki tata letak widget dasbor HR Manager.'
+    ]
+  },
+  {
+    version: 'v1.2.4',
     date: '28 Juli 2026',
     changes: [
       'Menambahkan lembar absensi kehadiran terintegrasi (Attendance Stage 4).',

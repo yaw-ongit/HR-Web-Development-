@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FileText, FolderOpen, Sparkles } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
+import { NoDataEmptyState } from '@/components/ui/empty-state';
 import { documentCenter } from '@/lib/people-data';
 
 export default function DocumentsPage() {
@@ -35,23 +36,27 @@ export default function DocumentsPage() {
             </div>
 
             <div className="mt-8 space-y-3">
-              {documentCenter.map((document) => (
-                <div key={document.title} className="rounded-3xl border border-border bg-card/80 p-5 transition hover:border-brand-500">
-                  <div className="flex flex-wrap items-center justify-between gap-4">
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">{document.title}</p>
-                      <p className="mt-1 text-sm text-muted">{document.category}</p>
+              {documentCenter.length === 0 ? (
+                <NoDataEmptyState module="dokumen" />
+              ) : (
+                documentCenter.map((document) => (
+                  <div key={document.title} className="rounded-3xl border border-border bg-card/80 p-5 transition hover:border-brand-500">
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">{document.title}</p>
+                        <p className="mt-1 text-sm text-muted">{document.category}</p>
+                      </div>
+                      <span className="rounded-full bg-surface/90 px-3 py-1 text-xs uppercase tracking-[0.28em] text-muted-foreground">{document.status}</span>
                     </div>
-                    <span className="rounded-full bg-surface/90 px-3 py-1 text-xs uppercase tracking-[0.28em] text-muted-foreground">{document.status}</span>
+                    <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-sm text-muted">
+                      <p>Diperbarui {document.updated}</p>
+                      <button className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-4 py-2 text-xs font-semibold text-foreground transition hover:border-brand-500">
+                        <FileText className="h-4 w-4" /> Lihat berkas
+                      </button>
+                    </div>
                   </div>
-                  <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-sm text-muted">
-                    <p>Diperbarui {document.updated}</p>
-                    <button className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-4 py-2 text-xs font-semibold text-foreground transition hover:border-brand-500">
-                      <FileText className="h-4 w-4" /> Lihat berkas
-                    </button>
-                  </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </Card>
 

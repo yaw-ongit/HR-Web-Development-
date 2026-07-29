@@ -23,22 +23,22 @@ export default function TalentHomePage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link href="/talent/candidates">
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <Users className="h-4 w-4" /> Kandidat
               </Button>
             </Link>
             <Link href="/talent/onboarding">
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <UserCheck className="h-4 w-4" /> Onboarding
               </Button>
             </Link>
             <Link href="/talent/training">
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <BookOpen className="h-4 w-4" /> Pelatihan
               </Button>
             </Link>
             <Link href="/talent/competency">
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <Award className="h-4 w-4" /> Kompetensi
               </Button>
             </Link>

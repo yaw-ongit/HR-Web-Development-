@@ -55,9 +55,9 @@ function StatusBadge({ value }: { value: string }) {
 function ExportButtons() {
   return (
     <div className="flex flex-wrap gap-2">
-      <Button variant="secondary" className="rounded-full px-4 py-2 text-xs"><FileDown className="h-4 w-4" /> PDF</Button>
-      <Button variant="secondary" className="rounded-full px-4 py-2 text-xs"><FileSpreadsheet className="h-4 w-4" /> Excel</Button>
-      <Button variant="ghost" className="rounded-full px-4 py-2 text-xs"><Download className="h-4 w-4" /> CSV</Button>
+      <Button comingSoon variant="secondary" className="rounded-full px-4 py-2 text-xs"><FileDown className="h-4 w-4" /> PDF</Button>
+      <Button comingSoon variant="secondary" className="rounded-full px-4 py-2 text-xs"><FileSpreadsheet className="h-4 w-4" /> Excel</Button>
+      <Button comingSoon variant="ghost" className="rounded-full px-4 py-2 text-xs"><Download className="h-4 w-4" /> CSV</Button>
     </div>
   );
 }
@@ -75,8 +75,8 @@ function IdentityShell({ children, section }: { children: React.ReactNode; secti
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href="/login"><Button className="rounded-full px-5 py-3"><KeyRound className="h-4 w-4" /> Login</Button></Link>
-            <Button variant="secondary" className="rounded-full px-5 py-3"><SlidersHorizontal className="h-4 w-4" /> Policies</Button>
+            <Link href="/login"><Button comingSoon className="rounded-full px-5 py-3"><KeyRound className="h-4 w-4" /> Login</Button></Link>
+            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3"><SlidersHorizontal className="h-4 w-4" /> Policies</Button>
             <ExportButtons />
           </div>
         </div>
@@ -260,8 +260,8 @@ function ActiveSessionsView({ compact = false }: { compact?: boolean }) {
   return (
     <SectionContainer title={compact ? 'Active sessions' : 'Enterprise active sessions'}>
       <div className="mb-4 flex flex-wrap gap-3">
-        <Button variant="destructive" className="rounded-full"><LogOut className="h-4 w-4" /> Sign out all devices</Button>
-        <Button variant="secondary" className="rounded-full"><ShieldCheck className="h-4 w-4" /> Trusted devices</Button>
+        <Button comingSoon variant="destructive" className="rounded-full"><LogOut className="h-4 w-4" /> Sign out all devices</Button>
+        <Button comingSoon variant="secondary" className="rounded-full"><ShieldCheck className="h-4 w-4" /> Trusted devices</Button>
       </div>
       <DataTable table={table} />
     </SectionContainer>
@@ -289,7 +289,7 @@ function LoginHistoryView({ compact = false }: { compact?: boolean }) {
           <div className="grid gap-3 md:grid-cols-4">
             {['Date', 'Success', 'Failed', 'Location'].map((label) => <select key={label} className="rounded-3xl border border-border bg-surface/90 p-4 text-sm text-foreground"><option>{label}</option></select>)}
           </div>
-          <div className="mt-4"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Apply filters</Button></div>
+          <div className="mt-4"><Button comingSoon variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Apply filters</Button></div>
         </Card>
       )}
       <SectionContainer title={compact ? 'Recent login history' : 'Login history'}>
@@ -327,9 +327,9 @@ function NotificationCenterView() {
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Button variant="secondary" className="rounded-full px-3 py-2 text-xs">Action</Button>
-                <Button variant="ghost" className="rounded-full px-3 py-2 text-xs"><Eye className="h-4 w-4" /> Mark read</Button>
-                <Button variant="ghost" className="rounded-full px-3 py-2 text-xs"><Archive className="h-4 w-4" /> Archive</Button>
+                <Button comingSoon variant="secondary" className="rounded-full px-3 py-2 text-xs">Action</Button>
+                <Button comingSoon variant="ghost" className="rounded-full px-3 py-2 text-xs"><Eye className="h-4 w-4" /> Mark read</Button>
+                <Button comingSoon variant="ghost" className="rounded-full px-3 py-2 text-xs"><Archive className="h-4 w-4" /> Archive</Button>
               </div>
             </div>
           </div>

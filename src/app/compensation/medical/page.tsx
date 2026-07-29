@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
+import { Tooltip } from '@/components/ui/tooltip';
 import { medicalRecords } from '@/lib/compensation-data';
 import { CompensationService } from '@/lib/services';
 
@@ -21,9 +22,9 @@ export default function MedicalPage() {
 
   useEffect(() => {
     // getMcuRecords fetches MCU/medical check-up records
-    CompensationService.getMcuRecords(medicalRecords).then((data) => {
-      if (Array.isArray(data) && data.length > 0) {
-        setDataList(data);
+    CompensationService.getMcuRecords(medicalRecords).then((result) => {
+      if (result && Array.isArray(result.data) && result.data.length > 0) {
+        setDataList(result.data);
       }
     });
   }, []);
@@ -130,7 +131,9 @@ export default function MedicalPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
-          <p className="text-xs uppercase tracking-[0.3em] text-muted">Completed MCU</p>
+          <Tooltip content="Medical Check-Up tahunan standar">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted cursor-help">Completed MCU</p>
+          </Tooltip>
           <p className="mt-3 text-3xl font-semibold text-foreground">{completedRecords}</p>
           <p className="mt-2 text-sm text-emerald-600">Current & valid</p>
         </Card>
@@ -211,10 +214,10 @@ export default function MedicalPage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">All medical records</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button variant="secondary" className="rounded-full px-5 py-3">
+            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
               <Download className="h-4 w-4" /> Export
             </Button>
-            <Button variant="ghost" className="rounded-full px-5 py-3">
+            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
               <Filter className="h-4 w-4" /> Filters
             </Button>
           </div>

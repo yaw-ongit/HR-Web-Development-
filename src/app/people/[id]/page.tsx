@@ -48,17 +48,17 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
         if (plansRes.data && realsRes.data) {
           const tempHistory: any[] = [];
           for (const real of realsRes.data) {
-            const plan = plansRes.data.find(p => p.id === real.planning_id);
+            const plan = plansRes.data.find((p: any) => p.id === real.planning_id);
             if (!plan) continue;
 
             const partsRes = await TalentService.getParticipants(real.id);
             if (partsRes.data) {
-              const matchedPart = partsRes.data.find(p => p.employee_id === profile.id || p.employee_name?.toLowerCase() === profile.fullName?.toLowerCase());
+              const matchedPart = partsRes.data.find((p: any) => p.employee_id === profile.id || p.employee_name?.toLowerCase() === profile.fullName?.toLowerCase());
               if (matchedPart) {
                 const attsRes = await TalentService.getAttendances(real.id);
-                const att = attsRes.data?.find(a => a.participant_id === matchedPart.id);
+                const att = attsRes.data?.find((a: any) => a.participant_id === matchedPart.id);
                 const certsRes = await TalentService.getCertificatesByRealization(real.id);
-                const cert = certsRes.data?.find(c => c.participant_id === matchedPart.id);
+                const cert = certsRes.data?.find((c: any) => c.participant_id === matchedPart.id);
 
                 tempHistory.push({
                   title: plan.title,
@@ -124,13 +124,13 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <Mail className="h-4 w-4" /> Kirim pesan
               </Button>
-              <Button variant="secondary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
                 <Phone className="h-4 w-4" /> Panggil
               </Button>
-              <Button variant="primary" className="rounded-full px-5 py-3">
+              <Button comingSoon variant="primary" className="rounded-full px-5 py-3">
                 <ArrowRight className="h-4 w-4" /> Edit profil
               </Button>
             </div>

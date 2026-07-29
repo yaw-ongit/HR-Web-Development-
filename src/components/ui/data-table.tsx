@@ -4,11 +4,14 @@ import { flexRender, Table } from '@tanstack/react-table';
 import { ArrowUpDown, ArrowUp, ArrowDown, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { NoDataEmptyState } from '@/components/ui/empty-state';
 
 interface DataTableProps<TData> {
   table: Table<TData>;
   /** Called when export button is clicked — defaults to a no-op that could be wired later */
   onExport?: () => void;
+  /** Whether to show the export button (defaults to true) */
+  showExport?: boolean;
   /** Optional caption for accessibility */
   caption?: string;
   /** Show or hide the footer toolbar */
@@ -20,12 +23,49 @@ interface DataTableProps<TData> {
 export function DataTable<TData>({
   table,
   onExport,
+  showExport = true,
   caption,
   showFooter = true,
   emptyContent,
 }: DataTableProps<TData>) {
   const selectedCount = table.getSelectedRowModel().rows.length;
   const totalCount = table.getRowModel().rows.length;
+
+  const handleExport = () => {
+    if (onExport) {
+      onExport();
+      return;
+    }
+    // Default client-side CSV export
+    const rows = table.getCoreRowModel().rows;
+    if (rows.length === 0) return;
+
+    const headers = table.getAllLeafColumns()
+      .filter((col) => col.id !== 'select' && col.id !== 'actions')
+      .map((col) => col.id);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => {
+        return headers.map(header => {
+          const value = row.getValue(header);
+          // Handle string wrapping for CSV
+          if (typeof value === 'string') {
+            return `"${value.replace(/"/g, '""')}"`;
+          }
+          return value;
+        }).join(',');
+      })
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'export.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="overflow-hidden rounded-[28px] border border-border/70 bg-card/80 shadow-[0_18px_48px_rgba(2,34,74,0.16)]">
@@ -130,11 +170,9 @@ export function DataTable<TData>({
               <tr>
                 <td
                   colSpan={table.getAllColumns().length}
-                  className="px-4 py-16 text-center"
+                  className="px-4 py-8"
                 >
-                  {emptyContent ?? (
-                    <p className="text-sm text-muted">Tidak ada data yang ditemukan.</p>
-                  )}
+                  {emptyContent ?? <NoDataEmptyState />}
                 </td>
               </tr>
             )}
@@ -153,12 +191,12 @@ export function DataTable<TData>({
 
           <div className="flex flex-wrap items-center gap-2">
             {/* Export */}
-            {onExport && (
+            {showExport && (
               <Button
                 variant="secondary"
                 size="sm"
                 leftIcon={<Download className="h-3.5 w-3.5" />}
-                onClick={onExport}
+                onClick={handleExport}
                 aria-label="Ekspor data tabel"
               >
                 Ekspor

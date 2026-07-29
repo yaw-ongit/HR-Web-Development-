@@ -107,13 +107,13 @@ export const dashboardKpis = {
     { label: 'Kontrak Kedaluwarsa', value: '18', trend: 'Bulan ini', icon: 'FileText', valueColor: 'text-primary' },
   ],
   'hr-manager': [
-    { label: 'Total Karyawan', value: '3,412', trend: '+6% kuartal ini', icon: 'Users', valueColor: 'text-emerald-600' },
+    { label: 'Total Karyawan', value: '3,412', trend: '+6% kuartal ini', icon: 'Users', valueColor: 'text-emerald-600', subLabel: 'Data demo' },
     { label: 'Tingkat Turnover', value: '8.2%', trend: 'Di bawah target', icon: 'ArrowDownRight', valueColor: 'text-foreground' },
     { label: 'Kepatuhan MCU', value: '94%', trend: 'Jadwal bulan ini', icon: 'HeartPulse', valueColor: 'text-cyan-600' },
     { label: 'Rata-rata Masa Kerja', value: '4.7 thn', trend: 'Naik 0.3 thn', icon: 'Hourglass', valueColor: 'text-purple-600' },
   ],
   director: [
-    { label: 'Total Karyawan', value: '3,412', trend: 'Pertumbuhan headcount', icon: 'Users', valueColor: 'text-emerald-600' },
+    { label: 'Total Karyawan', value: '3,412', trend: 'Pertumbuhan headcount', icon: 'Users', valueColor: 'text-emerald-600', subLabel: 'Data demo' },
     { label: 'Pertumbuhan', value: '+7.4%', trend: 'Kuartal ke kuartal', icon: 'TrendingUp', valueColor: 'text-cyan-600' },
     { label: 'Tingkat Turnover', value: '8.2%', trend: 'Di bawah benchmark', icon: 'ArrowDownRight', valueColor: 'text-foreground' },
     { label: 'Ringkasan Anggaran', value: 'Rp 12.4M', trend: 'Sesuai target', icon: 'Wallet', valueColor: 'text-amber-600' },
@@ -173,7 +173,29 @@ export const employeeMetrics = {
   ],
 };
 
-export const recentActivity = [
+export type ActivityItem = {
+  actor: string;
+  role: string;
+  action: string;
+  time: string;
+  status: string;
+};
+
+export const attendanceActivity: ActivityItem[] = [
+  { actor: 'Leo Wibowo', role: 'Staf Penjualan', action: 'Absen (Izin Sakit)', time: 'Hari ini', status: 'warning' },
+  { actor: 'Budi Santoso', role: 'Teknisi', action: 'Terlambat 45 menit', time: 'Hari ini', status: 'danger' },
+  { actor: 'Siti Aminah', role: 'Customer Service', action: 'Cuti Tahunan (Hari ke-2)', time: 'Kemarin', status: 'info' },
+  { actor: 'Andi Pratama', role: 'Desainer', action: 'Pulang Awal (Keperluan Keluarga)', time: 'Kemarin', status: 'neutral' },
+];
+
+export const complianceActivity: ActivityItem[] = [
+  { actor: 'Tim Pemasaran', role: 'Departemen', action: 'Dokumen NDA Kedaluwarsa', time: '1 hari lalu', status: 'danger' },
+  { actor: 'Maya Sari', role: 'Staf SDM', action: 'Sertifikasi Kepatuhan Selesai', time: '2 hari lalu', status: 'success' },
+  { actor: 'Grup Keuangan', role: 'Departemen', action: 'Audit Internal Tertunda', time: '3 hari lalu', status: 'warning' },
+  { actor: 'Seluruh Karyawan', role: 'Organisasi', action: 'Kebijakan Keselamatan Diperbarui', time: '1 minggu lalu', status: 'info' },
+];
+
+export const recentActivity: ActivityItem[] = [
   { actor: 'Maya Sari', role: 'Staf SDM', action: 'Menyetujui permintaan cuti untuk Leo Wibowo', time: '12m lalu', status: 'success' },
   { actor: 'Aulia Rizky', role: 'Supervisor', action: 'Menugaskan pelatihan ke tim produk', time: '28m lalu', status: 'info' },
   { actor: 'Caleb Santoso', role: 'Administrator', action: 'Memperbarui izin role untuk grup keamanan', time: '1j lalu', status: 'warning' },

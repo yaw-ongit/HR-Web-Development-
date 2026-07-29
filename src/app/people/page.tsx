@@ -133,9 +133,9 @@ export default function PeopleDirectoryPage() {
         description="Sumber utama profil karyawan, konteks organisasi, dan wawasan operasional."
         actions={
           <>
-            <Button variant="primary" size="md" leftIcon={<Plus className="h-4 w-4" />}>Tambah karyawan</Button>
-            <Button variant="secondary" size="md" leftIcon={<Upload className="h-4 w-4" />}>Impor</Button>
-            <Button variant="ghost" size="md" leftIcon={<Download className="h-4 w-4" />}>Ekspor</Button>
+            <Button comingSoon variant="primary" size="md" leftIcon={<Plus className="h-4 w-4" />}>Tambah karyawan</Button>
+            <Button comingSoon variant="secondary" size="md" leftIcon={<Upload className="h-4 w-4" />}>Impor</Button>
+            <Button comingSoon variant="ghost" size="md" leftIcon={<Download className="h-4 w-4" />}>Ekspor</Button>
           </>
         }
       />
@@ -155,7 +155,7 @@ export default function PeopleDirectoryPage() {
             {filteredData.length === 0 ? (
               <NoKaryawansEmptyState onAdd={() => {}} />
             ) : (
-              <DataTable table={table} caption="Tabel direktori karyawan" onExport={() => {}} />
+              <DataTable table={table} caption="Tabel direktori karyawan" />
             )}
           </SectionContainer>
         </div>
