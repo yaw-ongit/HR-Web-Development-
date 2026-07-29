@@ -4,28 +4,9 @@ import { useState, useId } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
-  ChefHat, 
-  ShieldCheck, 
-  Award, 
-  Phone, 
-  Users, 
-  MapPin, 
-  ArrowRight, 
-  Menu, 
-  X, 
-  Utensils, 
-  Building, 
-  Truck, 
-  HeartPulse, 
-  LogIn,
-  Activity,
-  HardHat,
-  Anchor,
-  Clock,
-  Compass,
-  FileCheck,
-  Mail,
-  PhoneCall
+  Users, ShieldCheck, ArrowRight, Menu, X, 
+  Building, LogIn, Activity, FileCheck, Mail, PhoneCall, MapPin, 
+  Database, LineChart, Lock, Zap, CheckCircle2, ChevronRight, Globe
 } from 'lucide-react';
 
 export default function LandingPage() {
@@ -35,113 +16,81 @@ export default function LandingPage() {
   const messageId = useId();
 
   const navigation = [
-    { name: 'Beranda', href: '#beranda' },
-    { name: 'Tentang Kami', href: '#tentang' },
-    { name: 'Layanan', href: '#layanan' },
-    { name: 'Sertifikasi & HSE', href: '#sertifikasi' },
-    { name: 'Hubungi Kami', href: '#kontak' },
+    { name: 'Tentang HRIS', href: '#tentang' },
+    { name: 'Fitur Inti', href: '#fitur' },
+    { name: 'Manfaat', href: '#manfaat' },
+    { name: 'Layanan Unit', href: '#unit' },
+    { name: 'Kontak', href: '#kontak' },
   ];
 
   const stats = [
-    { id: 1, name: 'Tahun Pengalaman', value: '45+', desc: 'Sejak 1978 melayani Indonesia', icon: Clock },
-    { id: 2, name: 'Karyawan Profesional', value: '5,000+', desc: 'SDM terlatih & tersertifikasi', icon: Users },
-    { id: 3, name: 'Lokasi Operasional', value: '120+', desc: 'Dari perkotaan hingga site terpencil', icon: Compass },
-    { id: 4, name: 'Sertifikasi Mutu & HSE', value: '100%', desc: 'Komitmen penuh zero accident', icon: ShieldCheck },
+    { id: 1, name: 'Karyawan Dikelola', value: '5,000+', desc: 'Data aktif & terpusat', icon: Users },
+    { id: 2, name: 'Lokasi Operasional', value: '120+', desc: 'Distribusi remote site', icon: MapPin },
+    { id: 3, name: 'Kepatuhan HSE', value: '100%', desc: 'Pelacakan sertifikasi', icon: ShieldCheck },
+    { id: 4, name: 'Uptime Sistem', value: '99.9%', desc: 'Infrastruktur enterprise', icon: Zap },
   ];
 
-  const services = [
+  const coreFeatures = [
     {
-      name: 'Katering Industri & Remote Site',
-      description: 'Layanan katering skala besar untuk pertambangan darat, perkebunan, dan konstruksi dengan standar nutrisi dan higienitas tertinggi.',
-      icon: ChefHat,
-      features: ['Perencanaan Menu Variatif', 'Ahli Gizi Tersertifikasi', 'Dapur Modular & Mobile'],
+      name: 'Manajemen Data Pegawai',
+      description: 'Sentralisasi data profil, dokumen, dan riwayat karir untuk seluruh karyawan dari kantor pusat hingga remote site.',
+      icon: Database,
     },
     {
-      name: 'Katering Lepas Pantai (Offshore)',
-      description: 'Layanan katering dan housekeeping khusus di rig pengeboran lepas pantai dan kapal FPSO dengan kepatuhan HSE kelautan yang ketat.',
-      icon: Anchor,
-      features: ['Logistik Marine Container', 'Kru Bersertifikat BST', 'Kepatuhan Regulasi Kelautan'],
+      name: 'Pelacakan Sertifikasi HSE',
+      description: 'Pemantauan masa berlaku lisensi, sertifikat BST, dan pelatihan keselamatan secara real-time untuk kepatuhan operasional.',
+      icon: ShieldCheck,
     },
     {
-      name: 'Camp Management (Manajemen Kamp)',
-      description: 'Solusi terpadu untuk pengelolaan akomodasi pekerja remote, mencakup housekeeping, laundry, kebersihan, dan fasilitas rekreasi.',
-      icon: Building,
-      features: ['Manajemen Kamar Real-time', 'Layanan Laundry Higienis', 'Fasilitas Rekreasi & Olahraga'],
+      name: 'Analitik & Pelaporan',
+      description: 'Dashboard komprehensif untuk memantau KPI demografi, produktivitas, dan absensi dengan visualisasi interaktif.',
+      icon: LineChart,
     },
     {
-      name: 'Katering Rumah Sakit & Institusi',
-      description: 'Penyusunan menu diet klinis khusus pasien rumah sakit yang diawasi oleh nutritionist profesional dan diolah secara higienis.',
-      icon: HeartPulse,
-      features: ['Diet Khusus Pasien', 'Kontrol Kontaminasi Silang', 'Sertifikasi Higiene Sanitasi'],
+      name: 'Manajemen Kehadiran & Shift',
+      description: 'Sistem pengaturan jadwal roster kompleks dan rotasi shift untuk operasional katering industri dan lepas pantai.',
+      icon: Activity,
     },
-    {
-      name: 'Rantai Pasok & Logistik Rantai Dingin',
-      description: 'Jaringan distribusi bahan makanan segar yang andal menuju lokasi ekstrem dengan armada berpendingin (cold chain) berteknologi tinggi.',
-      icon: Truck,
-      features: ['Truk Pendingin Terkontrol', 'Gudang Suhu Ganda', 'Pelacakan Rantai Pasok'],
-    },
-    {
-      name: 'Layanan Fasilitas Pendukung',
-      description: 'Manajemen fasilitas menyeluruh meliputi pengendalian hama (pest control), penanganan limbah domestik, dan pemeliharaan utilitas site.',
-      icon: HardHat,
-      features: ['Pest & Vector Control', 'Manajemen Limbah Domestik', 'Pemeliharaan Utilitas & Listrik'],
-    },
+  ];
+
+  const benefits = [
+    'Akses terpadu dari berbagai perangkat untuk administrasi cepat.',
+    'Peringatan otomatis untuk sertifikasi yang akan kedaluwarsa.',
+    'Keamanan tingkat tinggi dengan enkripsi data dan kontrol akses berbasis peran (RBAC).',
+    'Integrasi mulus dengan modul penggajian dan kompensasi.',
+    'Dukungan penuh untuk skala ribuan pengguna aktif serentak.',
+  ];
+
+  const values = [
+    { name: 'Safety First', desc: 'Prioritas utama pada keselamatan kerja dan lingkungan.' },
+    { name: 'Operational Excellence', desc: 'Standar tinggi dalam pelayanan dan pengelolaan operasi.' },
+    { name: 'Continuous Improvement', desc: 'Inovasi berkelanjutan dalam teknologi dan kapabilitas SDM.' },
   ];
 
   const certifications = [
-    { name: 'ISO 9001:2015', desc: 'Sistem Manajemen Mutu', organization: 'Standardisasi Internasional' },
-    { name: 'ISO 22000:2018', desc: 'Sistem Manajemen Keamanan Pangan', organization: 'HACCP Terintegrasi' },
-    { name: 'ISO 45001:2018', desc: 'Sistem Manajemen Keselamatan & Kesehatan Kerja', organization: 'HSE Komitmen Tinggi' },
-    { name: 'ISO 14001:2015', desc: 'Sistem Manajemen Lingkungan', organization: 'Ramah Lingkungan & Berkelanjutan' },
-    { name: 'Sertifikasi Halal MUI', desc: 'Jaminan Produk Halal dengan Nilai A (Excellent)', organization: 'Majelis Ulama Indonesia' },
-    { name: 'CSMS Gold Class', desc: 'Contractor Safety Management System', organization: 'Kualifikasi Keselamatan Kerja Tertinggi' },
-  ];
-
-  const offices = [
-    {
-      city: 'Kantor Pusat Jakarta',
-      address: 'Gedung Indocater, Jl. Suryopranoto No. 2, Petojo Utara, Gambir, Jakarta Pusat 10130',
-      phone: '+62-21-3810055',
-      email: 'info@indocater.co.id',
-    },
-    {
-      city: 'Kantor Cabang Balikpapan',
-      address: 'Jl. Mulawarman No. 28, RT 23, Sepinggan, Balikpapan Selatan, Kalimantan Timur 76115',
-      phone: '+62-542-764555',
-      email: 'bpp-office@indocater.co.id',
-    },
-    {
-      city: 'Kantor Cabang Timika',
-      address: 'Jl. Ahmad Yani No. 8, Timika, Mimika, Papua Tengah 99910',
-      phone: '+62-901-321333',
-      email: 'tmk-office@indocater.co.id',
-    },
+    'ISO 9001:2015 - Sistem Manajemen Mutu',
+    'ISO 22000:2018 - Manajemen Keamanan Pangan',
+    'ISO 45001:2018 - Kesehatan & Keselamatan Kerja',
+    'CSMS Gold Class Certification',
   ];
 
   return (
     <div className="bg-[#081C3A] text-slate-100 min-h-screen font-sans scroll-smooth">
       {/* Header / Navbar */}
-      <header className="sticky top-0 z-50 bg-[#081C3A]/90 backdrop-blur-md border-b border-white/5">
+      <header className="sticky top-0 z-50 bg-[#081C3A]/90 backdrop-blur-md border-b border-white/5 shadow-sm">
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Navigasi Utama">
           <div className="flex h-20 items-center justify-between">
             {/* Logo */}
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white p-1 shadow-inner">
-                <Image 
-                  src="/logo-indocater.jpg" 
-                  alt="Logo PT Indocater" 
-                  width={40} 
-                  height={40} 
-                  className="object-contain"
-                  priority
-                />
+                <Image src="/logo-indocater.jpg" alt="Logo PT Indocater" width={40} height={40} className="object-contain" priority />
               </div>
               <div>
                 <span className="text-lg font-extrabold tracking-wider bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">
                   INDOCATER
                 </span>
                 <span className="block text-[9px] uppercase tracking-[0.25em] text-slate-400 font-semibold leading-none">
-                  Member of Media Group
+                  Enterprise HRIS
                 </span>
               </div>
             </div>
@@ -149,443 +98,282 @@ export default function LandingPage() {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8">
               {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors"
-                >
+                <a key={item.name} href={item.href} className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors">
                   {item.name}
                 </a>
               ))}
             </div>
 
             {/* Login Button */}
-            <div className="hidden md:flex items-center">
+            <div className="hidden md:flex items-center gap-4">
               <Link
                 href="/login"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 px-5 py-2.5 text-sm font-bold text-slate-950 hover:from-amber-400 hover:to-amber-500 shadow-md shadow-amber-500/10 transition-all hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-[#081C3A]"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 px-6 py-2.5 text-sm font-bold text-slate-950 hover:from-amber-400 hover:to-amber-500 shadow-lg shadow-amber-500/20 transition-all hover:-translate-y-0.5 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-[#081C3A]"
               >
                 <LogIn className="h-4 w-4" />
-                Portal HRIS
+                Login Portal
               </Link>
             </div>
 
             {/* Mobile menu button */}
             <div className="flex md:hidden">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-xl p-2.5 text-slate-400 hover:bg-white/5 hover:text-white transition-colors"
-                onClick={() => setMobileMenuOpen(true)}
-              >
-                <span className="sr-only">Buka menu utama</span>
-                <Menu className="h-6 w-6" aria-hidden="true" />
+              <button type="button" className="rounded-xl p-2.5 text-slate-400 hover:bg-white/5 hover:text-white" onClick={() => setMobileMenuOpen(true)}>
+                <span className="sr-only">Buka menu</span>
+                <Menu className="h-6 w-6" />
               </button>
             </div>
           </div>
         </nav>
 
-        {/* Mobile menu overlay */}
+        {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 bg-[#081C3A] px-6 py-6 md:hidden flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white p-1">
-                    <Image src="/logo-indocater.jpg" alt="Logo PT Indocater" width={32} height={32} className="object-contain" />
-                  </div>
-                  <span className="text-md font-extrabold tracking-wider text-amber-400">INDOCATER</span>
+          <div className="fixed inset-0 z-50 bg-[#081C3A] px-6 py-6 md:hidden flex flex-col">
+            <div className="flex items-center justify-between border-b border-white/5 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white p-1">
+                  <Image src="/logo-indocater.jpg" alt="Logo PT Indocater" width={32} height={32} className="object-contain" />
                 </div>
-                <button
-                  type="button"
-                  className="rounded-xl p-2 text-slate-400 hover:bg-white/5 hover:text-white"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="sr-only">Tutup menu</span>
-                  <X className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <span className="text-md font-extrabold tracking-wider text-amber-400">HRIS PORTAL</span>
               </div>
-              <div className="mt-8 space-y-2">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block rounded-2xl px-4 py-3 text-base font-semibold text-slate-200 hover:bg-white/5 hover:text-amber-400 transition-all"
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
+              <button type="button" className="rounded-xl p-2 text-slate-400 hover:bg-white/5" onClick={() => setMobileMenuOpen(false)}>
+                <span className="sr-only">Tutup menu</span>
+                <X className="h-6 w-6" />
+              </button>
             </div>
-            <div className="space-y-4">
-              <Link
-                href="/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-amber-500 py-4 text-center text-md font-bold text-slate-950 hover:bg-amber-400 transition-colors"
-              >
-                <LogIn className="h-5 w-5" />
-                Masuk Portal HRIS
-              </Link>
-              <p className="text-center text-xs text-slate-500">
-                PT Indocater HRIS Enterprise © 2026
-              </p>
+            <div className="mt-8 flex flex-col space-y-4">
+              {navigation.map((item) => (
+                <a key={item.name} href={item.href} onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-200 hover:text-amber-400">
+                  {item.name}
+                </a>
+              ))}
+              <div className="pt-8 border-t border-white/5">
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 py-3.5 text-center text-sm font-bold text-slate-950 hover:bg-amber-400">
+                  <LogIn className="h-5 w-5" />
+                  Masuk Sistem
+                </Link>
+              </div>
             </div>
           </div>
         )}
       </header>
 
       {/* Hero Section */}
-      <section id="beranda" className="relative overflow-hidden pt-12 pb-20 lg:pt-24 lg:pb-32">
-        {/* Decorative background grid and gradients */}
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.blue.950),theme(colors.slate.950))] opacity-40" />
-        <div className="absolute right-0 top-0 -z-10 h-[600px] w-[600px] rounded-full bg-blue-900/10 blur-[120px]" />
-        <div className="absolute left-1/4 bottom-0 -z-10 h-[400px] w-[400px] rounded-full bg-amber-500/5 blur-[100px]" />
-
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-            {/* Left Column: Text Content */}
-            <div className="lg:col-span-7 space-y-6 text-left">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold tracking-wider text-amber-400">
-                <Award className="h-3.5 w-3.5" />
-                MITRA TERPERCAYA SEJAK 1978
-              </div>
-              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.1]">
-                Solusi Katering & <br />
-                <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-100 bg-clip-text text-transparent">
-                  Camp Management
-                </span> <br />
-                Kelas Dunia
-              </h1>
-              <p className="max-w-2xl text-md sm:text-lg leading-8 text-slate-300">
-                Kami menyediakan katering industri skala besar, pengelolaan kamp hunian terpadu, dan logistik penunjang untuk sektor pertambangan, minyak & gas, rumah sakit, dan korporasi di seluruh pelosok Indonesia dengan jaminan kepatuhan HSE dan sertifikasi mutu tertinggi.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <a
-                  href="#layanan"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 border border-white/10 px-6 py-3.5 text-sm font-bold text-white hover:bg-white/20 transition-all"
-                >
-                  Jelajahi Layanan Kami
-                </a>
-                <Link
-                  href="/login"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-6 py-3.5 text-sm font-bold text-slate-950 hover:bg-amber-400 shadow-lg shadow-amber-500/20 transition-all hover:scale-[1.01]"
-                >
-                  Portal HRIS Karyawan
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Column: Visual Dashboard/Services Concept */}
-            <div className="lg:col-span-5 relative mt-6 lg:mt-0 flex justify-center">
-              <div className="relative w-full max-w-[480px] overflow-hidden rounded-3xl border border-white/10 bg-[#0d274d]/40 p-6 shadow-2xl backdrop-blur-sm">
-                <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-amber-500/10 blur-2xl" />
-                <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-blue-500/15 blur-2xl" />
-                
-                {/* Header-like info inside mock card */}
-                <div className="flex items-center justify-between pb-6 border-b border-white/5">
-                  <div className="flex items-center gap-2">
-                    <Activity className="h-5 w-5 text-amber-400" />
-                    <span className="text-xs uppercase font-extrabold tracking-widest text-slate-300">INDOCATER OPERATIONS</span>
-                  </div>
-                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                </div>
-
-                {/* Operations Overview items */}
-                <div className="space-y-4 pt-6">
-                  <div className="flex items-start gap-4 p-3 rounded-2xl bg-white/[0.02] border border-white/5 transition-all hover:bg-white/[0.04]">
-                    <div className="rounded-xl bg-amber-500/10 p-2.5 text-amber-400">
-                      <ChefHat className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-white">Menu & Keamanan Pangan</h3>
-                      <p className="text-xs text-slate-400 mt-1">100% Halal MUI, bersertifikat HACCP & ISO 22000 untuk jaminan higienitas prima.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4 p-3 rounded-2xl bg-white/[0.02] border border-white/5 transition-all hover:bg-white/[0.04]">
-                    <div className="rounded-xl bg-blue-500/10 p-2.5 text-blue-400">
-                      <HardHat className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-white">Keselamatan Kerja (HSE)</h3>
-                      <p className="text-xs text-slate-400 mt-1">Sertifikasi ISO 45001 dan CSMS Gold Class untuk budaya keselamatan tanpa kompromi.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4 p-3 rounded-2xl bg-white/[0.02] border border-white/5 transition-all hover:bg-white/[0.04]">
-                    <div className="rounded-xl bg-emerald-500/10 p-2.5 text-emerald-400">
-                      <Users className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-white">Manajemen Sumber Daya</h3>
-                      <p className="text-xs text-slate-400 mt-1">Portal HRIS terpadu untuk monitoring kepatuhan lisensi, pelatihan HSE, & sertifikasi.</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom link to login */}
-                <div className="mt-6 pt-4 border-t border-white/5 flex justify-between items-center text-xs text-slate-400">
-                  <span>Akses portal staf internal</span>
-                  <Link href="/login" className="flex items-center gap-1 text-amber-400 font-semibold hover:underline">
-                    Login HRIS <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </div>
-              </div>
-            </div>
+      <section className="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,theme(colors.blue.900/30),transparent_70%)]" />
+        <div className="absolute right-0 top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-amber-500/5 blur-[100px]" />
+        
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold tracking-wider text-amber-400 mb-8">
+            <Lock className="h-3.5 w-3.5" />
+            SECURE ENTERPRISE PLATFORM
+          </div>
+          
+          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-7xl leading-[1.1]">
+            Transformasi Digital <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-200 bg-clip-text text-transparent">
+              Manajemen SDM & HSE
+            </span>
+          </h1>
+          
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+            Platform HRIS resmi PT Indocater yang dirancang khusus untuk mengelola operasional tenaga kerja, kepatuhan keselamatan, dan administrasi karyawan skala industri dengan presisi tinggi.
+          </p>
+          
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/login"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-8 py-4 text-sm font-bold text-slate-950 hover:bg-amber-400 shadow-xl shadow-amber-500/20 transition-transform hover:-translate-y-1"
+            >
+              Login ke Dashboard
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a
+              href="#fitur"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white/5 border border-white/10 px-8 py-4 text-sm font-bold text-white hover:bg-white/10 transition-colors"
+            >
+              Pelajari Fitur
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="border-y border-white/5 bg-[#0b1e38]/50 py-12">
+      {/* Statistics */}
+      <section className="border-y border-white/5 bg-[#0b1e38]/80 py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-y-10 gap-x-6 md:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.id} className="relative pl-14 text-left">
-                <dt className="text-sm font-medium text-slate-400">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
-                    <stat.icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  {stat.name}
-                </dt>
-                <dd className="mt-1 text-3xl font-extrabold tracking-tight text-white">{stat.value}</dd>
-                <dd className="mt-1 text-xs text-slate-500 leading-normal">{stat.desc}</dd>
+          <div className="grid grid-cols-2 gap-y-10 gap-x-6 md:grid-cols-4 divide-x divide-white/5">
+            {stats.map((stat, idx) => (
+              <div key={stat.id} className={`text-center ${idx === 0 ? '' : 'pl-6'}`}>
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400 mb-4">
+                  <stat.icon className="h-6 w-6" aria-hidden="true" />
+                </div>
+                <dd className="text-3xl font-extrabold tracking-tight text-white">{stat.value}</dd>
+                <dt className="mt-1 text-sm font-semibold text-slate-300">{stat.name}</dt>
+                <p className="mt-1 text-xs text-slate-500">{stat.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="tentang" className="py-20 lg:py-28 relative">
+      {/* HRIS Platform Intro & Company Overview */}
+      <section id="tentang" className="py-24 relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-            {/* Image Placeholder representing company history/heritage */}
-            <div className="lg:col-span-5 order-last lg:order-first flex justify-center">
-              <div className="relative w-full max-w-[400px] overflow-hidden rounded-3xl border border-white/10 bg-[#0d274d] p-8 shadow-xl text-left space-y-6">
-                <div className="h-2 w-16 rounded-full bg-amber-400" />
-                <h3 className="text-xl font-bold text-white">Visi Kami</h3>
-                <p className="text-sm leading-7 text-slate-300">
-                  &ldquo;Menjadi mitra katering dan camp management pilihan utama dengan reputasi tak tertandingi dalam kualitas makanan, kepedulian lingkungan, keselamatan kerja, serta pemberdayaan lokal.&rdquo;
-                </p>
-                <div className="pt-4 border-t border-white/5 space-y-3">
-                  <div className="flex items-center gap-3 text-xs text-slate-300">
-                    <FileCheck className="h-4 w-4 text-amber-400" />
-                    Kepatuhan Regulasi Nasional & Global
-                  </div>
-                  <div className="flex items-center gap-3 text-xs text-slate-300">
-                    <Users className="h-4 w-4 text-amber-400" />
-                    Pemberdayaan Tenaga Kerja Lokal
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* About Text */}
-            <div className="lg:col-span-7 space-y-6 text-left">
-              <div className="text-xs uppercase font-extrabold tracking-widest text-amber-400">TENTANG PT INDOCATER</div>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-6 text-left">
+              <div className="text-xs uppercase font-extrabold tracking-widest text-amber-400">TENTANG PLATFORM</div>
               <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-                Lebih dari Empat Dekade Mengabdi untuk Negeri
+                Sistem Terpusat untuk Operasi Skala Besar
               </h2>
-              <p className="text-md leading-8 text-slate-300">
-                PT Indocater didirikan pada tahun 1978 sebagai pionir penyedia jasa boga katering industri di Indonesia. Seiring berjalannya waktu, kami memperluas jangkauan layanan dengan menyediakan solusi manajemen akomodasi (camp management) dan layanan pendukung terpadu lainnya untuk industri pertambangan, minyak & gas, maritim, kesehatan, dan perkantoran komersil.
+              <p className="text-base leading-7 text-slate-300">
+                PT Indocater Enterprise HRIS adalah fondasi digital yang menggerakkan lebih dari 5.000 karyawan di seluruh Indonesia. Dari katering remote site hingga manajemen fasilitas lepas pantai, sistem kami memastikan setiap tenaga kerja terpantau, terlatih, dan terpenuhi haknya secara akurat.
               </p>
-              <p className="text-md leading-8 text-slate-300">
-                Sebagai bagian dari komitmen kami, PT Indocater selalu menerapkan sistem manajemen mutu standar tinggi dan budaya K3LH (Kesehatan, Keselamatan Kerja, dan Lindung Lingkungan) yang ketat guna memastikan keselamatan seluruh pekerja dan kepuasan maksimal klien di setiap titik operasi kami.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section id="layanan" className="py-20 lg:py-28 bg-[#0b1e38]/40 border-y border-white/5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <div className="text-xs uppercase font-extrabold tracking-widest text-amber-400">LAYANAN UTAMA</div>
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-            Solusi Terintegrasi untuk Operasi Anda
-          </h2>
-          <p className="mx-auto max-w-2xl text-sm sm:text-base text-slate-400 leading-normal">
-            Kami mengelola seluruh kebutuhan katering, akomodasi, dan layanan logistik pendukung secara presisi demi memastikan kenyamanan kru Anda di lapangan.
-          </p>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 pt-12 text-left">
-            {services.map((service) => (
-              <div 
-                key={service.name} 
-                className="rounded-3xl border border-white/5 bg-[#0d274d]/50 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:border-amber-500/20 hover:bg-[#0d274d]/80 hover:translate-y-[-4px]"
-              >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400 mb-6">
-                  <service.icon className="h-6 w-6" aria-hidden="true" />
-                </div>
-                <h3 className="text-lg font-bold text-white">{service.name}</h3>
-                <p className="mt-3 text-sm text-slate-400 leading-relaxed min-h-[72px]">
-                  {service.description}
-                </p>
-                <ul className="mt-6 space-y-2 border-t border-white/5 pt-4" aria-label={`Fitur ${service.name}`}>
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-xs text-slate-300">
-                      <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications & HSE Section */}
-      <section id="sertifikasi" className="py-20 lg:py-28 relative">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <div className="text-xs uppercase font-extrabold tracking-widest text-amber-400">STANDAR MUTU & HSE</div>
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-            Sertifikasi Nasional & Internasional
-          </h2>
-          <p className="mx-auto max-w-2xl text-sm sm:text-base text-slate-400 leading-normal">
-            Kami mengedepankan kepatuhan penuh terhadap standar mutu makanan, manajemen keselamatan kerja, dan perlindungan lingkungan di setiap unit dapur dan kamp.
-          </p>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 pt-12 text-left">
-            {certifications.map((cert) => (
-              <div 
-                key={cert.name} 
-                className="rounded-2xl border border-white/5 bg-[#0b1e38]/40 p-6 transition-all hover:bg-[#0d274d]/40"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
-                    <FileCheck className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-md font-bold text-white">{cert.name}</h3>
-                    <p className="text-xs text-slate-500 mt-0.5">{cert.organization}</p>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm text-slate-400 leading-relaxed">
-                  {cert.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="kontak" className="py-20 lg:py-28 bg-[#0b1e38]/60 border-t border-white/5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-12">
-            {/* Office Locations */}
-            <div className="lg:col-span-6 space-y-6 text-left">
-              <div className="text-xs uppercase font-extrabold tracking-widest text-amber-400">HUBUNGI KAMI</div>
-              <h2 className="text-3xl font-extrabold text-white">Jaringan Kantor Operasional Kami</h2>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Hubungi kantor terdekat kami untuk berdiskusi tentang bagaimana kami dapat mendukung kelancaran operasional perusahaan Anda melalui layanan katering dan camp management berkualitas.
-              </p>
-
-              <div className="space-y-6 pt-6">
-                {offices.map((office) => (
-                  <div key={office.city} className="flex items-start gap-4">
-                    <div className="rounded-xl bg-amber-500/10 p-2.5 text-amber-400 mt-1">
-                      <MapPin className="h-5 w-5" />
-                    </div>
+              <div className="pt-6 border-t border-white/5 grid gap-4">
+                {values.map((val) => (
+                  <div key={val.name} className="flex gap-4">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
                     <div>
-                      <h3 className="text-md font-bold text-white">{office.city}</h3>
-                      <p className="text-xs text-slate-400 mt-1 leading-normal">{office.address}</p>
-                      <div className="flex gap-4 mt-2 text-xs text-slate-300">
-                        <span className="flex items-center gap-1">
-                          <PhoneCall className="h-3 w-3 text-amber-400" />
-                          {office.phone}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Mail className="h-3 w-3 text-amber-400" />
-                          {office.email}
-                        </span>
-                      </div>
+                      <h4 className="text-sm font-bold text-white">{val.name}</h4>
+                      <p className="text-xs text-slate-400 mt-1">{val.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
+            
+            <div className="relative rounded-3xl border border-white/10 bg-[#0d274d] p-8 shadow-2xl">
+              <div className="absolute -top-12 -right-12 h-32 w-32 bg-amber-500/20 blur-[60px] rounded-full" />
+              <h3 className="text-xl font-bold text-white mb-6">Mengapa HRIS Kami Berbeda?</h3>
+              <ul className="space-y-6">
+                <li className="flex items-start gap-4">
+                  <div className="rounded-xl bg-blue-500/10 p-2 text-blue-400"><Globe className="h-5 w-5" /></div>
+                  <div>
+                    <strong className="block text-sm text-white">Desain Berbasis Industri (Industry-Specific)</strong>
+                    <span className="text-sm text-slate-400">Dibangun khusus untuk tantangan logistik dan penjadwalan katering industri jarak jauh.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="rounded-xl bg-purple-500/10 p-2 text-purple-400"><ShieldCheck className="h-5 w-5" /></div>
+                  <div>
+                    <strong className="block text-sm text-white">Kepatuhan HSE Terintegrasi</strong>
+                    <span className="text-sm text-slate-400">Bukan sekadar HR, namun juga platform pelacakan keselamatan (CSMS & ISO).</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Quick Contact Form Placeholder/Card */}
-            <div className="lg:col-span-6 flex justify-center">
-              <div className="w-full max-w-[460px] rounded-3xl border border-white/5 bg-[#0d274d]/50 p-8 shadow-xl text-left space-y-6">
-                <h3 className="text-lg font-bold text-white">Kirim Pesan Cepat</h3>
-                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                  <div>
-                    <label htmlFor={nameId} className="block text-xs uppercase font-semibold text-slate-400 tracking-wider">Nama Lengkap</label>
-                    <input 
-                      id={nameId}
-                      type="text" 
-                      placeholder="Masukkan nama Anda" 
-                      className="mt-2 w-full rounded-2xl border border-white/10 bg-[#081c3a] p-3 text-sm text-white placeholder-slate-500 outline-none focus:border-amber-500" 
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor={emailId} className="block text-xs uppercase font-semibold text-slate-400 tracking-wider">Alamat Email</label>
-                    <input 
-                      id={emailId}
-                      type="email" 
-                      placeholder="nama@perusahaan.com" 
-                      className="mt-2 w-full rounded-2xl border border-white/10 bg-[#081c3a] p-3 text-sm text-white placeholder-slate-500 outline-none focus:border-amber-500" 
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor={messageId} className="block text-xs uppercase font-semibold text-slate-400 tracking-wider">Pesan</label>
-                    <textarea 
-                      id={messageId}
-                      rows={3} 
-                      placeholder="Tuliskan kebutuhan katering atau camp management Anda di sini..." 
-                      className="mt-2 w-full rounded-2xl border border-white/10 bg-[#081c3a] p-3 text-sm text-white placeholder-slate-500 outline-none focus:border-amber-500 resize-none" 
-                    ></textarea>
-                  </div>
-                  <button 
-                    type="submit" 
-                    className="w-full rounded-full bg-amber-500 py-3 text-sm font-bold text-slate-950 hover:bg-amber-400 transition-colors"
-                  >
-                    Kirim Pesan
-                  </button>
-                </form>
+      {/* Core Features */}
+      <section id="fitur" className="py-24 bg-[#0b1e38]/50 border-y border-white/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl font-extrabold text-white sm:text-4xl">Modul Fitur Utama</h2>
+            <p className="mt-4 text-slate-400">Kemampuan komprehensif untuk mendukung tata kelola sumber daya manusia berstandar enterprise.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {coreFeatures.map((feat) => (
+              <div key={feat.name} className="rounded-3xl border border-white/5 bg-white/[0.02] p-6 hover:bg-white/[0.04] transition-colors">
+                <feat.icon className="h-8 w-8 text-amber-400 mb-5" />
+                <h3 className="text-base font-bold text-white mb-2">{feat.name}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">{feat.description}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits & Standards */}
+      <section id="manfaat" className="py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <div>
+              <h2 className="text-3xl font-extrabold text-white mb-8">Manfaat Bagi Operasional</h2>
+              <ul className="space-y-4">
+                {benefits.map((benefit, i) => (
+                  <li key={i} className="flex items-start gap-3 p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                    <ChevronRight className="h-5 w-5 text-amber-400 shrink-0" />
+                    <span className="text-sm text-slate-300">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="bg-[#0b1e38]/80 rounded-3xl p-8 border border-white/5">
+              <h2 className="text-2xl font-bold text-white mb-2">Standar & Sertifikasi</h2>
+              <p className="text-sm text-slate-400 mb-8">Sistem dirancang untuk menunjang audit dan pelaporan sesuai standar baku mutu internasional.</p>
+              
+              <div className="grid gap-4">
+                {certifications.map((cert, i) => (
+                  <div key={i} className="flex items-center gap-4 bg-[#081C3A] p-4 rounded-xl border border-white/5">
+                    <FileCheck className="h-6 w-6 text-emerald-400" />
+                    <span className="text-sm font-semibold text-slate-200">{cert}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Business Units Supported */}
+      <section id="unit" className="py-24 bg-[#0b1e38]/50 border-y border-white/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-extrabold text-white mb-12">Mendukung Seluruh Unit Bisnis</h2>
+          <div className="grid sm:grid-cols-3 gap-8">
+            <div className="p-6">
+              <Building className="h-10 w-10 text-amber-400 mx-auto mb-4" />
+              <h3 className="text-lg font-bold text-white mb-2">Industrial Catering</h3>
+              <p className="text-sm text-slate-400">Pengelolaan kru dapur dan ahli gizi untuk site pertambangan.</p>
+            </div>
+            <div className="p-6">
+              <ShieldCheck className="h-10 w-10 text-amber-400 mx-auto mb-4" />
+              <h3 className="text-lg font-bold text-white mb-2">Offshore Services</h3>
+              <p className="text-sm text-slate-400">Pelacakan lisensi kelautan (BST, HUET) secara real-time.</p>
+            </div>
+            <div className="p-6">
+              <Users className="h-10 w-10 text-amber-400 mx-auto mb-4" />
+              <h3 className="text-lg font-bold text-white mb-2">Camp Management</h3>
+              <p className="text-sm text-slate-400">Penjadwalan rotasi pekerja fasilitas akomodasi remote.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="kontak" className="py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl bg-gradient-to-br from-[#0d274d] to-[#081c3a] border border-white/10 p-8 lg:p-16 text-center">
+            <h2 className="text-3xl font-extrabold text-white">Butuh Bantuan Akses?</h2>
+            <p className="mt-4 text-slate-400 max-w-xl mx-auto mb-10">
+              Jika Anda mengalami kendala login, otorisasi peran, atau membutuhkan panduan sistem, silakan hubungi IT Helpdesk PT Indocater.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <a href="mailto:it.support@indocater.co.id" className="flex items-center gap-3 text-slate-200 hover:text-amber-400">
+                <div className="p-3 bg-white/5 rounded-full"><Mail className="h-5 w-5" /></div>
+                <span className="font-semibold">it.support@indocater.co.id</span>
+              </a>
+              <a href="tel:+62213810055" className="flex items-center gap-3 text-slate-200 hover:text-amber-400">
+                <div className="p-3 bg-white/5 rounded-full"><PhoneCall className="h-5 w-5" /></div>
+                <span className="font-semibold">+62-21-3810055 (Ext. 202)</span>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#06152a] border-t border-white/5 py-12 text-slate-500 text-xs">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1">
-                <Image src="/logo-indocater.jpg" alt="Logo PT Indocater" width={24} height={24} className="object-contain" />
-              </div>
-              <div className="text-left">
-                <span className="text-sm font-extrabold tracking-wider text-slate-300">PT INDOCATER</span>
-                <p className="text-[9px] uppercase tracking-wider text-slate-500">CATERING & CAMP MANAGEMENT SERVICES</p>
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap justify-center gap-6 text-slate-400">
-              <a href="#beranda" className="hover:text-white transition-colors">Beranda</a>
-              <a href="#tentang" className="hover:text-white transition-colors">Tentang Kami</a>
-              <a href="#layanan" className="hover:text-white transition-colors">Layanan</a>
-              <a href="#sertifikasi" className="hover:text-white transition-colors">Sertifikasi & HSE</a>
-              <Link href="/login" className="hover:text-amber-400 font-semibold transition-colors">Portal HRIS</Link>
+      <footer className="bg-[#051124] border-t border-white/5 py-12 text-center text-slate-500 text-sm">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="flex justify-center mb-6">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white p-1">
+              <Image src="/logo-indocater.jpg" alt="Logo PT Indocater" width={32} height={32} className="object-contain" />
             </div>
           </div>
-
-          <div className="mt-8 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-            <p>Copyright © 2026 PT Indocater. Seluruh hak cipta dilindungi.</p>
-            <p className="flex items-center gap-1.5 justify-center">
-              <span>Sistem Manajemen Kepegawaian & Kepatuhan HSE</span>
-              <span className="h-1.5 w-1.5 rounded-full bg-slate-700" />
-              <Link href="/login" className="hover:text-slate-300 underline">Login</Link>
-            </p>
-          </div>
+          <p className="font-bold text-slate-300 tracking-widest uppercase text-xs mb-2">PT INDOCATER</p>
+          <p className="mb-6 text-xs">Sistem Informasi SDM Terpadu (HRIS)</p>
+          <p>© {new Date().getFullYear()} PT Indocater. Seluruh Hak Cipta Dilindungi.</p>
         </div>
       </footer>
     </div>

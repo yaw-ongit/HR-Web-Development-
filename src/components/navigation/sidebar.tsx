@@ -27,7 +27,7 @@ import {
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { label: 'Dashboard', icon: LayoutDashboard, href: '/' },
+  { label: 'Dashboard', icon: LayoutDashboard, href: '/dashboard' },
   { label: 'Data Karyawan', icon: Users2, href: '/people' },
   { label: 'Struktur Organisasi', icon: Layers, href: '/people/org-structure' },
   { label: 'Dokumen Karyawan', icon: FileText, href: '/people/documents' },

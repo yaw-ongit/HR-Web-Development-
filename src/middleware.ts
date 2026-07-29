@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
 
   // Define protected paths
   const isProtectedPath =
-    pathname === '/' ||
+    pathname.startsWith('/dashboard') ||
     pathname.startsWith('/people') ||
     pathname.startsWith('/talent') ||
     pathname.startsWith('/workforce') ||
@@ -18,15 +18,13 @@ export function middleware(request: NextRequest) {
 
   const isLoginPage = pathname.startsWith('/login')
 
-  // Bypass login check for now
-  /*
+  // Enforce login check
   if (isProtectedPath && !session) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
-  */
 
   if (isLoginPage && session) {
-    return NextResponse.redirect(new URL('/', request.url))
+    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   return NextResponse.next()

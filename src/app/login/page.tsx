@@ -34,7 +34,7 @@ export default function LoginPage() {
       if (username === 'admin' && password === 'admin') {
         // Set persistent cookie
         document.cookie = 'hris_session=admin; path=/; max-age=86400; samesite=lax';
-        window.location.href = '/';
+        window.location.href = '/dashboard';
       } else {
         setLoading(false);
         setErrorMsg('Username atau kata sandi salah. Gunakan admin / admin.');
