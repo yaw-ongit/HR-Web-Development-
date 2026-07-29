@@ -19,9 +19,9 @@ export default function PayrollReadyPage() {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   useEffect(() => {
-    CompensationService.getPayrollPeriods().then((data) => {
-      if (data.data && Array.isArray(data.data)) {
-        setDataList(data.data);
+    CompensationService.getPayrollPeriods().then((result) => {
+      if (result?.data && Array.isArray(result.data)) {
+        setDataList(result.data);
       }
     });
   }, []);

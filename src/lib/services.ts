@@ -10,9 +10,13 @@ export interface ServiceQueryResult<T> {
   isFallback: boolean;
 }
 
-async function safeQuery<T>(queryPromise: any, fallbackData?: T): Promise<ServiceQueryResult<T>> {
+async function safeQuery<T>(
+  queryPromise: any,
+  fallbackData?: T,
+  transform?: (row: any) => any
+): Promise<ServiceQueryResult<T>> {
   if (!supabase) {
-    return { data: fallbackData || ([] as any) || ([] as any), error: 'Supabase environment variables are not configured', isFallback: true };
+    return { data: fallbackData || ([] as any), error: 'Supabase environment variables are not configured', isFallback: true };
   }
 
   try {
@@ -26,7 +30,12 @@ async function safeQuery<T>(queryPromise: any, fallbackData?: T): Promise<Servic
       return { data: fallbackData || ([] as any), error: 'No data returned from Supabase', isFallback: true };
     }
 
-    return { data: data as T, error: null, isFallback: false };
+    let finalData = data;
+    if (transform) {
+      finalData = Array.isArray(data) ? data.map(transform) : transform(data);
+    }
+
+    return { data: finalData as T, error: null, isFallback: false };
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown Supabase connection error';
     console.error('Supabase connection failed:', message);
@@ -96,14 +105,11 @@ export const PeopleService = {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('employees').select('*, employee_profiles(*), departments(name), positions(title), employment_types(name), branches(name, city), manager:employees!manager_id(full_name)'),
-      fallback
+      fallback,
+      mappers.mapEmployeeRecord
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapEmployeeRecord) };
-    }
-    return res;
   },
 
   async getEmployeeById(id: string | number, fallback?: any) {
@@ -156,14 +162,11 @@ export const WorkforceService = {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('attendances').select('*, employees(full_name, departments(name)), shift_assignments(shifts(name))').order('attendance_date', { ascending: false }),
-      fallback
+      fallback,
+      mappers.mapAttendanceRecord
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapAttendanceRecord) };
-    }
-    return res;
   },
 
   async getLeaveRequests(fallback?: any[]) {
@@ -171,14 +174,11 @@ export const WorkforceService = {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('leave_requests').select('*, employees(full_name), leave_types(name), approver:employees!approver_id(full_name)').order('start_date', { ascending: false }),
-      fallback
+      fallback,
+      mappers.mapLeaveRequest
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapLeaveRequest) };
-    }
-    return res;
   },
 
   async getShiftSchedules(fallback?: any[]) {
@@ -186,14 +186,11 @@ export const WorkforceService = {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('shifts').select('*, shift_assignments(id)'),
-      fallback
+      fallback,
+      mappers.mapShiftSchedule
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapShiftSchedule) };
-    }
-    return res;
   },
 
   async getOvertimeRequests(fallback?: any[]) {
@@ -201,14 +198,11 @@ export const WorkforceService = {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('overtimes').select('*, employees(full_name, departments(name))').order('overtime_date', { ascending: false }),
-      fallback
+      fallback,
+      mappers.mapOvertimeRequest
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapOvertimeRequest) };
-    }
-    return res;
   }
 };
 
@@ -302,42 +296,33 @@ export const TalentService = {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('candidates').select('*, job_vacancies(title, departments(name))'),
-      fallback
+      fallback,
+      mappers.mapCandidate
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapCandidate) };
-    }
-    return res;
   },
 
   async getInterviews(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('interview_schedules').select('*, candidates(full_name, job_vacancies(title)), interviewer:employees!interviewer_id(full_name)'),
-      fallback
+      fallback,
+      mappers.mapInterview
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapInterview) };
-    }
-    return res;
   },
 
   async getOnboardingTasks(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('onboardings').select('*, employees(full_name)'),
-      fallback
+      fallback,
+      mappers.mapOnboardingTask
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapOnboardingTask) };
-    }
-    return res;
   },
 
   // --- CERTIFICATIONS ---
@@ -345,14 +330,11 @@ export const TalentService = {
     if (!supabase) {
       return { data: localCertifications, error: null, isFallback: true };
     }
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('certificates').select('*, employees(full_name), certification_types(name)'),
-      localCertifications
+      localCertifications,
+      mappers.mapCertification
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapCertification) };
-    }
-    return res;
   },
 
   async createCertification(data: any) {
@@ -448,28 +430,21 @@ export const TalentService = {
     if (!supabase) {
       return { data: localTrainingPrograms, error: null, isFallback: true };
     }
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('training_programs').select('*'),
-      localTrainingPrograms
+      localTrainingPrograms,
+      (t: any) => ({
+        id: t.id,
+        title: t.title || t.training_title,
+        description: t.description || t.training_description,
+        category: t.category,
+        trainer: t.trainer || t.trainer_name,
+        location: t.location,
+        start_date: t.start_date || t.training_date,
+        duration: t.duration || t.training_duration,
+        certificate_template: t.certificate_template
+      })
     );
-    if (!res.isFallback && res.data) {
-      return {
-        data: res.data.map((t: any) => ({
-          id: t.id,
-          title: t.title || t.training_title,
-          description: t.description || t.training_description,
-          category: t.category,
-          trainer: t.trainer || t.trainer_name,
-          location: t.location,
-          start_date: t.start_date || t.training_date,
-          duration: t.duration || t.training_duration,
-          certificate_template: t.certificate_template
-        })),
-        error: null,
-        isFallback: false
-      };
-    }
-    return res;
   },
 
   async createTrainingProgram(data: any) {
@@ -1117,12 +1092,9 @@ export const CompensationService = {
 
     const res = await safeQuery(
       supabase.from('payrolls').select('*, employees(full_name, departments(name), positions(title), employment_types(name))'),
-      fallback
+      fallback,
+      mappers.mapPayrollReady
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapPayrollReady) };
-    }
-    return res;
   },
 
   async getClaims(fallback?: any[]) {
@@ -1130,14 +1102,11 @@ export const CompensationService = {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('medical_claims').select('*, employees(full_name), processed_by_employee:employees!processed_by(full_name)'),
-      fallback
+      fallback,
+      mappers.mapClaim
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapClaim) };
-    }
-    return res;
   },
 
   async getBenefits(fallback?: any[]) {
@@ -1145,14 +1114,11 @@ export const CompensationService = {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('benefits').select('*, employees(full_name, departments(name)), benefit_types(name)'),
-      fallback
+      fallback,
+      mappers.mapBenefit
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapBenefit) };
-    }
-    return res;
   },
 
   async getBpjsRecords(fallback?: any[]) {
@@ -1160,14 +1126,11 @@ export const CompensationService = {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('employee_insurances').select('*, employees(full_name), insurance_providers(name), benefit_types(name)'),
-      fallback
+      fallback,
+      mappers.mapInsurancePolicy
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapInsurancePolicy) };
-    }
-    return res;
   },
 
   async getMcuRecords(fallback?: any[]) {
@@ -1175,14 +1138,11 @@ export const CompensationService = {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
-    const res = await safeQuery(
+    return safeQuery(
       supabase.from('medical_claims').select('*, employees(full_name, departments(name))'),
-      fallback
+      fallback,
+      mappers.mapMedicalRecord
     );
-    if (!res.isFallback && res.data) {
-      return { ...res, data: res.data.map(mappers.mapMedicalRecord) };
-    }
-    return res;
   }
 };
 

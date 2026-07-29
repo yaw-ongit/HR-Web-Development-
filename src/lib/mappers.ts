@@ -1,4 +1,9 @@
-export function mapEmployeeRecord(row: any) {
+import { KaryawanRecord } from './people-data';
+import { AttendanceRecord, LeaveRequest, ShiftSchedule, OvertimeRequest } from './workforce-data';
+import { Candidate, Interview, OnboardingTask, Certification } from './talent-data';
+import { Benefit, InsurancePolicy, MedicalRecord, Claim, PayrollReady } from './compensation-data';
+
+export function mapEmployeeRecord(row: any): KaryawanRecord {
   const department = row.departments?.name || '';
   const position = row.positions?.title || '';
   const branch = row.branches?.name || '';
@@ -37,7 +42,7 @@ export function mapEmployeeRecord(row: any) {
   };
 }
 
-export function mapAttendanceRecord(row: any) {
+export function mapAttendanceRecord(row: any): AttendanceRecord {
   const employeeName = row.employees?.full_name || '';
   const departmentName = row.employees?.departments?.name || '';
   const shiftName = row.shift_assignments?.[0]?.shifts?.name || 'Reguler';
@@ -55,14 +60,14 @@ export function mapAttendanceRecord(row: any) {
     shift: shiftName,
     checkIn,
     checkOut,
-    hours,
+    jam: hours,
     late,
     status: row.status || 'Hadir',
     date: row.attendance_date || '',
   };
 }
 
-export function mapLeaveRequest(row: any) {
+export function mapLeaveRequest(row: any): LeaveRequest {
   const employeeName = row.employees?.full_name || '';
   const leaveType = row.leave_types?.name || '';
   const approverName = row.approver?.full_name || '-';
@@ -79,18 +84,18 @@ export function mapLeaveRequest(row: any) {
   };
 }
 
-export function mapShiftSchedule(row: any) {
+export function mapShiftSchedule(row: any): ShiftSchedule {
   return {
     id: row.id,
     shiftName: row.name || '',
-    employees: row.shift_assignments ? row.shift_assignments.length : 0,
-    workingJam: `${row.start_time || '00:00'} - ${row.end_time || '00:00'}`,
+    karyawan: row.shift_assignments ? row.shift_assignments.length : 0,
+    workingHours: `${row.start_time || '00:00'} - ${row.end_time || '00:00'}`,
     manager: '-',
     status: 'Aktif',
   };
 }
 
-export function mapOvertimeRequest(row: any) {
+export function mapOvertimeRequest(row: any): OvertimeRequest {
   const employeeName = row.employees?.full_name || '';
   const departmentName = row.employees?.departments?.name || '';
   const hours = row.duration_minutes ? `${Math.floor(row.duration_minutes / 60)} Jam` : '-';
@@ -100,13 +105,13 @@ export function mapOvertimeRequest(row: any) {
     employee: employeeName,
     department: departmentName,
     date: row.overtime_date || '',
-    hours,
+    jam: hours,
     reason: row.reason || '-',
     status: row.status === 'Approved' ? 'Disetujui' : row.status === 'Rejected' ? 'Ditolak' : 'Menunggu',
   };
 }
 
-export function mapCandidate(row: any) {
+export function mapCandidate(row: any): Candidate {
   return {
     id: row.id,
     name: row.full_name || '',
@@ -119,7 +124,7 @@ export function mapCandidate(row: any) {
   };
 }
 
-export function mapInterview(row: any) {
+export function mapInterview(row: any): Interview {
   const candidateName = row.candidates?.full_name || '';
   const position = row.candidates?.job_vacancies?.title || '';
   const interviewer = row.interviewer?.full_name || '';
@@ -137,39 +142,38 @@ export function mapInterview(row: any) {
     time,
     type: row.interview_stage || 'Technical',
     status: row.status || 'Dijadwalkan',
+    feedback: row.feedback || '',
   };
 }
 
-export function mapOnboardingTask(row: any) {
+export function mapOnboardingTask(row: any): OnboardingTask {
   const employeeName = row.employees?.full_name || '';
   
   return {
     id: row.id,
     employee: employeeName,
     task: row.checklist ? 'Onboarding Checklist' : 'Task',
-    category: 'General',
+    category: 'SDM',
     dueDate: row.start_date || '',
     assignedTo: 'HR',
     status: row.completed_at ? 'Selesai' : 'Sedang Berlangsung',
   };
 }
 
-export function mapCertification(row: any) {
+export function mapCertification(row: any): Certification {
   return {
     id: row.id,
     employee: row.employees?.full_name || row.employee_name || 'Karyawan',
     certification: row.certification_types?.name || row.certification_name || '',
-    category: row.category || 'Umum',
     issuer: row.issued_by || row.issuer || '',
     credentialId: row.certificate_number || '',
     issuedDate: row.issued_at || row.issue_date || '',
     expiryDate: row.expired_at || row.expiration_date || '',
     status: row.status === 'Active' ? 'Aktif' : row.status === 'Expired' ? 'Kedaluwarsa' : row.status || 'Aktif',
-    document_url: row.file_url || row.document_url || '',
   };
 }
 
-export function mapBenefit(row: any) {
+export function mapBenefit(row: any): Benefit {
   const employeeName = row.employees?.full_name || '';
   const departmentName = row.employees?.departments?.name || '';
   
@@ -186,7 +190,7 @@ export function mapBenefit(row: any) {
   };
 }
 
-export function mapInsurancePolicy(row: any) {
+export function mapInsurancePolicy(row: any): InsurancePolicy {
   const employeeName = row.employees?.full_name || '';
   
   return {
@@ -195,16 +199,18 @@ export function mapInsurancePolicy(row: any) {
     employee: employeeName,
     policyNumber: row.policy_number || '',
     provider: row.insurance_providers?.name || '',
-    policyType: row.benefit_types?.name || 'Health',
+    policyType: row.benefit_types?.name || 'Health Insurance',
     coverage: row.coverage_amount ? `Rp ${(row.coverage_amount/1000000).toFixed(0)}M` : '-',
     claimLimit: row.coverage_amount || 0,
     issueDate: row.start_date || '',
     expiryDate: row.end_date || '',
     status: row.is_active ? 'Aktif' : 'Kedaluwarsa',
+    monthlyPremium: 0,
+    dependents: 0,
   };
 }
 
-export function mapMedicalRecord(row: any) {
+export function mapMedicalRecord(row: any): MedicalRecord {
   const employeeName = row.employees?.full_name || '';
   const departmentName = row.employees?.departments?.name || '';
   
@@ -218,11 +224,12 @@ export function mapMedicalRecord(row: any) {
     issueDate: row.claim_date || '',
     expiryDate: row.claim_date || '',
     result: row.status === 'Approved' ? 'Fit' : 'Unfit',
-    status: row.status === 'Approved' ? 'Selesai' : 'Menunggu',
+    status: row.status === 'Approved' ? 'Selesai' : 'Dijadwalkan',
+    attachments: 0,
   };
 }
 
-export function mapClaim(row: any) {
+export function mapClaim(row: any): Claim {
   const employeeName = row.employees?.full_name || '';
   
   return {
@@ -234,10 +241,11 @@ export function mapClaim(row: any) {
     submissionDate: row.claim_date || '',
     status: row.status === 'Approved' ? 'Disetujui' : row.status === 'Rejected' ? 'Ditolak' : row.status === 'Pending' ? 'Menunggu' : 'Diproses',
     approver: row.processed_by_employee?.full_name || '-',
+    documents: 0,
   };
 }
 
-export function mapPayrollReady(row: any) {
+export function mapPayrollReady(row: any): PayrollReady {
   const employeeName = row.employees?.full_name || '';
   const departmentName = row.employees?.departments?.name || '';
   const position = row.employees?.positions?.title || '';
@@ -255,7 +263,15 @@ export function mapPayrollReady(row: any) {
     allowances: {
       transportation: row.total_earning ? row.total_earning * 0.1 : 0,
       meal: row.total_earning ? row.total_earning * 0.1 : 0,
+      accommodation: 0,
+      operational: 0,
     },
-    deductions: {},
+    deductions: {
+      bpjs: 0,
+      tax: 0,
+    },
+    salaryGrade: 'Grade A',
+    bankAccount: '123456',
+    bankName: 'Mandiri',
   };
 }
