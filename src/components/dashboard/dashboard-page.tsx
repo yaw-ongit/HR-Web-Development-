@@ -88,12 +88,22 @@ function WidgetActivity({ title }: { title: string }) {
   );
 }
 
-function WidgetAttendanceActivity({ title }: { title: string }) {
+function WidgetAttendanceActivity({ title, realData }: { title: string; realData?: any }) {
+  const data = realData?.attendances?.length 
+    ? realData.attendances.map((a: any) => ({
+        actor: a.employees?.full_name || 'Unknown',
+        role: a.employees?.positions?.title || '-',
+        action: a.status === 'TERLAMBAT' ? `Terlambat ${a.late_minutes} menit` : a.status,
+        time: new Date(a.attendance_date).toLocaleDateString('id-ID'),
+        status: a.status === 'TERLAMBAT' ? 'danger' : 'success'
+      }))
+    : attendanceActivity;
+
   return (
     <Card title={title} description="Aktivitas kehadiran dan ketidakhadiran terbaru.">
       <ul className="space-y-3" aria-label="Attendance activity">
-        {attendanceActivity.map((item) => (
-          <li key={item.actor} className="rounded-2xl border border-border/60 bg-card/80 p-4">
+        {data.map((item: any, idx: number) => (
+          <li key={idx} className="rounded-2xl border border-border/60 bg-card/80 p-4">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-foreground">{item.actor}</p>
@@ -205,12 +215,13 @@ function WidgetWorkforce({ title }: { title: string }) {
   );
 }
 
-function WidgetComparison({ title }: { title: string }) {
+function WidgetComparison({ title, realData }: { title: string; realData?: any }) {
+  const data = realData?.departmentGrowth?.length ? realData.departmentGrowth : employeeMetrics.departments;
   return (
     <Card title={title} description="Perbandingan kinerja departemen.">
       <div className="h-64" aria-label="Department comparison chart">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={employeeMetrics.departments} margin={{ top: 16, right: 16, left: 0, bottom: 0 }}>
+          <BarChart data={data} margin={{ top: 16, right: 16, left: 0, bottom: 0 }}>
             <CartesianGrid stroke="rgba(148,163,184,0.12)" vertical={false} />
             <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
@@ -223,15 +234,16 @@ function WidgetComparison({ title }: { title: string }) {
   );
 }
 
-function WidgetDistribution({ title }: { title: string }) {
+function WidgetDistribution({ title, realData }: { title: string; realData?: any }) {
   const PIE_COLORS = ['#38bdf8', '#7c3aed', '#22c55e', '#f97316', '#0ea5e9'];
+  const data = realData?.departmentGrowth?.length ? realData.departmentGrowth : employeeMetrics.departments;
   return (
     <Card title={title} description="Distribusi organisasi per departemen.">
       <div className="h-64" aria-label="Department distribution chart">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
-            <Pie data={employeeMetrics.departments} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={52} outerRadius={84} paddingAngle={4}>
-              {employeeMetrics.departments.map((_, i) => (
+            <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={52} outerRadius={84} paddingAngle={4}>
+              {data.map((_: any, i: number) => (
                 <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
               ))}
             </Pie>
@@ -258,7 +270,7 @@ function WidgetApprovals({ title }: { title: string }) {
   );
 }
 
-const widgetComponents: Record<string, React.FC<{ title: string }>> = {
+const widgetComponents: Record<string, React.FC<{ title: string; realData?: any }>> = {
   calendar: WidgetCalendar,
   balance: WidgetBalance,
   activity: WidgetActivity,
@@ -370,12 +382,17 @@ function getRoleLabel(role: RoleKey) {
 /* ---------------------------------------------------------------
    Main Dashboard Component
 --------------------------------------------------------------- */
-export default function DashboardPage() {
+export default function DashboardPage({ realData }: { realData?: any }) {
   const role: RoleKey = 'hr-manager';
   const quickActions = (roleQuickActions[role] || []).filter((action) =>
     ['Tambah Karyawan', 'Buat Pelatihan', 'Lihat Tim', 'Unduh Dokumen', 'Pelatihan & Sertifikasi', 'Kelola Pelatihan'].includes(action.label) || action.icon === 'BookOpen'
   );
-  const kpis = dashboardKpis[role];
+  const kpis = dashboardKpis[role].map(kpi => {
+    if (kpi.label === 'Total Karyawan' && realData?.employeeCount !== undefined) {
+      return { ...kpi, value: realData.employeeCount.toLocaleString('id-ID'), subLabel: 'Data real-time' };
+    }
+    return kpi;
+  });
   const widgets = roleWidgets[role];
   const today = new Intl.DateTimeFormat('id-ID', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date());
 
@@ -477,7 +494,7 @@ export default function DashboardPage() {
                       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                         {attentionWidgets.map((widget) => {
                           const Component = widgetComponents[widget.type] ?? WidgetActivity;
-                          return <Component key={widget.title} title={widget.title} />;
+                          return <Component key={widget.title} title={widget.title} realData={realData} />;
                         })}
                       </div>
                     </SectionContainer>
@@ -488,7 +505,7 @@ export default function DashboardPage() {
                       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                         {analyticsWidgets.map((widget) => {
                           const Component = widgetComponents[widget.type] ?? WidgetActivity;
-                          return <Component key={widget.title} title={widget.title} />;
+                          return <Component key={widget.title} title={widget.title} realData={realData} />;
                         })}
                       </div>
                     </SectionContainer>
