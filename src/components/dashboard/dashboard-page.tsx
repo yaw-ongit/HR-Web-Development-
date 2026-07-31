@@ -191,12 +191,13 @@ function WidgetTraining({ title }: { title: string }) {
   );
 }
 
-function WidgetWorkforce({ title }: { title: string }) {
+function WidgetWorkforce({ title, realData }: { title: string; realData?: any }) {
+  const data = realData?.headcountTrend?.length ? realData.headcountTrend : employeeMetrics.headcountTrend;
   return (
     <Card title={title} description="Tren headcount selama enam bulan.">
       <div className="h-64" aria-label="Headcount trend chart">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={employeeMetrics.headcountTrend} margin={{ top: 8, right: 12, left: -12, bottom: 8 }}>
+          <AreaChart data={data} margin={{ top: 8, right: 12, left: -12, bottom: 8 }}>
             <defs>
               <linearGradient id="hcGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.6} />
@@ -322,11 +323,13 @@ const widgetComponents: Record<string, React.FC<{ title: string; realData?: any 
       </ul>
     </Card>
   ),
-  trend: ({ title }) => (
+  trend: ({ title, realData }) => {
+    const data = realData?.headcountTrend?.length ? realData.headcountTrend : employeeMetrics.headcountTrend;
+    return (
     <Card title={title} description="Tren organisasi selama enam bulan.">
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={employeeMetrics.headcountTrend} margin={{ top: 12, right: 18, left: 0, bottom: 0 }}>
+          <LineChart data={data} margin={{ top: 12, right: 18, left: 0, bottom: 0 }}>
             <CartesianGrid stroke="rgba(148,163,184,0.12)" vertical={false} />
             <XAxis dataKey="month" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
@@ -336,7 +339,8 @@ const widgetComponents: Record<string, React.FC<{ title: string; realData?: any 
         </ResponsiveContainer>
       </div>
     </Card>
-  ),
+  );
+  },
   server: ({ title }) => (
     <Card title={title} description="Kesehatan server — CPU, memori, disk." footer={<p className="text-xs text-muted">Diperbarui barusan</p>}>
       <div className="space-y-3">
@@ -390,6 +394,12 @@ export default function DashboardPage({ realData }: { realData?: any }) {
   const kpis = dashboardKpis[role].map(kpi => {
     if (kpi.label === 'Total Karyawan' && realData?.employeeCount !== undefined) {
       return { ...kpi, value: realData.employeeCount.toLocaleString('id-ID'), subLabel: 'Data real-time' };
+    }
+    if (kpi.label === 'Tingkat Turnover' && realData?.turnoverRate !== undefined) {
+      return { ...kpi, value: `${realData.turnoverRate}%`, subLabel: '6 Bulan Terakhir' };
+    }
+    if (kpi.label === 'Kepatuhan MCU' && realData?.mcuCompliance !== undefined) {
+      return { ...kpi, value: `${realData.mcuCompliance}%`, subLabel: 'Target Tahunan' };
     }
     return kpi;
   });
@@ -544,7 +554,7 @@ export default function DashboardPage({ realData }: { realData?: any }) {
                 <p className="mt-1 text-lg font-semibold text-foreground">Siklus Saat Ini</p>
                 <div className="mt-4 h-36" aria-label="Attendance trend chart">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={employeeMetrics.attendance} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
+                    <AreaChart data={realData?.attendanceTrend?.length ? realData.attendanceTrend : employeeMetrics.attendance} margin={{ top: 4, right: 0, left: -20, bottom: 0 }}>
                       <CartesianGrid stroke="rgba(148,163,184,0.10)" vertical={false} />
                       <XAxis dataKey="label" tick={{ fill: '#94a3b8', fontSize: 10 }} axisLine={false} tickLine={false} />
                       <YAxis hide />
