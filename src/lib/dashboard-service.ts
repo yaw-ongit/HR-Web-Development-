@@ -107,6 +107,84 @@ export const DashboardService = {
       };
     }) : [];
 
+    // 9. Announcements
+    const { data: announcements } = await supabase.from('announcements')
+      .select('title, content, published_at')
+      .order('published_at', { ascending: false })
+      .limit(3);
+    const mappedAnnouncements = announcements ? announcements.map(a => ({
+      title: a.title,
+      subtitle: a.content,
+      status: 'info'
+    })) : [];
+
+    // 10. Recruitment Funnel
+    const { data: candidates } = await supabase.from('candidates').select('status');
+    const recruitMap: Record<string, number> = { 'BARU': 0, 'SCREENING': 0, 'INTERVIEW': 0, 'OFFERING': 0 };
+    candidates?.forEach(c => {
+      recruitMap[c.status] = (recruitMap[c.status] || 0) + 1;
+    });
+    const recruitmentFunnel = [
+      { label: 'Kandidat Baru', value: `${recruitMap['BARU']} dalam proses` },
+      { label: 'Screening', value: `${recruitMap['SCREENING']} tahap awal` },
+      { label: 'Interview', value: `${recruitMap['INTERVIEW']} dijadwalkan` },
+      { label: 'Offering', value: `${recruitMap['OFFERING']} tahap akhir` }
+    ];
+
+    // 11. Birthdays
+    const bdayMonth = new Date().getMonth() + 1;
+    const { data: bdayEmps } = await supabase.from('employees')
+      .select('full_name, birth_date, positions(title)')
+      .eq('employee_status', 'AKTIF');
+    const upcomingBirthdays = bdayEmps?.filter(e => {
+      if (!e.birth_date) return false;
+      const bMonth = new Date(e.birth_date).getMonth() + 1;
+      return bMonth === bdayMonth; 
+    }).slice(0, 5).map(e => ({
+      name: e.full_name,
+      role: (e.positions as any)?.title || 'Karyawan'
+    })) || [];
+
+    // 12. Approvals
+    const { data: rawApprovals } = await supabase.from('approvals')
+      .select('status, entity_type, employees!approvals_requester_id_fkey(full_name)')
+      .eq('status', 'MENUNGGU')
+      .limit(3);
+    const mappedApprovals = rawApprovals ? rawApprovals.map(a => {
+      const typeStr = a.entity_type === 'LEAVE_REQUEST' ? 'Permintaan Cuti' :
+                      a.entity_type === 'OVERTIME' ? 'Lembur' : 'Persetujuan';
+      return {
+        label: `${typeStr} — ${(a.employees as any)?.full_name}`,
+        status: a.status === 'MENUNGGU' ? 'Menunggu' : 'Review'
+      }
+    }) : [];
+
+    // 13. Training Progress & Chart
+    const { data: trData } = await supabase.from('training_participants')
+      .select('attendance_status, training_schedules(training_programs(name))');
+    
+    const courseStats: Record<string, { total: number, present: number }> = {};
+    trData?.forEach(tp => {
+      const courseName = (tp.training_schedules as any)?.training_programs?.name;
+      if (courseName) {
+        if (!courseStats[courseName]) courseStats[courseName] = { total: 0, present: 0 };
+        courseStats[courseName].total++;
+        if (tp.attendance_status === 'HADIR' || tp.attendance_status === 'SELESAI') {
+          courseStats[courseName].present++;
+        }
+      }
+    });
+    
+    const trainingProgress = Object.keys(courseStats).map(c => ({
+      course: c,
+      progress: Math.round((courseStats[c].present / courseStats[c].total) * 100)
+    }));
+    
+    const trainingCompletionChart = trainingProgress.map(tp => ({
+      name: tp.course.split(' ').slice(1).join(' ') || tp.course,
+      value: tp.progress
+    }));
+
     return {
       employeeCount: employeeCount || 0,
       departmentGrowth,
@@ -116,7 +194,13 @@ export const DashboardService = {
       headcountTrend,
       turnoverRate,
       attendanceTrend: attendanceCounts,
-      recentAuditLogs
+      recentAuditLogs,
+      announcements: mappedAnnouncements,
+      recruitmentFunnel,
+      upcomingBirthdays,
+      pendingApprovals: mappedApprovals,
+      trainingProgress,
+      trainingCompletionChart
     };
   }
 };

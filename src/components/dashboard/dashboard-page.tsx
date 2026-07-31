@@ -139,11 +139,12 @@ function WidgetComplianceActivity({ title }: { title: string }) {
   );
 }
 
-function WidgetAnnouncements({ title }: { title: string }) {
+function WidgetAnnouncements({ title, realData }: { title: string; realData?: any }) {
+  const data = realData?.announcements?.length ? realData.announcements : announcements;
   return (
     <Card title={title} description="Pengumuman penting organisasi.">
       <ul className="space-y-3" aria-label="Announcements">
-        {announcements.map((notice) => (
+        {data.map((notice: any) => (
           <li key={notice.title} className="rounded-2xl bg-card/80 p-4 ring-1 ring-border/60">
             <p className="text-sm font-semibold text-foreground">{notice.title}</p>
             <p className="mt-1 text-sm text-muted">{notice.subtitle}</p>
@@ -172,11 +173,12 @@ function WidgetStatus({ title }: { title: string }) {
   );
 }
 
-function WidgetTraining({ title }: { title: string }) {
+function WidgetTraining({ title, realData }: { title: string; realData?: any }) {
+  const data = realData?.trainingProgress?.length ? realData.trainingProgress : [{ course: 'Kepemimpinan Manajer', progress: 68 }, { course: 'Sertifikasi Kepatuhan', progress: 92 }];
   return (
     <Card title={title} description="Jadwal pelatihan dan kemajuan sesi.">
       <div className="space-y-4">
-        {[{ course: 'Kepemimpinan Manajer', progress: 68 }, { course: 'Sertifikasi Kepatuhan', progress: 92 }].map((item) => (
+        {data.map((item: any) => (
           <div key={item.course} className="rounded-2xl bg-card/80 p-4">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-foreground">{item.course}</p>
@@ -257,11 +259,12 @@ function WidgetDistribution({ title, realData }: { title: string; realData?: any
   );
 }
 
-function WidgetApprovals({ title }: { title: string }) {
+function WidgetApprovals({ title, realData }: { title: string; realData?: any }) {
+  const data = realData?.pendingApprovals?.length ? realData.pendingApprovals : [{ label: 'Permintaan cuti — Lia Pratiwi', status: 'Menunggu' }, { label: 'Perpanjangan kontrak — Keuangan', status: 'Review' }];
   return (
     <Card title={title} description="Persetujuan tertunda yang membutuhkan tindakan Anda.">
       <ul className="space-y-3" aria-label="Menunggu approvals">
-        {[{ label: 'Permintaan cuti — Lia Pratiwi', status: 'Menunggu' }, { label: 'Perpanjangan kontrak — Keuangan', status: 'Review' }].map((item) => (
+        {data.map((item: any) => (
           <li key={item.label} className="flex items-center justify-between rounded-2xl bg-card/80 p-4">
             <p className="text-sm font-semibold text-foreground">{item.label}</p>
             <StatusBadge status={item.status} />
@@ -300,10 +303,12 @@ const widgetComponents: Record<string, React.FC<{ title: string; realData?: any 
       </ul>
     </Card>
   ),
-  recruitment: ({ title }) => (
+  recruitment: ({ title, realData }) => {
+    const data = realData?.recruitmentFunnel?.length ? realData.recruitmentFunnel : [{ label: 'Karyawan Baru', value: '16 dalam proses' }, { label: 'Posisi Terbuka', value: '24 pencarian aktif' }];
+    return (
     <Card title={title} description="Sumber kandidat aktif dan perkembangan perekrutan.">
       <div className="space-y-3">
-        {[{ label: 'Karyawan Baru', value: '16 dalam proses' }, { label: 'Posisi Terbuka', value: '24 pencarian aktif' }].map((item) => (
+        {data.map((item: any) => (
           <div key={item.label} className="rounded-2xl bg-card/80 p-4">
             <p className="text-sm text-muted">{item.label}</p>
             <p className="mt-1.5 text-lg font-semibold text-foreground">{item.value}</p>
@@ -311,19 +316,23 @@ const widgetComponents: Record<string, React.FC<{ title: string; realData?: any 
         ))}
       </div>
     </Card>
-  ),
-  birthdays: ({ title }) => (
+  );
+  },
+  birthdays: ({ title, realData }) => {
+    const data = realData?.upcomingBirthdays?.length ? realData.upcomingBirthdays : [{ name: 'Maya Sari', role: 'Anggota Tim' }, { name: 'Noor Fadhila', role: 'Anggota Tim' }, { name: 'Aulia Rizky', role: 'Anggota Tim' }];
+    return (
     <Card title={title} description="Rekan kerja yang merayakan ulang tahun minggu ini.">
       <ul className="space-y-3">
-        {['Maya Sari', 'Noor Fadhila', 'Aulia Rizky'].map((name) => (
-          <li key={name} className="rounded-2xl bg-card/80 p-4">
-            <p className="text-sm font-semibold text-foreground">🎂 {name}</p>
-            <p className="text-xs text-muted">Anggota Tim</p>
+        {data.map((item: any) => (
+          <li key={item.name} className="rounded-2xl bg-card/80 p-4">
+            <p className="text-sm font-semibold text-foreground">🎂 {item.name}</p>
+            <p className="text-xs text-muted">{item.role}</p>
           </li>
         ))}
       </ul>
     </Card>
-  ),
+  );
+  },
   trend: ({ title, realData }) => {
     const data = realData?.headcountTrend?.length ? realData.headcountTrend : employeeMetrics.headcountTrend;
     return (
@@ -575,7 +584,7 @@ export default function DashboardPage({ realData }: { realData?: any }) {
                 <p className="mt-1 text-lg font-semibold text-foreground">Tingkat Partisipasi</p>
                 <div className="mt-4 h-36" aria-label="Training completion chart">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={employeeMetrics.trainingCompletion} margin={{ top: 4, right: 0, left: -16, bottom: 0 }}>
+                    <BarChart data={realData?.trainingCompletionChart?.length ? realData.trainingCompletionChart : employeeMetrics.trainingCompletion} margin={{ top: 4, right: 0, left: -16, bottom: 0 }}>
                       <CartesianGrid stroke="rgba(148,163,184,0.10)" vertical={false} />
                       <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} axisLine={false} tickLine={false} />

@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { User, Phone, Mail, MapPin, Briefcase, Calendar, Award, Shield, FileText, Save, Camera, Download } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { IdentityService } from '@/lib/services';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/toast';
 import { SectionContainer } from '@/components/layout/section-container';
@@ -72,11 +73,18 @@ export default function MyProfilePage() {
     });
   }, [profile]);
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    setProfile(form);
-    setIsEditing(false);
-    addToast({ title: 'Berhasil', description: 'Profil berhasil diperbarui!', variant: 'success' });
+    // Use hardcoded employee ID for demo purposes since getSession is mock
+    const empId = 'e0000000-0000-0000-0000-000000000001'; 
+    const { error } = await IdentityService.updateEmployeeProfile(empId, { phone: form.phone });
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal update profil: ' + error, variant: 'danger' });
+    } else {
+      setProfile(form);
+      setIsEditing(false);
+      addToast({ title: 'Berhasil', description: 'Profil berhasil diperbarui!', variant: 'success' });
+    }
   };
 
   return (

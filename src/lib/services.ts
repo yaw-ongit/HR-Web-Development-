@@ -47,6 +47,12 @@ async function safeQuery<T>(
 // 1. IDENTITY & AUTH SERVICES
 // ----------------------------------------------------
 export const IdentityService = {
+  async updateEmployeeProfile(id: string, data: { phone?: string; emergency_contact?: string }) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('employees').update(data).eq('id', id);
+    return { error: error?.message };
+  },
+
   async getSession() {
     if (!supabase) {
       return { data: null, error: 'Supabase environment variables are not configured' };
@@ -179,6 +185,24 @@ export const WorkforceService = {
       fallback,
       mappers.mapLeaveRequest
     );
+  },
+
+  async updateLeaveRequestStatus(ids: string[], status: string) {
+    if (!supabase) return { error: 'Supabase environment variables are not configured' };
+    
+    // Database schema uses 'DISETUJUI', 'DITOLAK', 'DIAJUKAN'
+    const dbStatus = status === 'Disetujui' ? 'DISETUJUI' : status === 'Ditolak' ? 'DITOLAK' : 'DIAJUKAN';
+    
+    const { error } = await supabase
+      .from('leave_requests')
+      .update({ status: dbStatus })
+      .in('id', ids);
+      
+    if (error) {
+      console.error('Failed to update leave status:', error);
+      return { error: error.message };
+    }
+    return { error: null };
   },
 
   async getShiftSchedules(fallback?: any[]) {

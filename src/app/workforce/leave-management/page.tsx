@@ -24,13 +24,40 @@ export default function WorkforceLeaveManagementPage() {
   const { addToast } = useToast();
   const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
 
-  const handleApprove = () => {
-    addToast({ title: 'Cuti disetujui', description: 'Permintaan cuti telah berhasil disetujui.', variant: 'success' });
+  const handleApprove = async () => {
+    const selectedIds = table.getSelectedRowModel().rows.map(r => r.original.id);
+    if (selectedIds.length === 0) {
+      addToast({ title: 'Pilih data', description: 'Pilih setidaknya satu permintaan cuti untuk disetujui.', variant: 'warning' });
+      return;
+    }
+    const { error } = await WorkforceService.updateLeaveRequestStatus(selectedIds, 'Disetujui');
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal menyetujui cuti: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Cuti disetujui', description: `${selectedIds.length} permintaan cuti telah berhasil disetujui.`, variant: 'success' });
+      // Refresh data
+      WorkforceService.getLeaveRequests().then((result) => {
+        if (Array.isArray(result.data)) setDataList(result.data);
+      });
+      setRowSelection({});
+    }
   };
 
-  const handleReject = () => {
+  const handleReject = async () => {
     setRejectDialogOpen(false);
-    addToast({ title: 'Cuti ditolak', description: 'Permintaan cuti telah ditolak.', variant: 'danger' });
+    const selectedIds = table.getSelectedRowModel().rows.map(r => r.original.id);
+    if (selectedIds.length === 0) return;
+    
+    const { error } = await WorkforceService.updateLeaveRequestStatus(selectedIds, 'Ditolak');
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal menolak cuti: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Cuti ditolak', description: `${selectedIds.length} permintaan cuti telah ditolak.`, variant: 'danger' });
+      WorkforceService.getLeaveRequests().then((result) => {
+        if (Array.isArray(result.data)) setDataList(result.data);
+      });
+      setRowSelection({});
+    }
   };
 
   useEffect(() => {
@@ -181,8 +208,14 @@ export default function WorkforceLeaveManagementPage() {
           <div className="mt-6 space-y-4 text-sm text-muted">
             <p>Review leave requests, add comments, and move requests through the workflow.</p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Button onClick={handleApprove} variant="primary" className="rounded-full px-5 py-3">Approve</Button>
-              <Button onClick={() => setRejectDialogOpen(true)} variant="destructive" className="rounded-full px-5 py-3">Reject</Button>
+              <Button onClick={handleApprove} variant="primary" className="rounded-full px-5 py-3">Approve Selected</Button>
+              <Button onClick={() => {
+                if (table.getSelectedRowModel().rows.length === 0) {
+                  addToast({ title: 'Pilih data', description: 'Pilih setidaknya satu permintaan cuti.', variant: 'warning' });
+                  return;
+                }
+                setRejectDialogOpen(true);
+              }} variant="destructive" className="rounded-full px-5 py-3">Reject Selected</Button>
               <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">Request revision</Button>
               <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">Add comment</Button>
             </div>
