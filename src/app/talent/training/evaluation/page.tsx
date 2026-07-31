@@ -154,7 +154,7 @@ export default function TrainingEvaluationPage() {
                     <label className="text-xs text-muted-foreground uppercase">Unit Kerja</label>
                     <div className="text-sm font-semibold text-foreground mt-1">{selectedRealizationDetail.planningUnit}</div>
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid sm:grid-cols-2 gap-2">
                     <div>
                       <label className="text-xs text-muted-foreground uppercase">Kategori</label>
                       <div className="text-sm font-semibold text-foreground mt-1">{selectedRealizationDetail.planningType}</div>

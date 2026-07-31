@@ -273,7 +273,7 @@ export default function TrainingRealizationPage() {
                     <label className="text-xs text-muted-foreground uppercase">Penyedia (Provider)</label>
                     <input type="text" readOnly value={matchedPlanning.provider} className="mt-1 w-full rounded-lg bg-secondary px-3 py-2 text-sm text-foreground outline-none cursor-not-allowed" />
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid sm:grid-cols-2 gap-2">
                     <div>
                       <label className="text-xs text-muted-foreground uppercase">Unit</label>
                       <input type="text" readOnly value={matchedPlanning.unit} className="mt-1 w-full rounded-lg bg-secondary px-3 py-2 text-sm text-foreground outline-none cursor-not-allowed" />
@@ -287,7 +287,7 @@ export default function TrainingRealizationPage() {
                     <label className="text-xs text-muted-foreground uppercase">Lokasi / Media</label>
                     <input type="text" readOnly value={matchedPlanning.location} className="mt-1 w-full rounded-lg bg-secondary px-3 py-2 text-sm text-foreground outline-none cursor-not-allowed" />
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid sm:grid-cols-2 gap-2">
                     <div>
                       <label className="text-xs text-muted-foreground uppercase">Tanggal Mulai</label>
                       <input type="text" readOnly value={matchedPlanning.start_date} className="mt-1 w-full rounded-lg bg-secondary px-3 py-2 text-sm text-foreground outline-none cursor-not-allowed" />

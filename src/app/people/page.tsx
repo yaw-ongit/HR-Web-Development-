@@ -206,7 +206,7 @@ export default function PeopleDirectoryPage() {
         {/* Sidebar summary */}
         <aside className="space-y-4" aria-label="Ringkasan modul People">
           <Card title="Area karyawan" description="Statistik singkat dan tindakan modul cepat.">
-            <div className="mt-2 grid grid-cols-2 gap-3">
+            <div className="mt-2 grid sm:grid-cols-2 gap-3">
               <div className="rounded-2xl bg-card/80 p-4">
                 <p className="text-xs text-muted">Total Karyawan</p>
                 <p className="mt-2 text-2xl font-semibold tabular-nums text-foreground">{employees.length}</p>

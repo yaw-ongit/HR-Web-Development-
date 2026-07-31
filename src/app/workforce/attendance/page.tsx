@@ -133,7 +133,7 @@ export default function WorkforceAttendancePage() {
               </div>
             ))}
           </div>
-          <div className="mt-6 grid grid-cols-2 gap-3 text-sm text-muted">
+          <div className="mt-6 grid sm:grid-cols-2 gap-3 text-sm text-muted">
             <div className="rounded-3xl bg-card/80 p-4">Hadir / WFH / business trip statuses visualized</div>
             <div className="rounded-3xl bg-card/80 p-4">Arahkan kursor pada hari untuk catatan operasional dan konteks jadwal.</div>
           </div>
