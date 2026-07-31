@@ -90,6 +90,23 @@ export const DashboardService = {
       return { label, value: count };
     });
 
+    // 8. Recent Audit Logs
+    const { data: auditLogs } = await supabase.from('audit_logs')
+      .select('action, table_name, created_at, employees(full_name, positions(title))')
+      .order('created_at', { ascending: false })
+      .limit(5);
+
+    const recentAuditLogs = auditLogs ? auditLogs.map(log => {
+      const emp = log.employees as any;
+      const d = new Date(log.created_at);
+      return {
+        actor: emp?.full_name || 'System',
+        role: emp?.positions?.title || 'System',
+        action: `${log.action} pada ${log.table_name}`,
+        time: d.toLocaleDateString('id-ID')
+      };
+    }) : [];
+
     return {
       employeeCount: employeeCount || 0,
       departmentGrowth,
@@ -98,7 +115,8 @@ export const DashboardService = {
       mcuCompliance,
       headcountTrend,
       turnoverRate,
-      attendanceTrend: attendanceCounts
+      attendanceTrend: attendanceCounts,
+      recentAuditLogs
     };
   }
 };

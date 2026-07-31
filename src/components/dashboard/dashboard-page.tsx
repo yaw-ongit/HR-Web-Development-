@@ -68,12 +68,13 @@ function WidgetBalance({ title }: { title: string }) {
   );
 }
 
-function WidgetActivity({ title }: { title: string }) {
+function WidgetActivity({ title, realData }: { title: string; realData?: any }) {
+  const data = realData?.recentAuditLogs?.length ? realData.recentAuditLogs : recentActivity;
   return (
     <Card title={title} description="Peristiwa sistem dan workforce terbaru.">
       <ul className="space-y-3" aria-label="Recent activity">
-        {recentActivity.map((item) => (
-          <li key={item.actor} className="rounded-2xl border border-border/60 bg-card/80 p-4">
+        {data.map((item: any, idx: number) => (
+          <li key={idx} className="rounded-2xl border border-border/60 bg-card/80 p-4">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-foreground">{item.actor}</p>
@@ -353,18 +354,23 @@ const widgetComponents: Record<string, React.FC<{ title: string; realData?: any 
       </div>
     </Card>
   ),
-  logs: ({ title }) => (
+  logs: ({ title, realData }) => {
+    const data = realData?.recentAuditLogs?.length 
+      ? realData.recentAuditLogs.map((l: any) => `${l.action} (${l.actor})`) 
+      : ['Akses pengguna diperbarui', 'Audit kebijakan selesai', 'Rotasi kunci SSH'];
+    return (
     <Card title={title} description="Entri audit terbaru.">
       <ul className="space-y-3">
-        {['Akses pengguna diperbarui', 'Audit kebijakan selesai', 'Rotasi kunci SSH'].map((item) => (
-          <li key={item} className="rounded-2xl bg-card/80 p-4">
+        {data.map((item: string, idx: number) => (
+          <li key={idx} className="rounded-2xl bg-card/80 p-4">
             <p className="text-sm text-foreground">{item}</p>
             <p className="text-xs text-muted">Selesai</p>
           </li>
         ))}
       </ul>
     </Card>
-  ),
+  );
+  },
   alerts: ({ title }) => (
     <Card title={title} description="Peringatan keamanan yang membutuhkan tinjauan admin.">
       <ul className="space-y-3">
