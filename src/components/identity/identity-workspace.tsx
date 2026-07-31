@@ -47,7 +47,7 @@ function StatusBadge({ value }: { value: string }) {
         ? 'bg-amber-50 text-amber-200'
         : value === 'Blocked' || value === 'Disabled'
           ? 'bg-rose-50 text-rose-200'
-          : 'bg-brand-50 text-primary';
+          : 'bg-primary/10 text-primary';
 
   return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
 }
@@ -196,7 +196,7 @@ function ProfilePreferencesView() {
     <div className="grid gap-4 xl:grid-cols-[0.7fr_1.3fr]">
       <Card title="Profile" description="Personal information and employee context.">
         <div className="flex items-center gap-4">
-          <div className="grid h-20 w-20 place-items-center rounded-[28px] bg-brand-50 text-2xl font-semibold text-foreground">{profilePreference.avatar}</div>
+          <div className="grid h-20 w-20 place-items-center rounded-[28px] bg-primary/10 text-2xl font-semibold text-foreground">{profilePreference.avatar}</div>
           <div>
             <p className="text-xl font-semibold text-foreground">{profilePreference.name}</p>
             <p className="text-sm text-muted">{profilePreference.position}</p>
@@ -319,7 +319,7 @@ function NotificationCenterView() {
           <div key={item.id} className="rounded-3xl border border-border bg-card/80 p-4">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex gap-3">
-                <div className="grid h-11 w-11 place-items-center rounded-3xl bg-brand-50 text-sm font-semibold text-foreground">{item.avatar}</div>
+                <div className="grid h-11 w-11 place-items-center rounded-3xl bg-primary/10 text-sm font-semibold text-foreground">{item.avatar}</div>
                 <div>
                   <div className="flex flex-wrap items-center gap-2"><p className="font-semibold text-foreground">{item.title}</p><StatusBadge value={item.priority} /></div>
                   <p className="mt-1 text-sm text-muted">{item.body}</p>

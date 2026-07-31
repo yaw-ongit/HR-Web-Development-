@@ -1,4 +1,5 @@
 'use client';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
@@ -49,28 +50,7 @@ export default function PayrollReadyPage() {
       {
         accessorKey: 'basicSalary',
         header: 'Basic Salary',
-        cell: ({ getValue }) => {
-          const value = getValue() as number;
-          return <span>Rp {(value / 1000000).toFixed(1)}M</span>;
-        },
-      },
-      {
-        accessorKey: 'employmentType',
-        header: 'Employment Type',
-      },
-      {
-        accessorKey: 'payrollIntegrationStatus',
-        header: 'Status',
-        cell: ({ getValue }) => {
-          const value = getValue() as string;
-          const color =
-            value === 'Ready'
-              ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Menunggu'
-              ? 'bg-amber-50 text-amber-200'
-              : 'bg-rose-50 text-rose-200';
-          return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
-        },
+        cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
       },
       {
         id: 'actions',
@@ -187,7 +167,7 @@ export default function PayrollReadyPage() {
               </div>
             ))}
           </div>
-          <div className="mt-6 p-3 rounded-2xl bg-brand-50/50 border border-sky-500/20">
+          <div className="mt-6 p-3 rounded-2xl bg-primary/5 border border-sky-500/20">
             <p className="text-xs font-semibold text-primary flex items-center gap-2">
               <Zap className="h-4 w-4" />
               Ready for payroll integration system

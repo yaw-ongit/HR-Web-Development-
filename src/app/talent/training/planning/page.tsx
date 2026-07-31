@@ -382,7 +382,7 @@ export default function TrainingPlanningPage() {
           <Card className="w-full max-w-2xl rounded-2xl border border-border bg-card p-6 shadow-xl max-h-[90vh] overflow-y-auto">
             <h3 className="text-xl font-bold mb-4">{editingId ? 'Edit Perencanaan Pelatihan' : 'Buat Proposal Pelatihan Baru'}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid sm:grid-cols-2 gap-4">
                 {editingId && (
                   <div className="col-span-2">
                     <label className="text-xs font-semibold text-muted-foreground">Nomor Proposal</label>

@@ -1,4 +1,5 @@
 'use client';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
@@ -79,29 +80,7 @@ export default function ClaimsPage() {
       {
         accessorKey: 'amount',
         header: 'Amount',
-        cell: ({ getValue }) => {
-          const value = getValue() as number;
-          return `Rp ${(value / 1000000).toFixed(1)}M`;
-        },
-      },
-      { accessorKey: 'submissionDate', header: 'Submission Tanggal' },
-      {
-        accessorKey: 'status',
-        header: 'Status',
-        cell: ({ getValue }) => {
-          const value = getValue() as string;
-          const color =
-            value === 'Disetujui'
-              ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Menunggu'
-              ? 'bg-amber-50 text-amber-200'
-              : value === 'Diproses'
-              ? 'bg-brand-50 text-primary'
-              : value === 'Ditolak'
-              ? 'bg-rose-50 text-rose-200'
-              : 'bg-slate-600/15 text-muted-foreground';
-          return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
-        },
+        cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
       },
       { accessorKey: 'approver', header: 'Penyetuju' },
       {

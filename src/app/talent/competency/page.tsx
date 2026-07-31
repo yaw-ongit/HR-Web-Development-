@@ -1,4 +1,5 @@
 'use client';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
@@ -36,18 +37,7 @@ export default function TalentCompetencyPage() {
       {
         accessorKey: 'level',
         header: 'Level',
-        cell: ({ getValue }) => {
-          const value = getValue() as string;
-          const color =
-            value === 'Ahli'
-              ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Mahir'
-              ? 'bg-brand-50 text-primary'
-              : value === 'Menengah'
-              ? 'bg-amber-50 text-amber-200'
-              : 'bg-slate-600/15 text-muted-foreground';
-          return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
-        },
+        cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
       },
       { accessorKey: 'assessmentDate', header: 'Assessment date' },
       { accessorKey: 'assessor', header: 'Assessor' },
@@ -128,7 +118,7 @@ export default function TalentCompetencyPage() {
                   <span className="text-sm text-muted">{item.count} employees</span>
                 </div>
                 <div className="h-2 rounded-full bg-secondary/80">
-                  <div className="h-2 rounded-full bg-brand-500" style={{ width: `${item.percentage * 3}%` }} />
+                  <div className="h-2 rounded-full bg-primary/100" style={{ width: `${item.percentage * 3}%` }} />
                 </div>
               </div>
             ))}

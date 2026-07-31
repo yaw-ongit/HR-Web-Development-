@@ -140,7 +140,7 @@ export default function RecruitmentAnalyticsPage() {
                   </div>
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-[0.2em] ${
                     vacancy.status === 'Open' ? 'bg-emerald-50 text-emerald-300' : 
-                    vacancy.status === 'Sedang Berlangsung' ? 'bg-brand-50 text-primary' :
+                    vacancy.status === 'Sedang Berlangsung' ? 'bg-primary/10 text-primary' :
                     'bg-surface0/15 text-muted-foreground'
                   }`}>
                     {vacancy.status}

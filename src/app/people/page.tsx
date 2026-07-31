@@ -117,7 +117,7 @@ export default function PeopleDirectoryPage() {
       enableSorting: true,
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-sm font-semibold text-primary" aria-hidden="true">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-sm font-semibold text-primary" aria-hidden="true">
             {row.original.initials}
           </div>
           <div>
@@ -239,7 +239,7 @@ export default function PeopleDirectoryPage() {
       </div>
       <Dialog open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Tambah Karyawan" description="Masukkan data karyawan baru.">
         <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             <div className="col-span-2">
               <label className="text-xs font-semibold text-muted-foreground">Nama Lengkap</label>
               <input required type="text" value={form.full_name} onChange={e => setForm({...form, full_name: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />

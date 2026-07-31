@@ -1,4 +1,5 @@
 'use client';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
@@ -128,16 +129,7 @@ export default function WorkforceLeaveManagementPage() {
       {
         accessorKey: 'status',
         header: 'Status',
-        cell: ({ getValue }) => {
-          const value = getValue() as string;
-          const color =
-            value === 'Disetujui'
-              ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Menunggu'
-              ? 'bg-amber-50 text-amber-200'
-              : 'bg-rose-50 text-rose-200';
-          return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
-        },
+        cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
       },
       { accessorKey: 'approver', header: 'Penyetuju' },
       {
@@ -351,7 +343,7 @@ export default function WorkforceLeaveManagementPage() {
                 {leaveTypesData?.map((t: any) => <option key={t.id} value={t.id}>{t.name}</option>)}
               </select>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-xs font-semibold text-muted-foreground">Tanggal Mulai</label>
                 <input required type="date" value={form.start_date} onChange={e => setForm({...form, start_date: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />

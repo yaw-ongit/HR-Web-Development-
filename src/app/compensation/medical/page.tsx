@@ -1,4 +1,5 @@
 'use client';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
@@ -54,34 +55,12 @@ export default function MedicalPage() {
       {
         accessorKey: 'result',
         header: 'Result',
-        cell: ({ getValue }) => {
-          const value = getValue() as string;
-          const color =
-            value === 'Fit'
-              ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Conditional'
-              ? 'bg-amber-50 text-amber-200'
-              : value === 'Unfit'
-              ? 'bg-rose-50 text-rose-200'
-              : 'bg-slate-600/15 text-muted-foreground';
-          return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
-        },
+        cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
       },
       {
         accessorKey: 'status',
         header: 'Status',
-        cell: ({ getValue }) => {
-          const value = getValue() as string;
-          const color =
-            value === 'Selesai'
-              ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Kedaluwarsa'
-              ? 'bg-rose-50 text-rose-200'
-              : value === 'Dijadwalkan'
-              ? 'bg-brand-50 text-primary'
-              : 'bg-amber-50 text-amber-200';
-          return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
-        },
+        cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
       },
       {
         id: 'actions',

@@ -71,7 +71,7 @@ export default function HelpCenterPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-brand-500/10 text-brand-600 rounded-xl">
+                <div className="p-2.5 bg-primary/100/10 text-brand-600 rounded-xl">
                   <Phone className="h-5 w-5" />
                 </div>
                 <div>

@@ -31,7 +31,7 @@ export default function CertificateVerificationPage() {
       <div className="w-full max-w-lg space-y-6">
         {/* Indocater Brand */}
         <div className="flex flex-col items-center text-center">
-          <div className="flex items-center gap-2 px-3 py-1 bg-brand-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="flex items-center gap-2 px-3 py-1 bg-primary/100 text-white rounded-xl text-xs font-bold uppercase tracking-wider mb-2">
             PT INDOCATER
           </div>
           <h2 className="text-xl font-bold text-foreground">Sistem Verifikasi Sertifikat</h2>

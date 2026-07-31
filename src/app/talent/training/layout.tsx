@@ -42,11 +42,11 @@ export default function TrainingWorkflowLayout({ children }: { children: React.R
                 onClick={() => router.push(step.path)}
                 className={`flex flex-col items-start gap-2 p-3 rounded-2xl border text-left transition-all ${
                   isActive
-                    ? 'border-brand-500 bg-brand-500/5 text-brand-600 dark:text-brand-400 font-semibold'
+                    ? 'border-brand-500 bg-primary/100/5 text-brand-600 dark:text-brand-400 font-semibold'
                     : 'border-border bg-card text-foreground hover:bg-secondary/40'
                 }`}
               >
-                <div className={`p-2 rounded-xl ${isActive ? 'bg-brand-500 text-white' : 'bg-secondary text-muted'}`}>
+                <div className={`p-2 rounded-xl ${isActive ? 'bg-primary/100 text-white' : 'bg-secondary text-muted'}`}>
                   <Icon className="h-4 w-4" />
                 </div>
                 <div className="min-w-0">

@@ -170,7 +170,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
           {stats.map((stat) => (
             <Card key={stat.label} className="rounded-[28px] border border-border bg-surface/95 p-5 shadow-card">
               <div className="flex items-center gap-3">
-                <div className="grid h-12 w-12 place-items-center rounded-3xl bg-brand-50 text-primary">
+                <div className="grid h-12 w-12 place-items-center rounded-3xl bg-primary/10 text-primary">
                   <stat.icon className="h-5 w-5" />
                 </div>
                 <div>

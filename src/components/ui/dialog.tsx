@@ -92,13 +92,13 @@ export function Dialog({ open, onClose, title, description, children, className,
         aria-labelledby="dialog-title"
         aria-describedby={description ? 'dialog-description' : undefined}
         className={cn(
-          'relative w-full rounded-[28px] border border-brand-100/80 bg-[linear-gradient(135deg,#ffffff_0%,#f8fbff_100%)] shadow-[0_24px_80px_rgba(2,34,74,0.16)]',
+          'relative w-full rounded-[28px] border border-border bg-card shadow-[0_24px_80px_rgba(2,34,74,0.16)] max-h-[90vh] flex flex-col',
           sizeClasses[size],
           className,
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-brand-100/80 px-6 py-5">
+        <div className="flex shrink-0 items-start justify-between gap-4 border-b border-border/80 px-6 py-5">
           <div>
             <h2 id="dialog-title" className="text-lg font-semibold text-foreground">{title}</h2>
             {description && (
@@ -109,14 +109,14 @@ export function Dialog({ open, onClose, title, description, children, className,
             type="button"
             aria-label="Close dialog"
             onClick={onClose}
-            className="rounded-full p-1.5 text-muted transition hover:bg-brand-50 hover:text-primary focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="rounded-full p-1.5 text-muted transition hover:bg-secondary hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="px-6 py-5">{children}</div>
+        <div className="px-6 py-5 overflow-y-auto min-h-0">{children}</div>
       </div>
     </div>
   );

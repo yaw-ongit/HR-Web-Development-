@@ -36,7 +36,7 @@ export default function OrgStructurePage() {
             <div className="rounded-[28px] border border-border bg-card/80 p-6">
               <p className="text-sm text-muted">Pimpinan</p>
               <div className="mt-6 flex items-center gap-4 rounded-3xl bg-surface/90 p-5">
-                <div className="grid h-16 w-16 place-items-center rounded-3xl bg-brand-50 text-primary text-xl font-semibold">{orgStructure.leader.split(' ').map((part) => part[0]).join('')}</div>
+                <div className="grid h-16 w-16 place-items-center rounded-3xl bg-primary/10 text-primary text-xl font-semibold">{orgStructure.leader.split(' ').map((part) => part[0]).join('')}</div>
                 <div>
                   <p className="text-sm uppercase tracking-[0.28em] text-muted">{orgStructure.title}</p>
                   <p className="mt-2 text-xl font-semibold text-foreground">{orgStructure.leader}</p>

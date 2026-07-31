@@ -53,7 +53,7 @@ export default function UserGuidePage() {
             return (
               <Card key={idx} className="p-6 rounded-[28px] border border-border bg-card flex flex-col justify-between space-y-4 shadow-sm hover:shadow transition">
                 <div className="space-y-3">
-                  <div className="p-3 bg-brand-500/10 text-brand-600 rounded-2xl w-max">
+                  <div className="p-3 bg-primary/100/10 text-brand-600 rounded-2xl w-max">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-sm font-bold text-foreground">{g.title}</h3>

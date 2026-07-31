@@ -1,4 +1,5 @@
 'use client';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
@@ -51,32 +52,7 @@ export default function WorkforceAttendancePage() {
       { accessorKey: 'checkOut', header: 'Waktu Keluar' },
       { accessorKey: 'hours', header: 'Jam Kerja' },
       {
-        accessorKey: 'late', header: 'Terlambat', cell: ({ getValue }) => {
-          const value = getValue() as string;
-          return (
-            <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${
-              value === 'Yes' ? 'bg-amber-50 text-amber-200' : 'bg-emerald-50 text-emerald-200'
-            }`}>
-              {value}
-            </span>
-          );
-        },
-      },
-      {
-        accessorKey: 'status',
-        header: 'Status',
-        cell: ({ getValue }) => {
-          const value = getValue() as string;
-          const color =
-            value === 'Hadir'
-              ? 'bg-emerald-50 text-emerald-200'
-              : value === 'On Leave'
-              ? 'bg-slate-600/15 text-muted-foreground'
-              : value === 'WFH'
-              ? 'bg-brand-50 text-primary'
-              : 'bg-rose-50 text-rose-200';
-          return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
-        },
+        accessorKey: 'late', header: 'Terlambat', cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
       },
       {
         id: 'actions',

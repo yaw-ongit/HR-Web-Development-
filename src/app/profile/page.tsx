@@ -93,7 +93,7 @@ export default function MyProfilePage() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-5">
             <div className="relative group shrink-0">
-              <div className="grid h-24 w-24 place-items-center rounded-[2.5rem] bg-brand-500 text-3xl font-bold text-white shadow-lg">
+              <div className="grid h-24 w-24 place-items-center rounded-[2.5rem] bg-primary/100 text-3xl font-bold text-white shadow-lg">
                 {profile.photo}
               </div>
               <button className="absolute bottom-0 right-0 p-2 bg-slate-800 text-white rounded-full hover:bg-slate-700 shadow border border-border">
@@ -144,7 +144,7 @@ export default function MyProfilePage() {
               <h3 className="text-lg font-bold mb-6 text-foreground">Informasi Pribadi</h3>
               {isEditing ? (
                 <form onSubmit={handleSave} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-semibold text-muted-foreground">No. Telepon / WhatsApp</label>
                       <input
@@ -180,7 +180,7 @@ export default function MyProfilePage() {
                   </div>
                 </form>
               ) : (
-                <div className="grid grid-cols-2 gap-6 text-sm">
+                <div className="grid sm:grid-cols-2 gap-6 text-sm">
                   <div>
                     <span className="text-xs text-muted-foreground block">Email</span>
                     <strong>{profile.email}</strong>
@@ -209,7 +209,7 @@ export default function MyProfilePage() {
           {activeTab === 'employment' && (
             <Card className="rounded-[28px] border border-border p-6 shadow-sm">
               <h3 className="text-lg font-bold mb-6 text-foreground">Informasi Kepegawaian (Read-Only)</h3>
-              <div className="grid grid-cols-2 gap-6 text-sm">
+              <div className="grid sm:grid-cols-2 gap-6 text-sm">
                 <div>
                   <span className="text-xs text-muted-foreground block">ID Karyawan</span>
                   <strong>{profile.employeeId}</strong>

@@ -102,16 +102,16 @@ export default function CompensationDashboard() {
               <span className="text-xs text-primary">→</span>
             </div>
             <div className="space-y-2">
-              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                 <Plus className="h-4 w-4" /> Assign Benefit
               </button>
-              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                 <FileText className="h-4 w-4" /> Submit Claim
               </button>
-              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                 <Clock className="h-4 w-4" /> Schedule Medical
               </button>
-              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+              <button className="w-full flex items-center gap-3 rounded-2xl bg-card/80 px-4 py-2 text-sm text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                 <Download className="h-4 w-4" /> Export Benefits
               </button>
             </div>
@@ -123,22 +123,22 @@ export default function CompensationDashboard() {
             <Card className="rounded-[28px] border border-border bg-surface/95 p-5 shadow-card transition group-hover:border-brand-500 cursor-pointer">
               <p className="text-sm font-semibold text-foreground mb-3">Modules</p>
               <div className="grid grid-cols-2 gap-2">
-                <Link href="/compensation/benefits" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+                <Link href="/compensation/benefits" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                   Benefits
                 </Link>
-                <Link href="/compensation/insurance" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+                <Link href="/compensation/insurance" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                   Insurance
                 </Link>
-                <Link href="/compensation/medical" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+                <Link href="/compensation/medical" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                   Medical
                 </Link>
-                <Link href="/compensation/claims" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+                <Link href="/compensation/claims" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                   Claims
                 </Link>
-                <Link href="/compensation/welfare" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+                <Link href="/compensation/welfare" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                   Welfare
                 </Link>
-                <Link href="/compensation/payroll-ready" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-brand-50/50 hover:text-primary">
+                <Link href="/compensation/payroll-ready" className="rounded-2xl bg-card/80 px-3 py-2 text-xs font-medium text-muted-foreground transition hover:bg-primary/5 hover:text-primary">
                   Payroll
                 </Link>
               </div>

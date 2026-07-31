@@ -72,7 +72,7 @@ function StatusBadge({ value }: { value: string }) {
         ? 'bg-amber-50 text-amber-200'
         : value === 'Failed' || value === 'Disabled'
           ? 'bg-rose-50 text-rose-200'
-          : 'bg-brand-50 text-primary';
+          : 'bg-primary/10 text-primary';
 
   return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
 }
@@ -194,7 +194,7 @@ function DashboardView() {
               <Link key={action.label} href={action.href} className="rounded-3xl border border-border bg-card/80 px-4 py-4 transition hover:border-brand-500">
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-brand-50">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-primary/10">
                       <action.icon className="h-4 w-4 text-primary" />
                     </div>
                     <div>
@@ -388,7 +388,7 @@ function UserManagementView() {
       header: 'User',
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-brand-50 text-sm font-semibold text-foreground">{row.original.avatar}</div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-primary/10 text-sm font-semibold text-foreground">{row.original.avatar}</div>
           <div>
             <p className="font-semibold text-foreground">{row.original.name}</p>
             <p className="text-xs text-muted">{row.original.email}</p>

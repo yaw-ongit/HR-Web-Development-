@@ -99,7 +99,7 @@ export default function NotificationCenterPage() {
                   onClick={() => setFilterType(type)}
                   className={`px-3 py-2 rounded-xl text-xs font-semibold text-left transition ${
                     filterType === type 
-                      ? 'bg-brand-500/10 text-brand-600 dark:text-brand-400' 
+                      ? 'bg-primary/100/10 text-brand-600 dark:text-brand-400' 
                       : 'text-muted-foreground hover:bg-secondary/40'
                   }`}
                 >
@@ -112,7 +112,7 @@ export default function NotificationCenterPage() {
           {/* List panel */}
           <div className="lg:col-span-3 space-y-4">
             {filteredNotifications.map((not) => (
-              <Card key={not.id} className={`rounded-2xl border border-border p-4 shadow-sm flex items-start gap-4 transition ${!not.is_read ? 'bg-brand-500/5 border-brand-200' : 'bg-card'}`}>
+              <Card key={not.id} className={`rounded-2xl border border-border p-4 shadow-sm flex items-start gap-4 transition ${!not.is_read ? 'bg-primary/100/5 border-brand-200' : 'bg-card'}`}>
                 <div className="p-2 bg-secondary rounded-xl">
                   {getTypeIcon(not.type)}
                 </div>

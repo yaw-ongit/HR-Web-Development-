@@ -190,7 +190,7 @@ export default function TrainingEvaluationPage() {
             <Card className="rounded-[28px] border border-border p-6 shadow-sm">
               <h3 className="text-xl font-bold text-foreground mb-6">Formulir Evaluasi & Penilaian</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-xs font-semibold text-muted-foreground">Skor Rata-rata Pelatihan (0 - 100)</label>
                     <input

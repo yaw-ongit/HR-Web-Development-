@@ -185,7 +185,7 @@ function WidgetTraining({ title, realData }: { title: string; realData?: any }) 
               <p className="text-sm text-muted">{item.progress}%</p>
             </div>
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-surface" role="progressbar" aria-valuenow={item.progress} aria-valuemin={0} aria-valuemax={100} aria-label={`${item.course} progress`}>
-              <div className="h-full rounded-full bg-brand-500 transition-all" style={{ width: `${item.progress}%` }} />
+              <div className="h-full rounded-full bg-primary/100 transition-all" style={{ width: `${item.progress}%` }} />
             </div>
           </div>
         ))}
@@ -451,7 +451,7 @@ export default function DashboardPage({ realData }: { realData?: any }) {
             </div>
             <div className="rounded-2xl border border-border bg-surface/90 p-5">
               <div className="flex items-center gap-4">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-primary" aria-hidden="true">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary" aria-hidden="true">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
@@ -491,7 +491,7 @@ export default function DashboardPage({ realData }: { realData?: any }) {
             {quickActions.map((action) => (
               <Card key={action.label} className="p-5 transition hover:border-brand-500/30">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-50/50 text-primary" aria-hidden="true">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-primary/5 text-primary" aria-hidden="true">
                     {createElement(iconMap[action.icon as keyof typeof iconMap] ?? Sparkles, { className: 'h-5 w-5' })}
                   </div>
                   <div>
@@ -564,7 +564,7 @@ export default function DashboardPage({ realData }: { realData?: any }) {
 
             {/* Insights mini-charts */}
             <div className="mt-5 space-y-4">
-              <div className="rounded-2xl border border-border bg-white/85 p-5">
+              <div className="rounded-2xl border border-border bg-card/85 p-5">
                 <p className="text-xs uppercase tracking-[0.28em] text-muted">Tren Kehadiran</p>
                 <p className="mt-1 text-lg font-semibold text-foreground">Siklus Saat Ini</p>
                 <div className="mt-4 h-36" aria-label="Attendance trend chart">
@@ -579,7 +579,7 @@ export default function DashboardPage({ realData }: { realData?: any }) {
                   </ResponsiveContainer>
                 </div>
               </div>
-              <div className="rounded-2xl border border-border bg-white/85 p-5">
+              <div className="rounded-2xl border border-border bg-card/85 p-5">
                 <p className="text-xs uppercase tracking-[0.28em] text-muted">Penyelesaian Pelatihan</p>
                 <p className="mt-1 text-lg font-semibold text-foreground">Tingkat Partisipasi</p>
                 <div className="mt-4 h-36" aria-label="Training completion chart">

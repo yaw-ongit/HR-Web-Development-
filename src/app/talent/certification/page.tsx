@@ -1,4 +1,5 @@
 'use client';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
@@ -49,16 +50,7 @@ export default function TalentCertificationPage() {
       {
         accessorKey: 'status',
         header: 'Status',
-        cell: ({ getValue }) => {
-          const value = getValue() as string;
-          const color =
-            value === 'Aktif'
-              ? 'bg-emerald-50 text-emerald-200'
-              : value === 'Hampir Habis'
-              ? 'bg-amber-50 text-amber-200'
-              : 'bg-rose-50 text-rose-200';
-          return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
-        },
+        cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
       },
       {
         id: 'actions',

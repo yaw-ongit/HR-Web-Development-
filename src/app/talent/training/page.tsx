@@ -169,7 +169,7 @@ export default function TrainingDashboardPage() {
                 <p className="mt-4 text-3xl font-semibold text-foreground">{upcomingCount} Pelatihan</p>
                 <p className="mt-2 text-xs text-muted-foreground">Status Approved / Scheduled</p>
               </div>
-              <div className="p-3 bg-brand-500/10 text-brand-600 rounded-2xl">
+              <div className="p-3 bg-primary/100/10 text-brand-600 rounded-2xl">
                 <Calendar className="h-5 w-5" />
               </div>
             </div>
@@ -263,7 +263,7 @@ export default function TrainingDashboardPage() {
                       <strong className="block text-foreground truncate max-w-[150px]">{item.title}</strong>
                       <span className="text-[10px] text-muted-foreground">{item.start_date} | {item.location}</span>
                     </div>
-                    <span className="text-[10px] font-bold text-brand-600 bg-brand-500/10 px-2 py-0.5 rounded-full">{item.unit}</span>
+                    <span className="text-[10px] font-bold text-brand-600 bg-primary/100/10 px-2 py-0.5 rounded-full">{item.unit}</span>
                   </div>
                 ))}
                 {upcomingList.length === 0 && (
