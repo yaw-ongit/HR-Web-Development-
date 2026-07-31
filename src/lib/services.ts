@@ -106,6 +106,38 @@ export const IdentityService = {
 // 2. PEOPLE & EMPLOYEE SERVICES
 // ----------------------------------------------------
 export const PeopleService = {
+  async getReferenceData() {
+    if (!supabase) return null;
+    const [depts, positions, types, comp, br, bu, div, jg, sec] = await Promise.all([
+      supabase.from('departments').select('id, name'),
+      supabase.from('positions').select('id, title'),
+      supabase.from('employment_types').select('id, name'),
+      supabase.from('companies').select('id').limit(1),
+      supabase.from('branches').select('id').limit(1),
+      supabase.from('business_units').select('id').limit(1),
+      supabase.from('divisions').select('id').limit(1),
+      supabase.from('job_grades').select('id').limit(1),
+      supabase.from('sections').select('id').limit(1)
+    ]);
+    return {
+      departments: depts.data || [],
+      positions: positions.data || [],
+      employmentTypes: types.data || [],
+      defaultComp: comp.data?.[0]?.id,
+      defaultBranch: br.data?.[0]?.id,
+      defaultBu: bu.data?.[0]?.id,
+      defaultDiv: div.data?.[0]?.id,
+      defaultJg: jg.data?.[0]?.id,
+      defaultSec: sec.data?.[0]?.id
+    };
+  },
+
+  async createEmployee(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { data: result, error } = await supabase.from('employees').insert([data]).select().single();
+    return { data: result, error: error?.message };
+  },
+
   async getEmployees(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
@@ -185,6 +217,18 @@ export const WorkforceService = {
       fallback,
       mappers.mapLeaveRequest
     );
+  },
+
+  async getLeaveTypes() {
+    if (!supabase) return [];
+    const { data } = await supabase.from('leave_types').select('id, name');
+    return data || [];
+  },
+
+  async createLeaveRequest(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('leave_requests').insert([data]);
+    return { error: error?.message };
   },
 
   async updateLeaveRequestStatus(ids: string[], status: string) {
@@ -316,6 +360,18 @@ export let localSettings = {
 
 export const TalentService = {
   // --- CANDIDATES, INTERVIEWS, ONBOARDING ---
+  async getJobVacancies() {
+    if (!supabase) return { data: [] };
+    const { data } = await supabase.from('job_vacancies').select('*').order('created_at', { ascending: false });
+    return { data: data || [] };
+  },
+
+  async createCandidate(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { data: result, error } = await supabase.from('candidates').insert([data]).select().single();
+    return { data: result, error: error?.message };
+  },
+
   async getCandidates(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
@@ -676,12 +732,14 @@ export const TalentService = {
   },
 
   async updatePlanning(id: string, data: any) {
-    if (!supabase) {
-      localPlannings = localPlannings.map(p => p.id === id ? { ...p, ...data } : p);
-      return { error: null };
-    }
-    const { error } = await supabase.from('training_plannings').update(data).eq('id', id);
-    return { error };
+    if (!supabase) return { error: 'No db' };
+    const payload = {
+      name: data.title,
+      category: data.training_type,
+      description: data.notes
+    };
+    const { error } = await supabase.from('training_programs').update(payload).eq('id', id);
+    return { error: error?.message };
   },
 
   async deletePlanning(id: string) {
@@ -1119,6 +1177,12 @@ export const CompensationService = {
       fallback,
       mappers.mapPayrollReady
     );
+  },
+
+  async createClaim(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { data: result, error } = await supabase.from('medical_claims').insert([data]).select().single();
+    return { data: result, error: error?.message };
   },
 
   async getClaims(fallback?: any[]) {

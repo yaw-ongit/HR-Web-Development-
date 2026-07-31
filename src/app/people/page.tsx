@@ -12,6 +12,8 @@ import { PageHeader } from '@/components/ui/page-header';
 import { FilterBar, SearchInput, SelectFilter } from '@/components/ui/filter-bar';
 import { SectionContainer } from '@/components/layout/section-container';
 import { NoKaryawansEmptyState } from '@/components/ui/empty-state';
+import { Dialog } from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/toast';
 import { PeopleService } from '@/lib/services';
 import {
   departmentOptions, positionOptions, statusOptions,
@@ -29,18 +31,59 @@ export default function PeopleDirectoryPage() {
   const [sorting, setSorting] = useState<any[]>([]);
   const [rowSelection, setRowSelection] = useState({});
 
-  useEffect(() => {
-    PeopleService.getEmployees().then((result) => {
-      if (result.error) {
-        console.error('People directory data unavailable:', result.error);
-        return;
-      }
+  const { addToast } = useToast();
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [refData, setRefData] = useState<any>(null);
+  const [form, setForm] = useState({
+    full_name: '',
+    email: '',
+    phone: '',
+    national_id_number: '',
+    gender: 'L',
+    marital_status: 'BELUM_KAWIN',
+    birth_date: '1990-01-01',
+    join_date: new Date().toISOString().split('T')[0],
+    department_id: '',
+    position_id: '',
+    employment_type_id: ''
+  });
 
-      if (Array.isArray(result.data) && result.data.length > 0) {
+  const loadData = () => {
+    PeopleService.getEmployees().then((result) => {
+      if (Array.isArray(result.data)) {
         setEmployees(result.data as unknown as KaryawanRecord[]);
       }
     });
+  };
+
+  useEffect(() => {
+    loadData();
+    PeopleService.getReferenceData().then(setRefData);
   }, []);
+
+  const handleAddSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!refData) return;
+    const payload = {
+      ...form,
+      employee_number: 'NIK-' + Math.floor(1000 + Math.random() * 9000),
+      employee_status: 'AKTIF',
+      company_id: refData.defaultComp,
+      branch_id: refData.defaultBranch,
+      business_unit_id: refData.defaultBu,
+      division_id: refData.defaultDiv,
+      section_id: refData.defaultSec,
+      job_grade_id: refData.defaultJg
+    };
+    const { error } = await PeopleService.createEmployee(payload);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal menambah karyawan: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Berhasil', description: 'Karyawan baru berhasil ditambahkan!', variant: 'success' });
+      setIsAddOpen(false);
+      loadData();
+    }
+  };
 
   const filteredData = useMemo(() => {
     const q = search.toLowerCase();
@@ -153,7 +196,7 @@ export default function PeopleDirectoryPage() {
 
           <SectionContainer title="Direktori karyawan" description={`Menampilkan ${filteredData.length} catatan`}>
             {filteredData.length === 0 ? (
-              <NoKaryawansEmptyState onAdd={() => {}} />
+              <NoKaryawansEmptyState onAdd={() => setIsAddOpen(true)} />
             ) : (
               <DataTable table={table} caption="Tabel direktori karyawan" />
             )}
@@ -194,6 +237,53 @@ export default function PeopleDirectoryPage() {
           </Card>
         </aside>
       </div>
+      <Dialog open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Tambah Karyawan" description="Masukkan data karyawan baru.">
+        <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="col-span-2">
+              <label className="text-xs font-semibold text-muted-foreground">Nama Lengkap</label>
+              <input required type="text" value={form.full_name} onChange={e => setForm({...form, full_name: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Email</label>
+              <input required type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Telepon</label>
+              <input required type="text" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Nomor KTP</label>
+              <input required type="text" value={form.national_id_number} onChange={e => setForm({...form, national_id_number: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Departemen</label>
+              <select required value={form.department_id} onChange={e => setForm({...form, department_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Departemen</option>
+                {refData?.departments.map((d: any) => <option key={d.id} value={d.id}>{d.name}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Jabatan</label>
+              <select required value={form.position_id} onChange={e => setForm({...form, position_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Jabatan</option>
+                {refData?.positions.map((p: any) => <option key={p.id} value={p.id}>{p.title}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Tipe Pegawai</label>
+              <select required value={form.employment_type_id} onChange={e => setForm({...form, employment_type_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Tipe</option>
+                {refData?.employmentTypes.map((t: any) => <option key={t.id} value={t.id}>{t.name}</option>)}
+              </select>
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 pt-4 border-t border-border">
+            <Button variant="ghost" type="button" onClick={() => setIsAddOpen(false)}>Batal</Button>
+            <Button variant="primary" type="submit">Simpan</Button>
+          </div>
+        </form>
+      </Dialog>
     </div>
   );
 }

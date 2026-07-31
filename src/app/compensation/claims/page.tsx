@@ -3,13 +3,15 @@
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
 import { ColumnDef, getCoreRowModel, getPaginationRowModel, getSortedRowModel, RowSelectionState, useReactTable, SortingState } from '@tanstack/react-table';
-import { Search, ArrowRight, Download, Filter, FileText, AlertCircle } from 'lucide-react';
+import { Search, ArrowRight, Download, Filter, FileText, AlertCircle, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
 import { claimTrendData } from '@/lib/compensation-data';
 import { CompensationService } from '@/lib/services';
+import { Dialog } from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/toast';
 
 export default function ClaimsPage() {
   const [dataList, setDataList] = useState<any[]>([]);
@@ -18,13 +20,43 @@ export default function ClaimsPage() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
-  useEffect(() => {
+  const { addToast } = useToast();
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [form, setForm] = useState({
+    description: '',
+    claimed_amount: '',
+    claim_date: new Date().toISOString().split('T')[0]
+  });
+
+  const loadData = () => {
     CompensationService.getClaims().then((data) => {
-      if (data.data && Array.isArray(data.data)) {
-        setDataList(data.data);
-      }
+      if (data.data && Array.isArray(data.data)) setDataList(data.data);
     });
+  };
+
+  useEffect(() => {
+    loadData();
   }, []);
+
+  const handleAddSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload = {
+      ...form,
+      claimed_amount: Number(form.claimed_amount),
+      status: 'DIAJUKAN',
+      employee_id: 'e0000000-0000-0000-0000-000000000001',
+      employee_insurance_id: '12000000-0000-0000-0000-000000000001', // Real valid seeded insurance ID
+      claim_number: 'CLM-' + Math.floor(1000 + Math.random() * 9000)
+    };
+    const { error } = await CompensationService.createClaim(payload);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal mengajukan klaim: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Berhasil', description: 'Klaim berhasil diajukan!', variant: 'success' });
+      setIsAddOpen(false);
+      loadData();
+    }
+  };
 
   const filteredClaims = useMemo(() => {
     const query = search.toLowerCase();
@@ -229,6 +261,9 @@ export default function ClaimsPage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">All claims</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
+            <Button onClick={() => setIsAddOpen(true)} variant="primary" className="rounded-full px-5 py-3">
+              <Plus className="h-4 w-4" /> Klaim Baru
+            </Button>
             <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
               <Download className="h-4 w-4" /> Export
             </Button>
@@ -262,6 +297,29 @@ export default function ClaimsPage() {
           <DataTable table={table} />
         </div>
       </Card>
+
+      <Dialog open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Klaim Baru" description="Masukkan data klaim baru.">
+        <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Deskripsi / Jenis Klaim</label>
+              <input required type="text" value={form.description} onChange={e => setForm({...form, description: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Tanggal Klaim</label>
+              <input required type="date" value={form.claim_date} onChange={e => setForm({...form, claim_date: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Jumlah (Rp)</label>
+              <input required type="number" value={form.claimed_amount} onChange={e => setForm({...form, claimed_amount: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 pt-4 border-t border-border">
+            <Button variant="ghost" type="button" onClick={() => setIsAddOpen(false)}>Batal</Button>
+            <Button variant="primary" type="submit">Ajukan</Button>
+          </div>
+        </form>
+      </Dialog>
     </div>
   );
 }

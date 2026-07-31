@@ -3,13 +3,15 @@
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
 import { ColumnDef, getCoreRowModel, getPaginationRowModel, getSortedRowModel, RowSelectionState, useReactTable, SortingState } from '@tanstack/react-table';
-import { Search, ArrowRight, Download, Filter, Users } from 'lucide-react';
+import { Search, ArrowRight, Download, Filter, Users, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
 import { candidatePipeline } from '@/lib/talent-data';
 import { TalentService } from '@/lib/services';
+import { Dialog } from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/toast';
 
 export default function TalentCandidatesPage() {
   const [dataList, setDataList] = useState<any[]>([]);
@@ -18,13 +20,46 @@ export default function TalentCandidatesPage() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
-  useEffect(() => {
+  const { addToast } = useToast();
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [vacancies, setVacancies] = useState<any[]>([]);
+  const [form, setForm] = useState({
+    full_name: '',
+    email: '',
+    phone: '',
+    gender: 'L',
+    job_vacancy_id: ''
+  });
+
+  const loadData = () => {
     TalentService.getCandidates().then((result) => {
-      if (result && Array.isArray(result.data)) {
-        setDataList(result.data);
-      }
+      if (result && Array.isArray(result.data)) setDataList(result.data);
+    });
+  };
+
+  useEffect(() => {
+    loadData();
+    // Load job vacancies for dropdown
+    TalentService.getJobVacancies().then((res) => {
+      if (res && Array.isArray(res.data)) setVacancies(res.data);
     });
   }, []);
+
+  const handleAddSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload = {
+      ...form,
+      status: 'BARU'
+    };
+    const { error } = await TalentService.createCandidate(payload);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal menambah kandidat: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Berhasil', description: 'Kandidat baru berhasil ditambahkan!', variant: 'success' });
+      setIsAddOpen(false);
+      loadData();
+    }
+  };
 
   const filteredCandidates = useMemo(() => {
     const query = search.toLowerCase();
@@ -118,6 +153,9 @@ export default function TalentCandidatesPage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">Kandidat aktif</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
+            <Button onClick={() => setIsAddOpen(true)} variant="primary" className="rounded-full px-5 py-3">
+              <Plus className="h-4 w-4" /> Tambah Kandidat
+            </Button>
             <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
               <Download className="h-4 w-4" /> Ekspor
             </Button>
@@ -150,6 +188,43 @@ export default function TalentCandidatesPage() {
           <DataTable table={table} />
         </div>
       </Card>
+
+      <Dialog open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Tambah Kandidat" description="Masukkan data kandidat baru.">
+        <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="col-span-2">
+              <label className="text-xs font-semibold text-muted-foreground">Nama Lengkap</label>
+              <input required type="text" value={form.full_name} onChange={e => setForm({...form, full_name: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Email</label>
+              <input required type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Telepon</label>
+              <input required type="text" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Lowongan</label>
+              <select required value={form.job_vacancy_id} onChange={e => setForm({...form, job_vacancy_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Lowongan</option>
+                {vacancies?.map((v: any) => <option key={v.id} value={v.id}>{v.title || v.position_title}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Jenis Kelamin</label>
+              <select required value={form.gender} onChange={e => setForm({...form, gender: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 pt-4 border-t border-border">
+            <Button variant="ghost" type="button" onClick={() => setIsAddOpen(false)}>Batal</Button>
+            <Button variant="primary" type="submit">Simpan</Button>
+          </div>
+        </form>
+      </Dialog>
     </div>
   );
 }

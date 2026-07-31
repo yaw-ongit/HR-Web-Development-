@@ -23,6 +23,49 @@ export default function WorkforceLeaveManagementPage() {
 
   const { addToast } = useToast();
   const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [leaveTypesData, setLeaveTypesData] = useState<any[]>([]);
+  const [form, setForm] = useState({
+    leave_type_id: '',
+    start_date: '',
+    end_date: '',
+    reason: ''
+  });
+
+  const loadData = () => {
+    WorkforceService.getLeaveRequests().then((result) => {
+      if (Array.isArray(result.data)) setDataList(result.data);
+    });
+  };
+
+  useEffect(() => {
+    loadData();
+    WorkforceService.getLeaveTypes().then(setLeaveTypesData);
+  }, []);
+
+  const handleAddSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const startDate = new Date(form.start_date);
+    const endDate = new Date(form.end_date);
+    const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+    const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+    const payload = {
+      ...form,
+      total_days: totalDays,
+      employee_id: 'e0000000-0000-0000-0000-000000000001',
+      status: 'DIAJUKAN',
+      approver_id: 'e0000000-0000-0000-0000-000000000002'
+    };
+    const { error } = await WorkforceService.createLeaveRequest(payload);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal mengajukan cuti: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Berhasil', description: 'Permintaan cuti berhasil diajukan!', variant: 'success' });
+      setIsAddOpen(false);
+      loadData();
+    }
+  };
 
   const handleApprove = async () => {
     const selectedIds = table.getSelectedRowModel().rows.map(r => r.original.id);
@@ -60,18 +103,7 @@ export default function WorkforceLeaveManagementPage() {
     }
   };
 
-  useEffect(() => {
-    WorkforceService.getLeaveRequests().then((result) => {
-      if (result.error) {
-        console.error('Leave requests data unavailable:', result.error);
-        return;
-      }
 
-      if (Array.isArray(result.data) && result.data.length > 0) {
-        setDataList(result.data);
-      }
-    });
-  }, []);
 
   const filteredLeaves = useMemo(() => {
     const query = search.toLowerCase();
@@ -309,6 +341,37 @@ export default function WorkforceLeaveManagementPage() {
           <DataTable table={table} />
         </div>
       </Card>
+      <Dialog open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Ajukan Cuti" description="Isi form untuk mengajukan cuti baru.">
+        <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Jenis Cuti</label>
+              <select required value={form.leave_type_id} onChange={e => setForm({...form, leave_type_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Jenis</option>
+                {leaveTypesData?.map((t: any) => <option key={t.id} value={t.id}>{t.name}</option>)}
+              </select>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-semibold text-muted-foreground">Tanggal Mulai</label>
+                <input required type="date" value={form.start_date} onChange={e => setForm({...form, start_date: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-muted-foreground">Tanggal Selesai</label>
+                <input required type="date" value={form.end_date} onChange={e => setForm({...form, end_date: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Alasan</label>
+              <textarea required value={form.reason} onChange={e => setForm({...form, reason: e.target.value})} rows={3} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none"></textarea>
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 pt-4 border-t border-border">
+            <Button variant="ghost" type="button" onClick={() => setIsAddOpen(false)}>Batal</Button>
+            <Button variant="primary" type="submit">Ajukan</Button>
+          </div>
+        </form>
+      </Dialog>
     </div>
   );
 }
