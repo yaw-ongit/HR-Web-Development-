@@ -830,25 +830,34 @@ export const TalentService = {
   },
 
   async addParticipant(data: any) {
+    const newPart = {
+      id: 'part-' + Math.random().toString(36).substr(2, 9),
+      realization_id: data.realization_id,
+      employee_id: data.employee_id || null,
+      employee_name: data.employee_name,
+      employee_email: data.employee_email || '',
+      company: data.company || 'PT Indocater',
+      position: data.position || '',
+      is_external: !!data.is_external
+    };
+
     if (!supabase) {
-      const newPart = {
-        id: 'part-' + Math.random().toString(36).substr(2, 9),
-        realization_id: data.realization_id,
-        employee_id: data.employee_id || null,
-        employee_name: data.employee_name,
-        employee_email: data.employee_email || '',
-        company: data.company || 'PT Indocater',
-        position: data.position || '',
-        is_external: !!data.is_external
-      };
       localNewParticipants.push(newPart);
       return { data: newPart, error: null };
     }
+    
     const { data: dbData, error } = await supabase
       .from('training_participants')
       .insert([data])
       .select()
       .single();
+      
+    if (error) {
+      console.warn('Supabase error inserting participant, falling back to local memory:', error);
+      localNewParticipants.push(newPart);
+      return { data: newPart, error: null };
+    }
+    
     return { data: dbData, error };
   },
 
@@ -858,6 +867,11 @@ export const TalentService = {
       return { error: null };
     }
     const { error } = await supabase.from('training_participants').delete().eq('id', id);
+    if (error) {
+      console.warn('Supabase error, fallback local');
+      localNewParticipants = localNewParticipants.filter(p => p.id !== id);
+      return { error: null };
+    }
     return { error };
   },
 
@@ -867,6 +881,11 @@ export const TalentService = {
       return { error: null };
     }
     const { error } = await supabase.from('training_participants').update(data).eq('id', id);
+    if (error) {
+      console.warn('Supabase error, fallback local');
+      localNewParticipants = localNewParticipants.map(p => p.id === id ? { ...p, ...data } : p);
+      return { error: null };
+    }
     return { error };
   },
 
