@@ -406,6 +406,22 @@ export const TalentService = {
   },
 
   // --- CERTIFICATIONS ---
+  async uploadCertificateDocument(file: File) {
+    if (!supabase) return { error: 'Supabase not configured' };
+    const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+    const { data, error } = await supabase.storage
+      .from('certificate-documents')
+      .upload(fileName, file, { cacheControl: '3600', upsert: false });
+    if (error) {
+      console.error('Failed to upload file:', error);
+      return { error: error.message };
+    }
+    const { data: publicUrlData } = supabase.storage
+      .from('certificate-documents')
+      .getPublicUrl(data.path);
+    return { data: publicUrlData.publicUrl, error: null };
+  },
+
   async getCertifications(fallback?: any[]) {
     if (!supabase) {
       return { data: localCertifications, error: null, isFallback: true };

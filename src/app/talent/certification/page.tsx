@@ -10,6 +10,9 @@ import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
 import { TalentService } from '@/lib/services';
+import { Dialog } from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/toast';
+import { employeeDirectory } from '@/lib/people-data';
 
 export default function TalentCertificationPage() {
   const [dataList, setDataList] = useState<any[]>([]);
@@ -17,6 +20,78 @@ export default function TalentCertificationPage() {
   const [status, setStatus] = useState('All');
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  const { addToast } = useToast();
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
+  const [uploadFile, setUploadFile] = useState<File | null>(null);
+  const [uploadEmployee, setUploadEmployee] = useState('');
+  const [uploadCertType, setUploadCertType] = useState('');
+  const [uploadIssuedDate, setUploadIssuedDate] = useState('');
+  const [uploadExpiryDate, setUploadExpiryDate] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      if (file.type !== 'application/pdf') {
+        addToast({ title: 'Error', description: 'Hanya file PDF yang diperbolehkan', variant: 'danger' });
+        e.target.value = '';
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        addToast({ title: 'Error', description: 'Ukuran file maksimal 5MB', variant: 'danger' });
+        e.target.value = '';
+        return;
+      }
+      setUploadFile(file);
+    }
+  };
+
+  const handleUploadSubmit = async () => {
+    if (!uploadFile || !uploadEmployee || !uploadCertType || !uploadIssuedDate || !uploadExpiryDate) {
+      addToast({ title: 'Error', description: 'Mohon lengkapi semua field', variant: 'danger' });
+      return;
+    }
+    setIsUploading(true);
+    try {
+      const uploadRes = await TalentService.uploadCertificateDocument(uploadFile);
+      if (uploadRes.error) {
+        addToast({ title: 'Error', description: uploadRes.error, variant: 'danger' });
+        setIsUploading(false);
+        return;
+      }
+
+      const emp = employeeDirectory.find(e => e.id === uploadEmployee);
+      
+      const newCertData = {
+        employee_id: emp?.employeeId || uploadEmployee,
+        employee: emp?.fullName || uploadEmployee,
+        certification: uploadCertType,
+        category: 'Umum',
+        issuer: 'External',
+        credentialId: `EXT-${Date.now()}`,
+        issuedDate: uploadIssuedDate,
+        expiryDate: uploadExpiryDate,
+        status: 'Aktif',
+        document_url: uploadRes.data
+      };
+
+      const dbRes = await TalentService.createCertification(newCertData);
+      if (dbRes.error) {
+        addToast({ title: 'Error', description: dbRes.error, variant: 'danger' });
+      } else {
+        addToast({ title: 'Sukses', description: 'Sertifikat berhasil diunggah', variant: 'success' });
+        setIsUploadOpen(false);
+        const listRes = await TalentService.getCertifications();
+        if (listRes.data) setDataList(listRes.data);
+      }
+    } catch (err) {
+      console.error(err);
+      addToast({ title: 'Error', description: 'Terjadi kesalahan sistem', variant: 'danger' });
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   useEffect(() => {
     TalentService.getCertifications().then((result) => {
@@ -55,10 +130,17 @@ export default function TalentCertificationPage() {
       {
         id: 'actions',
         header: 'Aksi',
-        cell: () => (
-          <Link href="/talent/certification" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground transition hover:border-brand-500">
-            View <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+        cell: ({ row }) => (
+          <div className="flex gap-2">
+            {row.original.document_url && (
+              <a href={row.original.document_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground transition hover:border-brand-500">
+                Lihat Sertifikat
+              </a>
+            )}
+            <Link href="/talent/certification" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground transition hover:border-brand-500">
+              View <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         ),
       },
     ],
@@ -93,9 +175,14 @@ export default function TalentCertificationPage() {
             <h1 className="text-3xl font-semibold text-foreground">Manajemen sertifikasi</h1>
             <p className="mt-2 max-w-2xl text-sm text-muted">Lacak sertifikasi karyawan, tanggal kedaluwarsa, dan kebutuhan perpanjangan.</p>
           </div>
-          <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-brand-500">
-            Kembali ke Talent
-          </Link>
+          <div className="flex gap-3">
+            <Button onClick={() => setIsUploadOpen(true)} className="inline-flex items-center gap-2 rounded-full border border-transparent bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700">
+              <Award className="h-4 w-4" /> Upload Sertifikat
+            </Button>
+            <Link href="/talent" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-brand-500">
+              Kembali ke Talent
+            </Link>
+          </div>
         </div>
       </SectionContainer>
 
@@ -166,6 +253,52 @@ export default function TalentCertificationPage() {
           <DataTable table={table} />
         </div>
       </Card>
+
+      <Dialog open={isUploadOpen} onClose={() => setIsUploadOpen(false)} title="Upload Sertifikat Baru">
+        <div className="space-y-4">
+          <div>
+            <label className="text-sm font-semibold text-muted-foreground">Karyawan</label>
+            <select value={uploadEmployee} onChange={e => setUploadEmployee(e.target.value)} className="w-full mt-1 rounded-xl border border-border p-2 bg-card text-foreground outline-none">
+              <option value="">Pilih Karyawan</option>
+              {employeeDirectory.map(e => (
+                <option key={e.id} value={e.id}>{e.fullName}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="text-sm font-semibold text-muted-foreground">Jenis Sertifikasi</label>
+            <select value={uploadCertType} onChange={e => setUploadCertType(e.target.value)} className="w-full mt-1 rounded-xl border border-border p-2 bg-card text-foreground outline-none">
+              <option value="">Pilih Sertifikasi</option>
+              <option value="AWS Certified Solutions Architect">AWS Certified Solutions Architect</option>
+              <option value="Certified Scrum Product Owner">Certified Scrum Product Owner</option>
+              <option value="SHRM Certified Professional">SHRM Certified Professional</option>
+              <option value="Kubernetes Application Developer">Kubernetes Application Developer</option>
+              <option value="Google Cloud Associate Cloud Engineer">Google Cloud Associate Cloud Engineer</option>
+              <option value="ISO 9001:2015 Quality Lead Auditor">ISO 9001:2015 Quality Lead Auditor</option>
+            </select>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm font-semibold text-muted-foreground">Tanggal Terbit</label>
+              <input type="date" value={uploadIssuedDate} onChange={e => setUploadIssuedDate(e.target.value)} className="w-full mt-1 rounded-xl border border-border p-2 bg-card text-foreground outline-none" />
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-muted-foreground">Tanggal Berakhir</label>
+              <input type="date" value={uploadExpiryDate} onChange={e => setUploadExpiryDate(e.target.value)} className="w-full mt-1 rounded-xl border border-border p-2 bg-card text-foreground outline-none" />
+            </div>
+          </div>
+          <div>
+            <label className="text-sm font-semibold text-muted-foreground">Dokumen Sertifikat (PDF, maks 5MB)</label>
+            <input type="file" accept=".pdf" onChange={handleFileChange} className="w-full mt-1 rounded-xl border border-border p-2 bg-card text-foreground outline-none" />
+          </div>
+          <div className="flex justify-end gap-3 mt-6">
+            <Button variant="ghost" onClick={() => setIsUploadOpen(false)}>Batal</Button>
+            <Button className="bg-brand-600 text-white" disabled={isUploading} onClick={handleUploadSubmit}>
+              {isUploading ? 'Mengunggah...' : 'Upload'}
+            </Button>
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 }
