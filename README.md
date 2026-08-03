@@ -39,7 +39,7 @@ A modernized, enterprise-scale frontend built with **Next.js 15 (App Router)**, 
 | **Dashboard** | `/` | Role-aware command center with KPIs, charts, and activity widgets. |
 | **People** | `/people` | Employee directory, profiles (Employee 360), org structure, documents. |
 | **Workforce** | `/workforce` | Attendance tracking, leave management, overtime, shift planning. |
-| **Talent** | `/talent` | Hiring pipeline, candidates, onboarding, training, competency, certification. Includes **PDF Certificate generation & uploads**. |
+| **Talent** | `/talent` | Hiring pipeline, onboarding, competency, certification. Includes **Training Module** (Planning & Realization), **PDF Certificate generation (jsPDF)**, and **Certificate Upload (Supabase Storage)**. |
 | **Compensation** | `/compensation` | Benefits, insurance, medical, claims, welfare, payroll readiness. |
 | **Analytics** | `/analytics` | BI dashboards for workforce, attendance, leave, recruitment, training, compliance. |
 | **Administration** | `/administration` | Master data, user management, roles & permissions, audit logs. |

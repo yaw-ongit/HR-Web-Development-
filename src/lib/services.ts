@@ -1,5 +1,6 @@
 import { createClient } from './client';
 import * as mappers from './mappers';
+import { employeeDirectory } from './people-data';
 
 // Re-use or instantiate browser-client
 const supabase = createClient();
@@ -139,20 +140,23 @@ export const PeopleService = {
   },
 
   async getEmployees(fallback?: any[]) {
+    const mockFallback = fallback || employeeDirectory;
     if (!supabase) {
-      return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
+      return { data: mockFallback, error: 'Supabase environment variables are not configured', isFallback: true };
     }
 
     return safeQuery(
       supabase.from('employees').select('*, employee_profiles(*), departments(name), positions(title), employment_types(name), branches(name, city), manager:employees!manager_id(full_name)'),
-      fallback,
+      mockFallback,
       mappers.mapEmployeeRecord
     );
   },
 
   async getEmployeeById(id: string | number, fallback?: any) {
+    const mockFallback = fallback || employeeDirectory.find(e => e.id === id) || null;
+    
     if (!supabase) {
-      return null;
+      return mockFallback;
     }
 
     try {
@@ -161,10 +165,10 @@ export const PeopleService = {
         .select('*, employee_profiles(*), employee_families(*), employee_educations(*), employee_experiences(*), departments(name), positions(title), employment_types(name), branches(name, city), manager:employees!manager_id(full_name)')
         .eq('id', id)
         .single();
-      if (error || !data) return null;
+      if (error || !data) return mockFallback;
       return mappers.mapEmployeeRecord(data);
     } catch {
-      return null;
+      return mockFallback;
     }
   },
 

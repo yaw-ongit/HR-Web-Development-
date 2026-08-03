@@ -70,9 +70,14 @@ export function Sidebar({ open, onClose }: SidebarProps) {
     window.location.href = '/login';
   };
 
+  // Find the most specific (longest) matching href for the current pathname
+  const activeHref = navItems
+    .map((item) => item.href)
+    .filter((href) => pathname === href || (href !== '/' && pathname.startsWith(href + '/')))
+    .sort((a, b) => b.length - a.length)[0];
+
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
-    return pathname.startsWith(href);
+    return href === activeHref;
   };
 
   return (

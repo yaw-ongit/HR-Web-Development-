@@ -301,18 +301,18 @@ export default function TrainingCertificatePage() {
     const stampX = w / 2 - 25;
     const stampY = 160;
     
-    // Draw seal
-    doc.setDrawColor(163, 0, 0);
-    doc.setLineWidth(0.8);
-    doc.circle(stampX, stampY, 12, 'D');
-    doc.setTextColor(163, 0, 0);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(4.5);
-    doc.text("PT INDOCATER", stampX, stampY - 4, { align: 'center' });
-    doc.setFontSize(6);
-    doc.text("HR DEPT", stampX, stampY + 1, { align: 'center' });
-    doc.setFontSize(4.5);
-    doc.text("OFFICIAL SEAL", stampX, stampY + 5, { align: 'center' });
+    // Draw seal (Removed manual geometric circle as requested)
+    // doc.setDrawColor(163, 0, 0);
+    // doc.setLineWidth(0.8);
+    // doc.circle(stampX, stampY, 12, 'D');
+    // doc.setTextColor(163, 0, 0);
+    // doc.setFont('helvetica', 'bold');
+    // doc.setFontSize(4.5);
+    // doc.text("PT INDOCATER", stampX, stampY - 4, { align: 'center' });
+    // doc.setFontSize(6);
+    // doc.text("HR DEPT", stampX, stampY + 1, { align: 'center' });
+    // doc.setFontSize(4.5);
+    // doc.text("OFFICIAL SEAL", stampX, stampY + 5, { align: 'center' });
 
     // Draw QR Code (Offline representation)
     const qrX = w / 2 + 10;
