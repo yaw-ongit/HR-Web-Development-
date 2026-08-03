@@ -78,7 +78,7 @@ export default function TalentCertificationPage() {
 
       const dbRes = await TalentService.createCertification(newCertData);
       if (dbRes.error) {
-        addToast({ title: 'Error', description: dbRes.error, variant: 'danger' });
+        addToast({ title: 'Error', description: typeof dbRes.error === 'string' ? dbRes.error : dbRes.error.message, variant: 'danger' });
       } else {
         addToast({ title: 'Sukses', description: 'Sertifikat berhasil diunggah', variant: 'success' });
         setIsUploadOpen(false);
