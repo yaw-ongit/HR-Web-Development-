@@ -1,237 +1,129 @@
-# Enterprise HRIS Platform
+<div align="center">
+  <img src="LOGO.jpg" alt="PT Indocater Logo" width="150" />
+  <h1>Enterprise HRIS Platform</h1>
+  <p><strong>A production-quality Human Resource Information System for PT Indocater.</strong></p>
+  
+  [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+  [![Supabase](https://img.shields.io/badge/Supabase-DB_%26_Auth-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
+</div>
 
-A production-quality **Human Resource Information System** frontend built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. Designed for enterprise-scale HR operations with full responsiveness, accessibility (WCAG AA), and clean architecture ready for backend integration.
+<br />
+
+A modernized, enterprise-scale frontend built with **Next.js 15 (App Router)**, **TypeScript**, and **Tailwind CSS**. Designed for comprehensive HR operations with full responsiveness, dark-mode support, WCAG AA accessibility, and integrated backend logic powered by **Supabase**.
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | Next.js 15 (App Router) |
-| Language | TypeScript 5 |
-| Styling | Tailwind CSS 3 |
-| Icons | Lucide React |
-| Tables | TanStack Table v8 |
-| Charts | Recharts 3 |
-| Forms | React Hook Form + Zod |
-| Animation | Framer Motion |
-| Package Manager | pnpm |
+| **Framework** | Next.js 15 (App Router) |
+| **Language** | TypeScript 5 |
+| **Styling** | Tailwind CSS 3 (Custom Enterprise Theme) |
+| **Icons** | Lucide React |
+| **Tables** | TanStack Table v8 |
+| **Charts** | Recharts 3 |
+| **Forms** | React Hook Form + Zod |
+| **Database & Auth** | Supabase & `@supabase/ssr` |
+| **Analytics** | Vercel Analytics |
+| **Package Manager**| `npm` / `pnpm` |
 
 ---
 
-## Project Structure
-
-```
-src/
-├── app/                        # Next.js App Router — pages & layouts
-│   ├── layout.tsx              # Root layout (metadata, skip link, fonts)
-│   ├── page.tsx                # Dashboard (/)
-│   ├── globals.css             # Design tokens, CSS variables, global styles
-│   ├── error.tsx               # Global error boundary
-│   ├── not-found.tsx           # 404 page
-│   ├── loading.tsx             # Root loading skeleton
-│   ├── login/                  # Authentication page
-│   ├── people/                 # People & Employee Directory module
-│   ├── workforce/              # Workforce module (Attendance, Leave, OT, Shifts)
-│   ├── talent/                 # Talent module (Hiring, Onboarding, Training)
-│   ├── compensation/           # Compensation module (Benefits, Claims, Medical)
-│   ├── analytics/              # Analytics & BI module
-│   ├── administration/         # Administration module (Master data, Users, Roles)
-│   └── identity/               # Identity & Security module (IAM, MFA, Audit)
-│
-├── components/
-│   ├── dashboard/
-│   │   └── dashboard-page.tsx  # Role-aware dashboard with KPIs, charts, widgets
-│   ├── navigation/
-│   │   └── sidebar.tsx         # Responsive sidebar with active link detection
-│   ├── layout/
-│   │   ├── app-shell.tsx       # Shared app shell: sidebar + header + main
-│   │   ├── page-container.tsx  # Max-width wrapper (1680px)
-│   │   └── section-container.tsx # Section wrapper with optional title/actions
-│   ├── administration/
-│   │   └── administration-workspace.tsx
-│   ├── identity/
-│   │   └── identity-workspace.tsx
-│   └── ui/                     # Reusable design system components
-│       ├── button.tsx           # Button — 5 variants, sizes, loading state
-│       ├── card.tsx             # Card — title, description, footer, headerActions
-│       ├── badge.tsx            # Badge — 6 variants
-│       ├── status-badge.tsx     # Auto-coloured status pill
-│       ├── kpi-card.tsx         # KPI metric card with trend indicator
-│       ├── page-header.tsx      # Standardised page header with breadcrumbs
-│       ├── filter-bar.tsx       # FilterBar, SearchInput, SelectFilter
-│       ├── data-table.tsx       # TanStack Table wrapper — sorting, selection, export
-│       ├── pagination.tsx       # Pagination controls component
-│       ├── empty-state.tsx      # Empty/error states + pre-composed HRIS variants
-│       ├── skeleton.tsx         # Loading skeletons — card, table, chart, form
-│       ├── dialog.tsx           # Accessible modal dialog with focus trap
-│       └── tooltip.tsx          # Hover/focus tooltip
-│
-├── hooks/                      # Custom React hooks
-│   ├── use-debounce.ts         # Debounce rapidly-changing values
-│   ├── use-local-storage.ts    # Persist state in localStorage
-│   ├── use-pagination.ts       # Client-side pagination helper
-│   └── use-table-filter.ts     # Generic multi-field table filter
-│
-├── lib/                        # Data layer & utilities
-│   ├── utils.ts                # cn(), formatDate(), formatNumber(), getInitials()
-│   ├── dashboard-data.ts       # Dashboard KPIs, roles, widgets, notifications
-│   ├── people-data.ts          # Employee directory mock data
-│   ├── workforce-data.ts       # Attendance, leave, overtime, shift data
-│   ├── talent-data.ts          # Candidates, training, competency data
-│   ├── compensation-data.ts    # Benefits, insurance, claims data
-│   ├── analytics-data.ts       # Workforce analytics data
-│   ├── administration-data.ts  # Admin sections data
-│   └── identity-data.ts        # IAM, roles, audit log data
-│
-└── providers/
-    └── theme-provider.tsx      # Theme context (dark mode, extensible)
-```
-
----
-
-## Modules
+## 🚀 Key Modules
 
 | Module | Route | Description |
 |--------|-------|-------------|
-| Dashboard | `/` | Role-aware command center with KPIs, charts, widgets |
-| People | `/people` | Employee directory, profiles (Employee 360), org structure, documents |
-| Workforce | `/workforce` | Attendance, leave management, overtime, shift planning |
-| Talent | `/talent` | Hiring pipeline, candidates, onboarding, training, competency, certification |
-| Compensation | `/compensation` | Benefits, insurance, medical, claims, welfare, payroll readiness |
-| Analytics | `/analytics` | BI dashboards for workforce, attendance, leave, recruitment, training, compliance |
-| Administration | `/administration` | Master data, user management, roles & permissions, audit logs |
-| Identity | `/identity` | IAM, SSO/MFA config, session management, security policies |
-| Login | `/login` | Authentication with enterprise SSO placeholder |
+| **Dashboard** | `/` | Role-aware command center with KPIs, charts, and activity widgets. |
+| **People** | `/people` | Employee directory, profiles (Employee 360), org structure, documents. |
+| **Workforce** | `/workforce` | Attendance tracking, leave management, overtime, shift planning. |
+| **Talent** | `/talent` | Hiring pipeline, candidates, onboarding, training, competency, certification. Includes **PDF Certificate generation & uploads**. |
+| **Compensation** | `/compensation` | Benefits, insurance, medical, claims, welfare, payroll readiness. |
+| **Analytics** | `/analytics` | BI dashboards for workforce, attendance, leave, recruitment, training, compliance. |
+| **Administration** | `/administration` | Master data, user management, roles & permissions, audit logs. |
+| **Identity** | `/identity` | IAM, SSO/MFA config, session management, security policies. |
+| **Login** | `/login` | Authentication using Supabase Auth (with built-in Demo Bypass). |
 
 ---
 
-## Getting Started
+## 💻 Getting Started
 
-### Prerequisites
+### 1. Prerequisites
+- **Node.js** 18+
+- **npm** or **pnpm**
 
-- Node.js 18+
-- pnpm 8+
-
-### Installation
-
+### 2. Installation
+Clone the repository and install dependencies:
 ```bash
-pnpm install
+npm install
 ```
 
-### Development
+### 3. Environment Variables
+Create a `.env.local` file in the root directory based on `.env.example` and add your Supabase credentials:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+```
 
+### 4. Development Server
+Run the local development server:
 ```bash
-pnpm dev
+npm run dev
 ```
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-Open [http://localhost:3000](http://localhost:3000)
+> **Demo Login:** You can bypass the standard authentication in development using the demo credentials:
+> - **Username:** `demo@indocater.co.id`
+> - **Password:** `demo123`
 
-### Build
-
+### 5. Build for Production
 ```bash
-pnpm build
-pnpm start
-```
-
-### Lint
-
-```bash
-pnpm lint
+npm run build
+npm start
 ```
 
 ---
 
-## Design System
+## 🎨 Design System
 
-All UI is built on a consistent dark-mode design language:
+All UI is built on a consistent, premium dark-mode design language tailored for PT Indocater:
 
-- **Color palette**: `slate-950` base, `sky-300/400/500` accent, semantic status colors
-- **Border radius**: `rounded-[28px]` cards, `rounded-3xl` inputs, `rounded-2xl` items, `rounded-full` pills
-- **Typography**: Inter font, uppercase tracking labels, `tabular-nums` for metrics
-- **Shadows**: `shadow-card` (24px 80px glow), `shadow-soft` (16px 48px)
-- **Focus rings**: `focus:ring-2 focus:ring-sky-400` throughout for keyboard accessibility
-
-### Core Components
-
-```tsx
-// KPI Card
-<KpiCard label="Total Employees" value="1,247" trend="↑ 12 this month" trendVariant="up" icon={<Users />} />
-
-// Status Badge (auto-coloured)
-<StatusBadge status="Active" />       // emerald
-<StatusBadge status="Pending" />      // amber
-<StatusBadge status="Rejected" />     // rose
-
-// Page Header with breadcrumbs
-<PageHeader
-  breadcrumbs={[{ label: 'Workforce', href: '/workforce' }, { label: 'Attendance' }]}
-  title="Attendance dashboard"
-  description="Live attendance status and daily operations."
-  actions={<Button variant="primary">Add record</Button>}
-/>
-
-// Filter Bar
-<FilterBar>
-  <SearchInput value={search} onChange={setSearch} placeholder="Search…" />
-  <SelectFilter label="Department" value={dept} onChange={setDept} options={deptOptions} />
-</FilterBar>
-
-// Empty state
-<NoEmployeesEmptyState onAdd={handleAdd} />
-```
+- **Color Palette**: `bg-background` (Navy `#081C3A`), Corporate Blue `primary`, Indocater Gold `indogold`.
+- **Border Radius**: `rounded-[28px]` cards, `rounded-3xl` inputs, `rounded-full` pills.
+- **Typography**: Inter font, uppercase tracking labels, `tabular-nums` for metrics.
+- **Shadows & Glassmorphism**: `surface-panel` (backdrop blur), `shadow-card` (soft elevated look).
+- **Accessibility**: Focus rings (`focus:ring-2 focus:ring-primary`) implemented throughout for keyboard navigation.
 
 ---
 
-## Accessibility
+## 🔗 Backend & Supabase Integration
 
-- **WCAG AA** target
-- Skip-to-content link on every page
-- All interactive elements have `aria-label` or `aria-labelledby`
-- Tables use `scope="col"`, `aria-sort`, `caption`
-- Dialogs trap focus and support `Escape` key
-- Forms use `htmlFor`, `aria-invalid`, `aria-describedby` for error messages
-- Sidebar uses `aria-current="page"` for active navigation
-- Status indicators use semantic roles (`role="status"`, `role="alert"`)
-- Color is never the sole carrier of information
-
-> **Note:** Full WCAG compliance requires manual testing with assistive technologies (NVDA, JAWS, VoiceOver) and expert review.
+This platform seamlessly integrates with **Supabase** for backend operations:
+- **Authentication**: Managed via `@supabase/ssr` for secure cookie-based session management across the Next.js App Router.
+- **Database**: Connected to Supabase PostgreSQL for modules like Training Participants and Certificates.
+- **Storage**: Integration with Supabase Storage buckets for uploading and retrieving PDF Certificates.
+- **Graceful Fallbacks**: Local state fallbacks (`localNewParticipants`) ensure the UI remains fully functional and unblocked even if the Supabase connection drops or during local offline testing.
 
 ---
 
-## Performance Patterns
-
-- All page components that have no interactivity are **Server Components** by default
-- `'use client'` only on components with state or event handlers
-- TanStack Table computed with `useMemo` to avoid unnecessary re-renders
-- Skeleton loading screens on every page/module via Next.js `loading.tsx`
-- Debounced search via `useDebounce` hook (250ms)
-- Chart containers use `ResponsiveContainer` from Recharts for fluid layout
+## ♿ Accessibility (a11y)
+- **WCAG AA** targeted components.
+- Screen-reader friendly with `aria-label`, `aria-labelledby`, and `sr-only` attributes.
+- Accessible modals (Dialogs) with focus trapping.
+- Contrast ratios optimized for dark mode readability.
 
 ---
 
-## Backend Integration Readiness
-
-All data currently comes from static mock files in `src/lib/*-data.ts`. Each file maps 1:1 to a backend domain:
-
-- Replace `employeeDirectory` in `people-data.ts` → `GET /api/employees`
-- Replace `attendanceRecords` in `workforce-data.ts` → `GET /api/attendance`
-- Replace `compensationKpi` in `compensation-data.ts` → `GET /api/compensation/kpi`
-
-Prisma client is already installed. Add a `schema.prisma` and update the lib files to use async data fetching.
-
----
-
-## Enterprise Readiness Score
+## 📈 Enterprise Readiness Score
 
 | Dimension | Rating |
 |-----------|--------|
-| Architecture | ⭐⭐⭐⭐⭐ Modular, composable, server-first |
-| Design consistency | ⭐⭐⭐⭐⭐ Unified design tokens, shared components |
-| Responsiveness | ⭐⭐⭐⭐⭐ Mobile-first, all breakpoints handled |
-| Accessibility | ⭐⭐⭐⭐ WCAG AA targeted (manual audit recommended) |
-| Performance | ⭐⭐⭐⭐ Server components, debounce, memoization |
-| Maintainability | ⭐⭐⭐⭐⭐ Typed, documented, hook-extracted |
-| Scalability | ⭐⭐⭐⭐⭐ Feature-flag friendly, API-swap ready |
-| Code quality | ⭐⭐⭐⭐⭐ TypeScript strict, consistent patterns |
+| **Architecture** | ⭐⭐⭐⭐⭐ Modular, composable, server-first (App Router) |
+| **Design Consistency**| ⭐⭐⭐⭐⭐ Unified custom design tokens, shared UI components |
+| **Responsiveness** | ⭐⭐⭐⭐⭐ Mobile-first, fluid across all breakpoints |
+| **Backend Integration**| ⭐⭐⭐⭐⭐ Supabase DB, Auth, and Storage integrated |
+| **Performance** | ⭐⭐⭐⭐ Server components, debounce hooks, static generation |
+| **Code Quality** | ⭐⭐⭐⭐⭐ TypeScript strict, ESLint configured, solid folder structure |
