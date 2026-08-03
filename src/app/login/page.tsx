@@ -30,6 +30,13 @@ export default function LoginPage() {
 
     setLoading(true);
 
+    // Mock bypass for demo user
+    if (username === 'demo@indocater.co.id' && password === 'demo123') {
+      document.cookie = 'demo_session=true; path=/; max-age=86400';
+      window.location.href = '/dashboard';
+      return;
+    }
+
     try {
       const { createClient } = await import('@/lib/client');
       const supabase = createClient();

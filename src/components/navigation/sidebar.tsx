@@ -56,6 +56,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
   const handleLogout = async () => {
     try {
+      // Clear demo session
+      document.cookie = 'demo_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      
       const { createClient } = await import('@/lib/client');
       const supabase = createClient();
       if (supabase) {

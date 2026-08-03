@@ -31,7 +31,8 @@ export async function middleware(request: NextRequest) {
   })
 
   const { data } = await supabase.auth.getSession()
-  const session = data?.session
+  const demoSession = request.cookies.get('demo_session')?.value
+  const session = data?.session || demoSession === 'true'
 
   const { pathname } = request.nextUrl
   const isProtectedPath =

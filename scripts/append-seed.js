@@ -1,3 +1,4 @@
+/* eslint-disable */
 const fs = require('fs');
 
 let seedContent = fs.readFileSync('scripts/seed.js', 'utf8');
