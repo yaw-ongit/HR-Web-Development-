@@ -156,7 +156,7 @@ export default function TrainingCertificatePage() {
     }
   };
 
-  const generatePDFBytes = (participant: any, certNum: string) => {
+  const generatePDFBytes = async (participant: any, certNum: string) => {
     if (!selectedRealizationDetail) return null;
 
     const doc = new jsPDF({
@@ -204,24 +204,21 @@ export default function TrainingCertificatePage() {
     drawAccents();
 
     // Logo Block in Header
-    const logoX = (w - 70) / 2;
-    const logoY = 18;
-    doc.setFillColor(10, 37, 64);
-    doc.roundedRect(logoX, logoY, 70, 18, 1, 1, 'F');
-    doc.setFillColor(163, 0, 0);
-    doc.triangle(logoX + 4, logoY + 14, logoX + 9, logoY + 4, logoX + 14, logoY + 14, 'F');
-    doc.setFillColor(255, 215, 0);
-    doc.triangle(logoX + 6, logoY + 13, logoX + 9, logoY + 7, logoX + 12, logoY + 13, 'F');
-    doc.setFillColor(10, 37, 64);
-    doc.circle(logoX + 9, logoY + 11, 1.5, 'F');
-
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-    doc.text("PT INDOCATER", logoX + 18, logoY + 8);
-    doc.setTextColor(255, 215, 0);
-    doc.setFontSize(5);
-    doc.text("ENTERPRISE HR SERVICES", logoX + 18, logoY + 13);
+    const logoSize = 24;
+    const logoX = (w - logoSize) / 2;
+    const logoY = 16;
+    try {
+      const response = await fetch('/logo-indocater.jpg');
+      const blob = await response.blob();
+      const base64 = await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.readAsDataURL(blob);
+      });
+      doc.addImage(base64, 'JPEG', logoX, logoY, logoSize, logoSize);
+    } catch (error) {
+      console.error("Failed to load logo", error);
+    }
 
     // Header texts
     doc.setTextColor(10, 37, 64);
@@ -355,12 +352,12 @@ export default function TrainingCertificatePage() {
     return doc.output('arraybuffer');
   };
 
-  const handleGenerateSinglePdf = (part: any) => {
+  const handleGenerateSinglePdf = async (part: any) => {
     if (!selectedRealizationDetail) return;
     const lastNum = certificates.length + 1;
     const certNum = `CERT-2026-${String(lastNum).padStart(6, '0')}`;
     
-    const pdfBytes = generatePDFBytes(part, certNum);
+    const pdfBytes = await generatePDFBytes(part, certNum);
     if (!pdfBytes) return;
 
     // Trigger local download
@@ -411,7 +408,7 @@ export default function TrainingCertificatePage() {
         const certNum = `CERT-2026-${String(lastNum).padStart(6, '0')}`;
 
         // Generate PDF bytes
-        const pdfBytes = generatePDFBytes(part, certNum);
+        const pdfBytes = await generatePDFBytes(part, certNum);
         if (!pdfBytes) continue;
 
         const nameCleaned = part.employee_name.replace(/\s+/g, '_');

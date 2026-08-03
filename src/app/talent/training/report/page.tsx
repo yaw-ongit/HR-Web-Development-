@@ -234,6 +234,25 @@ export default function TrainingReportPage() {
         // Draw basic cert structure
         doc.setDrawColor(10, 37, 64); doc.setLineWidth(3); doc.rect(8, 8, w-16, h-16);
         doc.setDrawColor(212, 175, 55); doc.setLineWidth(0.8); doc.rect(10, 10, w-20, h-20);
+        
+        // Draw Logo
+        const logoSize = 24;
+        const logoX = (w - logoSize) / 2;
+        try {
+          const response = await fetch('/logo-indocater.jpg');
+          const blob = await response.blob();
+          const base64 = await new Promise<string>((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result as string);
+            reader.readAsDataURL(blob);
+          });
+          doc.addImage(base64, 'JPEG', logoX, 16, logoSize, logoSize);
+        } catch (error) {
+          console.error("Failed to load logo", error);
+        }
+        doc.setTextColor(10, 37, 64); doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
+        doc.text("PT INDOCATER", w / 2, 45, { align: 'center' });
+
         doc.setTextColor(10, 37, 64); doc.setFont('times', 'bold'); doc.setFontSize(26);
         doc.text(row.name, w/2, 85, { align: 'center' });
         doc.setFontSize(18); doc.text(row.title, w/2, 114, { align: 'center' });
