@@ -19,6 +19,39 @@
   - `/feedback` for suggestions, priority ratings, and bug reporting.
   - `/error/403`, `/not-found`, and `/error` handling 403, 404, and 500 status codes.
 - **Supabase Core Integration & Failsafe**: Completed. Service layers expanded for all new entities (`training_plannings`, `training_realizations`, `training_participants`, `training_attendances`, `training_evaluations`, `training_certificates`, etc.) with in-memory failsafes.
+- **People Management Updates**:
+  - Implemented Bulk Data actions: Added a dynamic `.csv` Import parser capable of seeding employee profiles directly into the `employees` table.
+  - Added CSV Export functionality capturing current Data Table filters.
+- **Identity & Administration**:
+  - Removed all `comingSoon` blocks across the configuration workspaces (`/identity` & `/administration`).
+  - Mapped mock administrative workflows (PDF generation, LogOut All, Apply Filters) to client-side actions.
+- **Analytics & Reporting Updates**:
+  - Replaced all static mock metrics in the Executive Dashboard with live KPI counters fetching directly from `employees`, `leave_requests`, `training_participants`, `candidates`, and `job_vacancies`.
+  - Implemented dynamic data loading across Attendance, Leave, Recruitment, Training, and Compliance analytics views.
+  - Replaced all "Coming Soon" buttons with operational "Ekspor CSV" (generating functional local downloads), "Cetak PDF" (leveraging native browser print dialog), and quick-focus "Filter" actions.
+- **Talent Management Updates**:
+  - Implemented **Recruitment**: Created `/talent/vacancies` for Job Vacancies CRUD.
+  - Implemented **Candidates**: Added Candidate Profile modal, status updates (Applied -> Hired).
+  - Implemented **Interviews**: Added scheduling and result input forms linked to specific candidates.
+  - Implemented **Hiring Pipeline**: Added `Hire` workflow to automatically generate Employee profiles upon Candidate acceptance.
+  - Implemented **Onboarding**: Added Checklist assignment and completion tracking.
+  - Implemented **Competencies**: Integrated Supabase competencies list and Assessment input.
+  - Removed all `comingSoon` placeholders across the `/talent` module.
+- **Compensation Management Updates**:
+  - Implemented **Benefits**: Added `Assign Benefit` form with employee and benefit type dropdowns connected to Supabase.
+  - Implemented **Insurance**: Added `Add Insurance` form mapping employee records to insurance providers and benefit types.
+  - Implemented **Medical Claims**: Replaced hardcoded IDs with dynamic employee/insurance selectors. Added multi-row `Approve Selected` and `Reject Selected` functionalities with rejection reasons.
+  - Implemented **Payroll Preparation**: Added `Export` functionality for ready-to-process payroll data.
+  - Removed all `comingSoon` placeholders from the `/compensation` module (Benefits, Insurance, Medical Claims, Payroll Ready, Welfare, Medical records) replacing them with CSV exports and active search filters.
+- **Workforce Management Updates**:
+  - Implemented Leave Management actions: Submit leave (with dynamic employee selection), Approve, Reject, Add notes.
+  - Added export functionality (`.csv`) for Attendance, Leave, Shift, and Overtime tables.
+  - Activated search filters on Attendance, Shift, and Overtime pages.
+  - Removed all `comingSoon` placeholders from the `/workforce` module.
+- **People Management Updates**:
+  - Implemented "Tambah karyawan" dialog in the employee directory for adding new hires.
+  - Implemented "Edit profil" in the employee detail page.
+  - Activated "Kirim pesan" and "Panggil" actions using native anchor links.
 - **Build & Lint Verification**: Completed. Build is fully compiled and lint is 100% clean.
 
 ## Completed Features
@@ -34,3 +67,4 @@
 
 ## Next Recommended Actions
 1. Map other modules (e.g. Compensation, Presence) as their features get refocused.
+2. Continue addressing "Coming Soon" placeholders across other modules (Analytics, Compensation, Talent, Workforce).

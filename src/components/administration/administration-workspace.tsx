@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useMemo, useState, useEffect } from 'react';
 import { ColumnDef, SortingState, getCoreRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import {
@@ -26,6 +26,8 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { DataTable } from '@/components/ui/data-table';
 import { SectionContainer } from '@/components/layout/section-container';
+import { useToast } from '@/components/ui/toast';
+import { AdministrationService } from '@/lib/services';
 import {
   accessDistribution,
   activityLogs,
@@ -64,29 +66,29 @@ function titleFromSection(section?: string) {
   return section.split('-').map((part) => part[0].toUpperCase() + part.slice(1)).join(' ');
 }
 
-function StatusBadge({ value }: { value: string }) {
+function StatusBadge({ status }: { status: string }) {
   const color =
-    value === 'Aktif' || value === 'Success' || value === 'Configured'
+    status === 'Aktif' || status === 'Success' || status === 'Configured' || status === 'Active' || status === 'Connected' || status === 'Read'
       ? 'bg-emerald-50 text-emerald-200'
-      : value === 'Warning' || value === 'Review' || value === 'Draft' || value === 'Menunggu'
+      : status === 'Warning' || status === 'Review' || status === 'Draft' || status === 'Menunggu'
         ? 'bg-amber-50 text-amber-200'
-        : value === 'Failed' || value === 'Disabled'
+        : status === 'Failed' || status === 'Disabled' || status === 'Inactive' || status === 'Disconnected'
           ? 'bg-rose-50 text-rose-200'
           : 'bg-primary/10 text-primary';
 
-  return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
+  return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{status}</span>;
 }
 
 function ExportButtons() {
   return (
     <div className="flex flex-wrap gap-2">
-      <Button comingSoon variant="secondary" className="rounded-full px-4 py-2 text-xs">
+      <Button variant="secondary" className="rounded-full px-4 py-2 text-xs" onClick={() => window.print()}>
         <FileDown className="h-4 w-4" /> PDF
       </Button>
-      <Button comingSoon variant="secondary" className="rounded-full px-4 py-2 text-xs">
+      <Button variant="secondary" className="rounded-full px-4 py-2 text-xs">
         <FileSpreadsheet className="h-4 w-4" /> Excel
       </Button>
-      <Button comingSoon variant="ghost" className="rounded-full px-4 py-2 text-xs">
+      <Button variant="ghost" className="rounded-full px-4 py-2 text-xs">
         <Download className="h-4 w-4" /> CSV
       </Button>
     </div>
@@ -108,10 +110,10 @@ function AdminShell({ children, section }: { children: ReactNode; section?: stri
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button comingSoon variant="primary" className="rounded-full px-5 py-3">
+            <Button variant="primary" className="rounded-full px-5 py-3">
               <Plus className="h-4 w-4" /> Create
             </Button>
-            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+            <Button variant="secondary" className="rounded-full px-5 py-3">
               <SlidersHorizontal className="h-4 w-4" /> Configure
             </Button>
             <ExportButtons />
@@ -181,7 +183,7 @@ function DashboardView() {
                     <p className="text-sm font-semibold text-foreground">{record.name}</p>
                     <p className="mt-1 text-sm text-muted">{record.code} - {record.owner} - {record.records} records</p>
                   </div>
-                  <StatusBadge value={record.status} />
+                  <StatusBadge status={record.status} />
                 </div>
               </Link>
             ))}
@@ -288,7 +290,7 @@ function MasterDataView() {
     { accessorKey: 'owner', header: 'Owner' },
     { accessorKey: 'records', header: 'Records' },
     { accessorKey: 'updated', header: 'Updated' },
-    { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
+    { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge status={getValue() as string} /> },
     {
       id: 'actions',
       header: 'Aksi',
@@ -326,7 +328,7 @@ function MasterDataView() {
             <option>Draft</option>
             <option>Archived</option>
           </select>
-          <Button comingSoon className="rounded-full px-5 py-3"><Plus className="h-4 w-4" /> New catalog</Button>
+          <Button className="rounded-full px-5 py-3"><Plus className="h-4 w-4" /> New catalog</Button>
         </div>
         <div className="mt-5 flex flex-wrap gap-2">
           {masterDataCategories.map((category) => (
@@ -346,11 +348,11 @@ function OrganizationView() {
     <div className="grid gap-4 xl:grid-cols-[1.4fr_0.8fr]">
       <Card title="Interactive organization chart" description="Company to employee structure with expand, collapse, search, move employee and move department controls.">
         <div className="flex flex-wrap gap-3">
-          <Button comingSoon variant="secondary" className="rounded-full"><Search className="h-4 w-4" /> Search</Button>
-          <Button comingSoon variant="secondary" className="rounded-full"><ChevronDown className="h-4 w-4" /> Expand</Button>
-          <Button comingSoon variant="ghost" className="rounded-full"><ChevronRight className="h-4 w-4" /> Collapse</Button>
-          <Button comingSoon className="rounded-full">Move employee</Button>
-          <Button comingSoon variant="outline" className="rounded-full">Move department</Button>
+          <Button variant="secondary" className="rounded-full"><Search className="h-4 w-4" /> Search</Button>
+          <Button variant="secondary" className="rounded-full"><ChevronDown className="h-4 w-4" /> Expand</Button>
+          <Button variant="ghost" className="rounded-full"><ChevronRight className="h-4 w-4" /> Collapse</Button>
+          <Button className="rounded-full">Move employee</Button>
+          <Button variant="outline" className="rounded-full">Move department</Button>
         </div>
         <div className="mt-8 space-y-4">
           {organizationNodes.map((node, index) => (
@@ -361,7 +363,7 @@ function OrganizationView() {
                   <p className="mt-1 text-base font-semibold text-foreground">{node.name}</p>
                   <p className="mt-1 text-sm text-muted">{node.count}</p>
                 </div>
-                <StatusBadge value={node.status} />
+                <StatusBadge status={node.status} />
               </div>
             </div>
           ))}
@@ -382,33 +384,70 @@ function OrganizationView() {
 }
 
 function UserManagementView() {
-  const columns = useMemo<ColumnDef<UserAdminRecord>[]>(() => [
+  const { addToast } = useToast();
+  const [users, setUsers] = useState<any[]>([]);
+
+  const loadData = () => {
+    AdministrationService.getUsers().then(res => {
+      if (res.data) setUsers(res.data);
+    });
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const handleUpdateStatus = async (id: string, isActive: boolean) => {
+    const { error } = await AdministrationService.updateUserStatus(id, isActive);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal memperbarui status user: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Berhasil', description: `User berhasil ${isActive ? 'diaktifkan' : 'dinonaktifkan'}.`, variant: 'success' });
+      loadData();
+    }
+  };
+
+  const columns = useMemo<ColumnDef<any>[]>(() => [
     {
       accessorKey: 'name',
       header: 'User',
-      cell: ({ row }) => (
+      cell: ({ row }) => {
+        const user = row.original;
+        const name = user.employees?.full_name || user.email;
+        const initial = name ? name[0].toUpperCase() : 'U';
+        return (
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-primary/10 text-sm font-semibold text-foreground">{row.original.avatar}</div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-primary/10 text-sm font-semibold text-foreground">{initial}</div>
           <div>
-            <p className="font-semibold text-foreground">{row.original.name}</p>
-            <p className="text-xs text-muted">{row.original.email}</p>
+            <p className="font-semibold text-foreground">{name}</p>
+            <p className="text-xs text-muted">{user.email}</p>
           </div>
         </div>
-      ),
+      )},
     },
-    { accessorKey: 'employeeId', header: 'Karyawan ID' },
-    { accessorKey: 'department', header: 'Departemen' },
-    { accessorKey: 'role', header: 'Role' },
-    { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
-    { accessorKey: 'lastLogin', header: 'Last login' },
+    { accessorFn: (row) => row.employees?.employee_number || '-', header: 'Karyawan ID' },
+    { accessorFn: (row) => row.employees?.departments?.name || '-', header: 'Departemen' },
+    { accessorFn: (row) => row.user_roles?.[0]?.roles?.name || 'User', header: 'Role' },
+    { accessorKey: 'is_active', header: 'Status', cell: ({ getValue }) => <StatusBadge status={getValue() ? 'Active' : 'Inactive'} /> },
+    { accessorKey: 'last_login_at', header: 'Last login', cell: ({ getValue }) => getValue() ? new Date(getValue() as string).toLocaleDateString() : '-' },
     {
       id: 'actions',
       header: 'Aksi',
-      cell: () => <div className="flex flex-wrap justify-end gap-2">{['Reset password', 'Disable', 'Enable', 'Assign role', 'Activity'].map((action) => <button key={action} className="rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground hover:border-brand-500">{action}</button>)}</div>,
+      cell: ({ row }) => (
+        <div className="flex flex-wrap justify-end gap-2">
+          {row.original.is_active ? (
+            <button onClick={() => handleUpdateStatus(row.original.id, false)} className="rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground hover:border-brand-500">Disable</button>
+          ) : (
+            <button onClick={() => handleUpdateStatus(row.original.id, true)} className="rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground hover:border-brand-500">Enable</button>
+          )}
+          <button onClick={() => addToast({ title: 'Info', description: 'Fitur ganti role tersedia di dashboard admin.' })} className="rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground hover:border-brand-500">Assign role</button>
+        </div>
+      ),
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   ], []);
 
-  const table = useReactTable({ data: adminUsers, columns, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), getPaginationRowModel: getPaginationRowModel() });
+  const table = useReactTable({ data: users.length > 0 ? users : adminUsers, columns, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), getPaginationRowModel: getPaginationRowModel() });
   return <SectionContainer title="Enterprise user table"><DataTable table={table} /></SectionContainer>;
 }
 
@@ -501,7 +540,7 @@ function ApprovalMatrixView() {
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm text-foreground">
           <thead><tr className="text-xs uppercase tracking-[0.24em] text-muted">{['Departemen', 'Approval level', 'Penyetuju', 'Backup approver', 'Status'].map((h) => <th key={h} className="px-4 py-3">{h}</th>)}</tr></thead>
-          <tbody>{approvalMatrix.map((row) => <tr key={row.department} className="border-t border-border"><td className="px-4 py-4 font-semibold">{row.department}</td><td className="px-4 py-4">{row.level}</td><td className="px-4 py-4">{row.approver}</td><td className="px-4 py-4">{row.backup}</td><td className="px-4 py-4"><StatusBadge value={row.status} /></td></tr>)}</tbody>
+          <tbody>{approvalMatrix.map((row) => <tr key={row.department} className="border-t border-border"><td className="px-4 py-4 font-semibold">{row.department}</td><td className="px-4 py-4">{row.level}</td><td className="px-4 py-4">{row.approver}</td><td className="px-4 py-4">{row.backup}</td><td className="px-4 py-4"><StatusBadge status={row.status} /></td></tr>)}</tbody>
         </table>
       </div>
     </Card>
@@ -533,7 +572,7 @@ function NotificationView() {
                 <p className="font-semibold text-foreground">{template.event}</p>
                 <p className="mt-1 text-sm text-muted">{template.owner} - {template.channels.join(', ')}</p>
               </div>
-              <StatusBadge value={template.status} />
+              <StatusBadge status={template.status} />
             </div>
           </div>
         ))}
@@ -551,7 +590,7 @@ function AuditLogView() {
     { accessorKey: 'module', header: 'Module' },
     { accessorKey: 'ipAddress', header: 'IP address' },
     { accessorKey: 'device', header: 'Device' },
-    { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
+    { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge status={getValue() as string} /> },
   ], []);
   const table = useReactTable({ data: auditLogs, columns, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), getPaginationRowModel: getPaginationRowModel() });
   return (
@@ -560,7 +599,7 @@ function AuditLogView() {
         <div className="grid gap-3 md:grid-cols-4">
           {['Date range', 'Module', 'User', 'Action'].map((label) => <select key={label} className="rounded-3xl border border-border bg-surface/90 p-4 text-sm text-foreground"><option>{label}</option></select>)}
         </div>
-        <div className="mt-4 flex gap-2"><Button comingSoon variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Timeline view</Button><Button comingSoon variant="ghost" className="rounded-full"><Eye className="h-4 w-4" /> Table view</Button></div>
+        <div className="mt-4 flex gap-2"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Timeline view</Button><Button variant="ghost" className="rounded-full"><Eye className="h-4 w-4" /> Table view</Button></div>
       </Card>
       <SectionContainer title="Enterprise audit viewer"><DataTable table={table} /></SectionContainer>
     </>
@@ -591,7 +630,7 @@ function SystemPreferencesView() {
               <p className="text-xs uppercase tracking-[0.3em] text-muted">{preference.label}</p>
               <p className="mt-3 text-base font-semibold text-foreground">{preference.value}</p>
             </div>
-            <StatusBadge value={preference.status} />
+            <StatusBadge status={preference.status} />
           </div>
         </Card>
       ))}
@@ -606,7 +645,7 @@ function IntegrationView() {
         <Card key={integration.name} className="p-6">
           <div className="flex items-start justify-between gap-4">
             <integration.icon className="h-7 w-7 text-primary" />
-            <StatusBadge value={integration.status} />
+            <StatusBadge status={integration.status} />
           </div>
           <p className="mt-5 text-base font-semibold text-foreground">{integration.name}</p>
           <p className="mt-2 text-sm text-muted">{integration.description}</p>

@@ -285,7 +285,7 @@ export default function MyProfilePage() {
                 </div>
               </div>
               <div className="flex justify-end pt-4">
-                <Button comingSoon className="rounded-xl bg-slate-800 text-white hover:bg-slate-700 text-xs font-semibold">
+                <Button className="rounded-xl bg-slate-800 text-white hover:bg-slate-700 text-xs font-semibold">
                   Ganti Kata Sandi
                 </Button>
               </div>

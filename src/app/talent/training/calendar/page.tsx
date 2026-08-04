@@ -314,8 +314,8 @@ export default function TrainingCalendarPage() {
 
               <div className="pt-4 border-t border-border">
                 <Link href={`/talent/training/planning`} className="w-full">
-                  <Button comingSoon className="w-full rounded-xl bg-brand-600 text-white hover:bg-brand-700 text-xs font-semibold">
-                    Edit Perencanaan
+                  <Button className="w-full rounded-xl bg-brand-600 text-white hover:bg-brand-700 text-xs font-semibold">
+                    Lihat Perencanaan
                   </Button>
                 </Link>
               </div>

@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { AreaChart, Area, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { TrendingUp, Users, Briefcase, Activity, BookOpen, Heart, DollarSign, Award, Filter, Download } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SectionContainer } from '@/components/layout/section-container';
+import { AnalyticsService } from '@/lib/services';
 import {
-  executiveKpi,
   workforceTrendData,
   hiringTrendData,
   turnoverTrendData,
@@ -20,6 +21,32 @@ import {
 const COLORS = ['#0ea5e9', '#f97316', '#8b5cf6', '#ef4444', '#10b981', '#f59e0b'];
 
 export default function AnalyticsPage() {
+  const [kpi, setKpi] = useState({
+    totalEmployees: 0,
+    activeEmployees: 0,
+    totalLeaves: 0,
+    pendingLeaves: 0,
+    totalTrainings: 0,
+    totalCandidates: 0,
+    totalVacancies: 0
+  });
+
+  useEffect(() => {
+    AnalyticsService.getAnalyticsKpi().then(res => {
+      if (res.data) setKpi(res.data as any);
+    });
+  }, []);
+
+  const handleExport = () => {
+    const csv = `Metric,Value\nTotal Karyawan,${kpi.totalEmployees}\nKaryawan Aktif,${kpi.activeEmployees}\nTotal Cuti,${kpi.totalLeaves}\nCuti Menunggu,${kpi.pendingLeaves}\nKandidat,${kpi.totalCandidates}\nLowongan Aktif,${kpi.totalVacancies}`;
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'executive-kpi.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <SectionContainer>
@@ -32,11 +59,11 @@ export default function AnalyticsPage() {
             </p>
           </div>
           <div className="flex gap-2">
-            <Button comingSoon className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
+            <Button variant="ghost" className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
               <Filter className="h-4 w-4 mr-2" />
               Filter
             </Button>
-            <Button comingSoon className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
+            <Button onClick={handleExport} variant="secondary" className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500 hover:text-primary">
               <Download className="h-4 w-4 mr-2" />
               Ekspor
             </Button>
@@ -50,8 +77,8 @@ export default function AnalyticsPage() {
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-muted">Total Karyawan</p>
-                <p className="mt-3 text-3xl font-semibold text-foreground">{executiveKpi.totalEmployees}</p>
-                <p className="mt-2 text-sm text-emerald-600">↑ {executiveKpi.headcountGrowth} bulan ini</p>
+                <p className="mt-3 text-3xl font-semibold text-foreground">{kpi.totalEmployees}</p>
+                <p className="mt-2 text-sm text-emerald-600">{kpi.activeEmployees} Aktif</p>
               </div>
               <Users className="h-8 w-8 text-primary" />
             </div>
@@ -60,31 +87,31 @@ export default function AnalyticsPage() {
           <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-muted">Tingkat Kehadiran</p>
-                <p className="mt-3 text-3xl font-semibold text-foreground">{executiveKpi.attendanceRate}%</p>
-                <p className="mt-2 text-sm text-muted">Rata-rata</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Aktivitas Cuti</p>
+                <p className="mt-3 text-3xl font-semibold text-foreground">{kpi.totalLeaves}</p>
+                <p className="mt-2 text-sm text-amber-500">{kpi.pendingLeaves} Menunggu</p>
               </div>
-              <Activity className="h-8 w-8 text-emerald-600" />
+              <Activity className="h-8 w-8 text-amber-500" />
             </div>
           </Card>
 
           <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-muted">Tingkat Turnover</p>
-                <p className="mt-3 text-3xl font-semibold text-foreground">{executiveKpi.turnoverRate}%</p>
-                <p className="mt-2 text-sm text-rose-600">Bulan ini</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Rekrutmen Aktif</p>
+                <p className="mt-3 text-3xl font-semibold text-foreground">{kpi.totalVacancies}</p>
+                <p className="mt-2 text-sm text-emerald-600">{kpi.totalCandidates} Kandidat</p>
               </div>
-              <TrendingUp className="h-8 w-8 text-rose-600" />
+              <Briefcase className="h-8 w-8 text-emerald-600" />
             </div>
           </Card>
 
           <Card className="rounded-[28px] border border-border bg-surface/95 p-6 shadow-card">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-muted">Kepatuhan Pelatihan</p>
-                <p className="mt-3 text-3xl font-semibold text-foreground">{executiveKpi.trainingCompliance}%</p>
-                <p className="mt-2 text-sm text-primary">Selesai</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted">Sertifikasi & Training</p>
+                <p className="mt-3 text-3xl font-semibold text-foreground">{kpi.totalTrainings}</p>
+                <p className="mt-2 text-sm text-muted">Partisipasi total</p>
               </div>
               <BookOpen className="h-8 w-8 text-primary" />
             </div>

@@ -4,7 +4,9 @@ import { StatusBadge } from '@/components/ui/status-badge';
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
 import { ColumnDef, getCoreRowModel, getPaginationRowModel, getSortedRowModel, RowSelectionState, useReactTable, SortingState } from '@tanstack/react-table';
-import { Search, ArrowRight, Download, Filter, Shield, AlertCircle } from 'lucide-react';
+import { Search, ArrowRight, Download, Filter, Shield, AlertCircle, Plus } from 'lucide-react';
+import { Dialog } from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/toast';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
@@ -19,14 +21,72 @@ export default function InsurancePage() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
-  useEffect(() => {
-    // getBpjsRecords gets insurance/BPJS records
+  const { addToast } = useToast();
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [employees, setEmployees] = useState<any[]>([]);
+  const [benefitTypesList, setBenefitTypesList] = useState<any[]>([]);
+  const [insuranceProvidersList, setInsuranceProvidersList] = useState<any[]>([]);
+  const [form, setForm] = useState({
+    employee_id: '',
+    insurance_provider_id: '',
+    benefit_type_id: '',
+    policy_number: '',
+    coverage_amount: '',
+    start_date: new Date().toISOString().split('T')[0],
+    end_date: ''
+  });
+
+  const loadData = () => {
     CompensationService.getBpjsRecords().then((result) => {
       if (result && Array.isArray(result.data)) {
         setDataList(result.data);
       }
     });
+  };
+
+  useEffect(() => {
+    loadData();
+    CompensationService.getBenefitTypes().then((res) => setBenefitTypesList(res.data));
+    CompensationService.getInsuranceProviders().then((res) => setInsuranceProvidersList(res.data));
+    import('@/lib/services').then(({ PeopleService }) => {
+      PeopleService.getEmployees().then((res) => {
+        if (Array.isArray(res.data)) setEmployees(res.data);
+      });
+    });
   }, []);
+
+  const handleAddSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload = { ...form };
+    if (!payload.end_date) delete (payload as any).end_date;
+    if (!payload.coverage_amount) delete (payload as any).coverage_amount;
+    
+    const { error } = await CompensationService.createInsurance(payload);
+    if (error) {
+      addToast({ title: 'Error', description: 'Failed to assign insurance: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Success', description: 'Insurance successfully assigned!', variant: 'success' });
+      setIsAddOpen(false);
+      loadData();
+    }
+  };
+
+  const handleExportTable = () => {
+    const rows = table.getFilteredRowModel().rows;
+    if (rows.length === 0) return;
+    const headers = ['employee', 'policyNumber', 'provider', 'policyType', 'coverage', 'issueDate', 'status'];
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => headers.map(header => `"${String(row.getValue(header)).replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'insurance-data.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const filteredPolicies = useMemo(() => {
     const query = search.toLowerCase();
@@ -185,10 +245,13 @@ export default function InsurancePage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">All policies</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+            <Button variant="primary" className="rounded-full px-5 py-3" onClick={() => setIsAddOpen(true)}>
+              <Plus className="h-4 w-4" /> Add Insurance
+            </Button>
+            <Button variant="secondary" className="rounded-full px-5 py-3" onClick={handleExportTable}>
               <Download className="h-4 w-4" /> Export
             </Button>
-            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
+            <Button variant="ghost" className="rounded-full px-5 py-3" onClick={() => document.getElementById('search-insurance')?.focus()}>
               <Filter className="h-4 w-4" /> Filters
             </Button>
           </div>
@@ -198,6 +261,7 @@ export default function InsurancePage() {
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
+              id="search-insurance"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search employee or policy"
@@ -224,6 +288,60 @@ export default function InsurancePage() {
           <DataTable table={table} />
         </div>
       </Card>
+
+      <Dialog open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Add Insurance" description="Register a new insurance policy for an employee.">
+        <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Karyawan</label>
+              <select required value={form.employee_id} onChange={e => setForm({...form, employee_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Karyawan</option>
+                {employees?.map((emp: any) => <option key={emp.id} value={emp.id}>{emp.fullName}</option>)}
+              </select>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-semibold text-muted-foreground">Provider</label>
+                <select required value={form.insurance_provider_id} onChange={e => setForm({...form, insurance_provider_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                  <option value="">Pilih Provider</option>
+                  {insuranceProvidersList?.map((p: any) => <option key={p.id} value={p.id}>{p.name}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-muted-foreground">Policy Type</label>
+                <select required value={form.benefit_type_id} onChange={e => setForm({...form, benefit_type_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                  <option value="">Pilih Tipe</option>
+                  {benefitTypesList?.map((t: any) => <option key={t.id} value={t.id}>{t.name}</option>)}
+                </select>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-semibold text-muted-foreground">Policy Number</label>
+                <input required type="text" value={form.policy_number} onChange={e => setForm({...form, policy_number: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-muted-foreground">Coverage Amount</label>
+                <input type="number" value={form.coverage_amount} onChange={e => setForm({...form, coverage_amount: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-semibold text-muted-foreground">Start Date</label>
+                <input required type="date" value={form.start_date} onChange={e => setForm({...form, start_date: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-muted-foreground">End Date (Optional)</label>
+                <input type="date" value={form.end_date} onChange={e => setForm({...form, end_date: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 pt-4 border-t border-border">
+            <Button variant="ghost" type="button" onClick={() => setIsAddOpen(false)}>Batal</Button>
+            <Button variant="primary" type="submit">Save</Button>
+          </div>
+        </form>
+      </Dialog>
     </div>
   );
 }

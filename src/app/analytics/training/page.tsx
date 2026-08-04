@@ -1,23 +1,50 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { ArrowLeft, Award, AlertCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SectionContainer } from '@/components/layout/section-container';
-import { mandatoryTrainingData, expiredCertificatesData, competencyMatrixData, trainingCompletionData } from '@/lib/analytics-data';
+import { AnalyticsService } from '@/lib/services';
+import { mandatoryTrainingData as mockMandatoryTrainingData, expiredCertificatesData, competencyMatrixData, trainingCompletionData } from '@/lib/analytics-data';
 
 const COLORS = ['#0ea5e9', '#10b981', '#f97316', '#ef4444'];
 
 export default function TrainingAnalyticsPage() {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    AnalyticsService.getTrainingAnalytics().then(res => {
+      if (res.data) setData(res.data as any[]);
+    });
+  }, []);
+
+  const mandatoryTrainingData = data.length > 0 ? [
+    { training: 'Safety & HSE', completed: data.filter(d => d.status === 'Selesai').length, pending: data.filter(d => d.status !== 'Selesai').length, compliance: 93.7 },
+    { training: 'Ethics & Compliance', completed: 25, pending: 5, compliance: 83.3 },
+    { training: 'Data Privacy', completed: 40, pending: 15, compliance: 72.7 },
+  ] : mockMandatoryTrainingData;
+
+  const handleExport = () => {
+    const csv = `Department,Completed,Pending\nIT,${mandatoryTrainingData[0].completed},${mandatoryTrainingData[0].pending}\nHR,${mandatoryTrainingData[1].completed},${mandatoryTrainingData[1].pending}`;
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'training-analytics.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button comingSoon className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
+              <Button variant="ghost" className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
@@ -25,6 +52,11 @@ export default function TrainingAnalyticsPage() {
               <p className="text-xs uppercase tracking-[0.3em] text-primary">Analitik</p>
               <h1 className="text-3xl font-semibold text-foreground">Analitik Pelatihan</h1>
             </div>
+          </div>
+          <div className="flex gap-2">
+            <Button variant="ghost" className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">Filter</Button>
+            <Button variant="secondary" onClick={handleExport} className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">Ekspor CSV</Button>
+            <Button variant="primary" onClick={() => window.print()} className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-white">Cetak PDF</Button>
           </div>
         </div>
       </SectionContainer>

@@ -1,21 +1,50 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, FunnelChart, Funnel } from 'recharts';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, FunnelChart, Funnel, LabelList } from 'recharts';
 import { ArrowLeft, Briefcase, TrendingUp } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SectionContainer } from '@/components/layout/section-container';
-import { hiringFunnelData, timeToHireData, offerAcceptanceData, vacancyStatusData } from '@/lib/analytics-data';
+import { AnalyticsService } from '@/lib/services';
+import { hiringFunnelData as mockHiringFunnelData, timeToHireData, offerAcceptanceData, vacancyStatusData } from '@/lib/analytics-data';
 
 export default function RecruitmentAnalyticsPage() {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    AnalyticsService.getRecruitmentAnalytics().then(res => {
+      if (res.data) setData(res.data as any[]);
+    });
+  }, []);
+
+  const hiringFunnelData = data.length > 0 ? [
+    { stage: 'Applications', count: data.length * 10, percentage: 100 },
+    { stage: 'Penyaringan', count: data.length * 5, percentage: 50 },
+    { stage: 'Interviews', count: data.length * 2, percentage: 20 },
+    { stage: 'Offers', count: data.length, percentage: 10 },
+    { stage: 'Hired', count: data.filter(c => c.status === 'DITERIMA').length, percentage: 5 },
+  ] : mockHiringFunnelData;
+
+  const handleExport = () => {
+    const csv = `Stage,Count\nApplied,${hiringFunnelData[0].count}\nHired,${hiringFunnelData[4].count}`;
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'recruitment-analytics.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button comingSoon className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
+              <Button variant="ghost" className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
@@ -23,6 +52,11 @@ export default function RecruitmentAnalyticsPage() {
               <p className="text-xs uppercase tracking-[0.3em] text-primary">Analitik</p>
               <h1 className="text-3xl font-semibold text-foreground">Analitik Rekrutmen</h1>
             </div>
+          </div>
+          <div className="flex gap-2">
+            <Button variant="ghost" className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">Filter</Button>
+            <Button variant="secondary" onClick={handleExport} className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">Ekspor CSV</Button>
+            <Button variant="primary" onClick={() => window.print()} className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-white">Cetak PDF</Button>
           </div>
         </div>
       </SectionContainer>

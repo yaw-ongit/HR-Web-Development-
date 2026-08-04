@@ -77,6 +77,23 @@ export default function WorkforceLemburPage() {
     enableRowSelection: true,
   });
 
+  const handleExportTable = () => {
+    const rows = table.getFilteredRowModel().rows;
+    if (rows.length === 0) return;
+    const headers = ['employee', 'department', 'date', 'jam', 'reason', 'status'];
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => headers.map(header => `"${String(row.getValue(header)).replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'overtime-records.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <SectionContainer>
@@ -125,10 +142,10 @@ export default function WorkforceLemburPage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">Permintaan tertunda</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+            <Button variant="secondary" className="rounded-full px-5 py-3" onClick={handleExportTable}>
               <Download className="h-4 w-4" /> Ekspor
             </Button>
-            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
+            <Button variant="ghost" className="rounded-full px-5 py-3" onClick={() => document.getElementById('search-overtime')?.focus()}>
               <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
@@ -138,6 +155,7 @@ export default function WorkforceLemburPage() {
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
+              id="search-overtime"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Cari karyawan, alasan, atau departemen"

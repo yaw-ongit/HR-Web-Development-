@@ -168,6 +168,101 @@ export default function PeopleDirectoryPage() {
   const ctOptions = [{ value: 'All', label: 'Semua kontrak' }, ...contractOptions.map((o) => ({ value: o, label: o }))];
   const brOptions = [{ value: 'All', label: 'Semua cabang' }, ...branchOptions.map((o) => ({ value: o, label: o }))];
 
+  const handleExportTable = () => {
+    const rows = table.getFilteredRowModel().rows;
+    if (rows.length === 0) return;
+    const headers = ['employeeId', 'fullName', 'email', 'department', 'position', 'status', 'joinDate', 'contractType', 'branch'];
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => headers.map(header => `"${String(row.getValue(header) || (row.original as any)[header] || '').replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'employee-directory.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const [isImportOpen, setIsImportOpen] = useState(false);
+  const [importFile, setImportFile] = useState<File | null>(null);
+  const [parsedRows, setParsedRows] = useState<any[]>([]);
+  const [importResults, setImportResults] = useState<{success: number, failed: number, errors: string[]}>({ success: 0, failed: 0, errors: [] });
+  const [importPhase, setImportPhase] = useState<'upload' | 'preview' | 'result'>('upload');
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImportFile(file);
+    const text = await file.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    if (lines.length > 1) {
+      const rows = lines.slice(1).map(line => {
+        const cols = line.split(',').map(s => s.replace(/"/g, '').trim());
+        return {
+          empId: cols[0] || '',
+          fullName: cols[1] || '',
+          email: cols[2] || '',
+          department: cols[3] || '',
+          position: cols[4] || '',
+          unit: cols[5] || '',
+          joinDate: cols[6] || '',
+          status: cols[7] || 'Aktif',
+          isValid: !!cols[1] && !!cols[2] && cols[2].includes('@'),
+          error: (!cols[1] ? 'Nama kosong. ' : '') + (!cols[2] || !cols[2].includes('@') ? 'Email tidak valid.' : '')
+        };
+      });
+      setParsedRows(rows);
+      setImportPhase('preview');
+    }
+  };
+
+  const handleImportSubmit = async () => {
+    let successCount = 0;
+    let failedCount = 0;
+    let errors: string[] = [];
+    
+    for (const row of parsedRows) {
+      if (!row.isValid) {
+        failedCount++;
+        errors.push(`Row (${row.fullName || 'Unknown'}): ${row.error}`);
+        continue;
+      }
+      
+      const payload = {
+        employee_number: row.empId || ('NIK-' + Math.floor(1000 + Math.random() * 9000)),
+        full_name: row.fullName,
+        email: row.email,
+        company_id: refData?.defaultComp || '10000000-0000-0000-0000-000000000001',
+        branch_id: refData?.defaultBranch || '11000000-0000-0000-0000-000000000001',
+        business_unit_id: refData?.defaultBu || '12000000-0000-0000-0000-000000000001',
+        division_id: refData?.defaultDiv || '14000000-0000-0000-0000-000000000001',
+        department_id: refData?.departments?.[0]?.id || '13000000-0000-0000-0000-000000000001',
+        section_id: refData?.defaultSec || '16000000-0000-0000-0000-000000000001',
+        position_id: refData?.positions?.[0]?.id || '15000000-0000-0000-0000-000000000001',
+        job_grade_id: refData?.defaultJg || '17000000-0000-0000-0000-000000000001',
+        employment_type_id: refData?.employmentTypes?.[0]?.id || '18000000-0000-0000-0000-000000000001',
+        gender: 'Male',
+        birth_date: '1990-01-01',
+        national_id_number: '0000000000000000'
+      };
+      
+      const { error } = await PeopleService.createEmployee(payload);
+      if (error) {
+        failedCount++;
+        errors.push(`Row (${row.fullName}): ${error}`);
+      } else {
+        successCount++;
+      }
+    }
+    
+    setImportResults({ success: successCount, failed: failedCount, errors });
+    setImportPhase('result');
+    loadData();
+  };
+
   return (
     <div className="space-y-6 py-6">
       <PageHeader
@@ -176,9 +271,9 @@ export default function PeopleDirectoryPage() {
         description="Sumber utama profil karyawan, konteks organisasi, dan wawasan operasional."
         actions={
           <>
-            <Button comingSoon variant="primary" size="md" leftIcon={<Plus className="h-4 w-4" />}>Tambah karyawan</Button>
-            <Button comingSoon variant="secondary" size="md" leftIcon={<Upload className="h-4 w-4" />}>Impor</Button>
-            <Button comingSoon variant="ghost" size="md" leftIcon={<Download className="h-4 w-4" />}>Ekspor</Button>
+            <Button variant="primary" size="md" leftIcon={<Plus className="h-4 w-4" />} onClick={() => setIsAddOpen(true)}>Tambah karyawan</Button>
+            <Button variant="secondary" size="md" leftIcon={<Upload className="h-4 w-4" />} onClick={() => setIsImportOpen(true)}>Impor</Button>
+            <Button variant="ghost" size="md" leftIcon={<Download className="h-4 w-4" />} onClick={handleExportTable}>Ekspor</Button>
           </>
         }
       />
@@ -283,6 +378,59 @@ export default function PeopleDirectoryPage() {
             <Button variant="primary" type="submit">Simpan</Button>
           </div>
         </form>
+      </Dialog>
+
+      <Dialog open={isImportOpen} onClose={() => { setIsImportOpen(false); setImportPhase('upload'); setParsedRows([]); setImportFile(null); }} title="Impor Data Karyawan" description="Unggah file CSV untuk menambahkan data karyawan secara massal.">
+        <div className="mt-4">
+          {importPhase === 'upload' && (
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Pilih File (.csv)</label>
+              <input required type="file" accept=".csv" onChange={handleFileChange} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+              <p className="text-[10px] text-muted-foreground mt-2">Format yang diterima: ID, Nama Lengkap, Email, Departemen, Jabatan, Unit, Tanggal Gabung, Status</p>
+            </div>
+          )}
+          
+          {importPhase === 'preview' && (
+            <div className="space-y-3 max-h-[60vh] overflow-y-auto">
+              <p className="text-sm font-semibold">Preview Data ({parsedRows.length} baris)</p>
+              <div className="space-y-2">
+                {parsedRows.map((row, i) => (
+                  <div key={i} className={`p-3 rounded-xl border text-sm ${row.isValid ? 'border-emerald-500/20 bg-emerald-500/10' : 'border-rose-500/20 bg-rose-500/10'}`}>
+                    <p className="font-semibold">{row.fullName || 'Tanpa Nama'} <span className="text-xs font-normal text-muted-foreground ml-2">{row.email}</span></p>
+                    {!row.isValid && <p className="text-xs text-rose-500 mt-1">{row.error}</p>}
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-end gap-3 pt-4 border-t border-border">
+                <Button variant="ghost" onClick={() => setImportPhase('upload')}>Kembali</Button>
+                <Button variant="primary" onClick={handleImportSubmit}>Jalankan Impor</Button>
+              </div>
+            </div>
+          )}
+
+          {importPhase === 'result' && (
+            <div className="space-y-3">
+              <div className="flex gap-4 mb-4">
+                <div className="flex-1 bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-center">
+                  <p className="text-3xl font-semibold text-emerald-500">{importResults.success}</p>
+                  <p className="text-xs text-emerald-500 uppercase mt-1">Berhasil</p>
+                </div>
+                <div className="flex-1 bg-rose-500/10 border border-rose-500/20 p-4 rounded-xl text-center">
+                  <p className="text-3xl font-semibold text-rose-500">{importResults.failed}</p>
+                  <p className="text-xs text-rose-500 uppercase mt-1">Gagal</p>
+                </div>
+              </div>
+              {importResults.errors.length > 0 && (
+                <div className="max-h-40 overflow-y-auto bg-card rounded-xl p-3 text-xs text-rose-400 space-y-1">
+                  {importResults.errors.map((err, i) => <p key={i}>{err}</p>)}
+                </div>
+              )}
+              <div className="flex justify-end gap-3 pt-4 border-t border-border">
+                <Button variant="primary" onClick={() => { setIsImportOpen(false); setImportPhase('upload'); }}>Selesai</Button>
+              </div>
+            </div>
+          )}
+        </div>
       </Dialog>
     </div>
   );

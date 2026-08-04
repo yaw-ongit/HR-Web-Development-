@@ -25,8 +25,12 @@ export default function WorkforceLeaveManagementPage() {
   const { addToast } = useToast();
   const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [commentDialogOpen, setCommentDialogOpen] = useState(false);
+  const [commentText, setCommentText] = useState('');
   const [leaveTypesData, setLeaveTypesData] = useState<any[]>([]);
+  const [employees, setEmployees] = useState<any[]>([]);
   const [form, setForm] = useState({
+    employee_id: '',
     leave_type_id: '',
     start_date: '',
     end_date: '',
@@ -36,6 +40,11 @@ export default function WorkforceLeaveManagementPage() {
   const loadData = () => {
     WorkforceService.getLeaveRequests().then((result) => {
       if (Array.isArray(result.data)) setDataList(result.data);
+    });
+    import('@/lib/services').then(({ PeopleService }) => {
+      PeopleService.getEmployees().then((res) => {
+        if (Array.isArray(res.data)) setEmployees(res.data);
+      });
     });
   };
 
@@ -54,9 +63,7 @@ export default function WorkforceLeaveManagementPage() {
     const payload = {
       ...form,
       total_days: totalDays,
-      employee_id: 'e0000000-0000-0000-0000-000000000001',
       status: 'DIAJUKAN',
-      approver_id: 'e0000000-0000-0000-0000-000000000002'
     };
     const { error } = await WorkforceService.createLeaveRequest(payload);
     if (error) {
@@ -97,9 +104,23 @@ export default function WorkforceLeaveManagementPage() {
       addToast({ title: 'Error', description: 'Gagal menolak cuti: ' + error, variant: 'danger' });
     } else {
       addToast({ title: 'Cuti ditolak', description: `${selectedIds.length} permintaan cuti telah ditolak.`, variant: 'danger' });
-      WorkforceService.getLeaveRequests().then((result) => {
-        if (Array.isArray(result.data)) setDataList(result.data);
-      });
+      loadData();
+      setRowSelection({});
+    }
+  };
+
+  const handleAddCommentSubmit = async () => {
+    setCommentDialogOpen(false);
+    const selectedIds = table.getSelectedRowModel().rows.map(r => r.original.id);
+    if (selectedIds.length === 0 || !commentText.trim()) return;
+
+    const { error } = await WorkforceService.updateLeaveNotes(selectedIds, commentText);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal menambahkan catatan: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Catatan Ditambahkan', description: 'Catatan berhasil ditambahkan pada cuti yang dipilih.', variant: 'success' });
+      setCommentText('');
+      loadData();
       setRowSelection({});
     }
   };
@@ -183,9 +204,14 @@ export default function WorkforceLeaveManagementPage() {
             <h1 className="text-3xl font-semibold text-foreground">Dasbor Cuti</h1>
             <p className="mt-2 max-w-2xl text-sm text-muted">Workspace terpusat untuk permintaan cuti, saldo, dan persetujuan.</p>
           </div>
-          <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-brand-500">
-            Kembali ke Workforce
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="primary" className="rounded-full px-5 py-3" onClick={() => setIsAddOpen(true)}>
+              Ajukan Cuti
+            </Button>
+            <Link href="/workforce" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-brand-500">
+              Kembali
+            </Link>
+          </div>
         </div>
       </SectionContainer>
 
@@ -240,8 +266,20 @@ export default function WorkforceLeaveManagementPage() {
                 }
                 setRejectDialogOpen(true);
               }} variant="destructive" className="rounded-full px-5 py-3">Reject Selected</Button>
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">Request revision</Button>
-              <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">Add comment</Button>
+              <Button onClick={() => {
+                if (table.getSelectedRowModel().rows.length === 0) {
+                  addToast({ title: 'Pilih data', description: 'Pilih setidaknya satu permintaan cuti.', variant: 'warning' });
+                  return;
+                }
+                setCommentDialogOpen(true);
+              }} variant="secondary" className="rounded-full px-5 py-3">Request revision</Button>
+              <Button onClick={() => {
+                if (table.getSelectedRowModel().rows.length === 0) {
+                  addToast({ title: 'Pilih data', description: 'Pilih setidaknya satu permintaan cuti.', variant: 'warning' });
+                  return;
+                }
+                setCommentDialogOpen(true);
+              }} variant="ghost" className="rounded-full px-5 py-3">Add comment</Button>
             </div>
           </div>
         </Card>
@@ -250,6 +288,22 @@ export default function WorkforceLeaveManagementPage() {
           <div className="mt-6 flex justify-end gap-3">
             <Button variant="ghost" onClick={() => setRejectDialogOpen(false)}>Batal</Button>
             <Button variant="destructive" onClick={handleReject}>Tolak Cuti</Button>
+          </div>
+        </Dialog>
+
+        <Dialog open={commentDialogOpen} onClose={() => setCommentDialogOpen(false)} title="Tambah Catatan" description="Catatan ini akan ditambahkan ke permintaan cuti yang dipilih.">
+          <div className="mt-4">
+            <textarea
+              className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm outline-none"
+              rows={4}
+              placeholder="Masukkan catatan..."
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+            />
+          </div>
+          <div className="mt-6 flex justify-end gap-3">
+            <Button variant="ghost" onClick={() => setCommentDialogOpen(false)}>Batal</Button>
+            <Button variant="primary" onClick={handleAddCommentSubmit}>Simpan Catatan</Button>
           </div>
         </Dialog>
       </div>
@@ -300,7 +354,7 @@ export default function WorkforceLeaveManagementPage() {
             <Button variant="secondary" onClick={handleExportTable} className="rounded-full px-5 py-3">
               <Download className="h-4 w-4" /> Ekspor
             </Button>
-            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
+            <Button variant="ghost" className="rounded-full px-5 py-3" onClick={() => document.getElementById('search-leave')?.focus()}>
               <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
@@ -336,6 +390,13 @@ export default function WorkforceLeaveManagementPage() {
       <Dialog open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Ajukan Cuti" description="Isi form untuk mengajukan cuti baru.">
         <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
           <div className="space-y-4">
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Karyawan</label>
+              <select required value={form.employee_id} onChange={e => setForm({...form, employee_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Karyawan</option>
+                {employees?.map((emp: any) => <option key={emp.id} value={emp.id}>{emp.fullName}</option>)}
+              </select>
+            </div>
             <div>
               <label className="text-xs font-semibold text-muted-foreground">Jenis Cuti</label>
               <select required value={form.leave_type_id} onChange={e => setForm({...form, leave_type_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">

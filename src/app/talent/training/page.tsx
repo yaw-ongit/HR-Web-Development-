@@ -116,42 +116,42 @@ export default function TrainingDashboardPage() {
           </div>
           <div className="flex gap-2 flex-wrap">
             <Link href="/talent/training/planning">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <Play className="h-4 w-4 mr-2" /> Planning
               </Button>
             </Link>
             <Link href="/talent/training/calendar">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <Calendar className="h-4 w-4 mr-2" /> Calendar
               </Button>
             </Link>
             <Link href="/talent/training/attendance">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <Users className="h-4 w-4 mr-2" /> Attendance
               </Button>
             </Link>
             <Link href="/talent/training/evaluation">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <BarChart3 className="h-4 w-4 mr-2" /> Evaluation
               </Button>
             </Link>
             <Link href="/talent/training/realization">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <CheckCircle2 className="h-4 w-4 mr-2" /> Realization
               </Button>
             </Link>
             <Link href="/talent/training/report">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <TrendingUp className="h-4 w-4 mr-2" /> Report
               </Button>
             </Link>
             <Link href="/talent/training/approval">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <AlertTriangle className="h-4 w-4 mr-2" /> Approval
               </Button>
             </Link>
             <Link href="/talent/training/certificate">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <Award className="h-4 w-4 mr-2" /> Certificate
               </Button>
             </Link>

@@ -22,23 +22,28 @@ export default function TalentHomePage() {
             <p className="mt-3 max-w-2xl text-sm text-muted">Pengelolaan talenta menyeluruh mulai dari rekrutmen hingga pengembangan karir dan sertifikasi.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
+            <Link href="/talent/vacancies">
+              <Button variant="primary" className="rounded-full px-5 py-3">
+                <Briefcase className="h-4 w-4" /> Lowongan
+              </Button>
+            </Link>
             <Link href="/talent/candidates">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <Users className="h-4 w-4" /> Kandidat
               </Button>
             </Link>
             <Link href="/talent/onboarding">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <UserCheck className="h-4 w-4" /> Onboarding
               </Button>
             </Link>
             <Link href="/talent/training">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <BookOpen className="h-4 w-4" /> Pelatihan
               </Button>
             </Link>
             <Link href="/talent/competency">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3">
                 <Award className="h-4 w-4" /> Kompetensi
               </Button>
             </Link>

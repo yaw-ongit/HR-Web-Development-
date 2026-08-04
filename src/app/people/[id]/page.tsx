@@ -4,6 +4,7 @@ import { useMemo, useState, use, useEffect } from 'react';
 import { ArrowRight, Briefcase, BookOpen, CalendarDays, CheckCircle2, ClipboardList, HeartPulse, Mail, MapPin, Phone, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Dialog } from '@/components/ui/dialog';
 import { useToast } from '@/components/ui/toast';
 import { PeopleService, TalentService } from '@/lib/services';
 
@@ -19,6 +20,29 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
   const [profile, setProfile] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('Ringkasan');
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [editForm, setEditForm] = useState<any>({});
+
+  const handleEditClick = () => {
+    setEditForm({
+      full_name: profile.fullName || '',
+      email: profile.email || '',
+      phone: profile.phone || '',
+    });
+    setIsEditOpen(true);
+  };
+
+  const handleEditSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { error } = await PeopleService.updateEmployee(params.id, editForm);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal memperbarui profil: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Berhasil', description: 'Profil berhasil diperbarui.', variant: 'success' });
+      setIsEditOpen(false);
+      PeopleService.getEmployeeById(params.id).then(setProfile);
+    }
+  };
 
   useEffect(() => {
     PeopleService.getEmployeeById(params.id).then((data) => {
@@ -134,13 +158,13 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3" onClick={() => window.location.href = `mailto:${profile.email}`}>
                 <Mail className="h-4 w-4" /> Kirim pesan
               </Button>
-              <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+              <Button variant="secondary" className="rounded-full px-5 py-3" onClick={() => window.location.href = `tel:${profile.phone}`}>
                 <Phone className="h-4 w-4" /> Panggil
               </Button>
-              <Button comingSoon variant="primary" className="rounded-full px-5 py-3">
+              <Button variant="primary" className="rounded-full px-5 py-3" onClick={handleEditClick}>
                 <ArrowRight className="h-4 w-4" /> Edit profil
               </Button>
             </div>
@@ -576,6 +600,29 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
           </section>
         )}
       </section>
+
+      <Dialog open={isEditOpen} onClose={() => setIsEditOpen(false)} title="Edit Profil Karyawan" description="Perbarui informasi profil karyawan.">
+        <form onSubmit={handleEditSubmit} className="space-y-4 mt-4">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="col-span-2">
+              <label className="text-xs font-semibold text-muted-foreground">Nama Lengkap</label>
+              <input required type="text" value={editForm.full_name} onChange={e => setEditForm({...editForm, full_name: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Email</label>
+              <input required type="email" value={editForm.email} onChange={e => setEditForm({...editForm, email: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Telepon</label>
+              <input required type="text" value={editForm.phone} onChange={e => setEditForm({...editForm, phone: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 pt-4 border-t border-border">
+            <Button variant="ghost" type="button" onClick={() => setIsEditOpen(false)}>Batal</Button>
+            <Button variant="primary" type="submit">Simpan</Button>
+          </div>
+        </form>
+      </Dialog>
     </div>
   );
 }

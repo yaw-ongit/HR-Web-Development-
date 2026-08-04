@@ -32,6 +32,7 @@ export type LeaveRequest = {
   duration: string;
   status: string;
   approver: string;
+  notes?: string;
 };
 
 export type ShiftSchedule = {

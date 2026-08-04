@@ -77,6 +77,23 @@ export default function PayrollReadyPage() {
     enableRowSelection: true,
   });
 
+  const handleExportTable = () => {
+    const rows = table.getFilteredRowModel().rows;
+    if (rows.length === 0) return;
+    const headers = ['employeeId', 'employee', 'department', 'position', 'basicSalary', 'payrollIntegrationStatus'];
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => headers.map(header => `"${String(row.getValue(header)).replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'payroll-preparation.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const readyCount = dataList.filter((p) => p.payrollIntegrationStatus === 'Ready').length;
   const totalSalaryBudget = dataList.reduce((sum, p) => sum + p.basicSalary, 0);
   const totalAllowances = dataList.reduce((sum, p) => sum + Object.values(p.allowances || {}).reduce((a: any, b: any) => Number(a) + Number(b), 0), 0);
@@ -183,10 +200,10 @@ export default function PayrollReadyPage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">All employees</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+            <Button variant="secondary" className="rounded-full px-5 py-3" onClick={handleExportTable}>
               <Download className="h-4 w-4" /> Export
             </Button>
-            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
+            <Button variant="ghost" className="rounded-full px-5 py-3" onClick={() => document.getElementById('search-payroll')?.focus()}>
               <Filter className="h-4 w-4" /> Filters
             </Button>
           </div>
@@ -196,6 +213,7 @@ export default function PayrollReadyPage() {
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
+              id="search-payroll"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search employee or position"

@@ -139,6 +139,12 @@ export const PeopleService = {
     return { data: result, error: error?.message };
   },
 
+  async updateEmployee(id: string, data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('employees').update(data).eq('id', id);
+    return { error: error?.message };
+  },
+
   async getEmployees(fallback?: any[]) {
     const mockFallback = fallback || employeeDirectory;
     if (!supabase) {
@@ -238,8 +244,7 @@ export const WorkforceService = {
   async updateLeaveRequestStatus(ids: string[], status: string) {
     if (!supabase) return { error: 'Supabase environment variables are not configured' };
     
-    // Database schema uses 'DISETUJUI', 'DITOLAK', 'DIAJUKAN'
-    const dbStatus = status === 'Disetujui' ? 'DISETUJUI' : status === 'Ditolak' ? 'DITOLAK' : 'DIAJUKAN';
+    const dbStatus = status === 'Disetujui' ? 'DISETUJUI' : status === 'Ditolak' ? 'DITOLAK' : status === 'Dibatalkan' ? 'DIBATALKAN' : 'DIAJUKAN';
     
     const { error } = await supabase
       .from('leave_requests')
@@ -251,6 +256,15 @@ export const WorkforceService = {
       return { error: error.message };
     }
     return { error: null };
+  },
+
+  async updateLeaveNotes(ids: string[], notes: string) {
+    if (!supabase) return { error: 'Supabase environment variables are not configured' };
+    const { error } = await supabase
+      .from('leave_requests')
+      .update({ notes })
+      .in('id', ids);
+    return { error: error?.message };
   },
 
   async getShiftSchedules(fallback?: any[]) {
@@ -366,14 +380,38 @@ export const TalentService = {
   // --- CANDIDATES, INTERVIEWS, ONBOARDING ---
   async getJobVacancies() {
     if (!supabase) return { data: [] };
-    const { data } = await supabase.from('job_vacancies').select('*').order('created_at', { ascending: false });
+    const { data } = await supabase.from('job_vacancies').select('*, positions(title), departments(name)').order('created_at', { ascending: false });
     return { data: data || [] };
+  },
+
+  async createJobVacancy(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('job_vacancies').insert([data]);
+    return { error: error?.message };
+  },
+
+  async updateJobVacancy(id: string, data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('job_vacancies').update(data).eq('id', id);
+    return { error: error?.message };
+  },
+
+  async updateCandidateStatus(id: string, status: string) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('candidates').update({ status }).eq('id', id);
+    return { error: error?.message };
   },
 
   async createCandidate(data: any) {
     if (!supabase) return { error: 'No db' };
     const { data: result, error } = await supabase.from('candidates').insert([data]).select().single();
     return { data: result, error: error?.message };
+  },
+
+  async updateCandidate(id: string, data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('candidates').update(data).eq('id', id);
+    return { error: error?.message };
   },
 
   async getCandidates(fallback?: any[]) {
@@ -398,6 +436,33 @@ export const TalentService = {
     );
   },
 
+  async createInterview(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('interview_schedules').insert([data]);
+    return { error: error?.message };
+  },
+
+  async updateInterviewResult(scheduleId: string, resultData: any, candidateId: string, newCandidateStatus: string) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('interview_results').insert([
+      { interview_schedule_id: scheduleId, ...resultData }
+    ]);
+    if (error) return { error: error.message };
+    
+    const { error: candError } = await supabase.from('candidates').update({ status: newCandidateStatus }).eq('id', candidateId);
+    return { error: candError?.message };
+  },
+
+  async hireCandidate(candidateId: string, employeeData: any) {
+    if (!supabase) return { error: 'No db' };
+    // Update candidate status
+    await supabase.from('candidates').update({ status: 'DITERIMA' }).eq('id', candidateId);
+    
+    // Create employee
+    const { error } = await supabase.from('employees').insert([employeeData]);
+    return { error: error?.message };
+  },
+
   async getOnboardingTasks(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
@@ -409,7 +474,32 @@ export const TalentService = {
     );
   },
 
-  // --- CERTIFICATIONS ---
+  async createOnboarding(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('onboardings').insert([data]);
+    return { error: error?.message };
+  },
+
+  async completeOnboarding(id: string) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('onboardings').update({ completed_at: new Date().toISOString() }).eq('id', id);
+    return { error: error?.message };
+  },
+
+  // --- COMPETENCY ---
+  async getCompetencies(fallback?: any[]) {
+    if (!supabase) return { data: fallback, error: 'No db', isFallback: true };
+    return safeQuery(
+      supabase.from('competencies').select('*'),
+      fallback
+    );
+  },
+
+  async addCompetency(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('competencies').insert([data]);
+    return { error: error?.message };
+  },
   async uploadCertificateDocument(file: File) {
     if (!supabase) return { error: 'Supabase not configured' };
     const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
@@ -1236,6 +1326,52 @@ export const CompensationService = {
     );
   },
 
+  async getBenefitTypes() {
+    if (!supabase) return { data: [] };
+    const { data } = await supabase.from('benefit_types').select('id, name');
+    return { data: data || [] };
+  },
+
+  async createBenefit(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('benefits').insert([data]);
+    return { error: error?.message };
+  },
+
+  async updateBenefit(id: string, data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('benefits').update(data).eq('id', id);
+    return { error: error?.message };
+  },
+
+  async getInsuranceProviders() {
+    if (!supabase) return { data: [] };
+    const { data } = await supabase.from('insurance_providers').select('id, name');
+    return { data: data || [] };
+  },
+
+  async createInsurance(data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('employee_insurances').insert([data]);
+    return { error: error?.message };
+  },
+
+  async updateInsurance(id: string, data: any) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('employee_insurances').update(data).eq('id', id);
+    return { error: error?.message };
+  },
+
+  async updateClaimStatus(id: string, status: string, approvedAmount?: number, rejectionReason?: string) {
+    if (!supabase) return { error: 'No db' };
+    const payload: any = { status };
+    if (approvedAmount !== undefined) payload.approved_amount = approvedAmount;
+    if (rejectionReason !== undefined) payload.rejection_reason = rejectionReason;
+    
+    const { error } = await supabase.from('medical_claims').update(payload).eq('id', id);
+    return { error: error?.message };
+  },
+
   async getBenefits(fallback?: any[]) {
     if (!supabase) {
       return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
@@ -1277,26 +1413,86 @@ export const CompensationService = {
 // 6. ANALYTICS & DASHBOARD SERVICES
 // ----------------------------------------------------
 export const AnalyticsService = {
-  async getAnalyticsKpi(fallback?: any) {
-    if (!supabase) {
-      return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
-    }
+  async getAnalyticsKpi() {
+    if (!supabase) return { data: null };
 
-    return safeQuery(
-      supabase.from('analytics_kpis').select('*').single(),
-      fallback
-    );
+    const [
+      { count: totalEmployees },
+      { count: activeEmployees },
+      { count: totalLeaves },
+      { count: pendingLeaves },
+      { count: totalTrainings },
+      { count: totalCandidates },
+      { count: totalVacancies }
+    ] = await Promise.all([
+      supabase.from('employees').select('*', { count: 'exact', head: true }),
+      supabase.from('employees').select('*', { count: 'exact', head: true }).eq('employee_status', 'AKTIF'),
+      supabase.from('leave_requests').select('*', { count: 'exact', head: true }),
+      supabase.from('leave_requests').select('*', { count: 'exact', head: true }).eq('status', 'DIAJUKAN'),
+      supabase.from('training_participants').select('*', { count: 'exact', head: true }),
+      supabase.from('candidates').select('*', { count: 'exact', head: true }),
+      supabase.from('job_vacancies').select('*', { count: 'exact', head: true })
+    ]);
+
+    return {
+      data: {
+        totalEmployees: totalEmployees || 0,
+        activeEmployees: activeEmployees || 0,
+        totalLeaves: totalLeaves || 0,
+        pendingLeaves: pendingLeaves || 0,
+        totalTrainings: totalTrainings || 0,
+        totalCandidates: totalCandidates || 0,
+        totalVacancies: totalVacancies || 0
+      }
+    };
   },
 
-  async getDashboardSummary(fallback?: any) {
-    if (!supabase) {
-      return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
-    }
+  async getDashboardSummary() {
+    if (!supabase) return { data: null };
+    
+    // Detailed aggregations can be added here
+    const { data: recentLeaves } = await supabase.from('leave_requests').select('*, employees(full_name)').order('created_at', { ascending: false }).limit(5);
+    const { data: recentCandidates } = await supabase.from('candidates').select('*').order('created_at', { ascending: false }).limit(5);
 
-    return safeQuery(
-      supabase.from('dashboard_summaries').select('*').single(),
-      fallback
-    );
+    return {
+      data: {
+        recentLeaves: recentLeaves || [],
+        recentCandidates: recentCandidates || []
+      }
+    };
+  },
+  
+  async getAttendanceAnalytics() {
+    if (!supabase) return { data: null };
+    const { data } = await supabase.from('attendances').select('*').order('attendance_date', { ascending: false }).limit(100);
+    return { data };
+  },
+
+  async getLeaveAnalytics() {
+    if (!supabase) return { data: null };
+    const { data } = await supabase.from('leave_requests').select('*, employees(full_name), leave_types(name)').order('created_at', { ascending: false });
+    return { data };
+  },
+
+  async getRecruitmentAnalytics() {
+    if (!supabase) return { data: null };
+    const { data } = await supabase.from('candidates').select('*');
+    return { data };
+  },
+
+  async getTrainingAnalytics() {
+    if (!supabase) return { data: null };
+    const { data } = await supabase.from('training_participants').select('*, training_programs(training_title)');
+    return { data };
+  },
+
+  async getComplianceAnalytics() {
+    if (!supabase) return { data: null };
+    const [certs, insurances] = await Promise.all([
+      supabase.from('certifications').select('*'),
+      supabase.from('employee_insurances').select('*')
+    ]);
+    return { data: { certs: certs.data || [], insurances: insurances.data || [] } };
   }
 };
 
@@ -1305,13 +1501,48 @@ export const AnalyticsService = {
 // ----------------------------------------------------
 export const AdministrationService = {
   async getSystemSettings(fallback?: any) {
-    if (!supabase) {
-      return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
-    }
+    if (!supabase) return { data: fallback, error: 'Supabase environment variables are not configured', isFallback: true };
+    return safeQuery(supabase.from('system_settings').select('*').single(), fallback);
+  },
 
-    return safeQuery(
-      supabase.from('system_settings').select('*').single(),
-      fallback
-    );
+  async getUsers() {
+    if (!supabase) return { data: [] };
+    const { data } = await supabase.from('users').select('*, employees(employee_number, full_name, departments(name)), user_roles(roles(name))');
+    return { data: data || [] };
+  },
+
+  async getRoles() {
+    if (!supabase) return { data: [] };
+    const { data } = await supabase.from('roles').select('*');
+    return { data: data || [] };
+  },
+
+  async assignUserRole(userId: string, roleId: string) {
+    if (!supabase) return { error: 'No db' };
+    const { error: delErr } = await supabase.from('user_roles').delete().eq('user_id', userId);
+    if (delErr) return { error: delErr.message };
+    const { error } = await supabase.from('user_roles').insert([{ user_id: userId, role_id: roleId }]);
+    return { error: error?.message };
+  },
+
+  async updateUserStatus(userId: string, isActive: boolean) {
+    if (!supabase) return { error: 'No db' };
+    const { error } = await supabase.from('users').update({ is_active: isActive }).eq('id', userId);
+    return { error: error?.message };
+  },
+  
+  async getActiveSessions() {
+    // Supabase auth.sessions is not accessible directly from client pg. 
+    // We will simulate querying a session log or returning the current session
+    if (!supabase) return { data: [] };
+    const { data } = await supabase.auth.getSession();
+    return { data: data.session ? [data.session] : [] };
+  },
+
+  async signoutAll() {
+    if (!supabase) return { error: 'No db' };
+    // This logs out the current user and clears session storage, simulating signing out all devices if backend supported
+    const { error } = await supabase.auth.signOut();
+    return { error: error?.message };
   }
 };

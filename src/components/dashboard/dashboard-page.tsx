@@ -7,6 +7,7 @@ import {
   ClipboardList, Key, Wallet, CalendarCheck, FileText,
 } from 'lucide-react';
 import { AppShell } from '@/components/layout/app-shell';
+import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { KpiCard } from '@/components/ui/kpi-card';
@@ -445,7 +446,7 @@ export default function DashboardPage({ realData }: { realData?: any }) {
               <p className="max-w-xl text-sm leading-7 text-muted">{hero.subtitle}</p>
               <div className="flex flex-wrap gap-3 pt-2">
                 {hero.actions.map((label) => (
-                  <Button comingSoon key={label} variant="outline" size="sm">{label}</Button>
+                  <Button key={label} variant="outline" size="sm">{label}</Button>
                 ))}
               </div>
             </div>
@@ -545,7 +546,7 @@ export default function DashboardPage({ realData }: { realData?: any }) {
             <Card
               title="Peringatan Terbaru"
               description="Notifikasi untuk peran Anda."
-              headerActions={<Button comingSoon variant="ghost" size="sm">Lihat semua</Button>}
+              headerActions={<Link href="/notifications"><Button variant="ghost" size="sm">Lihat semua</Button></Link>}
             >
               <ul className="space-y-3" aria-label="Notification list">
                 {roleNotifications.map((n) => (

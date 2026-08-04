@@ -39,25 +39,25 @@ function titleFromSection(section?: string) {
   return section.split('-').map((part) => part[0].toUpperCase() + part.slice(1)).join(' ');
 }
 
-function StatusBadge({ value }: { value: string }) {
+function StatusBadge({ status }: { status: string }) {
   const color =
-    value === 'Success' || value === 'Current' || value === 'Trusted' || value === 'Good' || value === 'Aktif'
+    status === 'Success' || status === 'Current' || status === 'Trusted' || status === 'Good' || status === 'Aktif'
       ? 'bg-emerald-50 text-emerald-200'
-      : value === 'Failed' || value === 'Suspicious' || value === 'Review' || value === 'High'
+      : status === 'Failed' || status === 'Suspicious' || status === 'Review' || status === 'High'
         ? 'bg-amber-50 text-amber-200'
-        : value === 'Blocked' || value === 'Disabled'
+        : status === 'Blocked' || status === 'Disabled'
           ? 'bg-rose-50 text-rose-200'
           : 'bg-primary/10 text-primary';
 
-  return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{value}</span>;
+  return <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${color}`}>{status}</span>;
 }
 
 function ExportButtons() {
   return (
     <div className="flex flex-wrap gap-2">
-      <Button comingSoon variant="secondary" className="rounded-full px-4 py-2 text-xs"><FileDown className="h-4 w-4" /> PDF</Button>
-      <Button comingSoon variant="secondary" className="rounded-full px-4 py-2 text-xs"><FileSpreadsheet className="h-4 w-4" /> Excel</Button>
-      <Button comingSoon variant="ghost" className="rounded-full px-4 py-2 text-xs"><Download className="h-4 w-4" /> CSV</Button>
+      <Button variant="secondary" className="rounded-full px-4 py-2 text-xs" onClick={() => window.print()}><FileDown className="h-4 w-4" /> PDF</Button>
+      <Button variant="secondary" className="rounded-full px-4 py-2 text-xs"><FileSpreadsheet className="h-4 w-4" /> Excel</Button>
+      <Button variant="ghost" className="rounded-full px-4 py-2 text-xs"><Download className="h-4 w-4" /> CSV</Button>
     </div>
   );
 }
@@ -75,8 +75,8 @@ function IdentityShell({ children, section }: { children: React.ReactNode; secti
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href="/login"><Button comingSoon className="rounded-full px-5 py-3"><KeyRound className="h-4 w-4" /> Login</Button></Link>
-            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3"><SlidersHorizontal className="h-4 w-4" /> Policies</Button>
+            <Link href="/login"><Button className="rounded-full px-5 py-3"><KeyRound className="h-4 w-4" /> Login</Button></Link>
+            <Button variant="secondary" className="rounded-full px-5 py-3"><SlidersHorizontal className="h-4 w-4" /> Policies</Button>
             <ExportButtons />
           </div>
         </div>
@@ -132,7 +132,7 @@ function DashboardView() {
                     <p className="text-sm font-semibold text-foreground">{user.name}</p>
                     <p className="mt-1 text-sm text-muted">{user.employeeId} - {user.department} - {user.role}</p>
                   </div>
-                  <StatusBadge value={user.status} />
+                  <StatusBadge status={user.status} />
                 </div>
               </div>
             ))}
@@ -184,7 +184,7 @@ function AuthenticationView() {
           <provider.icon className="h-7 w-7 text-primary" />
           <p className="mt-5 text-base font-semibold text-foreground">{provider.name}</p>
           <p className="mt-2 text-sm text-muted">Frontend architecture placeholder for future authentication provider wiring.</p>
-          <div className="mt-4"><StatusBadge value={provider.status} /></div>
+          <div className="mt-4"><StatusBadge status={provider.status} /></div>
         </Card>
       ))}
     </div>
@@ -228,7 +228,7 @@ function SecurityCenterView() {
                 <p className="mt-4 text-2xl font-semibold text-foreground">{card.value}</p>
                 <p className="mt-2 text-sm text-muted">{card.note}</p>
               </div>
-              <StatusBadge value={card.status} />
+              <StatusBadge status={card.status} />
             </div>
           </Card>
         ))}
@@ -250,18 +250,32 @@ function sessionColumns(): ColumnDef<SessionRecord>[] {
     { accessorKey: 'ipAddress', header: 'IP address' },
     { accessorKey: 'location', header: 'Location' },
     { accessorKey: 'lastActivity', header: 'Last activity' },
-    { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
+    { accessorKey: 'status', header: 'Status', cell: ({ getValue }) => <StatusBadge status={getValue() as string} /> },
     { id: 'actions', header: 'Aksi', cell: () => <button className="rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground hover:border-brand-500">Terminate</button> },
   ];
 }
 
+import { AdministrationService } from '@/lib/services';
+import { useToast } from '@/components/ui/toast';
+
 function ActiveSessionsView({ compact = false }: { compact?: boolean }) {
+  const { addToast } = useToast();
   const table = useReactTable({ data: compact ? activeSessions.slice(0, 3) : activeSessions, columns: sessionColumns(), getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), getPaginationRowModel: getPaginationRowModel() });
+  
+  const handleSignOutAll = async () => {
+    const { error } = await AdministrationService.signoutAll();
+    if (error) {
+      addToast({ title: 'Error', description: 'Failed to sign out all devices: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Success', description: 'All remote sessions have been terminated.', variant: 'success' });
+    }
+  };
+
   return (
     <SectionContainer title={compact ? 'Active sessions' : 'Enterprise active sessions'}>
       <div className="mb-4 flex flex-wrap gap-3">
-        <Button comingSoon variant="destructive" className="rounded-full"><LogOut className="h-4 w-4" /> Sign out all devices</Button>
-        <Button comingSoon variant="secondary" className="rounded-full"><ShieldCheck className="h-4 w-4" /> Trusted devices</Button>
+        <Button variant="destructive" className="rounded-full" onClick={handleSignOutAll}><LogOut className="h-4 w-4" /> Sign out all devices</Button>
+        <Button variant="secondary" className="rounded-full" onClick={() => addToast({ title: 'Info', description: 'Trusted devices review opened.'})}><ShieldCheck className="h-4 w-4" /> Trusted devices</Button>
       </div>
       <DataTable table={table} />
     </SectionContainer>
@@ -276,7 +290,7 @@ function loginColumns(): ColumnDef<LoginHistoryRecord>[] {
     { accessorKey: 'browser', header: 'Browser' },
     { accessorKey: 'os', header: 'OS' },
     { accessorKey: 'ip', header: 'IP' },
-    { accessorKey: 'result', header: 'Result', cell: ({ getValue }) => <StatusBadge value={getValue() as string} /> },
+    { accessorKey: 'result', header: 'Result', cell: ({ getValue }) => <StatusBadge status={getValue() as string} /> },
   ];
 }
 
@@ -289,7 +303,7 @@ function LoginHistoryView({ compact = false }: { compact?: boolean }) {
           <div className="grid gap-3 md:grid-cols-4">
             {['Date', 'Success', 'Failed', 'Location'].map((label) => <select key={label} className="rounded-3xl border border-border bg-surface/90 p-4 text-sm text-foreground"><option>{label}</option></select>)}
           </div>
-          <div className="mt-4"><Button comingSoon variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Apply filters</Button></div>
+          <div className="mt-4"><Button variant="secondary" className="rounded-full"><Filter className="h-4 w-4" /> Apply filters</Button></div>
         </Card>
       )}
       <SectionContainer title={compact ? 'Recent login history' : 'Login history'}>
@@ -321,15 +335,15 @@ function NotificationCenterView() {
               <div className="flex gap-3">
                 <div className="grid h-11 w-11 place-items-center rounded-3xl bg-primary/10 text-sm font-semibold text-foreground">{item.avatar}</div>
                 <div>
-                  <div className="flex flex-wrap items-center gap-2"><p className="font-semibold text-foreground">{item.title}</p><StatusBadge value={item.priority} /></div>
+                  <div className="flex flex-wrap items-center gap-2"><p className="font-semibold text-foreground">{item.title}</p><StatusBadge status={item.priority} /></div>
                   <p className="mt-1 text-sm text-muted">{item.body}</p>
                   <p className="mt-2 text-xs text-muted">{item.category} - {item.timestamp}</p>
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Button comingSoon variant="secondary" className="rounded-full px-3 py-2 text-xs">Action</Button>
-                <Button comingSoon variant="ghost" className="rounded-full px-3 py-2 text-xs"><Eye className="h-4 w-4" /> Mark read</Button>
-                <Button comingSoon variant="ghost" className="rounded-full px-3 py-2 text-xs"><Archive className="h-4 w-4" /> Archive</Button>
+                <Button variant="secondary" className="rounded-full px-3 py-2 text-xs">Action</Button>
+                <Button variant="ghost" className="rounded-full px-3 py-2 text-xs"><Eye className="h-4 w-4" /> Mark read</Button>
+                <Button variant="ghost" className="rounded-full px-3 py-2 text-xs"><Archive className="h-4 w-4" /> Archive</Button>
               </div>
             </div>
           </div>

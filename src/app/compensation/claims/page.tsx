@@ -23,7 +23,11 @@ export default function ClaimsPage() {
 
   const { addToast } = useToast();
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [employees, setEmployees] = useState<any[]>([]);
+  const [insurances, setInsurances] = useState<any[]>([]);
   const [form, setForm] = useState({
+    employee_id: '',
+    employee_insurance_id: '',
     description: '',
     claimed_amount: '',
     claim_date: new Date().toISOString().split('T')[0]
@@ -37,6 +41,14 @@ export default function ClaimsPage() {
 
   useEffect(() => {
     loadData();
+    CompensationService.getBpjsRecords().then((res) => {
+      if (res.data && Array.isArray(res.data)) setInsurances(res.data);
+    });
+    import('@/lib/services').then(({ PeopleService }) => {
+      PeopleService.getEmployees().then((res) => {
+        if (Array.isArray(res.data)) setEmployees(res.data);
+      });
+    });
   }, []);
 
   const handleAddSubmit = async (e: React.FormEvent) => {
@@ -45,8 +57,6 @@ export default function ClaimsPage() {
       ...form,
       claimed_amount: Number(form.claimed_amount),
       status: 'DIAJUKAN',
-      employee_id: 'e0000000-0000-0000-0000-000000000001',
-      employee_insurance_id: '12000000-0000-0000-0000-000000000001', // Real valid seeded insurance ID
       claim_number: 'CLM-' + Math.floor(1000 + Math.random() * 9000)
     };
     const { error } = await CompensationService.createClaim(payload);
@@ -57,6 +67,52 @@ export default function ClaimsPage() {
       setIsAddOpen(false);
       loadData();
     }
+  };
+
+  const handleExportTable = () => {
+    const rows = table.getFilteredRowModel().rows;
+    if (rows.length === 0) return;
+    const headers = ['employee', 'claimType', 'amount', 'submissionDate', 'status', 'approver'];
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => headers.map(header => `"${String(row.getValue(header)).replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'claims-data.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
+  const [rejectReason, setRejectReason] = useState('');
+
+  const handleApprove = async () => {
+    const selectedIds = table.getSelectedRowModel().rows.map(r => r.original.id);
+    if (selectedIds.length === 0) {
+      addToast({ title: 'Pilih data', description: 'Pilih klaim yang akan disetujui.', variant: 'warning' });
+      return;
+    }
+    for (const id of selectedIds) {
+      await CompensationService.updateClaimStatus(id, 'DISETUJUI');
+    }
+    addToast({ title: 'Berhasil', description: 'Klaim disetujui.', variant: 'success' });
+    loadData();
+    setRowSelection({});
+  };
+
+  const handleRejectSubmit = async () => {
+    const selectedIds = table.getSelectedRowModel().rows.map(r => r.original.id);
+    for (const id of selectedIds) {
+      await CompensationService.updateClaimStatus(id, 'DITOLAK', undefined, rejectReason);
+    }
+    addToast({ title: 'Klaim Ditolak', description: 'Klaim telah ditolak.', variant: 'success' });
+    setRejectDialogOpen(false);
+    setRejectReason('');
+    loadData();
+    setRowSelection({});
   };
 
   const filteredClaims = useMemo(() => {
@@ -75,11 +131,27 @@ export default function ClaimsPage() {
 
   const columns = useMemo<ColumnDef<any>[]>(
     () => [
+      {
+        id: 'select',
+        header: ({ table }) => (
+          <input type="checkbox" aria-label="Select all rows" checked={table.getIsAllRowsSelected()} onChange={table.getToggleAllRowsSelectedHandler()}
+            className="h-4 w-4 rounded border-slate-400 bg-secondary text-primary focus:ring-brand-500" />
+        ),
+        cell: ({ row }) => (
+          <input type="checkbox" aria-label={`Select row`} checked={row.getIsSelected()} onChange={row.getToggleSelectedHandler()}
+            className="h-4 w-4 rounded border-slate-400 bg-secondary text-primary focus:ring-brand-500" />
+        ),
+      },
       { accessorKey: 'employee', header: 'Karyawan' },
       { accessorKey: 'claimType', header: 'Claim Type' },
       {
         accessorKey: 'amount',
         header: 'Amount',
+        cell: ({ getValue }) => `Rp ${(getValue() as number).toLocaleString('id-ID')}`,
+      },
+      {
+        accessorKey: 'status',
+        header: 'Status',
         cell: ({ getValue }) => <StatusBadge status={getValue() as string} />,
       },
       { accessorKey: 'approver', header: 'Penyetuju' },
@@ -240,13 +312,25 @@ export default function ClaimsPage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">All claims</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button onClick={() => setIsAddOpen(true)} variant="primary" className="rounded-full px-5 py-3">
+            <Button onClick={handleApprove} variant="primary" className="rounded-full px-5 py-3">
+              Approve Selected
+            </Button>
+            <Button onClick={() => {
+                if (table.getSelectedRowModel().rows.length === 0) {
+                  addToast({ title: 'Pilih data', description: 'Pilih klaim yang akan ditolak.', variant: 'warning' });
+                  return;
+                }
+                setRejectDialogOpen(true);
+              }} variant="destructive" className="rounded-full px-5 py-3">
+              Reject Selected
+            </Button>
+            <Button onClick={() => setIsAddOpen(true)} variant="secondary" className="rounded-full px-5 py-3">
               <Plus className="h-4 w-4" /> Klaim Baru
             </Button>
-            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+            <Button variant="ghost" className="rounded-full px-5 py-3" onClick={handleExportTable}>
               <Download className="h-4 w-4" /> Export
             </Button>
-            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
+            <Button variant="ghost" className="rounded-full px-5 py-3" onClick={() => document.getElementById('search-claim')?.focus()}>
               <Filter className="h-4 w-4" /> Filters
             </Button>
           </div>
@@ -256,6 +340,7 @@ export default function ClaimsPage() {
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
+              id="search-claim"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search employee or claim type"
@@ -281,6 +366,20 @@ export default function ClaimsPage() {
         <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
           <div className="space-y-4">
             <div>
+              <label className="text-xs font-semibold text-muted-foreground">Karyawan</label>
+              <select required value={form.employee_id} onChange={e => setForm({...form, employee_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Karyawan</option>
+                {employees?.map((emp: any) => <option key={emp.id} value={emp.id}>{emp.fullName}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Asuransi Terkait</label>
+              <select required value={form.employee_insurance_id} onChange={e => setForm({...form, employee_insurance_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Polis Asuransi</option>
+                {insurances?.map((ins: any) => <option key={ins.id} value={ins.id}>{ins.policyNumber} - {ins.provider}</option>)}
+              </select>
+            </div>
+            <div>
               <label className="text-xs font-semibold text-muted-foreground">Deskripsi / Jenis Klaim</label>
               <input required type="text" value={form.description} onChange={e => setForm({...form, description: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
             </div>
@@ -298,6 +397,22 @@ export default function ClaimsPage() {
             <Button variant="primary" type="submit">Ajukan</Button>
           </div>
         </form>
+      </Dialog>
+
+      <Dialog open={rejectDialogOpen} onClose={() => setRejectDialogOpen(false)} title="Tolak Klaim" description="Masukkan alasan penolakan klaim ini.">
+        <div className="mt-4">
+          <textarea
+            className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm outline-none"
+            rows={4}
+            placeholder="Alasan penolakan..."
+            value={rejectReason}
+            onChange={(e) => setRejectReason(e.target.value)}
+          />
+        </div>
+        <div className="mt-6 flex justify-end gap-3">
+          <Button variant="ghost" onClick={() => setRejectDialogOpen(false)}>Batal</Button>
+          <Button variant="destructive" onClick={handleRejectSubmit}>Tolak Klaim</Button>
+        </div>
       </Dialog>
     </div>
   );

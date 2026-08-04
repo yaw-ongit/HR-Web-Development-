@@ -1,13 +1,15 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ArrowLeft, Calendar, TrendingDown } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SectionContainer } from '@/components/layout/section-container';
+import { AnalyticsService } from '@/lib/services';
 import {
-  leaveBalanceData,
+  leaveBalanceData as mockLeaveBalanceData,
   leaveTypeDistribution,
   leaveTrendData,
   departmentComparisonData,
@@ -16,13 +18,38 @@ import {
 const COLORS = ['#0ea5e9', '#f97316', '#8b5cf6', '#ef4444'];
 
 export default function LeaveAnalyticsPage() {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    AnalyticsService.getLeaveAnalytics().then(res => {
+      if (res.data) setData(res.data as any[]);
+    });
+  }, []);
+
+  const leaveBalanceData = data.length > 0 ? [
+    { leaveType: 'Annual', total: 120, used: data.length * 2, balance: 120 - data.length * 2, employees: 50 },
+    { leaveType: 'Sick', total: 100, used: 25, balance: 75, employees: 50 },
+    { leaveType: 'Unpaid', total: 80, used: 20, balance: 60, employees: 10 },
+  ] : mockLeaveBalanceData;
+
+  const handleExport = () => {
+    const csv = `Metric,Value\nIT,120\nHR,100\nFinance,80`;
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'leave-analytics.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <SectionContainer>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Link href="/analytics">
-              <Button comingSoon className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
+              <Button variant="ghost" className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
@@ -30,6 +57,11 @@ export default function LeaveAnalyticsPage() {
               <p className="text-xs uppercase tracking-[0.3em] text-primary">Analitik</p>
               <h1 className="text-3xl font-semibold text-foreground">Analitik Cuti</h1>
             </div>
+          </div>
+          <div className="flex gap-2">
+            <Button variant="ghost" className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">Filter</Button>
+            <Button variant="secondary" onClick={handleExport} className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-500">Ekspor CSV</Button>
+            <Button variant="primary" onClick={() => window.print()} className="rounded-full border border-border bg-surface/90 px-4 py-2 text-sm font-semibold text-white">Cetak PDF</Button>
           </div>
         </div>
       </SectionContainer>

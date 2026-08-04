@@ -79,8 +79,9 @@ export function mapLeaveRequest(row: any): LeaveRequest {
     startDate: row.start_date || '',
     endDate: row.end_date || '',
     duration: row.total_days ? `${row.total_days} Hari` : '-',
-    status: row.status === 'Approved' ? 'Disetujui' : row.status === 'Rejected' ? 'Ditolak' : 'Menunggu',
+    status: row.status === 'DISETUJUI' ? 'Disetujui' : row.status === 'DITOLAK' ? 'Ditolak' : row.status === 'DIBATALKAN' ? 'Dibatalkan' : 'Menunggu',
     approver: approverName,
+    notes: row.notes || '',
   };
 }
 

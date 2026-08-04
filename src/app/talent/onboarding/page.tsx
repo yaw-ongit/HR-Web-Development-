@@ -4,12 +4,14 @@ import { StatusBadge } from '@/components/ui/status-badge';
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
 import { ColumnDef, getCoreRowModel, getPaginationRowModel, getSortedRowModel, RowSelectionState, useReactTable, SortingState } from '@tanstack/react-table';
-import { Search, ArrowRight, Download, Filter, CheckCircle2, Clock } from 'lucide-react';
+import { Search, ArrowRight, Download, Filter, CheckCircle2, Clock, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { DataTable } from '@/components/ui/data-table';
 import { TalentService } from '@/lib/services';
+import { Dialog } from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/toast';
 
 export default function TalentOnboardingPage() {
   const [dataList, setDataList] = useState<any[]>([]);
@@ -18,13 +20,71 @@ export default function TalentOnboardingPage() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
-  useEffect(() => {
+  const { addToast } = useToast();
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [employees, setEmployees] = useState<any[]>([]);
+
+  const [form, setForm] = useState({
+    employee_id: '',
+    hiring_id: '00000000-0000-0000-0000-000000000000', // Mock hiring ID for now
+    start_date: new Date().toISOString().split('T')[0],
+  });
+
+  const loadData = () => {
     TalentService.getOnboardingTasks().then((result) => {
-      if (result && Array.isArray(result.data)) {
-        setDataList(result.data);
-      }
+      if (result && Array.isArray(result.data)) setDataList(result.data);
+    });
+  };
+
+  useEffect(() => {
+    loadData();
+    import('@/lib/services').then(({ PeopleService }) => {
+      PeopleService.getEmployees().then(res => setEmployees(res.data || []));
     });
   }, []);
+
+  const handleAddSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload = {
+      ...form,
+      checklist: [{ task: 'Dokumen', completed: false }, { task: 'Setup Email', completed: false }]
+    };
+    const { error } = await TalentService.createOnboarding(payload);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal membuat tugas onboarding: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Berhasil', description: 'Tugas onboarding berhasil dibuat.', variant: 'success' });
+      setIsAddOpen(false);
+      loadData();
+    }
+  };
+
+  const handleCompleteTask = async (id: string) => {
+    const { error } = await TalentService.completeOnboarding(id);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal menyelesaikan: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Berhasil', description: 'Onboarding diselesaikan!', variant: 'success' });
+      loadData();
+    }
+  };
+
+  const handleExportTable = () => {
+    const rows = table.getFilteredRowModel().rows;
+    if (rows.length === 0) return;
+    const headers = ['employee', 'task', 'category', 'dueDate', 'assignedTo', 'status'];
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => headers.map(header => `"${String(row.getValue(header) || '').replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'onboarding.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const filteredTasks = useMemo(() => {
     const query = search.toLowerCase();
@@ -54,13 +114,18 @@ export default function TalentOnboardingPage() {
       {
         id: 'actions',
         header: 'Aksi',
-        cell: () => (
-          <Link href="/talent/onboarding" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground transition hover:border-brand-500">
-            Update <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+        cell: ({ row }) => (
+          row.original.status !== 'Selesai' ? (
+            <Button variant="ghost" size="sm" onClick={() => handleCompleteTask(row.original.id)} className="rounded-full px-3 py-2 text-xs font-semibold text-brand-600 hover:bg-brand-50">
+              <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Selesaikan
+            </Button>
+          ) : (
+            <span className="text-xs text-muted-foreground">Selesai</span>
+          )
         ),
       },
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
@@ -133,10 +198,13 @@ export default function TalentOnboardingPage() {
             <h2 className="mt-2 text-xl font-semibold text-foreground">Task checklist</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+            <Button onClick={() => setIsAddOpen(true)} variant="primary" className="rounded-full px-5 py-3">
+              <Plus className="h-4 w-4" /> Tugas Baru
+            </Button>
+            <Button variant="secondary" className="rounded-full px-5 py-3" onClick={handleExportTable}>
               <Download className="h-4 w-4" /> Ekspor
             </Button>
-            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
+            <Button variant="ghost" className="rounded-full px-5 py-3" onClick={() => document.getElementById('search-onboarding')?.focus()}>
               <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
@@ -146,6 +214,7 @@ export default function TalentOnboardingPage() {
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
+              id="search-onboarding"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search employee, task, or category"
@@ -164,6 +233,28 @@ export default function TalentOnboardingPage() {
           <DataTable table={table} />
         </div>
       </Card>
+
+      <Dialog open={isAddOpen} onClose={() => setIsAddOpen(false)} title="Buat Tugas Onboarding" description="Tugaskan checklist onboarding baru kepada karyawan.">
+        <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Karyawan</label>
+              <select required value={form.employee_id} onChange={e => setForm({...form, employee_id: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none">
+                <option value="">Pilih Karyawan</option>
+                {employees?.map(e => <option key={e.id} value={e.id}>{e.fullName}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Tanggal Mulai</label>
+              <input required type="date" value={form.start_date} onChange={e => setForm({...form, start_date: e.target.value})} className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none" />
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 pt-4 border-t border-border">
+            <Button variant="ghost" type="button" onClick={() => setIsAddOpen(false)}>Batal</Button>
+            <Button variant="primary" type="submit">Buat Tugas</Button>
+          </div>
+        </form>
+      </Dialog>
     </div>
   );
 }

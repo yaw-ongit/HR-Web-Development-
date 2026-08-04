@@ -23,6 +23,8 @@ export default function TalentCandidatesPage() {
 
   const { addToast } = useToast();
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [selectedCandidate, setSelectedCandidate] = useState<any>(null);
   const [vacancies, setVacancies] = useState<any[]>([]);
   const [form, setForm] = useState({
     full_name: '',
@@ -62,6 +64,18 @@ export default function TalentCandidatesPage() {
     }
   };
 
+  const handleUpdateStatus = async (newStatus: string) => {
+    if (!selectedCandidate) return;
+    const { error } = await TalentService.updateCandidateStatus(selectedCandidate.id, newStatus);
+    if (error) {
+      addToast({ title: 'Error', description: 'Gagal memperbarui status: ' + error, variant: 'danger' });
+    } else {
+      addToast({ title: 'Berhasil', description: 'Status kandidat diperbarui.', variant: 'success' });
+      setSelectedCandidate({ ...selectedCandidate, stage: newStatus });
+      loadData();
+    }
+  };
+
   const filteredCandidates = useMemo(() => {
     const query = search.toLowerCase();
     return dataList.filter((candidate) => {
@@ -90,10 +104,10 @@ export default function TalentCandidatesPage() {
       {
         id: 'actions',
         header: 'Aksi',
-        cell: () => (
-          <Link href="/talent/candidates" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-2 text-xs font-semibold text-foreground transition hover:border-brand-500">
-            View <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+        cell: ({ row }) => (
+          <Button variant="ghost" size="sm" onClick={() => { setSelectedCandidate(row.original); setIsDetailOpen(true); }} className="rounded-full px-3 py-2 text-xs font-semibold">
+            View <ArrowRight className="h-3.5 w-3.5 ml-1" />
+          </Button>
         ),
       },
     ],
@@ -111,6 +125,23 @@ export default function TalentCandidatesPage() {
     getPaginationRowModel: getPaginationRowModel(),
     enableRowSelection: true,
   });
+
+  const handleExportTable = () => {
+    const rows = table.getFilteredRowModel().rows;
+    if (rows.length === 0) return;
+    const headers = ['name', 'position', 'department', 'email', 'phone', 'stage'];
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => headers.map(header => `"${String(row.getValue(header) || '').replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'candidates.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
@@ -146,10 +177,10 @@ export default function TalentCandidatesPage() {
             <Button onClick={() => setIsAddOpen(true)} variant="primary" className="rounded-full px-5 py-3">
               <Plus className="h-4 w-4" /> Tambah Kandidat
             </Button>
-            <Button comingSoon variant="secondary" className="rounded-full px-5 py-3">
+            <Button variant="secondary" className="rounded-full px-5 py-3" onClick={handleExportTable}>
               <Download className="h-4 w-4" /> Ekspor
             </Button>
-            <Button comingSoon variant="ghost" className="rounded-full px-5 py-3">
+            <Button variant="ghost" className="rounded-full px-5 py-3" onClick={() => document.getElementById('search-candidate')?.focus()}>
               <Filter className="h-4 w-4" /> Filter
             </Button>
           </div>
@@ -159,6 +190,7 @@ export default function TalentCandidatesPage() {
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
             <input
+              id="search-candidate"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Cari nama, posisi, atau email"
@@ -214,6 +246,47 @@ export default function TalentCandidatesPage() {
             <Button variant="primary" type="submit">Simpan</Button>
           </div>
         </form>
+      </Dialog>
+
+      <Dialog open={isDetailOpen} onClose={() => setIsDetailOpen(false)} title="Detail Kandidat" description="Informasi kandidat dan pembaruan tahapan pipeline.">
+        {selectedCandidate && (
+          <div className="mt-4 space-y-6">
+            <div className="grid sm:grid-cols-2 gap-4 text-sm">
+              <div>
+                <p className="text-muted-foreground font-semibold">Nama Lengkap</p>
+                <p>{selectedCandidate.name}</p>
+              </div>
+              <div>
+                <p className="text-muted-foreground font-semibold">Posisi Dilamar</p>
+                <p>{selectedCandidate.position}</p>
+              </div>
+              <div>
+                <p className="text-muted-foreground font-semibold">Email</p>
+                <p>{selectedCandidate.email}</p>
+              </div>
+              <div>
+                <p className="text-muted-foreground font-semibold">Telepon</p>
+                <p>{selectedCandidate.phone}</p>
+              </div>
+            </div>
+            
+            <div className="border-t border-border pt-4">
+              <p className="text-xs uppercase tracking-widest text-primary mb-3">Update Tahapan</p>
+              <div className="flex flex-wrap gap-2">
+                {['BARU', 'SCREENING', 'INTERVIEW', 'OFFERING', 'DITERIMA', 'DITOLAK'].map(stage => (
+                  <Button 
+                    key={stage} 
+                    variant={selectedCandidate.stage === stage ? 'primary' : 'outline'} 
+                    size="sm"
+                    onClick={() => handleUpdateStatus(stage)}
+                  >
+                    {stage}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </Dialog>
     </div>
   );
