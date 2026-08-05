@@ -48,7 +48,21 @@ async function safeQuery<T>(
 // 1. IDENTITY & AUTH SERVICES
 // ----------------------------------------------------
 export const IdentityService = {
-  async updateEmployeeProfile(id: string, data: { phone?: string; emergency_contact?: string }) {
+  async getUserProfile() {
+    if (!supabase) return { data: null, error: 'No db' };
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return { data: null, error: 'Not authenticated' };
+    
+    // Find employee by email (assuming email matches)
+    const { data, error } = await supabase
+      .from('employees')
+      .select('*, departments(name), positions(title)')
+      .eq('email', user.email)
+      .single();
+      
+    return { data, error };
+  },
+  async updateEmployeeProfile(id: string, data: { phone?: string; emergency_contact?: string; address?: string }) {
     if (!supabase) return { error: 'No db' };
     const { error } = await supabase.from('employees').update(data).eq('id', id);
     return { error: error?.message };

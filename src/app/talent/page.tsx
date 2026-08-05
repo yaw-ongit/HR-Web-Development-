@@ -1,17 +1,32 @@
 'use client';
 
+import { useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useMemo } from 'react';
 import { AreaChart, Area, BarChart, Bar, CartesianGrid, LineChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, PieChart, Pie, Cell } from 'recharts';
 import { ArrowRight, Briefcase, Users, BookOpen, Award, CheckCircle2, UserCheck, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
-import { talentKpis, candidatePipeline, hiringFunnel, trainingProgress, competencyDistribution, departmentHiringTarget } from '@/lib/talent-data';
+import { TalentService } from '@/lib/services';
+import { talentKpis as mockKpis, candidatePipeline, hiringFunnel, trainingProgress, competencyDistribution, departmentHiringTarget } from '@/lib/talent-data';
 
 const COLORS = ['#10b981', '#f59e0b', '#3b82f6', '#8b5cf6'];
 
 export default function TalentHomePage() {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    TalentService.getCandidates().then(res => {
+      if (res.data) setData(res.data as any[]);
+    });
+  }, []);
+
+  const talentKpis = data.length > 0 ? [
+    { label: 'Posisi Terbuka', value: '5', note: 'Permintaan aktif' },
+    { label: 'Total Kandidat', value: data.length.toString(), note: 'Semua lamaran' },
+    { label: 'Dalam Pipeline', value: data.length.toString(), note: 'Sedang diproses' },
+    { label: 'Tawaran Diterima', value: data.filter(c => c.stage === 'DITERIMA').length.toString(), note: 'Bulan ini' }
+  ] : mockKpis.slice(0, 4);
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <section className="space-y-6">

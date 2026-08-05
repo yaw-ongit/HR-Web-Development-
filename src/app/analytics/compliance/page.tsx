@@ -25,7 +25,7 @@ export default function ComplianceAnalyticsPage() {
     { item: 'Kepatuhan Medis', rate: 95, target: 100 },
     { item: 'Kepatuhan Sertifikat', rate: 85, target: 100 },
     { item: 'Kepatuhan Pelatihan', rate: 92, target: 100 },
-  ] : mockComplianceRateData;
+  ] : [];
 
   const handleExport = () => {
     const csv = `Category,Rate\nMedis,${complianceRateData[0].rate}\nSertifikat,${complianceRateData[1].rate}\nPelatihan,${complianceRateData[2].rate}`;

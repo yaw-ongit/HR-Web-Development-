@@ -39,7 +39,7 @@ export default function TalentOnboardingPage() {
   useEffect(() => {
     loadData();
     import('@/lib/services').then(({ PeopleService }) => {
-      PeopleService.getEmployees().then(res => setEmployees(res.data || []));
+      PeopleService.getEmployees().then(res => setEmployees((res.data as any[]) || []));
     });
   }, []);
 

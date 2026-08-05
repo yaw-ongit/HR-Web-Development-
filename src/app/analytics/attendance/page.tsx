@@ -30,7 +30,7 @@ export default function AttendanceAnalyticsPage() {
     { month: 'Sep', present: 94, absent: 3, late: 3 },
     { month: 'Oct', present: 97, absent: 1, late: 2 },
     { month: 'Nov', present: 92, absent: 4, late: 4 },
-  ] : mockAttendanceData;
+  ] : [];
 
   const handleExport = () => {
     const csv = `Metric,Value\nAverage Attendance,94.2%\nTotal Late,12\nOvertime Hours,145`;

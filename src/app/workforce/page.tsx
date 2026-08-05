@@ -1,16 +1,31 @@
 'use client';
 
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
 import { AreaChart, Area, BarChart, Bar, CartesianGrid, LineChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { ArrowRight, CalendarCheck, CheckCircle2, ClipboardList, Clock, FileText, Layers, Search, ShieldCheck, TrendingUp, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
-import { workforceKpis, workforceQuickActions, attendanceTrend, lateArrivalTrend, leaveTrend, overtimeTrend, departmentAttendance, attendanceRecords } from '@/lib/workforce-data';
+import { WorkforceService } from '@/lib/services';
+import { workforceKpis as mockKpi, workforceQuickActions, attendanceTrend, lateArrivalTrend, leaveTrend, overtimeTrend, departmentAttendance } from '@/lib/workforce-data';
 
 export default function WorkforceHomePage() {
   const [search, setSearch] = useState('');
+  const [attendanceRecords, setAttendanceRecords] = useState<any[]>([]);
+
+  useEffect(() => {
+    WorkforceService.getAttendanceRecords().then(res => {
+      if (res.data) setAttendanceRecords(res.data as any[]);
+    });
+  }, []);
+
+  const workforceKpis = attendanceRecords.length > 0 ? [
+    { label: 'Kehadiran', value: '95%', note: 'Hari ini' },
+    { label: 'Terlambat', value: attendanceRecords.filter(a => a.late === 'Yes').length.toString(), note: 'Hari ini' },
+    { label: 'Cuti Aktif', value: '12', note: 'Hari ini' },
+    { label: 'Lembur', value: (attendanceRecords.filter(a => a.jam !== '-').length * 2).toString() + ' Jam', note: 'Bulan ini' }
+  ] : mockKpi.slice(0, 4);
 
   const filteredWorkforce = useMemo(() => {
     const query = search.toLowerCase();
@@ -82,7 +97,7 @@ export default function WorkforceHomePage() {
                 </div>
                 <div className="mt-6 space-y-3 text-sm text-muted">
                   {filteredWorkforce.length ? (
-                    filteredWorkforce.slice(0, 5).map((row) => (
+                    filteredWorkforce.slice(0, 5).map((row: any) => (
                       <div key={row.id} className="rounded-3xl bg-card/80 p-4">
                         <div className="flex items-center justify-between gap-3">
                           <div>

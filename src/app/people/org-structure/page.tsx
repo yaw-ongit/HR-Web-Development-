@@ -1,10 +1,31 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Layers, Users } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
-import { orgStructure } from '@/lib/people-data';
+import { PeopleService } from '@/lib/services';
 
 export default function OrgStructurePage() {
+  const [orgStructure, setOrgStructure] = useState<any>({
+    title: 'Manajer SDM',
+    leader: 'Noor Fadhila',
+    team: []
+  });
+
+  useEffect(() => {
+    PeopleService.getOrgStructure().then(res => {
+      const data = res.data as any[];
+      if (data && data.length > 0) {
+        setOrgStructure({
+          title: 'Perusahaan',
+          leader: 'Direksi',
+          team: data.map((d: any) => ({ name: d.name, role: 'Departemen' }))
+        });
+      }
+    });
+  }, []);
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <SectionContainer>
@@ -36,7 +57,7 @@ export default function OrgStructurePage() {
             <div className="rounded-[28px] border border-border bg-card/80 p-6">
               <p className="text-sm text-muted">Pimpinan</p>
               <div className="mt-6 flex items-center gap-4 rounded-3xl bg-surface/90 p-5">
-                <div className="grid h-16 w-16 place-items-center rounded-3xl bg-primary/10 text-primary text-xl font-semibold">{orgStructure.leader.split(' ').map((part) => part[0]).join('')}</div>
+                <div className="grid h-16 w-16 place-items-center rounded-3xl bg-primary/10 text-primary text-xl font-semibold">{orgStructure.leader.split(' ').map((part: string) => part[0]).join('')}</div>
                 <div>
                   <p className="text-sm uppercase tracking-[0.28em] text-muted">{orgStructure.title}</p>
                   <p className="mt-2 text-xl font-semibold text-foreground">{orgStructure.leader}</p>
@@ -47,14 +68,14 @@ export default function OrgStructurePage() {
             <div className="rounded-[28px] border border-border bg-card/80 p-6">
               <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">Tim Inti</p>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                {orgStructure.team.map((member) => (
+                {orgStructure.team.map((member: any) => (
                   <div key={member.name} className="rounded-3xl border border-border/60 bg-surface/90 p-5">
                     <div className="flex items-center justify-between gap-3">
                       <div>
                         <p className="text-sm font-semibold text-foreground">{member.name}</p>
                         <p className="mt-1 text-sm text-muted">{member.role}</p>
                       </div>
-                      <div className="grid h-11 w-11 place-items-center rounded-3xl bg-card/80 text-foreground">{member.name.split(' ').map((part) => part[0]).join('')}</div>
+                      <div className="grid h-11 w-11 place-items-center rounded-3xl bg-card/80 text-foreground">{member.name.split(' ').map((part: string) => part[0]).join('')}</div>
                     </div>
                   </div>
                 ))}

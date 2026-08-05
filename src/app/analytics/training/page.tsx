@@ -25,7 +25,7 @@ export default function TrainingAnalyticsPage() {
     { training: 'Safety & HSE', completed: data.filter(d => d.status === 'Selesai').length, pending: data.filter(d => d.status !== 'Selesai').length, compliance: 93.7 },
     { training: 'Ethics & Compliance', completed: 25, pending: 5, compliance: 83.3 },
     { training: 'Data Privacy', completed: 40, pending: 15, compliance: 72.7 },
-  ] : mockMandatoryTrainingData;
+  ] : [];
 
   const handleExport = () => {
     const csv = `Department,Completed,Pending\nIT,${mandatoryTrainingData[0].completed},${mandatoryTrainingData[0].pending}\nHR,${mandatoryTrainingData[1].completed},${mandatoryTrainingData[1].pending}`;

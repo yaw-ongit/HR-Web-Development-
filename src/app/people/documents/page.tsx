@@ -1,13 +1,21 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FileText, FolderOpen, Sparkles } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
 import { NoDataEmptyState } from '@/components/ui/empty-state';
-import { documentCenter } from '@/lib/people-data';
+import { PeopleService } from '@/lib/services';
 
 export default function DocumentsPage() {
+  const [documentCenter, setDocumentCenter] = useState<any[]>([]);
+
+  useEffect(() => {
+    PeopleService.getDocuments().then(res => {
+      if (res.data) setDocumentCenter(res.data as any[]);
+    });
+  }, []);
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <SectionContainer>

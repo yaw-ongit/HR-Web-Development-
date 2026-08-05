@@ -1,14 +1,32 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Users, Shield, Heart, FileText, TrendingUp, AlertCircle, Download, Plus, Clock, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SectionContainer } from '@/components/layout/section-container';
-import { compensationKpi, benefitDistributionData, insuranceCoverageData, medicalComplianceData, claimTrendData, departmentComparisonData } from '@/lib/compensation-data';
+import { CompensationService } from '@/lib/services';
+import { compensationKpi as mockKpi, benefitDistributionData, insuranceCoverageData, medicalComplianceData, claimTrendData, departmentComparisonData } from '@/lib/compensation-data';
 
 export default function CompensationDashboard() {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    CompensationService.getClaims().then(res => {
+      if (res.data) setData(res.data as any[]);
+    });
+  }, []);
+
+  const compensationKpi = data.length > 0 ? {
+    employeesCovered: data.length * 5,
+    activeInsurance: data.length * 4,
+    medicalDue: data.length * 2,
+    claimsPending: data.filter(c => c.status === 'Menunggu').length,
+    benefitUtilization: 85,
+    certificatesExpiring: 3
+  } : { employeesCovered: 0, activeInsurance: 0, medicalDue: 0, claimsPending: 0, benefitUtilization: 0, certificatesExpiring: 0 };
   return (
     <div className="space-y-8 pb-12 pt-6 lg:pb-16">
       <SectionContainer>

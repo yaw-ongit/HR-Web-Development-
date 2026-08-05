@@ -30,7 +30,7 @@ export default function LeaveAnalyticsPage() {
     { leaveType: 'Annual', total: 120, used: data.length * 2, balance: 120 - data.length * 2, employees: 50 },
     { leaveType: 'Sick', total: 100, used: 25, balance: 75, employees: 50 },
     { leaveType: 'Unpaid', total: 80, used: 20, balance: 60, employees: 10 },
-  ] : mockLeaveBalanceData;
+  ] : [];
 
   const handleExport = () => {
     const csv = `Metric,Value\nIT,120\nHR,100\nFinance,80`;

@@ -15,29 +15,63 @@ export default function MyProfilePage() {
   const [userTrainings, setUserTrainings] = useState<any[]>([]);
 
   // Local state for user profile
-  const [profile, setProfile] = useState({
-    id: 'leo-wibowo',
-    fullName: 'Leo Wibowo',
-    employeeId: 'EMP-1006',
-    email: 'leo.wibowo@indocater.co.id',
-    phone: '+62 812-9988-2233',
-    department: 'Teknologi',
-    position: 'Pengembang Perangkat Lunak',
-    joinDate: '2022-01-19',
-    manager: 'Fitri Novita',
-    location: 'Bandung Studio',
-    photo: 'LW',
-    emergencyContact: 'Maya Sari (+62 812-3456-7890)',
-    address: 'Jl. Merdeka No. 45, Bandung',
-    bloodType: 'O',
-    gender: 'Laki-laki'
+  const [profile, setProfile] = useState<any>({
+    id: '',
+    fullName: '',
+    employeeId: '',
+    email: '',
+    phone: '',
+    department: '',
+    position: '',
+    joinDate: '',
+    manager: '',
+    location: '',
+    photo: '',
+    emergencyContact: '',
+    address: '',
+    bloodType: '',
+    gender: ''
   });
 
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState({ ...profile });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load training history for Leo Wibowo
+    IdentityService.getUserProfile().then(res => {
+      if (res.data) {
+        const d = res.data;
+        const nameParts = (d.full_name || '').split(' ');
+        const initials = nameParts.length > 1 ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase() : (nameParts[0]?.[0] || 'U').toUpperCase();
+
+        const p = {
+          id: d.id,
+          fullName: d.full_name,
+          employeeId: d.employee_number,
+          email: d.email,
+          phone: d.phone || '',
+          department: d.departments?.name || '',
+          position: d.positions?.title || '',
+          joinDate: d.join_date || '',
+          manager: d.manager?.full_name || '-',
+          location: d.branches?.name || '',
+          photo: initials,
+          emergencyContact: d.emergency_contact || '',
+          address: d.address || '',
+          bloodType: d.blood_type || '-',
+          gender: d.gender === 'Male' ? 'Laki-laki' : d.gender === 'Female' ? 'Perempuan' : '-'
+        };
+        setProfile(p);
+        setForm(p);
+      }
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!profile.fullName) return;
+    
+    // Load training history
     Promise.all([
       TalentService.getPlannings(),
       TalentService.getRealizations()
@@ -75,9 +109,8 @@ export default function MyProfilePage() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Use hardcoded employee ID for demo purposes since getSession is mock
-    const empId = 'e0000000-0000-0000-0000-000000000001'; 
-    const { error } = await IdentityService.updateEmployeeProfile(empId, { phone: form.phone });
+    if (!profile.id) return;
+    const { error } = await IdentityService.updateEmployeeProfile(profile.id, { phone: form.phone, emergency_contact: form.emergencyContact, address: form.address });
     if (error) {
       addToast({ title: 'Error', description: 'Gagal update profil: ' + error, variant: 'danger' });
     } else {

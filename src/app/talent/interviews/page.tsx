@@ -51,9 +51,9 @@ export default function TalentInterviewsPage() {
 
   useEffect(() => {
     loadData();
-    TalentService.getCandidates().then((res) => setCandidates(res.data || []));
+    TalentService.getCandidates().then((res) => setCandidates((res.data as any[]) || []));
     import('@/lib/services').then(({ PeopleService }) => {
-      PeopleService.getEmployees().then((res) => setEmployees(res.data || []));
+      PeopleService.getEmployees().then((res) => setEmployees((res.data as any[]) || []));
     });
   }, []);
 

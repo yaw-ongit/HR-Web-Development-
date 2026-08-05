@@ -56,7 +56,7 @@ export default function EmployeeProfilePage(props: EmployeePageProps) {
 
   useEffect(() => {
     if (profile?.fullName) {
-      TalentService.getCertifications([]).then((res: any) => {
+      TalentService.getCertifications().then((res: any) => {
         if (res && res.data) {
           const matched = res.data.filter((c: any) =>
             c.employee.toLowerCase() === profile.fullName.toLowerCase()

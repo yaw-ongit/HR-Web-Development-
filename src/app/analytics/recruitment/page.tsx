@@ -25,7 +25,7 @@ export default function RecruitmentAnalyticsPage() {
     { stage: 'Interviews', count: data.length * 2, percentage: 20 },
     { stage: 'Offers', count: data.length, percentage: 10 },
     { stage: 'Hired', count: data.filter(c => c.status === 'DITERIMA').length, percentage: 5 },
-  ] : mockHiringFunnelData;
+  ] : [];
 
   const handleExport = () => {
     const csv = `Stage,Count\nApplied,${hiringFunnelData[0].count}\nHired,${hiringFunnelData[4].count}`;

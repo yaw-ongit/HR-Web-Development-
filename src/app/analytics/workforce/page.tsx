@@ -35,7 +35,7 @@ export default function WorkforceAnalyticsPage() {
     { group: '31-35', count: data.filter(e => e.gender === 'Laki-laki').length },
     { group: '36-40', count: 45 },
     { group: '41+', count: 20 },
-  ] : mockAgeDistribution;
+  ] : [];
 
   const handleExport = () => {
     const csv = `Group,Count\n20-25,${ageDistribution[0].count}\n26-30,${ageDistribution[1].count}`;
