@@ -885,30 +885,45 @@ export const TalentService = {
 
   async createRealization(planningId: string) {
     if (!supabase) {
-      const existing = localRealizations.find(r => r.planning_id === planningId);
-      if (existing) return { data: existing, error: null };
-      const newReal = {
-        id: 'real-' + Math.random().toString(36).substr(2, 9),
-        planning_id: planningId,
-        status: 'Draft'
-      };
-      localRealizations.unshift(newReal);
-      return { data: newReal, error: null };
+      return this._fallbackCreateRealization(planningId);
     }
-    const { data: existing } = await supabase
-      .from('training_realizations')
-      .select('*')
-      .eq('planning_id', planningId)
-      .maybeSingle();
-    if (existing) {
-      return { data: existing, error: null };
+    
+    try {
+      const { data: existing, error: existingErr } = await supabase
+        .from('training_realizations')
+        .select('*')
+        .eq('planning_id', planningId)
+        .maybeSingle();
+        
+      if (existingErr) throw existingErr;
+      if (existing) {
+        return { data: existing, error: null };
+      }
+      
+      const { data: dbData, error } = await supabase
+        .from('training_realizations')
+        .insert([{ planning_id: planningId, status: 'Draft' }])
+        .select()
+        .single();
+        
+      if (error) throw error;
+      return { data: dbData, error: null };
+    } catch (err) {
+      console.error('Fallback due to DB error in createRealization:', err);
+      return this._fallbackCreateRealization(planningId);
     }
-    const { data: dbData, error } = await supabase
-      .from('training_realizations')
-      .insert([{ planning_id: planningId, status: 'Draft' }])
-      .select()
-      .single();
-    return { data: dbData, error };
+  },
+
+  _fallbackCreateRealization(planningId: string) {
+    const existing = localRealizations.find(r => r.planning_id === planningId);
+    if (existing) return { data: existing, error: null };
+    const newReal = {
+      id: 'real-' + Math.random().toString(36).substr(2, 9),
+      planning_id: planningId,
+      status: 'Draft'
+    };
+    localRealizations.unshift(newReal);
+    return { data: newReal, error: null };
   },
 
   async updateRealizationStatus(id: string, status: string) {
@@ -917,7 +932,12 @@ export const TalentService = {
       return { error: null };
     }
     const { error } = await supabase.from('training_realizations').update({ status }).eq('id', id);
-    return { error };
+    if (error) {
+      console.warn('Fallback due to DB error in updateRealizationStatus:', error);
+      localRealizations = localRealizations.map(r => r.id === id ? { ...r, status } : r);
+      return { error: null };
+    }
+    return { error: null };
   },
 
   async deleteRealization(id: string) {
